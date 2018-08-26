@@ -1,7 +1,0 @@
-#配置springmvc的视图
-spring:
-  mvc:
-    view:
-      prefix: /WEB-INF/views/
-      suffix: .jsp
-      
