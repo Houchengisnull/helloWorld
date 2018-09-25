@@ -13,7 +13,7 @@ public class A0消息摘要算法 {
 		sha.update(input);
 		// 获取消息摘要结果
 		byte[] output = sha.digest();
-		System.out.println( output );
+		System.out.println(output);
 		
 	}
 }

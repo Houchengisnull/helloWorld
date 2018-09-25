@@ -22,7 +22,6 @@
 	    <artifactId>commons-codec</artifactId>
 	</dependency>
   	
-  	
   	<!-- 加密组件 -->
   	<!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on -->
 	<dependency>

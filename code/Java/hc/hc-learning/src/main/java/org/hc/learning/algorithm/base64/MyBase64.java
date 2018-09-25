@@ -56,9 +56,9 @@ public class MyBase64 {
 		// 在通过这些数字信息 解析 为 原信息
 		int count = 0 ;
 		for( int i=0 ; i<ori.length ; i+=4){
-			chars[count++] = (char) ( (ori[i] *4 ) + ( ori[i+1] *4 /64 ) ) ;
-			chars[count++] = (char) ( (ori[i+1] %8 * 16 ) + ( ori[i+2] *4 /16 ) );
-			chars[count++] = (char) ( (ori[i+2] %2 * 64 ) + ( ori[i+3] ) );
+			chars[count++] = (char) ((ori[i] * 4) + (ori[i+1] * 4 / 64)) ;
+			chars[count++] = (char) ((ori[i+1] % 8 * 16) + (ori[i+2] * 4 / 16));
+			chars[count++] = (char) ((ori[i+2] % 2 * 64) + (ori[i+3]));
 		}
 		return new String( chars );
 	}
