@@ -29,6 +29,12 @@
 	    <artifactId>bcprov-jdk15on</artifactId>
 	    <version>1.59</version>
 	</dependency>
+	
+	<dependency>
+    	<groupId>org.bouncycastle</groupId>
+    	<artifactId>bcprov-ext-jdk15on</artifactId>
+    	<version>1.59</version>
+	</dependency>
   
 	<!-- Spring Boot添加Aop引用 -->  
 	<dependency>
