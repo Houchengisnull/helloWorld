@@ -6,11 +6,9 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Controller;
 
 import hc.web.mapper.UserMapper;
 
-@Controller
 @ComponentScan(basePackages = {"hc.web.controller","hc.web.config"})
 /*
  * 由于 DataSourceAutoConfiguration将读取 .yml .properties 中的spring.datasource.*属性并自动配置单数据源。

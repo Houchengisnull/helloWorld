@@ -15,7 +15,7 @@
   </properties>
   <dependencies>
   	
-  	<!-- 编解码器 -->
+  	<!-- 编码解码器 -->
   	<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
 	<dependency>
 	    <groupId>commons-codec</groupId>
@@ -35,7 +35,14 @@
     	<artifactId>bcprov-ext-jdk15on</artifactId>
     	<version>1.59</version>
 	</dependency>
-  
+    
+    <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+	<dependency>
+	    <groupId>org.apache.httpcomponents</groupId>
+	    <artifactId>httpclient</artifactId>
+	    <version>4.5.3</version>
+	</dependency>
+    
 	<!-- Spring Boot添加Aop引用 -->  
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
