@@ -126,6 +126,20 @@ stringOptional = Optional.empty();
 System.out.println(stringOptional.map(e -> e.toUpperCase()).orElse("失败"));
 ```
 
+个人觉得该例子难理解 map() 方法实际用处，见以下代码  
+
+```java
+public static String getChampionName(Competition comp) throws IllegalArgumentException {
+    return Optional.ofNullable(comp)
+            .map(c->c.getResult())
+            .map(r->r.getChampion())
+            .map(u->u.getName())
+            .orElseThrow(()->new IllegalArgumentException("The value of param comp isn't available."));
+}
+```
+
+
+
 ## flagMap
 
 如果创建的Optional中的值存在，就对该值执行提供的Function函数调用，返回一个Optional类型的值，否 
