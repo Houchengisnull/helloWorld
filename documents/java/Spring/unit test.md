@@ -8,7 +8,7 @@
 
 
 
-springmvc中常用MultipartFile实现类为 `CommonMultipartFile`
+springmvc中常用MultipartFile实现类为 `CommonsMultipartFile`
 
 ## 构造方法
 
