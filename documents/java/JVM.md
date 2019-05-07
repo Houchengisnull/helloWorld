@@ -154,14 +154,98 @@ https://www.ibm.com/support/knowledgecenter/zh/SSAW57_9.0.0/com.ibm.websphere.nd
 - 340 One AArch64 Port, Not Two ：删除与 arm64 端口相关的所有源码，保留 32 位 ARM 移植和 64 位 aarch64 移植。
 - 341 Default CDS Archives ：默认生成类数据共享（CDS）存档。
 - 344  Abortable Mixed Collections for G1 ：当 G1 垃圾回收器的回收超过暂停目标，则能中止垃圾回收过程。
-
 - JEP346  Promptly Return Unused Committed Memory from G1 ：改进 G1 垃圾回收器，以便在空闲时自动将 Java 堆内存返回给操作系统。
+
+# Java虚拟机发展史
+
+> 也许还有一些程序员会注意到BEAJRockit和**IBM J9**，但对JVM的认识不仅仅这些。
+
+2019-05-07
+
+在使用WebSphere过程中认识到了OpenJ9,下面是OpenJ9的源码地址：
+
+https://github.com/eclipse/openj9.git
+
+## Sun Classic/Exact VM
+
+- Sun Classic
+
+  以今天角度来看技术比较原始，但其为`世界第一款商用Java虚拟机`。
+
+  `JDK1.0`中自带虚拟机即`Classic VM`。该虚拟器只能使用`純解释器方式`执行Java代码。如果要使用`JIT编译器`就要使用外挂，例如`sunwjit`。由于解释器与编译器无法配合工作，就意味着使用编译器时，不得不对每一个方法，每一行代码进行编译，不论它们执行的频率是否有价值。基于程序响应时间压力，这些编译器不敢应用编译耗时较高的`优化技术`。即使使用了`JIT编译器`，执行效率也无法与`C/C++`媲美。
+
+  “Java语言很慢”的形象就是在这个时候在用户中心树立起来的。
+
+  * 优化技术比如指对生成字节码的优化
+
+- Exact VM
+
+  Sun虚拟机团队为解决`Classic VM`面临各种问题，曾发布过`Exact VM`。其初具现代高性能虚拟机雏形：`两级即时编译器`，`编译器与解释器混合工作模式`。它采用`准确式内存管理（Exact Memory Management）`而得名，即其准确知道内存中某位置数据的具体类型。
+
+  譬如能分辨内存中一个32位整数123456，它到底是一个reference类型指向123456的内存地址，还是数值为123456的整数。如此才能在GC时判断`堆`上数据是否还可能被使用。
+
+## HotSpot
+
+由`LongView Technologies`小公司设计。最初并非是为Java设计，其源于`Strongtalk VM`，而这款虚拟机中相当多技术又是来源于一款支持Self语言实现“达到C语言50%以上执行效率”为目标而设计的虚拟机。
+
+> `HotSpot`指热点代码探测技术
+
+### 上帝规则：局部性原理
+
+局部性原理：在一段时间内，整个程序的执行仅限于程序的某一部分，相应地，程序访问的存储空间也局限于某个内存区域。
+
+- 时间局部性：如果程序中某条指令一旦执行，不久之后该指令可能再次被执行。如果某条数据被访问，不久后该数据可能再次被访问。
+- 空间局部性：一旦程序访问了某个存储单元，不久之后其附件的存储单元也将被访问。
+
+涉及知识：`缓存`、`热点代码`等。
+
+## BEA JRockit
+
+`BEA公司`已经被`Oracle`收购
+
+为服务器硬件和服务器端应用场景高度优化虚拟机，不关注程序启动速度。
+
+## IBM J9 VM
+
+开发目的，作为IBM公司各种Java产品的执行平台，例如：`websphere`
+
+## Apache Harmony/Dalvik VM
+
+两者不止是“Java虚拟机”。
+
+### Apache
+
+#### 号外
+
+`Apache` 曾要求Sun提供`TCK(Technology Compatibility Kit)`的使用授权，但一直遭到拒绝，直至两者关系愈发僵化，以`Apache`退出`JCP（Java Community Process）`收场。
+
+## Dalivik VM
+
+`Android`平台核心核心组成之一。
+
+并非Java虚拟机，也未遵从Java虚拟机规范，不能直接执行`Class`文件。
+
+但其执行`dex(Dalvik Executable)`由`Class`文件转化而来，使用Java语法编写程序，可以使用大部分Java API。
+
+## TCK
+
+Java兼容性测试
+
+# Java技术未来发展方向
+
+- 模块化
+- 混合语言
+- 多核并行
+- 64 bit 虚拟机
+
+## OSGi
 
 # 参考
 
 ## 书籍
 
 - 《深入理解Java虚拟机》
+- 《码农翻身》
 
 ## 网站
 
