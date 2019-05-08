@@ -10,7 +10,7 @@
 
 空间效率极高的概率型算法
 
-![1557320189757](git_houcheng\documents\images\redis)
+![1557320189757](git_houcheng\documents\images\redis\boolm.png)
 
 ### 优势
 
@@ -29,7 +29,9 @@
 
 #### 数据量过大，布隆过滤器初始化过长
 
-##### 解决
+##### 解决方案
 
 Java多线程分而治之——多线程 Fork/Join
+
+#### 数据不一致
 
