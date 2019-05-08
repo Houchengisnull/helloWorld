@@ -10,7 +10,7 @@
 
 空间效率极高的概率型算法
 
-![1557320189757](git_houcheng\documents\images\redis\boolm.png)
+![1557320189757](https://github.com/Houchengisnull/git_houcheng/documents/images/redis/boolm.png)
 
 ### 优势
 
