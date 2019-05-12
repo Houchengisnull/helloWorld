@@ -14,3 +14,21 @@ https://www.cnblogs.com/sigm/p/6035155.html
 
 https://blog.csdn.net/u012826756/article/details/79478973
 
+
+
+# 手动导入jar
+
+依赖插件
+
+https://blog.csdn.net/tyrroo/article/details/77017190
+
+``` xml
+<dependency>
+	<groupId>org.apache.maven.plugins</groupId>  
+	<artifactId>maven-install-plugin</artifactId>  
+	<version>2.5.1</version>  
+</dependency>
+```
+
+
+
