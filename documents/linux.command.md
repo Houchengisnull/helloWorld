@@ -22,6 +22,12 @@
 # ip addr
 ```
 
+# 查看内存 free
+
+``` shell
+# free -h
+```
+
 # 进程
 
 ## 查看
