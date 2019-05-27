@@ -293,6 +293,133 @@ CPU`与`线程`相互"作用"（使用作用这个词语是因为笔者不清楚
 
 如果正在执行的是Native方法，这个计数器值为空（Undefined）。此内存区域是唯一一个在JVM规范中没有规定任何`OutOfMemoryError`的区域。
 
+## 常量池
+
+### 问题 String.intern()
+
+``` java
+public class ConstantPool {
+    public static void main(String[] args) {
+        String string1 = "Hello";
+		String string2 = string1 + "World";
+		// String string3 = "HelloWorld";
+		
+		System.out.println(string2.intern() == string2);
+		// System.out.println(string2 == string3);
+		// System.out.println(string3.intern() == string2.intern());
+		// System.out.println(string3.intern() == string3);
+    }
+}
+```
+
+运行结果
+
+``` txt
+true
+```
+
+汇编字节码结果
+
+``` assembly
+public class org.hc.learning.jvm.ConstantPool {
+  public org.hc.learning.jvm.ConstantPool();
+    Code:
+       0: aload_0
+       1: invokespecial #8                  // Method java/lang/Object."<init>":()V
+       4: return
+
+  public static void main(java.lang.String[]);
+    Code:
+       0: ldc           #16                 // String Hello
+       2: astore_1
+       3: new           #18                 // class java/lang/StringBuilder
+       6: dup
+       7: aload_1
+       8: invokestatic  #20                 // Method java/lang/String.valueOf:(Ljava/lang/Object;)Ljava/lang/String;
+      11: invokespecial #26                 // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+      14: ldc           #29                 // String World
+      16: invokevirtual #31                 // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      19: invokevirtual #35                 // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      22: astore_2
+      23: ldc           #39                 // String HelloWorld
+      25: astore_3
+      26: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      29: aload_2
+      30: invokevirtual #47                 // Method java/lang/String.intern:()Ljava/lang/String;
+      33: aload_2
+      34: if_acmpne     41
+      37: iconst_1
+      38: goto          42
+      41: iconst_0
+      42: invokevirtual #50                 // Method java/io/PrintStream.println:(Z)V
+      45: getstatic     #41                 // Field java/lang/System.out:Ljava/io/PrintStream;
+      48: aload_2
+      49: aload_3
+      50: if_acmpne     57
+      53: iconst_1
+      54: goto          58
+      57: iconst_0
+      58: invokevirtual #50                 // Method java/io/PrintStream.println:(Z)V
+      61: return
+}
+```
+
+分析
+
+``` java
+String string2 = string1 + "world";
+```
+
+在实际运行过程中，该代码相当于
+
+``` java
+new StringBuilder(string1) + new StringBuilder("World");
+```
+
+则字符串`Hello`与`World`均在常量池中，而 string2则指向堆中地址。
+
+再看`intern()`官方注释
+
+``` java
+/**
+     * Returns a canonical representation for the string object.
+     * <p>
+     * A pool of strings, initially empty, is maintained privately by the
+     * class {@code String}.
+     * <p>
+     * When the intern method is invoked, if the pool already contains a
+     * string equal to this {@code String} object as determined by
+     * the {@link #equals(Object)} method, then the string from the pool is
+     * returned. Otherwise, this {@code String} object is added to the
+     * pool and a reference to this {@code String} object is returned.
+     * <p>
+     * It follows that for any two strings {@code s} and {@code t},
+     * {@code s.intern() == t.intern()} is {@code true}
+     * if and only if {@code s.equals(t)} is {@code true}.
+     * <p>
+     * All literal strings and string-valued constant expressions are
+     * interned. String literals are defined in section 3.10.5 of the
+     * <cite>The Java&trade; Language Specification</cite>.
+     *
+     * @return  a string that has the same contents as this string, but is
+     *          guaranteed to be from a pool of unique strings.
+     */
+```
+
+该方法用于保证相同字符串引用均来自常量池。当调用`intern()`时，如果常量池中已经包含该字符串，则返回该字符串引用；否则这个对象的***堆引用***添加到常量池。
+
+故 string2.intern() == string2结果为true;
+
+当令 string3 = "HelloWorld"时，由于常量池中已有“HelloWorld”，故此时 string2.intern() == string2 结果为false。
+
+> 　jdk1.6中只能查询或创建在字符串常量池；
+>
+> 　jdk1.7中会先查询字符串常量池，若没有又会到堆中再去查询并存储堆的引用，然后返回。
+
+### 参考
+
+https://www.cnblogs.com/aloenfs/p/9127353.html
+
 # 参考
 
 ## 书籍
