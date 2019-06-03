@@ -17,3 +17,8 @@ git log -number #{filename}
 git reset #{verison} #{filename}
 ```
 
+# 异常
+
+## Couldn't find remote ref refs/heads/xxx [core]
+
+https://blog.csdn.net/Tyro_java/article/details/76064584

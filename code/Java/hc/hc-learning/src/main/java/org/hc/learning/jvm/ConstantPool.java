@@ -8,7 +8,7 @@ public class ConstantPool {
 		String string1 = "Hello";
 		String string2 = string1 + "World";
 		// String string3 = "HelloWorld";
-		
+	
 		System.out.println(string2.intern() == string2);
 		/*System.out.println(string2 == string3);
 		System.out.println(string3.intern() == string2.intern());
