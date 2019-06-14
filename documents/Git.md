@@ -1,5 +1,26 @@
 [TOC]
 
+# stash
+
+`stash` 备份当前工作区到Git栈
+
+## 用法一 备份本地修改
+
+``` bash
+git stash 
+git pull
+git stash pop # 从Git栈中取出上次修改内容
+```
+
+## 用法二 放弃本地修改
+
+``` bash
+git reset
+git pull
+```
+
+
+
 # 用法
 
 ## 回滚单个文件
