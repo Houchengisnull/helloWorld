@@ -1,5 +1,50 @@
 [TOC]
 
+# 安装编译器
+
+在安装python类库`wordcloud`时出现以下错误：
+
+``` shell
+  error: Microsoft Visual C++ 14.0 is required. Get it with "Microsoft Visual C++ Build Tools": https://visualstudio.microsoft.com/downloads/
+```
+
+本想通过使用轻量的Visual Code绕过这个问题，但是Visual Code仅提供插件而不安装编译器，故我们安装自己的编译器`MinGW`。
+
+## MinGW
+
+`MinGW`( Minimalist GNU for Windows ），是将`GCC编译器`和`GNU Binutils`移植Windows 32下的产物，包括一系列头文件（Win32API）、库和可执行文件。
+
+我之所以选择MinGW，是因为我暂时没有深入C++开发的需求，不需要安装庞大的`visual studio`。
+
+- MinGW下载地址
+
+<https://sourceforge.net/projects/mingw/files/latest/download?source=files>
+
+- MinGW安装步骤
+  - 选择需要安装的Categories(条目)，以下为本人选择Categoies
+    - mingw-developer-toolkit
+    - mingw32-base
+    - mingw32-gcc-c++
+    - msys-base
+  - 选择“Installation-Apply Change”
+
+- 配置Path
+
+  将%filepath%\MinGW\bin配置在`Path`（环境变量下）
+
+- 参考
+
+  https://www.cnblogs.com/qcssmd/p/5302052.html
+
+## Visual Cpp Build Tools
+
+百度云地址
+
+>  链接：https://pan.baidu.com/s/1uRAPZXu9uyzezCc-r2ORUA 
+> 提取码：qu7o 
+
+> 如果条件允许，还是直接安装 visual studio比较好，在安装与选择版本上浪费太多时间实在是太boring了。
+
 # 编译
 
 ## 编译过程
