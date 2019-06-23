@@ -8,7 +8,37 @@
 
 # POM文件
 
-## 生产可执行jar
+## build
+
+### plugin
+
+#### 指定JDK版本
+
+``` xml
+<build>  
+    <plugins>  
+        <plugin>  
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>  
+                <version>3.7</version>  
+                <configuration>  
+                    <source>1.8</source>  
+                    <target>1.8</target>  
+                </configuration>  
+            </plugin>  
+        </plugins>  
+</build>
+```
+
+- source
+
+  向下兼容最低版本
+
+- target
+
+  生成字节码使用JDK版本
+
+#### 生成`可执行jar`
 
 于`pom.xml`中添加以下配置
 
