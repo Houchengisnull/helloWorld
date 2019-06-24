@@ -29,11 +29,34 @@ HTTP1.1规范中新定义的头信息**Cache-Contro**l可以通知浏览器不�
 <meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate"> 
 <meta HTTP-EQUIV="expires" CONTENT="0"> 
 
- 
 
 对于JSP页面，加入：
+``` java
 <% 
 response.setHeader("Cache-Control","no-store"); 
 response.setHeader("Pragrma","no-cache"); 
 response.setDateHeader("Expires",0); 
 %> 
+```
+
+- 20190624
+
+  | 名称 | 描述 |
+  | ---- | ---- |
+  | 系统 | `Windows 7` |
+  | Web容器 | `Tomcat 8.5` |
+  | 浏览器 | `IE` |
+  | 前端 | `JSP` |
+
+在`JSP`中，仅有通过以下方式设置`response`属性后，才能强制浏览器每次从服务器读取页面。
+
+*通过`HTML`方式设置不生效。*
+
+``` java
+<% 
+response.setHeader("Cache-Control","no-store"); 
+response.setHeader("Pragrma","no-cache"); 
+response.setDateHeader("Expires",0); 
+%> 
+```
+
