@@ -13,6 +13,81 @@
 
 ZO01设置了禁止转载，就不将他的回答copy上去了。个人以为确实是个直击灵魂的问题。
 
+# 弱引用的应用场景
+
+- 弱引用的概念
+
+  > JVM发生GC时，一定回收弱引用。
+
+  
+
+  强引用在置空时才可以被JVM的GC回收
+
+  ``` java
+  Object obj = new Object();
+  obj = null;
+  ```
+
+  但手动置空对象对于程序员来说，**繁琐且违背自动回收的思想。**平常情况下，手动置空不需要程序员来做，因为在Java中，对于调用它的方法执行完毕后，指向它的引用会从栈帧中“pop up”。下次GC时将回收它。
+
+- Cache
+
+  但也有例外，缓存对象正是程序员运行需要的，那么只要程序运行，Cache对象的引用就不会被回收。随着Cache中的Reference越来越多，GC无法回收的对象也会越来越多。
+
+  由于无法被自动回收，那就需要程序员手动释放这些引用占据的内存，而这却违背了GC本质——自动回收可回收的对象。
+
+  于是就有`WeakReference`。
+
+- Example
+
+  ``` java
+  
+  import java.lang.ref.WeakReference;
+  
+  /**
+   * 弱引用示例
+   */
+  public class WeakReferenceExample {
+      public static void main(String[] args) {
+          Person person = new Person("Hou", "Yamy", 23);
+          // 当一个对象仅仅被weak reference指向, 而没有任何其他strong reference指向的时候, 如果GC运行, 那么这个对象就会被回收。
+          WeakReference<Person> personWeakReference = new WeakReference<Person>(person);
+  
+          Person personClone = person;
+          int count = 0;
+          while (true) {
+              if(personWeakReference.get() != null) {
+                  count++;
+                  System.out.println("person still be alive");
+              } else {
+                  System.out.println("person was collected");
+                  break;
+              }
+          }
+          // System.out.println(personClone.getName() + " is a cloneMan"); // 1
+      }
+  }
+  ```
+
+  若存在person指向强引用，但若之后不调用该强引用`personClone`，编译器将对它优化——即发生垃圾回收时依然能回收person。
+
+  可对比**1处注释**通过`javap`反编译字节码结果 。
+
+- 运行结果
+
+  ``` text
+  ...
+  person still be alive
+  person still be alive
+  person still be alive
+  person still be alive[GC (Allocation Failure)  65536K->1123K(251392K), 0.0009931 secs]
+  
+  person was collected
+  
+  ```
+
+https://blog.csdn.net/qq_33663983/article/details/78349641
+
 # Java中常见的内存泄漏场景
 
 ## 静态集合类引起内存泄漏

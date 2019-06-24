@@ -22,7 +22,8 @@ public class ThreadLocalOOM {
             executor.execute(new Runnable() {
                 @Override
                 public void run() {
-                    new LocalVariable();
+                    localVariable.set(new LocalVariable());
+                    // new LocalVariable();
                     System.out.println("use local var");
                     // localVariable.remove();
                 }
