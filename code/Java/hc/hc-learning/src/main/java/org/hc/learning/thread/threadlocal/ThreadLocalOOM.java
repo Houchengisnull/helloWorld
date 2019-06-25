@@ -8,7 +8,7 @@ public class ThreadLocalOOM {
 
     private static final int TASK_LOOP_SIZE = 500;
     final static ThreadPoolExecutor executor
-            = new ThreadPoolExecutor(5, 5, 1, TimeUnit.MINUTES, new LinkedBlockingQueue());
+            = new ThreadPoolExecutor(5, 5, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<>());
 
     static class LocalVariable {
         private byte[] a = new byte[1024*1024*5];/*5M大小的数组*/
