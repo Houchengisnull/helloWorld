@@ -11,13 +11,15 @@ public class ThreadLocalOOM {
             = new ThreadPoolExecutor(5, 5, 1, TimeUnit.MINUTES, new LinkedBlockingQueue<>());
 
     static class LocalVariable {
-        private byte[] a = new byte[1024*1024*5];/*5M大小的数组*/
+        @SuppressWarnings("unused")
+		private byte[] a = new byte[1024*1024*5];/*5M大小的数组*/
     }
 
     final static ThreadLocal<LocalVariable> localVariable = new ThreadLocal<>();
 
     public static void main(String[] args) throws InterruptedException {
-        Object o = new Object();
+        @SuppressWarnings("unused")
+		Object o = new Object();
         for (int i = 0; i < TASK_LOOP_SIZE; i++) {
             executor.execute(new Runnable() {
                 @Override
