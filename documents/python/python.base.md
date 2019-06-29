@@ -1,5 +1,11 @@
 [TOC]
 
+# 禅
+
+``` python
+import this
+```
+
 # pip
 
 - 更新`pip`工具
@@ -82,7 +88,94 @@ https://blog.csdn.net/zhou120189162/article/details/82711600
 
 https://blog.csdn.net/qq_14998713/article/details/78277052
 
+# 设置Python脚本编码
+
+`SyntaxError: Non-UTF-8 code starting with '\xc4' `
+
+- 2019\06\29
+
+  今天在遇到如上错误，出现在声明字符串处
+
+  百度后发现在文件头设置编码即可
+
+  ``` python
+  # coding = gbk
+  ```
+
+- 参考
+
+  https://blog.csdn.net/mgsg_asp/article/details/80668621
+
+# Python编码规范
+
+## def 方法声明
+
+<span style="color:red">PEP:8 expected 2 blank lines ，found 1</span>
+
+在Python中声明方法时，需要距上空两行
+
+# import
+
+## 导入同路径下Package/Module
+
+.
+
+└──src
+
+​		└──spider
+
+
+
+​				├── SpiderUtils
+
+​				│ 		└──\__init__.py
+
+​				└── books
+
+​							└──1q84.py
+
+如上场景，`1q84.py`需要调用SpiderUtils下\____init____.py中方法时
+
+``` python
+from src.spider.spidersuit import SpiderMan
+```
+
+https://blog.csdn.net/Tyro_java/article/details/80739247
+
+https://www.cnblogs.com/7tiny/p/7209608.html
+
+# 循环
+
+## while
+
+``` python
+count = 0 
+while count < 5: 
+	print (count, " 小于 5") 
+	count = count + 1 
+else: 
+	print (count, " 大于或等于 5")
+```
+
 # 字符串
+
+## 类型转换
+
+- 字符串转整形
+
+  ``` python
+  stringType = "1"
+  intType = str(stringType)
+  ```
+
+- 整形转字符串
+
+  ``` python
+  intType = 1
+  stringType = int(intType)
+  ```
+
+  
 
 ## 正则表达式
 
@@ -95,6 +188,12 @@ signature = rep.sub("", signature)
 ```
 
 # 异次元口袋——python类库
+
+- bs4 (BeautifulSoup)
+
+  ``` 
+  pip install bs4
+  ```
 
 - 微信
 

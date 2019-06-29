@@ -47,3 +47,26 @@ Scope 与maven编译范围类似
 - archive 归档
 至少在IBM中常常使用 archive 描述[jar|war]
 - exploded 分解的
+
+
+
+# Install Python Plugins
+
+- File - Settings - Plugins
+- 点击<Button>Install JetBrains plugin</Button>
+
+> 若出现`idea no python interpreter`，请设置项目`SDK`。
+>
+> - interpreter 解释器
+
+- 建议直接使用系统`SDK`，而非交给Idea复制出一个`SDK`副本。
+
+  下图`Inherit global site-packages`选项即表示继承系统`SDK`
+
+  - inherit 继承
+
+![1561804023049](https://github.com/Houchengisnull/helloWorld/blob/master/documents/images/idea/idea_pyhton_plugin.png)
+
+## 参考
+
+https://www.cnblogs.com/zlslch/p/7976893.html
