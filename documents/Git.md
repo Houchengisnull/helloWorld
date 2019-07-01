@@ -1,5 +1,13 @@
 [TOC]
 
+# 安装Git Server
+
+## Gitblit
+
+- 在-windows-上部署-gitblit
+
+https://blog.csdn.net/longintchar/article/details/80787907#
+
 # stash
 
 `stash` 备份当前工作区到Git栈
@@ -43,3 +51,7 @@ git reset #{verison} #{filename}
 ## Couldn't find remote ref refs/heads/xxx [core]
 
 https://blog.csdn.net/Tyro_java/article/details/76064584
+
+# 参考
+
+https://www.liaoxuefeng.com/wiki/896043488029600/896202815778784
