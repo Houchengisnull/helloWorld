@@ -3,8 +3,10 @@ package org.hc.learning.thread.forkjoin.learning;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 无返回值的分治编程
@@ -59,7 +61,9 @@ public class FindDirsFiles extends RecursiveAction {
          * 异步提交
          * 与主线程中工作并行执行
          */
-         pool.execute(task);
+        pool.execute(task);
+        // 有返回值
+        // pool.submit(task);
 
         /*主线程做自己的业务工作*/
         System.out.println("Task is Running......");
@@ -75,7 +79,8 @@ public class FindDirsFiles extends RecursiveAction {
         }
         System.out.println("Main Thread done sth......,otherWork="
                 +otherWork);
-        // 阻塞方法 Fork-Join任务完成后才执行之后代码 sout("Task end")
+        // 阻塞方法
+        // **Fork-Join任务完成后才执行之后代码 sout("Task end")**
         task.join();
         System.out.println("Task end");
         System.out.println("任务耗时:" + (System.currentTimeMillis() - timeVar) + "ms");
