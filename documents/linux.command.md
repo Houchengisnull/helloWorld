@@ -1,6 +1,18 @@
 [TOC]
 
+# 查看系统版本
 
+- 查看Linux系统版本
+
+``` shell
+cat /etc/issue
+```
+
+- 查看Linux内核版本
+
+``` shell
+cat /proc/version
+```
 
 # 网络
 
@@ -41,6 +53,14 @@
 `# kill #{port}`
 `# kill -s 9 #{port}`
 -s 9 即传递给进程信号为9, 9即强制,尽快结束进程
+
+# 查看端口 lsof
+
+查看FTP服务端口21
+
+``` shell
+# lsof -i:21 
+```
 
 # netstat
 
@@ -83,6 +103,10 @@
 ## 参考
 
 <http://www.runoob.com/linux/linux-vim.html>
+
+# Yum
+
+`Yellow dog Updater , Modified`，为一款Shell前端软件包管理器。
 
 # head 和 tail
 
