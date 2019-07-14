@@ -36,9 +36,10 @@ public class FindDirsFiles extends RecursiveAction {
                     // 对每个子目录都新建一个子任务
                     subTasks.add(new FindDirsFiles(file, fileType));
                 } else {
+                    // System.out.println(file.getAbsolutePath());
                     // 遇到文件 检查
                     if (file.getAbsolutePath().endsWith(fileType)) {
-                        System.out.println("文件:" + file.getAbsolutePath());
+                       System.out.println("文件:" + file.getAbsolutePath());
                     }
                 }
                 if (!subTasks.isEmpty()) {
@@ -55,13 +56,15 @@ public class FindDirsFiles extends RecursiveAction {
         long timeVar = System.currentTimeMillis();
         // 用一个 ForkJoinPool 实例调度总任务
         ForkJoinPool pool = new ForkJoinPool();
-        FindDirsFiles task = new FindDirsFiles(new File("C:\\Users\\60993\\Desktop\\helloWorld"), "md");
+        FindDirsFiles task = new FindDirsFiles(new File("C:\\Users\\60993\\Desktop\\helloWorld\\documents\\C++"), "md");
 
         /**
          * 异步提交
          * 与主线程中工作并行执行
          */
         pool.execute(task);
+        // 同步提交
+        // pool.invoke(task);
         // 有返回值
         // pool.submit(task);
 
