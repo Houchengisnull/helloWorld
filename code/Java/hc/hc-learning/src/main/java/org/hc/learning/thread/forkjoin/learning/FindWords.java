@@ -22,51 +22,61 @@ public class FindWords extends RecursiveAction {
      */
     private File path;
 
-    public FindWords(File path, String keyWords) {
+    private FilenameFilter filenameFilter;
+
+    /**
+     * 构造器
+     * @param path 遍历路径
+     * @param keyWords 关键字
+     * @param filenameFilter 文件名称过滤器（仅对文件生效）
+     */
+    public FindWords(File path, String keyWords, FilenameFilter filenameFilter) {
         this.path = path;
         this.keyWords = keyWords;
-
-        if (keyWords == null || "".equals(keyWords)) {
+        this.filenameFilter = filenameFilter;
+        /*if (keyWords == null || "".equals(keyWords)) {
             System.err.println("无效关键字");
-        }
+        }*/
     }
 
     @Override
     protected void compute() {
         ArrayList<FindWords> subTasks = new ArrayList<>();
-        // 查看当前代码根据[文件|文件夹]作为分解的任务
-        // System.out.println(Thread.currentThread().getName());
-        File[] files = path.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                subTasks.add(new FindWords(file, keyWords));
-                // real service
-                if (file.isFile()) {
-                    findWords(file);
-                }
-                if (!subTasks.isEmpty()) {
-                    // 在当前的ForkJoinPool上调度所有的子任务
-                    // 多路树结构
-                    for (FindWords subTask : invokeAll(subTasks)) {
-                        subTask.join();
+        if (path.isDirectory()){
+            File[] files = path.listFiles();
+            if (files != null) {
+                for (File file : files) {
+                    boolean accept = filenameFilter == null || filenameFilter.accept(file, file.getName());
+                    if (accept || file.isDirectory()){ // pass directory
+                        subTasks.add(new FindWords(file, keyWords, filenameFilter));
                     }
                 }
             }
+            if (!subTasks.isEmpty()) {
+                invokeAll(subTasks);
+            }
+        } else {
+            // real service
+            findWords();
         }
+
     }
 
-    public void findWords(File file) {
-        try(FileInputStream fileInputStream = new FileInputStream(file);
+    private void findWords() {
+        // 查看当前代码根据[文件|文件夹]作为分解的任务
+        // System.out.println(Thread.currentThread().getName() + " > " + file.getAbsolutePath());
+        try(FileInputStream fileInputStream = new FileInputStream(path);
             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
-            BufferedReader reader = new BufferedReader(inputStreamReader);
+            BufferedReader reader = new BufferedReader(inputStreamReader)
         ){
-            StringBuilder builder = null;
-            String line = null;
+            StringBuilder builder;
+            String line;
             // 文件行数
             int index = 1;
             while ((line = reader.readLine()) != null){
                 if (line.contains(keyWords)) {
-                    builder = new StringBuilder(path.getAbsolutePath());
+                    builder = new StringBuilder();
+                    builder.append(path.getAbsolutePath());
                     builder.append(":").append(index);
                     builder.append("\t").append(line);
                     System.out.println(builder.toString());
@@ -86,7 +96,16 @@ public class FindWords extends RecursiveAction {
         // 检索路径
         File file = new File("C:\\Users\\60993\\Desktop\\helloWorld\\documents");
         ForkJoinPool pool = new ForkJoinPool();
-        FindWords task = new FindWords(file, keyWords);
+        /*FindWords task = new FindWords(file, keyWords, new FilenameFilter() {
+            @Override
+            public synchronized boolean accept(File dir, String name) {
+                if (name.contains("Java")) {
+                    return true;
+                }
+                return false;
+            }
+        });*/
+        FindWords task = new FindWords(file, keyWords,null);
         pool.invoke(task);
     }
 }

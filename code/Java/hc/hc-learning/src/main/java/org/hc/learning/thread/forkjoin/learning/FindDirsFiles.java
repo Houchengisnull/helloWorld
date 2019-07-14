@@ -42,11 +42,11 @@ public class FindDirsFiles extends RecursiveAction {
                        System.out.println("文件:" + file.getAbsolutePath());
                     }
                 }
-                if (!subTasks.isEmpty()) {
-                    // 在当前的 ForkJoinPool 上调度所有的子任务。
-                    for (FindDirsFiles subTask : invokeAll(subTasks)) {
-                        subTask.join();
-                    }
+            }
+            if (!subTasks.isEmpty()) {
+                // 在当前的 ForkJoinPool 上调度所有的子任务。
+                for (FindDirsFiles subTask : invokeAll(subTasks)) {
+                    subTask.join(); // 获取子任务返回值
                 }
             }
         };
