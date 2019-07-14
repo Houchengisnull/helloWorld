@@ -34,14 +34,14 @@ public class FindWords extends RecursiveAction {
     @Override
     protected void compute() {
         ArrayList<FindWords> subTasks = new ArrayList<>();
-
+        // 查看当前代码根据[文件|文件夹]作为分解的任务
+        // System.out.println(Thread.currentThread().getName());
         File[] files = path.listFiles();
         if (files != null) {
             for (File file : files) {
-                if (file.isDirectory()) {
-                    subTasks.add(new FindWords(file, keyWords));
-                } else {
-                    // real service
+                subTasks.add(new FindWords(file, keyWords));
+                // real service
+                if (file.isFile()) {
                     findWords(file);
                 }
                 if (!subTasks.isEmpty()) {
