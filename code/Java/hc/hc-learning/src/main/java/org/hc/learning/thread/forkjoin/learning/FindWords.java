@@ -1,5 +1,7 @@
 package org.hc.learning.thread.forkjoin.learning;
 
+import org.hc.tool.print.Colorful;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.concurrent.ForkJoinPool;
@@ -69,17 +71,15 @@ public class FindWords extends RecursiveAction {
             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
             BufferedReader reader = new BufferedReader(inputStreamReader)
         ){
-            StringBuilder builder;
             String line;
+            String desc;
             // 文件行数
             int index = 1;
             while ((line = reader.readLine()) != null){
                 if (line.contains(keyWords)) {
-                    builder = new StringBuilder();
-                    builder.append(path.getAbsolutePath());
-                    builder.append(":").append(index);
-                    builder.append("\t").append(line);
-                    System.out.println(builder.toString());
+                    desc = Colorful.toBlue(path.getAbsolutePath() + ":" + index + "\t");
+                    line = Colorful.toRed(line, keyWords);
+                    System.out.println(desc + line);
                 }
                 index++;
             }
