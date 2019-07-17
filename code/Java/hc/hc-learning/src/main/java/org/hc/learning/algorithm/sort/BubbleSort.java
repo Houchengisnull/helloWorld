@@ -6,7 +6,7 @@ import org.hc.learning.thread.forkjoin.learning.sum.MakeArray;
  * 冒泡排序
  */
 public class BubbleSort extends Sort<Integer>{
-
+    private int iterateCount = 0;
     private int count = 0 ;
 
     public BubbleSort(Integer[] array) {
@@ -24,8 +24,9 @@ public class BubbleSort extends Sort<Integer>{
         BubbleSort sort = new BubbleSort(array);
         sort.sort();
         // sort.output(array);
-        System.out.println("交换" + sort.getCount() + "次");
-        System.out.println("耗时" + (System.currentTimeMillis()-l) + "ms");
+        System.out.println("\t交换" + sort.getCount() + "次");
+        System.out.println("\t迭代" + sort.getIterateCount() + "次");
+        System.out.println("\t耗时" + (System.currentTimeMillis()-l) + "ms");
     }
 
     @Override
@@ -34,6 +35,7 @@ public class BubbleSort extends Sort<Integer>{
             // 标记排序是否完成 缺省true
             boolean finished = true;
             for (int j = 0; j < array.length-1-i; j++) {
+                iterateCount++;
                 if (array[j] < array[j+1]) {
                     swap(j, j+1);
                     finished = false;
@@ -60,5 +62,13 @@ public class BubbleSort extends Sort<Integer>{
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public int getIterateCount() {
+        return iterateCount;
+    }
+
+    public void setIterateCount(int iterateCount) {
+        this.iterateCount = iterateCount;
     }
 }

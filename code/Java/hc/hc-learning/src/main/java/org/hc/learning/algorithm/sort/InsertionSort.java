@@ -8,7 +8,10 @@ import org.hc.learning.thread.forkjoin.learning.sum.MakeArray;
  * 插入排序时一种稳定的排序
  */
 public class InsertionSort extends Sort<Integer>{
-
+    /**
+     * 迭代次数
+     */
+    private int iterateCount = 0;
     private int count = 0 ;
 
     public InsertionSort(Integer[] array) {
@@ -22,7 +25,8 @@ public class InsertionSort extends Sort<Integer>{
             int value = array[i];
             int j = i;
             while (j>=1 && array[j-1] > value) {
-                array[j] = array[j-1];
+                iterateCount++;
+                array[j] = array[j-1]; // 元素往后移动
                 j--;
             }
             array[j] = value;
@@ -44,8 +48,9 @@ public class InsertionSort extends Sort<Integer>{
         Integer[] array = MakeArray.makeArray();
         InsertionSort sort = new InsertionSort(array);
         sort.sort();
-        sort.output(array);
-        System.out.println("耗时" + (System.currentTimeMillis()-l) + "ms");
+        /*sort.output(array);*/
+        System.out.println("\t迭代" + sort.getIterateCount() + "次");
+        System.out.println("\t耗时" + (System.currentTimeMillis()-l) + "ms");
     }
 
     public int getCount() {
@@ -54,5 +59,13 @@ public class InsertionSort extends Sort<Integer>{
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public int getIterateCount() {
+        return iterateCount;
+    }
+
+    public void setIterateCount(int iterateCount) {
+        this.iterateCount = iterateCount;
     }
 }

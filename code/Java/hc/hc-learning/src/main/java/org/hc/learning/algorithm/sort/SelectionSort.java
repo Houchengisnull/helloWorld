@@ -4,6 +4,7 @@ import org.hc.learning.thread.forkjoin.learning.sum.MakeArray;
 
 public class SelectionSort extends Sort<Integer>{
 
+    private int iterateCount = 0;
     private int count = 0 ;
 
     public SelectionSort(Integer[] array) {
@@ -15,6 +16,7 @@ public class SelectionSort extends Sort<Integer>{
         for (int i = 0; i < array.length; i++) {
             int max = i;
             for (int j = i+1; j < array.length; j++) {
+                iterateCount++;
                 if (array[max] < array[j]){
                     max = j;
                 }
@@ -42,8 +44,9 @@ public class SelectionSort extends Sort<Integer>{
         SelectionSort sort = new SelectionSort(array);
         sort.sort();
         // sort.output(array);
-        System.out.println("交换" + sort.getCount() + "次");
-        System.out.println("耗时" + (System.currentTimeMillis()-l) + "ms");
+        System.out.println("\t交换" + sort.getCount() + "次");
+        System.out.println("\t迭代" + sort.getIterateCount() + "次");
+        System.out.println("\t耗时" + (System.currentTimeMillis()-l) + "ms");
     }
 
     public int getCount() {
@@ -52,5 +55,13 @@ public class SelectionSort extends Sort<Integer>{
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public int getIterateCount() {
+        return iterateCount;
+    }
+
+    public void setIterateCount(int iterateCount) {
+        this.iterateCount = iterateCount;
     }
 }
