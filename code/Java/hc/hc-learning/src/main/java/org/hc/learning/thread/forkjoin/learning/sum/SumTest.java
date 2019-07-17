@@ -12,7 +12,7 @@ public class SumTest {
     @Test
     public void singleSum () {
         int count = 0;
-        int[] src = MakeArray.makeArray();
+        Integer[] src = MakeArray.makeArray();
 
         long start = System.currentTimeMillis();
         for (int i : src) {
@@ -30,7 +30,7 @@ public class SumTest {
     @Test
     public void forkJoinSum () {
         ForkJoinPool pool = new ForkJoinPool();
-        int[] src = MakeArray.makeArray();
+        Integer[] src = MakeArray.makeArray();
         SumTask innerFind = new SumTask(src, 0, src.length - 1);
 
         long start = System.currentTimeMillis();

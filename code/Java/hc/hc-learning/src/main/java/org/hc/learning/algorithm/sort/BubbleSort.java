@@ -7,6 +7,8 @@ import org.hc.learning.thread.forkjoin.learning.sum.MakeArray;
  */
 public class BubbleSort extends Sort<Integer>{
 
+    private int count = 0 ;
+
     public BubbleSort(Integer[] array) {
         super(array);
     }
@@ -16,11 +18,13 @@ public class BubbleSort extends Sort<Integer>{
      * @param args
      */
     public static void main(String[] args) {
+        System.out.println("冒泡排序");
         long l = System.currentTimeMillis();
         Integer[] array = MakeArray.makeArray();
         BubbleSort sort = new BubbleSort(array);
         sort.sort();
         sort.output(array);
+        System.out.println("交换" + sort.getCount() + "次");
         System.out.println("耗时" + (System.currentTimeMillis()-l) + "ms");
     }
 
@@ -36,7 +40,7 @@ public class BubbleSort extends Sort<Integer>{
                 }
             }
             if (finished){
-                System.out.println("执行" + (i+1) + "次数");
+                /*System.out.println("执行" + (i+1) + "次数");*/
                 break;
             }
         }
@@ -44,9 +48,17 @@ public class BubbleSort extends Sort<Integer>{
 
     @Override
     void swap(int posFront, int posBack) {
+        count++ ;
         int temp = array[posFront];
         array[posFront] = array[posBack];
         array[posBack] = temp;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 }

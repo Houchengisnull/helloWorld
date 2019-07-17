@@ -8,11 +8,11 @@ public class SumTask extends RecursiveTask<Integer> {
      * 阈值 即每份任务量的大小
      */
     private final static int THRESHOLD = MakeArray.ARRAY_LENGTH/10;
-    private int[] src;
+    private Integer[] src;
     private int fromIndex;
     private int toIndex;
 
-    public SumTask(int[] src, int fromIndex, int toIndex) {
+    public SumTask(Integer[] src, int fromIndex, int toIndex) {
         this.src = src;
         this.fromIndex = fromIndex;
         this.toIndex = toIndex;

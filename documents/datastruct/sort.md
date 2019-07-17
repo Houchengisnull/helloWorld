@@ -54,6 +54,92 @@
 - 易实现
 - 原地排序（不需要额外的存储空间）
 
+``` java
+
+public class SeletionSort extends Sort<Integer>{
+
+    public SeletionSort(Integer[] array) {
+        super(array);
+    }
+
+    @Override
+    public void sort() {
+        for (int i = 0; i < array.length; i++) {
+            int max = array[i];
+            for (int j = i+1; j < array.length; j++) {
+                if (max < array[j]){
+                    swap(i, j);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void swap(int posFront, int posBack) {
+        int temp = array[posFront];
+        array[posFront] = array[posBack];
+        array[posBack] = temp;
+    }
+
+    /**
+     * 10万数据耗时16703ms
+     * @param args
+     */
+    public static void main(String[] args) {
+        long l = System.currentTimeMillis();
+        Integer[] array = MakeArray.makeArray();
+        SeletionSort sort = new SeletionSort(array);
+        sort.sort();
+        sort.output(array);
+        System.out.println("耗时" + (System.currentTimeMillis()-l) + "ms");
+    }
+}
+```
+
+# 插入排序
+
+`insertion sort`，每次迭代过程中算法随机地从输入序列中移除一个元素，并将该元素插入待排序地正确位置。重复该过程，直到所有输入元素都被选择一次。
+
+- 例如
+
+  给定一个序列 6 8 1 4 5
+
+  第一次排序：6
+
+  第二次排序：6 8
+
+  第三次排序：1 6 8
+
+  第四次排序：1 4 6 8
+
+  第五次排序：1 4 5 6 8
+
+## 优点
+
+- 实现简单
+- 数据量较少时效率较高
+- 算法实际运行效率优于选择排序和冒泡排序，即使在最坏情况下三个算法的时间复杂度均为O(n^2)
+- 稳定
+- 原地：仅需要常量O(1)的辅助内存空间
+- 即时：插入排序能够在**接受序列的同时**对其进行排序
+
+> 该算法最好结合链表实现。
+
+插入排序是典型的原地排序，**经过k次迭代后数组具有性质：前k+1个元素已经排序。**
+
+## 适用场景
+
+- 链表
+- 手动输入序列
+
+## 与其他算法比较
+
+在**数据几乎已经排序**和输入数据规模较小时可以使用插入排序。由于上述原因以及插入排序的稳定性，插入排序可用于归并和快速排序等高开销的分治排序算法。
+
+其次，尽管`冒泡排序`、`选择排序`与`插入排序`同为O(n^2)的排序算法，但实际运行效率高于`冒泡排序`与`选择排序`。
+
+![1563373927782](https://github.com/Houchengisnull/helloWorld/blob/master/documents/images/algorithm/sort/sort.png)
+
 # 快速排序
 
 快速排序算法，又名分区交换排序算法。
