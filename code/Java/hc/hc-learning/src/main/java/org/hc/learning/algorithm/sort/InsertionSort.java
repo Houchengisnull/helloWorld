@@ -2,10 +2,10 @@ package org.hc.learning.algorithm.sort;
 
 import org.hc.learning.thread.forkjoin.learning.sum.MakeArray;
 
-import java.util.LinkedList;
 
 /**
  * 插入排序
+ * 插入排序时一种稳定的排序
  */
 public class InsertionSort extends Sort<Integer>{
 
@@ -18,12 +18,15 @@ public class InsertionSort extends Sort<Integer>{
     @Override
     public void sort() {
         // 每次输入数据中 移除一个元素并将其插入已排序序列的正确位置
-        for (int i = 0; i < array.length; i++) {
-            for (int j = i-1; j > 0; j--) {
-                if (array[i] < array[j]) {
-                    swap(i, j);
-                }
+        for (int i = 2; i < array.length - 1; i++) {
+            int value = array[i];
+            int j = i;
+            while (j>=1 && array[j-1] > value) {
+                array[j] = array[j-1];
+                j--;
             }
+            array[j] = value;
+            // output(array);
         }
     }
 
@@ -42,7 +45,6 @@ public class InsertionSort extends Sort<Integer>{
         InsertionSort sort = new InsertionSort(array);
         sort.sort();
         sort.output(array);
-        System.out.println("交换" + sort.getCount() + "次");
         System.out.println("耗时" + (System.currentTimeMillis()-l) + "ms");
     }
 

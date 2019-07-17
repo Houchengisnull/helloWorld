@@ -1,6 +1,5 @@
 package org.hc.learning.algorithm.sort;
 
-import org.hc.learning.thread.forkjoin.learning.sum.MakeArray;
 import org.junit.Test;
 
 public class SortTest {

@@ -23,7 +23,7 @@ public class BubbleSort extends Sort<Integer>{
         Integer[] array = MakeArray.makeArray();
         BubbleSort sort = new BubbleSort(array);
         sort.sort();
-        sort.output(array);
+        // sort.output(array);
         System.out.println("交换" + sort.getCount() + "次");
         System.out.println("耗时" + (System.currentTimeMillis()-l) + "ms");
     }

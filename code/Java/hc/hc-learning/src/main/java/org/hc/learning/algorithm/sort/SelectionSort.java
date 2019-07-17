@@ -13,12 +13,13 @@ public class SelectionSort extends Sort<Integer>{
     @Override
     public void sort() {
         for (int i = 0; i < array.length; i++) {
-            int max = array[i];
+            int max = i;
             for (int j = i+1; j < array.length; j++) {
-                if (max < array[j]){
-                    swap(i, j);
+                if (array[max] < array[j]){
+                    max = j;
                 }
             }
+            swap(max, i);
         }
     }
 
@@ -40,7 +41,7 @@ public class SelectionSort extends Sort<Integer>{
         Integer[] array = MakeArray.makeArray();
         SelectionSort sort = new SelectionSort(array);
         sort.sort();
-        sort.output(array);
+        // sort.output(array);
         System.out.println("交换" + sort.getCount() + "次");
         System.out.println("耗时" + (System.currentTimeMillis()-l) + "ms");
     }
