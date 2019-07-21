@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public class MakeArray {
     // 数组长度
-    public static final int ARRAY_LENGTH = 10000;
+    public static final int ARRAY_LENGTH = 100000;
     public static final int THRESHOLD = 47;
 
     public static Integer[] makeArray() {

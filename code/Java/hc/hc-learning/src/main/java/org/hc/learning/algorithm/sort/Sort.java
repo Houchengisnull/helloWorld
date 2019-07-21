@@ -7,6 +7,8 @@ public abstract class Sort<T> {
         this.array = array;
     }
 
+    protected Sort() {}
+
     /**
      * 排序
      */

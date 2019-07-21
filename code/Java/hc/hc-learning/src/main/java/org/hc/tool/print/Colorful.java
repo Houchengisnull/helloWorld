@@ -56,6 +56,9 @@ public final class Colorful {
         return drawInSection(Color.BLACK, value, keyWords);
     }
 
+    public static String toRed(String value){
+        return drawTo(Color.RED, value);
+    }
     /**
      * 局部變紅
      * @param value 內容
