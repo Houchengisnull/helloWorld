@@ -308,3 +308,28 @@ https://my.oschina.net/u/3548836/blog/974048
 ## 场景
 
 ​	需要排序的数据将导致内存溢出，即内存大小小于数据大小。
+
+## 效率比较
+
+相关代码见
+
+https://github.com/Houchengisnull/helloWorld/tree/master/code/Java/hc/hc-learning/src/main/java/org/hc/learning/algorithm/sort
+
+``` text
+FkSort implement By Mark
+	spend time:64ms
+插入排序
+	迭代-1800678900次
+	耗时9430ms
+冒泡排序
+	交换-1795838063次
+	迭代704940218次
+	耗时72180ms
+选择排序
+	交换100000次
+	迭代704982704次
+	耗时20643ms
+归并排序
+	耗时153ms
+```
+
