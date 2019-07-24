@@ -7,6 +7,16 @@
 - ctrl + w
 - alt + F4
 
+# XPMode
+
+## 整合硬盘
+
+在`Win7`上右键`.vmcx(XPMode启动文件)`中点击`设定`。于`整合功能`中选中使用盘符
+
+### 参考
+
+https://jingyan.baidu.com/article/ff42efa91023a3c19e220217.html
+
 # 配置`ODBC`数据源
 
 1. 进入`odbc数据源管理器`
