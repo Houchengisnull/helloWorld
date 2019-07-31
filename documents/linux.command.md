@@ -1,6 +1,8 @@
 [TOC]
 
-# 查看系统版本
+# 系统
+
+## 系统版本
 
 - 查看Linux系统版本
 
@@ -13,6 +15,53 @@ cat /etc/issue
 ``` shell
 cat /proc/version
 ```
+
+## 系统位数
+
+``` shell
+$ getconf LONG_BIT
+```
+
+## 查看磁盘IO信息
+
+- iotop
+- iostat
+
+# 文件
+
+## 创建文件夹 mkdir
+
+``` shell
+$ mkdir #{file}
+
+// 需要时创建上级目录
+$ mkdir -P #{file} 
+```
+
+## 设置用户或用户组 chown
+
+将指定文件设置用户或用户组
+
+``` shell
+$ chown -R #{user}:#{usergroup} #{file}
+```
+
+| 参数 | 描述                           |
+| ---- | ------------------------------ |
+| -R   | 处理指定目录以及子目录下的文件 |
+| -c | 显示更改的部份信息 |
+
+## 设置文件权限 chowd
+
+``` shell
+chowd -R 777 #{directory}
+```
+
+| 权限代号 | 权限描述       |
+| -------- | -------------- |
+| 777      | 可读可写可执行 |
+
+http://blog.sina.com.cn/s/blog_8610084f0102xx2k.html
 
 # 网络
 
@@ -34,11 +83,77 @@ cat /proc/version
 # ip addr
 ```
 
-# 查看内存 free
+## 网卡流量
+
+`iptraf-ng`或`iptraf`一般系统默认不安装，需要通过`yum -y install iptraf`安装
+
+``` shell
+$ iptraf-ng eth0
+```
+
+# 内存
+
+## 查看 free
 
 ``` shell
 # free -h
 ```
+
+## 查看 top
+
+``` shell
+# top
+```
+
+​	top命令是Linux下常用的性能分析工具，能够实时显示系统中各个进程的资源占用状况，类似于Windows的任务管理器
+
+- 查看用户进程内存使用情况
+
+``` shell
+$ top -u root
+```
+
+- 参数意义
+
+| name | description |
+| ---- | ----------- |
+| PID | 进程的ID |
+| USER | 进程所有者 |
+| PR | 进程的优先级别，越小越优先被执行 |
+| NInice | 值 |
+| VIRT | 进程占用的虚拟内存 |
+| RES | 进程占用的物理内存 |
+| SHR | 进程使用的共享内存 |
+| S | 进程的状态。S表示休眠，R表示正在运行，Z表示僵死状态，N表示该进程优先值为负数 |
+| %CPU | 进程占用CPU的使用率 |
+| %MEM | 进程使用的物理内存和总内存的百分比 |
+| TIME+ | 该进程启动后占用的总的CPU时间，即占用CPU使用时间的累加值。|
+| COMMAND | 进程启动命令名称 |
+
+- 常用命令
+  - P 按照CPU占用百分百排序
+  - M 按照内存占用百分比排序
+  - T 按照MITE+排序
+
+## 释放内存
+
+``` shell
+# sync
+# echo 1 > /proc/sys/vm/drop_caches
+```
+
+- sync
+
+将buffer区数据写入磁盘，确保文件系统完整性
+
+- echo #{num} > /proc/sys/vm/drop_caches
+
+| num | 含义 |
+| --- | --- |
+| 0  | 不释放 |
+| 1 |  释放页内存 |
+| 2 | 释放dentries 和inodes |
+| 3 |  释放所有缓存 |
 
 # 进程
 
@@ -47,6 +162,8 @@ cat /proc/version
 ```
 # ps -ef | grep #{process_name}
 ```
+
+
 
 ## kill
 
@@ -68,6 +185,12 @@ cat /proc/version
 
 ```
 # netstat -tnlp
+```
+
+## 查看主机路由
+
+``` shell
+$ netstat -rn
 ```
 
 # ssh

@@ -1,4 +1,4 @@
-[toc]
+[TOC]
 
 # 常用命令命令
 
@@ -96,10 +96,26 @@
 
 - 启动manager
   路径 :$WAS_HOME/bin
-  命令 :sh [startManger.sh](http://startManger.sh)
+  命令 :sh [startManager.sh](http://startManger.sh)
+
+  ``` shell
+  # 指定管理节点
+  ./startManager.sh -profileName dmgr
+  ```
+
 - 启动node和server
   路径 :$WAS_HOME/profiles/#{profile_directory}/bin/startNode.sh
   命令 : ./startNode.sh 与 ./startServer.sh #{serverName}
+
+### 启动时未找到管理节点配置FileNotFoundException
+
+``` java
+FileNotFoundException:$WAS_HOME/profiles/#{serverName}/config/cells/dmgrCell/nodes/#{nodeName}/servers/dmgr/server
+```
+
+可在`$WAS_HOME/profiles`下直接找到管理节点，进入其`bin`文件夹执行`./startServer.sh`。
+
+出现以上异常可能是由于执行`$WAS_HOME/bin/startManager.sh`未能成功找到正确管理节点导致。
 
 ## 关闭was
 
