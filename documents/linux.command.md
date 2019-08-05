@@ -113,7 +113,13 @@ $ iptraf-ng eth0
 $ top -u root
 ```
 
-- 参数意义
+- 查看端口内存占比
+
+``` shell
+$ top -p #{pid}
+```
+
+- 字段意义
 
 | name | description |
 | ---- | ----------- |
@@ -134,6 +140,12 @@ $ top -u root
   - P 按照CPU占用百分百排序
   - M 按照内存占用百分比排序
   - T 按照MITE+排序
+
+## 查看内存详细内容
+
+``` shell 
+$ cat /proc/#{pid}/status
+```
 
 ## 释放内存
 
