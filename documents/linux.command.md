@@ -27,6 +27,16 @@ $ getconf LONG_BIT
 - iotop
 - iostat
 
+# 用户
+
+## 查看用户所在用户组
+
+``` shell
+$ groups #{username}
+```
+
+
+
 # 文件
 
 ## 创建文件夹 mkdir
