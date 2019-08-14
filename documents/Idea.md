@@ -95,7 +95,18 @@ Scope 与maven编译范围类似
 至少在IBM中常常使用 archive 描述[jar|war]
 - exploded 分解的
 
+# .idea与*.iml
 
+> 2019-08-08
+>
+> 在工作中遇到一个环境配置的问题：
+>
+> - Maven配`pom.xml`提供依赖不完全满足项目
+> - 复制他人可用项目时idea将根据Maven重置项目`.idea`和`*.iml`
+
+`.idea`工程文件夹
+
+`*.iml`模块配置信息
 
 # Install Python Plugins
 
