@@ -83,6 +83,12 @@ http://www.talkwithtrend.com/Question/382627?order=desc
 - 在META-INF目录下添加属性文件:META-INF/ibm-parialapp-delete.props, 且文件必须是ASCII文件
 - 文件路径相对于 META-INF/ibm-parialapp-delete.props
 
+# 数据源
+
+## customer properties
+
+### 设置current Schema
+
 # 修改端口
 
 *$WAS_HOME/profiles/#{serverName}/config/cells/#{cellName}/nodes/#{nodeName}/serverindex.xml*
