@@ -30,7 +30,25 @@ https://blog.csdn.net/comeoncomputer/article/details/78681193
 
 用户影子口令文件
 
+# 文件权限
 
+``` shell
+drwx-rwx-x ...
+```
+
+其中以`-`分隔。
+
+- d 文件夹
+- 所有者权限
+- 用户组权限
+- 其他用户权限
+- r 读权限
+- w 写权限
+- x 执行权限
+
+
+
+> 可通过`ls -l`显示当前目录详细信息
 
 # 参考
 
