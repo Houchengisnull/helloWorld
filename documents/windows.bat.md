@@ -1,5 +1,17 @@
 [TOC]
 
+# 查看端口被占用
+
+``` bash
+netstat -aon|findstr #{pid}
+```
+
+# 终止进程 taskkill
+
+``` bash
+taskkill -f -pid #{pid}
+```
+
 
 
 # Runas
