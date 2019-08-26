@@ -211,6 +211,12 @@ $ cat /proc/#{pid}/status
 
 ## 查看主机路由
 
+- `genmask` `子网掩码`
+
+``` shell
+$ route -n
+```
+
 ``` shell
 $ netstat -rn
 ```
