@@ -20,6 +20,7 @@ taskkill -f -pid #{pid}
 
 ``` bash
 # runas /profile /user:ourcomputer\ftpuser "C:Program Files\ftp.exe"
+# runas /profile /user:mymachine\ftpuser "C:Program Files\ftp.exe \"${params}\"
 ```
 
 ## 参数
