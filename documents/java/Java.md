@@ -223,6 +223,10 @@ Runtime.getRuntime().availableProcessors();
 
 有时当`ftp4j`等应用程序无法通过防火墙时，可设置该参数为true以令应用程序通过防火墙。
 
+>  2019/08/30
+>
+> ​	本人第一次尝试时是可行的。当时忘做笔记。再次尝试是却失败了。网络真是相当离奇的环境。
+
 ``` java
 System.setProperty("java.net.preferIPv4Stack", "true");
 ```
