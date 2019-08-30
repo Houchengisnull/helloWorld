@@ -1,5 +1,13 @@
 [TOC]
 
+# command
+
+## 查看JDK安装地址
+
+``` shell
+$ java -verbose
+```
+
 # 面向对象
 
 ## private
@@ -193,3 +201,50 @@ public class CollectionObjectChange {
 
 https://www.cnblogs.com/panxuejun/p/5883044.html
 
+# Runtime
+
+## 获取系统CPU核心数
+
+``` java
+Runtime.getRuntime().availableProcessors();
+```
+
+# Java Socket
+
+## java.net.preferIPv4Stack
+
+- `java`文档
+
+  > If an application has a preference to only use IPv4 sockets, then this property can be set to true. The implication is that the application will not be able to communicate with IPv6 hosts.
+
+优先使用`ipv4 栈`。// 优先使用`ipv4地址`
+
+### 代码方式
+
+有时当`ftp4j`等应用程序无法通过防火墙时，可设置该参数为true以令应用程序通过防火墙。
+
+``` java
+System.setProperty("java.net.preferIPv4Stack", "true");
+```
+
+### 参数方式
+
+``` text
+-Djava.net.preferIPv4Stack=true
+```
+
+### tomcat
+
+可在`catalina.bat`或者`catalina.sh`中增加如下环境变量即可：
+
+```shell
+SET CATALINA_OPTS=-Djava.net.preferIPv4Stack=true
+```
+
+### 参考
+
+https://blog.csdn.net/iteye_9130/article/details/82325170
+
+https://blog.csdn.net/wodeyuer125/article/details/50502989
+
+http://www.micmiu.com/lang/java/java-net-ipv4-ipv6/
