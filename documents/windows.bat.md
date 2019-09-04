@@ -1,5 +1,15 @@
 [TOC]
 
+# 注释
+
+`::`
+
+# 暂停
+
+执行完毕后`cmd`不退出
+
+`pause`
+
 # 查看端口被占用
 
 ``` bash
@@ -11,8 +21,6 @@ netstat -aon|findstr #{pid}
 ``` bash
 taskkill -f -pid #{pid}
 ```
-
-
 
 # Runas
 
