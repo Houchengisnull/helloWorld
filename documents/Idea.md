@@ -2,6 +2,8 @@
 
 # 破解
 
+## 破解JAR
+
 - 安装
 
   版本：2018.2.5
@@ -47,6 +49,14 @@ https://blog.csdn.net/yl1712725180/article/details/80309862
 
 https://blog.csdn.net/WinstonLau/article/details/83278653
 
+## 验证服务器
+
+1、安装验证服务器并启动；
+
+2、修改`hosts`文件将破解服务网址修改为本地服务；
+
+3、启动IDEA并输入破解码；
+
 # Project Structure
 
 ## Project Setting
@@ -79,6 +89,13 @@ Scope 与maven编译范围类似
 - Runtime 仅运行时有效
 - Provided 仅编译时有效; 对测试类编译运行均有效
 
+#### 将项目设置为`Web`项目
+
+- 进入`Module`
+- 添加`Web模块`
+
+https://jingyan.baidu.com/article/fdffd1f8938c93f3e98ca18e.html
+
 ## Libraries
 
 ### Facets
@@ -92,8 +109,10 @@ Scope 与maven编译范围类似
 > An artifact is an assembly of your project assets that you put together to test, deploy or distribute your software solution or its part. Examples are a collection of compiled Java classes or a Java application packaged in a Java archive, a Web application as a directory structure or a Web application archive, etc.     ——官方文档
 
 - archive 归档
-至少在IBM中常常使用 archive 描述[jar|war]
+  至少在IBM中常常使用 archive 描述[jar|war]
 - exploded 分解的
+
+### 将`resource`放入`war`/`jar`中
 
 # .idea与*.iml
 
