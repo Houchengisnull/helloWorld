@@ -73,6 +73,20 @@ chowd -R 777 #{directory}
 
 http://blog.sina.com.cn/s/blog_8610084f0102xx2k.html
 
+# 删除文件 rm
+
+``` shell
+$ rm #{file}
+# 强制删除，系统无提示
+$ rm -f #{file}
+# 删除所有.log文件
+$ rm -i *.log
+# 删除文件夹
+$ rm -r #{directory}
+```
+
+https://blog.csdn.net/chyychfchx/article/details/52687935
+
 # 网络
 
 ## host
