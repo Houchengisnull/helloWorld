@@ -1,5 +1,22 @@
 [TOC]
 
+# 编码
+
+## 查看编码 chcp
+
+## 切换编码
+
+- `win + r`打开输入`regedit`打开注册表
+- 定位到`HKEY_CURRENT_USER\Console\%SystemRoot%_system32_cmd.exe`
+- 修改`CodePage`内容
+
+| number | encode |
+| ------ | ------ |
+| 936    | GBK    |
+| 65001    | UTF-8    |
+| 950  | Big-5 |
+
+
 # 快捷键
 
 ## 关闭窗口 Ctrl + w
