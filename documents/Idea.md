@@ -114,6 +114,10 @@ https://jingyan.baidu.com/article/fdffd1f8938c93f3e98ca18e.html
 
 ### 将`resource`放入`war`/`jar`中
 
+1、添加`Directory Content`，地址指向`resource`
+
+https://blog.csdn.net/yanguo110/article/details/80430200
+
 # .idea与*.iml
 
 > 2019-08-08
