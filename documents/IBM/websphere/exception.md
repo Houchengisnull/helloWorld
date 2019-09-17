@@ -29,3 +29,22 @@ https://developer.ibm.com/answers/questions/258586/how-to-resolve-adml3000e-duri
 - 进入控制台 - 结点 - 全部同步
 
 https://developer.ibm.com/answers/questions/195947/how-to-resolve-admg0011e-error-attempting-to-delet/
+
+# NoSuchMethodException
+
+## 原因分析
+
+由于`wasphere`与`tomcat`类加载顺序不一样：
+
+- `tomcat`通常先加载应用`lib`
+
+- `wasphere`通常先加载自身`lib`
+
+当遇到`wasphere`自身引用类包名与类名与应用所引用的类一样时，且在`was console`设置类加载顺序为`parent first`时，则会出现类似错误。
+
+# 解决方案
+
+- 修改类加载顺序为`parent last`
+- 设置共享库，并设置对此共享库使用隔离类加载器
+
+https://blog.csdn.net/sinat_34703020/article/details/51179670

@@ -21,13 +21,75 @@ $ java -verbose
 
 ZO01设置了禁止转载，就不将他的回答copy上去了。个人以为确实是个直击灵魂的问题。
 
+# 类加载
+
+## 类动态加载
+
+动态主要体现为三种方式：
+
+| 加载方式 | 加载类型 |
+| -------- | -------- |
+| new关键字         | 隐式加载         |
+| Class.forName()         | 显式加载         |
+| 自定义classloader加载         | 显式加载         |
+
+当`JVM`启动时，会形成三个类加载器组成的初始类加载器层次结构
+
+- `bootstrap classloader`
+
+  引导类加载器，负责加载`JDK`核心类
+
+- `extension classloader`
+
+  扩展类加载器，负责加载`JRE`扩展目录——`$JAVA_HOME/jre/lib/ext`
+
+- `system classloader`
+
+  应用类加载器，负责加载`java -classpath`中指定的类路径或`jar`
+
+## 类加载过程
+
+在默认的`JVM`设计中，`classloader`加载`Class`的过程大致如下：
+
+1、检测此`Class`是否载入过（即在`JVM`中是否有此`Class`），如果有到第8,如果没有到第2
+
+2、如果父亲 `classloader`不存在（没有父亲 ，那一定是`bootstrap classloader`了），到第4
+
+3、请求父亲 `classloader`载入，如果成功到第8，不成功到第5
+
+4、请求`JVM`让`bootstrap classloader`去加载，如果成功到第8
+
+5、寻找`Class`文件（从与此`classloader`相关的类路径中寻找）。如果找不到则到第7.
+
+6、从文件中载入`Class`，到第8.
+
+7、抛出`ClassNotFoundException`.
+
+8、返回`Class`.
+
+> 我们可以看到，`classloader`加载`Class`的顺序是先委托其parent来加载，直到所有的parent都不能加载才自己去加载。
+>
+> Java使用`classloader`原因，除了可以达到动态性之外，其实最重要的原因还有安全性，体现在下面两点：
+>
+> 1,核心的类不可能被仿照(这主要是因为`先parent委托机制`的作用)，比如我们不可能加载一个自己写的放在`classpath`下的`java.lang.String`类，因为`Java`总是`parent`优先，在系统目录下面的`String类`总是被优先加载。
+>
+> 2,我们可以指定，控制到特定的载入点，不会误用，比如我只要加载目录的ABC下面的类
+
+## 类加载顺序
+
+`paret first`，双亲委派机制。核心的类不可被仿照。
+
+## 参考
+
+https://www.xuebuyuan.com/1760563.html
+
+http://blog.itpub.net/145274/viewspace-591473/
+
 # 弱引用的应用场景
 
 - 弱引用的概念
 
   > JVM发生GC时，一定回收弱引用。
-
-  
 
   强引用在置空时才可以被JVM的GC回收
 
