@@ -27,6 +27,12 @@ $ getconf LONG_BIT
 - iotop
 - iostat
 
+## 查看文件占用空间
+
+``` shell
+$ du -sk -m ./
+```
+
 # 用户
 
 ## 查看用户所在用户组
@@ -34,8 +40,6 @@ $ getconf LONG_BIT
 ``` shell
 $ groups #{username}
 ```
-
-
 
 # 文件
 
