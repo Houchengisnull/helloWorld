@@ -30,7 +30,9 @@ https://blog.csdn.net/comeoncomputer/article/details/78681193
 
 用户影子口令文件
 
-# 文件权限
+# 文件
+
+## 权限
 
 ``` shell
 drwx-rwx-x ...
@@ -46,10 +48,19 @@ drwx-rwx-x ...
 - w 写权限
 - x 执行权限
 
-
-
 > 可通过`ls -l`显示当前目录详细信息
 
-# 参考
+### 参考
 
 https://www.cnblogs.com/pengyunjing/p/8543026.html
+
+## shell
+
+`linux`引用环境变量中其他脚本或文件时，
+
+``` shell
+#!/usr/bin/ksh
+```
+
+该语句将引用根目录下路径的`ksh`
+
