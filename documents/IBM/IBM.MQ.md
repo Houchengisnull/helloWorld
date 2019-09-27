@@ -7,6 +7,9 @@
 | registry    | 存储`Broker`注册信息 |
 | config    | 存储`Broker`配置信息 |
 
+# 启动日志路径
+
+`${mqsi_install_path}/components/#{BROKER}/#{一串神秘数字}/stdout`
 
 # `mqsicreatebar`
 
