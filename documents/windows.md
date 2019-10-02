@@ -1,5 +1,13 @@
 [TOC]
 
+# systemprofile
+
+> 2019-10-2
+>
+> 配置`jenkins`在连接远程机器时出错。后经同事提醒`jenkins`配置私钥目录为`C:\WINDOWS\system32\config\systemprofile`。
+
+其为用户配置的模版文件夹。
+
 # 编码
 
 ## 查看编码 chcp

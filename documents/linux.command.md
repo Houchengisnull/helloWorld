@@ -33,6 +33,12 @@ $ getconf LONG_BIT
 $ du -sk -m ./
 ```
 
+# 查看编码 
+
+``` shell
+$ locale
+```
+
 # 用户
 
 ## 查看用户所在用户组
@@ -240,6 +246,16 @@ $ netstat -rn
 ```
 
 # ssh
+
+## 生成公钥\私钥
+
+``` shell
+#ssh-keygen -t rsa
+```
+
+并将私钥配置在对应用户`.ssh`目录`authorized_keys`文件夹下。
+
+https://blog.csdn.net/baozijiaruqing/article/details/80645082
 
 ## 连接命令
 
