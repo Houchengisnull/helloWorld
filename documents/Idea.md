@@ -131,7 +131,24 @@ https://blog.csdn.net/yanguo110/article/details/80430200
 
 `*.iml`模块配置信息
 
-# Install Python Plugins
+# Plugins
+
+## Activiti 插件乱码
+
+修改`idea`配置文件
+
+- `$idea/bin/idea.exe.vmoptions`
+- `$idea/bin/idea64.exe.vmoptions`
+
+在文件末尾增加配置
+
+``` txt
+-Dfile.encoding=UTF-8
+```
+
+https://blog.csdn.net/jiankunking/article/details/73188603
+
+## Install Python Plugins
 
 - File - Settings - Plugins
 - 点击<Button>Install JetBrains plugin</Button>
