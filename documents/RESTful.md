@@ -218,28 +218,30 @@ Content-Type: application/json
 ...
 }
 ```
-```
 
 上面的回应中，挑一个 URL 访问，又可以得到别的 URL。对于用户来说，不需要记住 URL 设计，只要从 `api.github.com` 一步步查找就可以了。
 
 `HATEOAS` 的格式没有统一规定，上面例子中，`GitHub` 将它们与其他属性放在一起。更好的做法应该是，将相关链接与其他属性分开。
 
-> ```http
-> HTTP/1.1 200 OK
-> Content-Type: application/json
-> 
-> {
->   "status": "In progress",
->    "links": {[
->     { "rel":"cancel", "method": "delete", "href":"/api/status/12345" } ,
->     { "rel":"edit", "method": "put", "href":"/api/status/12345" }
->   ]}
-> }
-> ```
+ ```http
+ HTTP/1.1 200 OK
+ Content-Type: application/json
+ 
+ {
+ "status": "In progress",
+ "links": {[
+  { "rel":"cancel", "method": "delete", "href":"/api/status/12345" } ,
+  { "rel":"edit", "method": "put", "href":"/api/status/12345" }
+ ]}
+ }
+ ```
 
 # 参考
 
 http://www.ruanyifeng.com/blog/2018/10/restful-api-best-practices.html
 
 https://www.runoob.com/w3cnote/restful-architecture.html
+
+```
+
 ```
