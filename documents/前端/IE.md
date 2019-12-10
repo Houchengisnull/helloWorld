@@ -18,7 +18,7 @@ https://www.cnblogs.com/o--ok/archive/2012/11/01/IE8IE9-Compabilityview.html
 
 # IE8
 
-## IE8不记录`iframe`元素历史记录
+## IE8不记录`iframe`元素初次加载时历史记录
 
 > 2019月12月10日
 >
@@ -29,8 +29,6 @@ https://www.cnblogs.com/o--ok/archive/2012/11/01/IE8IE9-Compabilityview.html
 一直以为只是前端问题——`IE历史记录机制`有*bug*。
 
 在看`Controller`代码后才发现其两次返回视图不同：其中一个使用`iframe`元素，而`IE8.0`中无法记录其历史记录，导致问题产生。
-
-> 实在不太明白同一个页面为什么返回两个不同的视图。其中还包含一个无意义代码。
 
 ### 前端代码
 
