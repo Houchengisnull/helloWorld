@@ -15,6 +15,14 @@
 链接：https://pan.baidu.com/s/1X4W-q3jqPAj8dhJFT4zreg 
 提取码：***dedr***
 
+- `JetbrainsCrack-2.10-release-enc`
+
+链接：https://pan.baidu.com/s/1TZNnEhqCnNAwxlJ4uAX4mg
+
+提取码：**g069**
+
+> `IDEA`与`JetbrainsCrack.jar`版本不一或导致`IDEA`频繁闪退
+
 - 修改`idea.exe.vmoptions`和`idea64.exe.vmopitons`
 
   添加`-javaagent`参数
