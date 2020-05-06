@@ -9,10 +9,19 @@ import jpcap.packet.*;
  * Jpcap 抓包
  * @author Administrator
  *
+ * windows环境下 下载Jpacp = jpacp.dll + jpacp.jar
+ * jpacp.dll 放在${java_home}/jre/bin目录下
+ * jpacp.jar 放在${java_home}/jre/lib/ext目录下
+ *
  */
 public class JpcapApp {
 	
 	public static void main(String[] args) throws IOException {
+		String propertys = System.getProperty("java.library.path");
+		String[] propertyArray = propertys.split(";");
+		for (String property : propertyArray) {
+			System.out.println(property);
+		}
 		capturePacket(1, 10);
 	}
 	
