@@ -39,3 +39,12 @@ taskkill -f -pid #{pid}
 |`/no profile` | 指定不加载用户配置文件 |
 |`/user:username` |  指定在其下运行程序的用户账户名称 |
 |`/savecred` | 记住密码 |
+
+# 查找文件绝对路径 where
+
+适用查找大部分常规软件的安装路径
+
+``` bat
+$ where python
+C:\Users\admin\AppData\Local\Programs\Python\Python38\python.exe
+```
