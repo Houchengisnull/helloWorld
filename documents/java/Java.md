@@ -263,6 +263,29 @@ public class CollectionObjectChange {
 
 https://www.cnblogs.com/panxuejun/p/5883044.html
 
+# System
+
+## identityHashCode
+
+重写`hashCode() `方法后，以JVM内存地址为基准计算得到的HashCode，与原`hashCode()`方法无异。
+
+``` java
+    /**
+     * Returns the same hash code for the given object as
+     * would be returned by the default method hashCode(),
+     * whether or not the given object's class overrides
+     * hashCode().
+     * The hash code for the null reference is zero.
+     *
+     * @param x object for which the hashCode is to be calculated
+     * @return  the hashCode
+     * @since   JDK1.1
+     */
+    public static native int identityHashCode(Object x);
+```
+
+
+
 # Runtime
 
 ## 获取系统CPU核心数
