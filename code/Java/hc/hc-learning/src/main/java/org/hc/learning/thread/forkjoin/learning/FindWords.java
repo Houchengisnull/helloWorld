@@ -94,7 +94,7 @@ public class FindWords extends RecursiveAction {
         // 关键字
         String keyWords = "同步";
         // 检索路径
-        File file = new File("C:\\Users\\60993\\Desktop\\helloWorld\\documents");
+        File file = new File("C:\\Users\\admin\\Desktop\\helloWorld");
         ForkJoinPool pool = new ForkJoinPool();
         /*FindWords task = new FindWords(file, keyWords, new FilenameFilter() {
             @Override

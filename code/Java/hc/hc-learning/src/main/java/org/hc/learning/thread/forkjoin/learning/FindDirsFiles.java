@@ -56,7 +56,7 @@ public class FindDirsFiles extends RecursiveAction {
         long timeVar = System.currentTimeMillis();
         // 用一个 ForkJoinPool 实例调度总任务
         ForkJoinPool pool = new ForkJoinPool();
-        FindDirsFiles task = new FindDirsFiles(new File("C:\\Users\\60993\\Desktop\\helloWorld\\documents\\C++"), "md");
+        FindDirsFiles task = new FindDirsFiles(new File("C:\\Users\\admin\\Desktop\\helloWorld"), "md");
 
         /**
          * 异步提交
