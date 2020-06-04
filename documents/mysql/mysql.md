@@ -1,5 +1,35 @@
 [TOC]
 
+# 国内镜像
+
+- 搜狐
+
+http://mirrors.sohu.com/mysql/MySQL-8.0/
+
+# 安装报错
+
+- 报错信息
+
+  `This application requires Visual Studio 2019 Redistributable. Please install the Redistributable then run this installer again.`
+
+`mysql`运行在`VC++`环境下，而`redistrubutable`为`VC++`环境必要组件。
+
+- 参考
+
+  https://blog.csdn.net/mengjie0617/article/details/105148847/
+
+- `redistrubutable`下载地址
+
+  https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
+
+# 启动
+
+- 参考
+
+  https://bbs.csdn.net/topics/391950830
+
+  https://blog.csdn.net/qq_37915248/article/details/82631398
+
 # 数据类型
 
 ## text数据类型最大长度

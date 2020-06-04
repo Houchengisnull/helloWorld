@@ -1,5 +1,12 @@
 [TOC]
 
+# mysqld --initialize
+
+初始化
+
+- `mysqld --initialize`创建随机密码root用户/`mysqld --initialize-insecure`创建无密码root用户
+- 创建`data`文件夹
+
 # mysqld --console
 
 可用于在mysql server 发生错误时查看错误信息。有效排除错误。
