@@ -2,7 +2,7 @@
 
 
 
-# Spring简史**
+# Spring简史
 
 第一阶段：xml配置；
 
@@ -12,7 +12,7 @@
 
 # **Spring体系**
 
-## **（1）****核心容器（Core Container）**
+## （1）核心容器（Core Container）
 
 Spring-core核心工具类，Spring其他模块大量使用Spring-core
 
@@ -24,7 +24,7 @@ Spring-Context-Support：Spring容器对第三方包的集成支持；
 
 Spring-Expression：使用表达式语言在运行时查询和操作对象；
 
-## **（2）****AOP**
+## （2）AOP
 
 SpringAOP：基于代理的AOP支持；
 
@@ -32,11 +32,11 @@ Spring-Aspects：基于 AspectJ的AOP支持；
 
 可参考架构探险
 
-## **（3）****消息（Messaging）**
+## （3）消息（Messaging）
 
 Spring-Messaging：对消息架构和协议的支持；
 
-## **（4）****Web**
+## （4）Web
 
 Spring-Web：提供基础的Web集成的功能，在Web项目中提供Spring容器；
 
@@ -46,7 +46,7 @@ Spring-WebSocket：提供WebSocket功能；
 
 Spring-Webmvc-Portlet：提供Portlet环境支持；
 
-## **（5）****数据访问/集成（Data Access / Integration ）**
+## （5）数据访问/集成（Data Access / Integration ）
 
 Spring-JDBC：提供以JDBC访问数据库的支持；
 
@@ -102,7 +102,7 @@ Spring Session：提供一个API及实现来管理用户会话信息；
 
 # **Spring基础**
 
-## **四大原则**
+## 四大原则
 
 1、使用POJO进行轻量级和最小侵入式开发
 
@@ -130,15 +130,13 @@ Spring Session：提供一个API及实现来管理用户会话信息；
 
 3、对单例对象可读性的优化。
 
-### **BeanFactory****接口**
+### BeanFactory接口
 
 
 
 |      |                                                              |
 | ---- | ------------------------------------------------------------ |
 |      | ![img](https://github.com/Houchengisnull/helloWorld/blob/master/documents/images/java.spring/wps1.jpg) |
-
- 
 
 
 
@@ -162,7 +160,7 @@ FileSystemXmlApplicationContext
 
 头部还有一个SimpleJndiBeanFactory，直觉告诉我只有和Jndi有关都要重视。
 
- 
+
 
 #### **AnnotationConfigApplicationContext** 
 
@@ -180,8 +178,6 @@ FileSystemXmlApplicationContext
 
 @Controller：在展现层（MVC -> Spring MVC）使用；
 
- 
-
 ### **注入Bean的注解**
 
 @Autowired：Spring提供注解；
@@ -189,8 +185,6 @@ FileSystemXmlApplicationContext
 @Inject: JSR-330提供的注解；
 
 @Resource：JSR-250 提供的注解；
-
- 
 
 ### **Java配置**
 
