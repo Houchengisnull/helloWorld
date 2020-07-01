@@ -6,6 +6,13 @@
 
 由于`Maven`依赖本地JDK，需要设置环境变量`JAVA_HOME`指向本地JDK，注意不能直接指向本地JDK的bin目录。
 
+# MVN常用命令
+
+| command       | 作用                                                         |
+| ------------- | ------------------------------------------------------------ |
+| `mvn package` | 打包(resource、compile、testResource、testCompile、test、jar) |
+|               |                                                              |
+
 # POM文件
 
 ## build
@@ -77,8 +84,6 @@ https://www.cnblogs.com/sigm/p/6035155.html
 ## 在IDEA中使用Maven构建Web应用
 
 https://blog.csdn.net/u012826756/article/details/79478973
-
-
 
 # 手动导入jar
 
