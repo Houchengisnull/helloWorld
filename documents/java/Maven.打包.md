@@ -87,7 +87,25 @@ mvn package
 </plugin>
 ```
 
+## `SpringBoot`生成可执行jar
 
+``` xml
+ <plugin>
+     <groupId>org.springframework.boot</groupId>
+     <artifactId>spring-boot-maven-plugin</artifactId>
+     <configuration>
+         <includeSystemScope>true</includeSystemScope>
+         <mainClass>com.sanro.test.CMApplication</mainClass>
+     </configuration>
+     <executions>
+         <execution>
+             <goals>
+                 <goal>repackage</goal>
+             </goals>
+         </execution>
+     </executions>
+</plugin>
+```
 
 # 参考
 
