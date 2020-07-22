@@ -47,9 +47,9 @@ $ git diff
 
 `git log`
 
-# 暂存区stage
+# 暂存区 stage
 
-## 移除stage中文件
+## 移除暂存区中文件
 
 - 已存在repository中
 
@@ -62,6 +62,19 @@ $ git diff
   ``` shell
   $ git rm --cached #{filename}
   ```
+
+## 添加文件至暂存区
+
+``` shell
+$ git add #{filename}
+```
+
+当发现添加失败时，可以使用以下命令
+
+``` shell
+$ git add .
+$ git add --all
+```
 
 # 提交
 
@@ -78,6 +91,12 @@ $ git diff
 最后，这样就将两次提交的节点合并成一个，甚至能够修改提交信息！
 
 谁说历史不可篡改了？前提是，**想要合并的那几次提交还没有推送到远程！**
+
+## 提交
+
+``` shell
+$ git commit -m "hello world"
+```
 
 ## 通过Rebase合并
 
