@@ -25,9 +25,43 @@ https://blog.csdn.net/longintchar/article/details/80787907
 - feature——某个功能点正在开发阶段；
 - release——发布定期要上线的功能。
 
+# 查看
+
+## 查看当前状态
+
+``` shell
+$ git status
+```
+
+- 显示已修改但未提交的文件
+- 显示*not staged*的文件
+- 显示`untracked`的文件
+
+## 查看本次修改的具体内容
+
+``` shell
+$ git diff
+```
+
 # 查看日志
 
 `git log`
+
+# 暂存区stage
+
+## 移除stage中文件
+
+- 已存在repository中
+
+  ``` shell
+  $ git reset HEAD #{filename}
+  ```
+
+- 不在repository中
+
+  ``` shell
+  $ git rm --cached #{filename}
+  ```
 
 # 提交
 
