@@ -85,5 +85,11 @@
 		  <artifactId>junit</artifactId>
 		  <version>4.12</version>
 	  </dependency>
+	  <!-- @Inject注解 -->
+	  <dependency>
+		  <groupId>javax.inject</groupId>
+		  <artifactId>javax.inject</artifactId>
+		  <version>1</version>
+	  </dependency>
   </dependencies>
 </project>

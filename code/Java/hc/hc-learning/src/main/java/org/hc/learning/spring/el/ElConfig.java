@@ -12,6 +12,8 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 
+import javax.inject.Inject;
+
 @Configuration
 @ComponentScan("org.hc.learning.spring.el")
 @PropertySource("classpath:org/hc/learning/spring/el/test.properties")
@@ -99,7 +101,31 @@ public class ElConfig {
 
 	@Value("${book.name}")
 	private String bookName;
-	
+
+	private int width;
+
+	private int height;
+
+	/**
+	 * setter 多参方法注入
+	 * 需要通过@Inject|@Autowired提醒spring context对该setter进行注入
+	 * @param width
+	 * @param height
+	 */
+	@Inject
+	public void setSize(@Value("100") int width,@Value("200") int height) {
+		this.width = width;
+		this.height = height;
+	}
+
+	public int getWidth() {
+		return this.width;
+	}
+
+	public int getHeight() {
+		return this.height;
+	}
+
 	@Autowired
 	private Environment environment;
 	
@@ -125,5 +151,8 @@ public class ElConfig {
 		
 		System.out.println(bookName);
 		System.out.println(environment.getProperty("book.author"));
+
+		System.out.println("width : " + width);
+		System.out.println("height : " + height);
 	}
 }
