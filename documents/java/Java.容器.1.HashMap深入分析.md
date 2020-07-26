@@ -1,5 +1,7 @@
 [toc]
 
+![HashMap](..\images\java.容器\HashMap.png)
+
 # 使用`HashMap`的目的
 
 存储`键值对`<Key-Value>
