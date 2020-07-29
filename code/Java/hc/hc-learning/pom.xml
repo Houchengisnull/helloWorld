@@ -14,7 +14,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
-  	
+
   	<!-- 编码解码器 -->
   	<!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
 	<dependency>

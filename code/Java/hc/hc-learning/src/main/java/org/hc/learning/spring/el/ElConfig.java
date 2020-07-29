@@ -1,7 +1,6 @@
 package org.hc.learning.spring.el;
 
 import java.io.IOException;
-
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,12 +10,11 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
-
 import javax.inject.Inject;
 
 @Configuration
 @ComponentScan("org.hc.learning.spring.el")
-@PropertySource("classpath:org/hc/learning/spring/el/test.properties")
+@PropertySource("classpath:config/el/test.properties")
 public class ElConfig {
 	public String getNormal() {
 		return normal;
@@ -93,7 +91,7 @@ public class ElConfig {
 	@Value("#{demoService.another}")
 	private String fromAnother;
 	
-	@Value("classpath:org/hc/learning/spring/el/test.txt")
+	@Value("classpath:config/el/test.txt")
 	private Resource testFile;
 	
 	@Value("http://www.baidu.com")
@@ -132,7 +130,7 @@ public class ElConfig {
 	public static PropertySourcesPlaceholderConfigurer properyConfigure() {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
-	
+
 	public void outputResource() {
 		System.out.println(normal);
 		System.out.println(osName);
@@ -155,4 +153,5 @@ public class ElConfig {
 		System.out.println("width : " + width);
 		System.out.println("height : " + height);
 	}
+
 }

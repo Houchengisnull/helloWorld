@@ -3,4 +3,3 @@ spring:
   #切换不同的配置文件
   profiles:
     active: web
-  
