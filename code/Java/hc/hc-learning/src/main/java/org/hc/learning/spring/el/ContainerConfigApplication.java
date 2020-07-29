@@ -13,7 +13,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class ContainerConfigApplication {
 
     public static void main(String[] args) {
-        /**
+        /*
          * 使用AnnotationConfigApplicationContext将不会根据字段名称进行匹配 必须使用@Value或其他注解
          */
         SpringApplicationBuilder builder = new SpringApplicationBuilder(ContainerConfigApplication.class);

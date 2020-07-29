@@ -2,7 +2,6 @@ package org.hc.learning.spring.el;
 
 import java.io.IOException;
 import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -107,8 +106,6 @@ public class ElConfig {
 	/**
 	 * setter 多参方法注入
 	 * 需要通过@Inject|@Autowired提醒spring context对该setter进行注入
-	 * @param width
-	 * @param height
 	 */
 	@Inject
 	public void setSize(@Value("100") int width,@Value("200") int height) {
@@ -124,7 +121,7 @@ public class ElConfig {
 		return this.height;
 	}
 
-	@Autowired
+	@Inject
 	private Environment environment;
 	
 	public static PropertySourcesPlaceholderConfigurer properyConfigure() {
