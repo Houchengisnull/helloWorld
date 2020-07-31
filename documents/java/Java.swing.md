@@ -2,6 +2,15 @@
 
 # JFrame
 
+## 设置图标
+
+- `*.ico`不适用，可以先将***ico***文件转换成***png***格式
+
+``` java
+JFrame frame = new JFrame();
+frame.setIconImage(new ImageIcon("icon.png"));
+```
+
 ## 重绘
 
 - 方法一
@@ -35,11 +44,26 @@
 - `BorderLayout.North`
 - `BorderLayout.CENTER`
 
-## 修改各区域控件大小
+### 修改各区域控件大小
 
 当使用`BorderLayout`时，直接调用控件的`setSize(width, height)`方法时会失效，此时我们需要调用控件的`setPreferredSize(Dimension)`方法控制大小。
 
 > 这样使各区域大小依赖控件的大小，而无法直接控制区域大小，略显笨重。
+
+## FlowLayout
+
+`流式布局`
+
+ - 构造方法
+
+   ``` java
+   public FlowLayout();
+   public FlowLayout(int align, int hgap, int vgap);
+   ```
+
+   - **align**:	对齐方式
+   - **hgap**:	水平间隔
+   - **vgap**:	垂直间隔
 
 # 滚动条 JScrollPane
 
