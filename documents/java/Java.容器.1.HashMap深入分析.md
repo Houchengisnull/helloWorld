@@ -39,6 +39,132 @@
 transient Node<K, V>[] table;
 ```
 
+## 读取数据
+
+### 遍历方式
+
+- **Iterator**:	迭代器
+- **For Each**
+- **Lambda**:	JDK1.8+
+- **Streams API**
+
+`HashMap`主要可分为以上四种遍历方式，又根据`EntrySet`与`KeySet`共可分为7种：
+
+- **Iterator**：	`EntrySet`
+
+``` java
+Iterator<Map.Entry<Integer, String>> iterator = map.entrySet().iterator();
+while(iterator.hasNext()) {
+    Map.Entry<Integer, String> entry = iterator.next();
+    // 逻辑代码
+}
+```
+
+- **Iterator**：	`KeySet`
+
+``` java
+Iterator<Integer> iterator = map.keySet().iterator();
+while (iterator.hasNext()) {
+    Integer key = iterator.next();
+    String value = map.get(key);
+    // service
+}
+```
+
+- **For Each**：	`EntrySet`
+
+``` java
+for (Map.Entry<Integer, String> entry : map.entrySet()) {
+	// service
+}
+```
+
+- **For Each**：	`KeySet`
+
+``` java
+for (Integer key : map.keySet()) {
+	// service
+}
+```
+
+- **Lambda**
+
+``` java
+map.forEach((key, value) -> {
+    // serivce
+});
+```
+
+这种方式不可修改方法体外参数，存在一定局限性。
+
+- **Streams API**：	单线程
+
+``` java
+map.entrySet().stream.forEach((entry) -> {
+    // service
+});
+```
+
+- **Streams API**：	多线程
+
+``` java
+map.entrySet().parallelStream().forEach((entry) -> {
+    // service
+});
+```
+
+#### 运行效率
+
+参考`org.hc.learning.datastruct.map.HashMapMicrobenchmark`代码运行结果，除并发条件下，其他遍历方式相差不大。
+
+对编译后的字节码进行反编译我们可以看到，`iterator`与`forEach`相差不大。
+
+``` java
+public static void entrySet() {
+    Iterator var0 = map.entrySet().iterator();
+    while(var0.hasNext()) {
+        Entry var1 = (Entry)var0.next();
+        // service
+    }
+}
+public static void forEachEntrySet() {
+    Iterator var0 = map.entrySet().iterator();
+    while(var0.hasNext()) {
+        Entry var1 = (Entry)var0.next();
+        // service
+    }
+}
+```
+
+> **所以通过字节码来看，使用** `EntrySet` **和** `KeySet` **代码差别不是很大，并不像网上说的那样** `KeySet` **的性能远不如** `EntrySet`**，因此从性能的角度来说** `EntrySet` **和** `KeySet` **几乎是相近的，但从代码的优雅型和可读性来说，还是推荐使用** `EntrySet`**。**
+
+#### 安全性
+
+- `Lambda`删除数据
+
+  ``` java
+  map.keySet().removeIf(key -> key == 1);
+  map.forEach((key, value) -> {
+      System.out.println("show:" + key);
+  });
+  ```
+
+  先使用 `Lambda` 的 `removeIf` 删除多余的数据，再进行循环是一种正确操作集合的方式。
+
+- `stream`
+
+  ``` java
+  map.entrySet().stream().filter(m -> 1 != m.getKey()).forEach((entry) -> {
+      if (entry.getKey() == 1) {
+          System.out.println("del:" + entry.getKey());
+      } else {
+          System.out.println("show:" + entry.getKey());
+      }
+  });
+  ```
+
+  使用 Stream 中的 `filter` 过滤掉要删除的数据进行循环。
+
 # 源码分析
 
 ## 成员常量与成员变量
@@ -361,8 +487,6 @@ final Node<K,V>[] resize() {
     return newTab;
 }
 ```
-
-
 
 # 参考
 
