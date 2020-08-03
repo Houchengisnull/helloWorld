@@ -43,6 +43,10 @@ public class SelfLock implements Lock {
     }
 
     static class SelfQueuedSynchronized extends AbstractQueuedSynchronizer {
+        /**
+         * 由于这里的CAS操作仅允许为0 且未判断当前线程是否为持有同步资源的线程
+         * 所以线程必须等待上一个线程release后, 将state调整为0
+         */
         @Override
         protected boolean tryAcquire(int arg) {
             if (compareAndSetState(0, 1)) {

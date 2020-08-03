@@ -7,8 +7,17 @@ public class SelfLockRunnable implements Runnable {
 
     @Override
     public void run() {
-        lock.lock();
+        forEachOut();
+        // System.out.println(count(5));
+    }
+
+    /**
+     * 通过该方法测试SelfLock是否现场安全
+     * 可通过ReentrantLock作为参照
+     */
+    public void forEachOut() {
         for (int i = 0; i < 5; i++) {
+            lock.lock();
             count++;
             try {
                 Thread.sleep(10);
@@ -16,13 +25,27 @@ public class SelfLockRunnable implements Runnable {
                 e.printStackTrace();
             }
             System.out.println(count);
+            lock.unlock();
+        }
+    }
+
+    /**
+     * 通过该方法测试SelfLock不可重入
+     * @param i
+     * @return
+     */
+    public int count(int i) {
+        lock.lock();
+        if (i > 0) {
+            i = i + count(--i);
         }
         lock.unlock();
+        return i;
     }
 
     public static void main(String[] args){
         SelfLockRunnable run = new SelfLockRunnable();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 1; i++) {
             new Thread(run).start();
         }
     }
