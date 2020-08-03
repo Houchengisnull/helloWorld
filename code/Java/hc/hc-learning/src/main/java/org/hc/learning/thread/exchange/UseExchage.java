@@ -1,4 +1,4 @@
-package org.hc.learning.thread.exchage;
+package org.hc.learning.thread.exchange;
 
 import java.util.concurrent.Exchanger;
 
