@@ -1,14 +1,25 @@
 package org.hc.learning.thread.lock.aqs;
 
+import java.util.concurrent.locks.Lock;
+
 public class SelfLockRunnable implements Runnable {
-    SelfLock lock = new SelfLock();
+    static boolean isLock = false;
+    static int length = 10;
+    /**
+     * 可重入锁
+     */
+    Lock lock = new ReentrantSelfLock();
+    /**
+     * 不可重入锁
+     */
+    /*Lock lock = new SelfLock();*/
     /*ReentrantLock lock = new ReentrantLock();*/
     int count = 0;
 
     @Override
     public void run() {
-        forEachOut();
-        // System.out.println(count(5));
+        /*forEachOut();*/
+        /*System.out.println(count(length));*/
     }
 
     /**
@@ -16,16 +27,20 @@ public class SelfLockRunnable implements Runnable {
      * 可通过ReentrantLock作为参照
      */
     public void forEachOut() {
-        for (int i = 0; i < 5; i++) {
-            lock.lock();
+        for (int i = 0; i < length ; i++) {
+            if (isLock) {
+                lock.lock();
+            }
             count++;
-            try {
-                Thread.sleep(10);
+            /*try {
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
             System.out.println(count);
-            lock.unlock();
+            if (isLock) {
+                lock.unlock();
+            }
         }
     }
 
@@ -45,7 +60,7 @@ public class SelfLockRunnable implements Runnable {
 
     public static void main(String[] args){
         SelfLockRunnable run = new SelfLockRunnable();
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 2; i++) {
             new Thread(run).start();
         }
     }
