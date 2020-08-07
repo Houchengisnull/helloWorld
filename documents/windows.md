@@ -24,13 +24,16 @@
 | 65001    | UTF-8    |
 | 950  | Big-5 |
 
-
 # 快捷键
+
+## 关闭计算机 Alt + Ctrl + Del
 
 ## 关闭窗口 Ctrl + w
 
 - ctrl + w
 - alt + F4
+
+## 打开任务管理器 Ctrl + Shift + Esc
 
 # 切换执行身份
 
