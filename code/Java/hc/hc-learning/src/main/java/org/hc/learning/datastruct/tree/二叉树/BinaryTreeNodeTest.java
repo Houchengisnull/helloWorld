@@ -2,8 +2,6 @@ package org.hc.learning.datastruct.tree.二叉树;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
