@@ -86,3 +86,25 @@ scroll.revalidate()
 - 终于搞明白如何将一个JPanel放置到JScrollPane里面并显示滚动条了
 
   https://blog.csdn.net/leongod/article/details/5967838?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param
+
+# Graphics
+
+`swing`中绘图抽象类。
+
+- 定制边框粗细`setStroke(BasicStroke stroke)`
+
+  ``` java
+  public class MyPanel extends JPanel {
+      
+      @Override
+      protected void paintBorder(Graphics g) {
+          Graphics2D g2d = (Graphics) g;
+          g2d.setColor(Color.LIGHT_GRAP);
+          g2d.setStroke(new BasicStroke(3));
+          g2d.drawLine(0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, 0);
+      }
+      
+  }
+  ```
+
+  
