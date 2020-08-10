@@ -196,23 +196,18 @@ public class BinaryTreeNodeTest {
 	 */
 	public void postOrderNoRecursiveWithBacktracking(BinaryTreeNode root) {
 		LinkedList<BinaryTreeNode> stack = new LinkedList<>();
-		// 是否回溯过
-		boolean hasBack = false;
+		boolean hasBack = false; 															// 是否回溯过
 		while (root != null){
-			while ((root.left != null || root.right != null) && !hasBack) { // 遍历至子节点最深处 且当前结点未回溯过
+			while ((root.left != null || root.right != null) && !hasBack) { 				// 遍历至子节点最深处 且当前结点未回溯过
 				stack.push(root);
-				if (root.left != null) {
-					root = root.left;
-				} else {
-					root = root.right;
-				}
+					root = root.left != null ? root.left : root.right;
 			}
 			System.out.print(root.data + " "); /*list.add(root);*/
-			if (stack.size() > 0) { // 如果栈中有元素
+			if (stack.size() > 0) { 														// 如果栈中有元素
 				if (stack.getFirst().right == null || root == stack.getFirst().right) { 	// 首先判断是否已经回溯:右结点为空 或者 当前当前root为栈顶元素的右子树
 					hasBack = true;
 					root = stack.pop();
-				} else { // 将右子树设置为root以便进行遍历:right 不为空 且 未回溯
+				} else { 																	// 否则将右子树设置为root以便进行遍历:right 不为空 且 未回溯
 					hasBack = false;
 					root = stack.getFirst().right;
 				}
