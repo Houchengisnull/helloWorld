@@ -374,3 +374,23 @@ https://blog.csdn.net/iteye_9130/article/details/82325170
 https://blog.csdn.net/wodeyuer125/article/details/50502989
 
 http://www.micmiu.com/lang/java/java-net-ipv4-ipv6/
+
+# JDBC
+
+## 无需`Class.forName(String className)`注册驱动
+
+在`JDK6/JDBC4.0`之后，注册数据库驱动无需再通过
+
+``` java
+Class.forName("com.mysql.jdbc.Driver");
+```
+
+## 异常
+
+- `A ResourcePool could not acquire a resource from its primary factory or source`
+
+  在部署公司某系统连接`oracle`时，`c3p0`连接池由于神秘原因无法从数据库服务器中获取连接，导致出现该错误。
+
+  经过百度与同事帮助，分析原因为`JDK`、`oracle`、`c3p0连接池`及相关数据库连接驱动(`ojdbc6`\`ojdbc7`)之间存在差异造成的。
+
+  最后，听取同事建议，将数据库连接池切换为`Druid`后，项目成功运行。
