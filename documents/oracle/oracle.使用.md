@@ -1,11 +1,5 @@
 [toc]
 
-# 查询oracle版本
-
-``` sql
-SELECT * FROM PRODUCT_COMPONENT_VERSION;
-```
-
 # DDL
 
 ## 表
@@ -100,6 +94,32 @@ AND page_.NUM <= #{end}
 ```
 
 `ROWNUM`是在已经产生的数据上生成编号，所以在使用`ROWNUM`时需要保证已有数据的基础上。
+
+## 查询oracle版本
+
+``` sql
+SELECT * FROM PRODUCT_COMPONENT_VERSION;
+```
+
+## 查询oracle标准数据块大小 
+
+``` sql
+-- 可通过以下语句查询oracle标准数据块大小 
+SELECT name, value FROM V$PARAMETER WHERE name = 'db_block_size'
+```
+
+## 查询数据文件
+
+``` sql
+SELECT FILE_NAME, TABLESPACE_NAME FROM DBA_DATA_FILES;
+```
+
+## 查询控制文件
+
+``` sql
+-- 查询控制文件
+SELECT NAME FROM v$controlfile;
+```
 
 # 数据类型
 
