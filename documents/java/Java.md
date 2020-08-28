@@ -108,9 +108,9 @@ https://blog.csdn.net/lovezhaohaimig/java/article/details/80372233
 >
 > Java使用`classloader`原因，除了可以达到动态性之外，其实最重要的原因还有安全性，体现在下面两点：
 >
-> 1,核心的类不可能被仿照(这主要是因为`先parent委托机制`的作用)，比如我们不可能加载一个自己写的放在`classpath`下的`java.lang.String`类，因为`Java`总是`parent`优先，在系统目录下面的`String类`总是被优先加载。
+> 1.核心的类不可能被仿照(这主要是因为`先parent委托机制`的作用)，比如我们不可能加载一个自己写的放在`classpath`下的`java.lang.String`类，因为`Java`总是`parent`优先，在系统目录下面的`String类`总是被优先加载。
 >
-> 2,我们可以指定，控制到特定的载入点，不会误用，比如我只要加载目录的ABC下面的类
+> 2.我们可以指定，控制到特定的载入点，不会误用，比如我只要加载目录的ABC下面的类
 
 ## 类加载顺序
 
@@ -374,6 +374,144 @@ https://blog.csdn.net/iteye_9130/article/details/82325170
 https://blog.csdn.net/wodeyuer125/article/details/50502989
 
 http://www.micmiu.com/lang/java/java-net-ipv4-ipv6/
+
+# 格式化
+
+作为一名`Java`程序员，一定经常需要对各种数据类型进行格式化。以下来温故以下`Java`中的`Format API`。
+
+## Format
+
+我们最常用的`SimpleDateFormat`和`DecimalFormat`都是抽象类`Format`的基类。
+
+采用`Template patter`，如果我们需要实现自己的格式化类，我们需要继承`Format`并实现
+
+- **StringBuffer format(Object obj, StringBuffer toAppendTo, FieldPosition pos)**
+- **parseObject(String source, ParsePosition pos)**
+
+在实际开发中，我们无需实现自己的格式化类。我们只要知道常规用法就好了，所以也不对`Format`进行深入分析了。
+
+## DecimalFormat 数字格式化
+
+- 参考
+
+  https://www.jianshu.com/p/b3699d73142e
+
+| 符号 | 位置 | 本地化 | 含义                             |
+| ---- | ---- | ------ | -------------------------------- |
+| 0    | 数字 | true   | 阿拉伯数字                       |
+| #    | 数字 | true   | 阿拉伯数字，如果不存在则显示为空 |
+| E    | 数字 | true   | 分割科学计数法法的尾数和指数     |
+
+当然除了以上有意义的符号，可以在`pattern`中添加任意字符串来定义格式。
+
+### `0`和`#`
+
+这应该是我们最常用的符号
+
+``` java
+ /**
+  * 上面的代码就是网上很经典的案例，下面我们来分析另外的一个值
+  */      
+pi=12.34567;
+//取一位整数
+System.out.println(new DecimalFormat("0").format(pi));//12
+//取一位整数和两位小数
+System.out.println(new DecimalFormat("0.00").format(pi));//12.35
+//取两位整数和三位小数，整数不足部分以0填补。
+System.out.println(new DecimalFormat("00.000").format(pi));// 12.346
+//取所有整数部分
+System.out.println(new DecimalFormat("#").format(pi));//12
+//以百分比方式计数，并取两位小数
+System.out.println(new DecimalFormat("#.##%").format(pi));//1234.57%
+
+/**
+ * 扩展，如果是其他的数字会是下面的效果
+ */
+pi=12.34;
+//整数
+System.out.println(new DecimalFormat("6").format(pi));//612
+System.out.println(new DecimalFormat("60").format(pi));//612
+System.out.println(new DecimalFormat("06").format(pi));//126
+System.out.println(new DecimalFormat("00600").format(pi));//00126
+System.out.println(new DecimalFormat("#####60000").format(pi));//00126
+//小数
+System.out.println(new DecimalFormat(".6").format(pi));//12.6
+System.out.println(new DecimalFormat(".06").format(pi));//12.36
+System.out.println(new DecimalFormat(".60").format(pi));//12.36
+System.out.println(new DecimalFormat(".0600").format(pi));//12.3406
+System.out.println(new DecimalFormat(".6000").format(pi));//12.3406
+System.out.println(new DecimalFormat(".600000##").format(pi));//12.340006
+```
+
+那么在使用数字时，即`0`或其他数字，在`source`位数不满时，填充`pattern`中的数字。
+
+### 科学计数法 E
+
+``` java
+pi = 123456789.3456;
+System.out.println(new DecimalFormat("0E0").format(pi));//1E8
+System.out.println(new DecimalFormat("0E00").format(pi));//1E08
+System.out.println(new DecimalFormat("#E0").format(pi));//.1E9
+System.out.println(new DecimalFormat("##E0").format(pi));//1.2E8
+System.out.println(new DecimalFormat("###E0").format(pi));//123E6
+System.out.println(new DecimalFormat("####E0").format(pi));//1.235E8
+System.out.println(new DecimalFormat("#####E0").format(pi));//1234.6E5
+System.out.println(new DecimalFormat("######E0").format(pi));//123.457E6
+System.out.println(new DecimalFormat("#######E0").format(pi));//12.34568E7
+System.out.println(new DecimalFormat("########E0").format(pi));//1.2345679E8
+System.out.println(new DecimalFormat("#########E0").format(pi));//123456789E0
+System.out.println(new DecimalFormat("##########E0").format(pi));//123456789.3E0
+```
+
+## SimpleDateFormat 日期格式化
+
+### 定义到毫秒
+
+其中大写的`S`表示毫秒。
+
+``` java
+new SimpleDateFormat("yyyyMMddhhmmssSSSS");
+```
+
+### 线程安全问题
+
+- 参考
+
+  https://www.cnblogs.com/zemliu/p/3290585.html
+
+  https://blog.csdn.net/qq_42361748/article/details/88661408
+
+在《阿里巴巴开发手册》中，我们使用`SimpleDateFormat`避免频繁创建对象实例，会将它定义为一个静态变量。
+
+但`SimpleDateFormat`内部有个`Calendar`对象引用。
+
+``` java
+protected Calendar calendar;
+```
+
+我们在看`SimpleDateFormat`的`Date parse(Object source)`
+
+``` java
+Date parse() {
+
+  calendar.clear(); // 清理calendar
+
+  ... // 执行一些操作, 设置 calendar 的日期什么的
+
+  calendar.getTime(); // 获取calendar的时间
+
+}
+```
+
+对并发编程有一定了解的同学很容易发现这会导致线程安全问题。
+
+所以`SimpleDateFormat`的开发者建议我们为每一个线程创建一个实例。
+
+解决办法有很多，比如每次创建一个`SimpleDateFormat instance`、`synchronized`、`ThreadLocal`，我们需要根据实际情况选择合适的解决方案。
+
+## DateTimeFormatter
+
+`JDK8`引入了新的`DateTimeFormatter`，它是一个线程安全的时间日期格式化类。
 
 # JDBC
 
