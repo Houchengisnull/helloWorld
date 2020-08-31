@@ -8,6 +8,73 @@
 $ java -verbose
 ```
 
+# 枚举
+
+- 参考
+
+  https://blog.csdn.net/echizao1839/article/details/80890490
+
+## 常量定义
+
+``` java
+public enum WeekDay{
+    SUN,MON,TUE,WED,THT,FRI,SAT
+}
+```
+
+## switch
+
+枚举类型可用于`switch`
+
+``` java
+WeekDay weekday = WeekDay.SUN;
+switch(weekday) {
+        CASE SUN:break;
+        CASE MON:break;
+        CASE TUE:break;
+        CASE WED:break;
+        CASE THT:break;
+        CASE FRI:break;
+        cASE SAT:break;
+}
+```
+
+## 定义成员变量
+
+枚举依然是一个类，也可以定义成员方法甚至是实现接口
+
+``` java
+public enum Color{
+    RED("red", 0), GREEN("green",1);
+    
+    private String name;
+    private int index;
+    
+    public Color(String name, int index) {
+        this.name = name;
+        this.index = index;
+    }
+    public String getName() {  
+        return name;  
+    }  
+
+    public void setName(String name) {  
+        this.name = name;  
+    }  
+
+    public int getIndex() {  
+        return index;  
+    }  
+
+    public void setIndex(int index) {  
+        this.index = index;  
+    }
+       
+}
+```
+
+
+
 # 面向对象
 
 ## private
