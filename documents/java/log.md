@@ -113,3 +113,32 @@
 ## 参考
 
 https://www.cnblogs.com/sandea/p/7116751.html
+
+# log4j2
+
+## 设置控制台编码
+
+> 2020.08.31
+>
+> 前些日子做了个项目，起初并没有特别在意。直到强迫症发作一定要解决这个问题。
+>
+> 由于只有这个项目且只是在控制台中乱码，比如`System.out.println("你好")`不会乱码，但是`logger.info("你好")`会乱码。
+>
+> 在百度了许久时间才发现在`log4j2-spring.xml`有一个关于控制台编码的配置。其中`encoding`使用了`GBK`编码。
+>
+> 之所以搜索这么久其实除了百度的结果命中率低外，还因为自己关键字没有找对。没注意到使用的是`log4j2`，而不是`log4j`。或者我直接搜索`spring-boot`与`log4j2-spring`的日志配置效率会更高。
+>
+> 在解决该问题的时候，我实际上是参考一篇关于`log4j`的编码配置后，尝试修改`log4j2-spring.xml`解决的。又或者是乍一眼看到关于日志控制台编码的参数。
+>
+> 突然之间的灵光一现。
+
+``` xml
+<Console name="Console" target="SYSTEM_OUT">
+  <PatternLayout charset="UTF-8" pattern="%-d{yyyy-MM-dd HH:mm:ss.SSS [%thread] %-5level %logger:(%line) %msg %n}"/>
+</Console>
+```
+
+
+
+
+
