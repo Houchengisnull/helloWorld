@@ -225,6 +225,23 @@ $ cat /proc/#{pid}/status
 # lsof -i:21 
 ```
 
+# ss 列出所有连接
+
+在查看连接时`ss`比`lsof`输出信息更详细，可以看到`socket`的接收/发送队列、ino号。
+
+``` shell
+# 列出所有tcp连接
+ss -t
+# 列出所有处于监听状态的tcp连接
+ss -tl
+# 列出所有的udp连接
+ss -u
+# 列出连接时显示进程名与进程号pid
+ss -p
+# 统计socket
+ss -s
+```
+
 # netstat
 
 ## 查看tcp端口
