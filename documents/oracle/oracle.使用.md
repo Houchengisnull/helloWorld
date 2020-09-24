@@ -141,3 +141,39 @@ insert into tablename (date_col) value (sysdate + 1);
   ``` sql
   insert into tablename (date_col) value ('2020-08-15 17:00:00', 'yyyy-mm-dd hh24:mi"ss');
   ```
+
+# 清理归档日志
+
+当连接`oracle`出现`ORA-00257`错误时，说明`oracle`服务的归档日志已满。
+
+- 如何清理归档日志
+
+  ``` shell
+  # 登录ssh
+  # 切换oracle用户
+  su - oracle
+  sqlplus /nolog
+  SQL> connect /as sysdba
+  # 查看使用情况
+  SQL> select * from V$FLASH_RECOVERY_AREA_USAGE;
+  # 计算flash recovery area已经占用的空间
+  SQL> select sum(percent_space_used)*3/100 from v$flash_recovery_area_usage;
+  # 查找日志目录位置
+  SQL> show parameter recover;
+  
+  # 删除归档日志
+  # RMAN
+  # RMAN 检查归档日志
+  RMAN> crosscheck archivelog all; 
+  RMAN> list expire archivelog all
+  # 清理全部
+  RMAN> delete expired archivelog all;
+  # 删除7天前的日志
+  RMAN> delete archivelog until time "sysdate-7";
+  # RMAN 检查归档日志是否已经删除
+  RMAN> crosscheck archivelog all; 
+  ```
+
+  
+
+  
