@@ -599,3 +599,49 @@ Class.forName("com.mysql.jdbc.Driver");
   经过百度与同事帮助，分析原因为`JDK`、`oracle`、`c3p0连接池`及相关数据库连接驱动(`ojdbc6`\`ojdbc7`)之间存在差异造成的。
 
   最后，听取同事建议，将数据库连接池切换为`Druid`后，项目成功运行。
+
+# JAR
+
+## META-INF
+
+### MANIFEST.MF
+
+在`Jar`中，有一个`META-INF`目录，该目录中有一个`MANIFEST.MF`文件。该文件主要用于描述`Jar`的信息。
+
+以下为`struct.jar`的`MANIFEST.MF`内容:
+
+``` text
+## 版本信息
+Manifest-Version: 1.0
+## 创建者
+Created-By: Apache Ant 1.5.1
+Extension-Name: Struts Framework
+Specification-Title: Struts Framework
+Specification-Vendor: Apache Software Foundation
+Specification-Version: 1.1
+Implementation-Title: Struts Framework
+Implementation-Vendor: Apache Software Foundation
+Implementation-Vendor-Id: org.apache
+Implementation-Version: 1.1
+## 依赖Jar 应用程序或类加载器通过该值构建内部类搜索路径
+Class-Path:  commons-beanutils.jar commons-collections.jar commons-dig
+ ester.jar commons-logging.jar commons-validator.jar jakarta-oro.jar s
+ truts-legacy.jar
+```
+
+其他关键信息
+
+- **Main-Class:**	定义`Jar`的主类
+
+#### 签名
+
+在`Jar`中可以定义签名，以下为`mail.jar`：
+
+``` text
+Name: javax/mail/Address.class
+Digest-Algorithms: SHA MD5 
+SHA-Digest: AjR7RqnN//cdYGouxbd06mSVfI4=
+MD5-Digest: ZnTIQ2aQAtSNIOWXI1pQpw==
+```
+
+这段内容中定义类签名的类名，计算摘要的算法名以及摘要。通过摘要我们可以确定代码是否被纂改过。
