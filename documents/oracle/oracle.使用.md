@@ -95,6 +95,23 @@ AND page_.NUM <= #{end}
 
 `ROWNUM`是在已经产生的数据上生成编号，所以在使用`ROWNUM`时需要保证已有数据的基础上。
 
+## 计算时间
+
+- https://www.cnblogs.com/yanghj010/p/5109714.html
+
+``` sql
+// 天
+ROUND(TO_NUMBER(END_DATE - START_DATE))
+// 小时
+ROUND(TO_NUMBER(END_DATE - START_DATE) * 24)
+// 分钟
+ROUND(TO_NUMBER(END_DATE - START_DATE) * 24 * 60)
+// 秒
+ROUND(TO_NUMBER(END_DATE - START_DATE) * 24 * 60 * 60)
+// 毫秒
+ROUND(TO_NUMBER(END_DATE - START_DATE) * 24 * 60 * 60 * 60)
+```
+
 ## 查询oracle版本
 
 ``` sql
