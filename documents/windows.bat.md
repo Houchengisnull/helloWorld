@@ -1,8 +1,22 @@
 [TOC]
 
+- 参考
+
+  https://www.cnblogs.com/zhaoqingqing/p/4620402.html
+
 # 注释
 
 `::`
+
+# 查看帮助信息
+
+`/?`
+
+比如向查看`type`命令的帮助信息，则只需
+
+``` bat
+type /?
+```
 
 # 暂停
 
@@ -48,3 +62,31 @@ taskkill -f -pid #{pid}
 $ where python
 C:\Users\admin\AppData\Local\Programs\Python\Python38\python.exe
 ```
+
+# 调用外部程序 start
+
+`start`
+
+- 启动`cmd`
+
+  ``` bat
+  start
+  ```
+
+- 打开文件夹
+
+  ``` bat
+  # 打开当前文件夹
+  start .
+  # 打开文件夹
+  start %path%
+  ```
+
+# 文件
+
+## 复制 copy
+
+``` bat
+copy A.txt B.txt
+```
+
