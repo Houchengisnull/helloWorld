@@ -1,5 +1,15 @@
 [TOC]
 
+# 处理图片Base64
+
+当获得一个文件的`byte[]`时，中间需要通过以字符串的形式传播，那我们需要以`Base64`作为加密字节流。若直接调用以下代码：
+
+``` java
+new String(bytes);
+```
+
+解析时生成的`bytes`与原`bytes`不一致，导致文件失效。
+
 # InputStream与OutputStream相互转换
 
 ## ByteArray
