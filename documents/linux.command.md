@@ -125,6 +125,12 @@ https://blog.csdn.net/chyychfchx/article/details/52687935
 $ iptraf-ng eth0
 ```
 
+## 查看网卡状态
+
+``` shell
+$ ethtool eth0
+```
+
 # 内存
 
 ## 查看 free
@@ -209,8 +215,6 @@ $ cat /proc/#{pid}/status
 # ps -ef | grep #{process_name}
 ```
 
-
-
 ## kill
 
 `# kill #{port}`
@@ -244,13 +248,37 @@ ss -s
 
 # netstat
 
+- **-t:** 只显示TCP端口
+
+- **-u:** 只显示UDP端口
+
+- **-l:** 仅显示监听套接字(能够读写与收发通讯协议(protocol)的程序)
+
+- **-p:** 显示进程标识符和程序名称，每一个套接字/端口都属于一个程序
+
+- **-n:** 不进行DNS轮询，显示IP(这样可以加快查询的时间)
+
 ## 查看tcp端口
 
-```
+```shell
 # netstat -tnlp
 ```
 
-## 查看主机路由
+## 通过pid/port查看占用port/pid
+
+``` shell
+$ netstat -nap | grep #{pid/port}
+```
+
+# pidof
+
+用于查找指定名称的pid
+
+``` shell
+$ pidof nginx
+```
+
+# 查看主机路由
 
 - `genmask` `子网掩码`
 
