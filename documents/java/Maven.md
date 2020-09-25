@@ -78,5 +78,61 @@ https://blog.csdn.net/tyrroo/article/details/77017190
 </dependency>
 ```
 
+# 查看依赖树
 
+``` shell
+mvn dependency:tree
+```
+
+# 解决依赖冲突
+
+## spring-boot log4j日志未生成
+
+- https://blog.csdn.net/libertine1993/article/details/80857483
+
+该问题导致无法产生日志文件。
+
+导致问题的`xml`如下：
+
+``` xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-amqp</artifactId>
+</dependency>
+<denpendency>
+	<groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+    <exclusions>
+        <exclusion>
+            <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-logging</artifactId>
+        </exclusion>
+    </exclusions>
+</denpendency>
+```
+
+将`spring-boot-starter-amqp`依赖移到后面去，日志文件便能正常生产。
+
+``` xml
+<denpendency>
+	<groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+    <exclusions>
+        <exclusion>
+            <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-logging</artifactId>
+        </exclusion>
+    </exclusions>
+</denpendency>
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-amqp</artifactId>
+</dependency>
+```
+
+通过`mvn dependency:tree`可知`spring-boot-starter-amqp`依赖`spring-boot-starter-logging`，而`spring-boot-starter-logging`的日志依赖是`logback-classic`。
+
+也可以通过鼠标右键`Maven`点击`show Dependencies`查看项目的依赖情况。
+
+而项目则使用`log4j`作为日志控件。
 
