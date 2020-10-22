@@ -412,6 +412,8 @@ void resize(int newCapacity) {   //传入新的容量
 
 将原旧中元素转换给扩容之后的新数组。
 
+> JDK1.7中HashMap在扩容时采用`头插法`。
+
 ### JDK1.8
 
 #### `resize()`
