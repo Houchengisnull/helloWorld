@@ -6,6 +6,7 @@ target_port = 9090
 # build a socket object
 client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 # client.bind((target_host, target_port))
+client.connect(("localhost", 9090))
 client.settimeout(10)
 client.sendto("helloworld".encode(), (target_host, target_port))
 # accept message

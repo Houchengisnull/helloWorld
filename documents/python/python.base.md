@@ -144,6 +144,14 @@ https://blog.csdn.net/Tyro_java/article/details/80739247
 
 https://www.cnblogs.com/7tiny/p/7209608.html
 
+# 声明变量
+
+## GLOBAL
+
+当我们需要在函数中使用全局变量时，应该对该变量使用`global`声明。
+
+否则`解释器`将认为你在函数中定义了一个局部变量。
+
 # 循环
 
 ## while
@@ -175,7 +183,6 @@ else:
   stringType = int(intType)
   ```
 
-  
 
 ## 正则表达式
 
