@@ -275,7 +275,7 @@ static int indexFor(int h, int length) {
 /**
 * @param hash 经过扰动函数`hash()`得到的哈希值
 * @param onlyIfAbsent 仅在缺失条件下保存元素
-* @param evict 是否驱逐 || 为false时, table在创造模式
+* @param evict 是否驱逐 || 为false时, table为创造模式
 */
 final V putVal(int hash
                , K key
