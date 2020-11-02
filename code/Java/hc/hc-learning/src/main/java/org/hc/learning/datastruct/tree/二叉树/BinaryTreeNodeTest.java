@@ -35,7 +35,7 @@ public class BinaryTreeNodeTest {
 			root.right.left = new BinaryTreeNode("G");
 			root.right.right = new BinaryTreeNode("I");
 			root.right.left.right = new BinaryTreeNode("H");
-			root.right.left.right = new BinaryTreeNode("K");
+			/*root.right.left.right = new BinaryTreeNode("K");*/
 		}
 		// root.right.right = new BinaryTreeNode(6);
 		/*list = new ArrayList<>();*/
@@ -212,5 +212,95 @@ public class BinaryTreeNodeTest {
 			} else
 				break;
 		}
+	}
+
+	@Test
+	public void levelOrderTest() {
+		levelOrder(root);
+	}
+
+	/**
+	 * 层次遍历
+	 * 利用队列先进先出的思想，实现层次遍历
+	 * 尽管可以按照正确的层次遍历输出，但无法区分节点具体在哪一层次
+	 * @param root
+	 */
+	public void levelOrder(BinaryTreeNode root) {
+		BinaryTreeNode temp = null;
+		LinkedList<BinaryTreeNode> queue = new LinkedList<>();
+		if (root == null) {
+			return;
+		}
+		queue.add(root);
+		while (!queue.isEmpty()) {
+			temp = queue.poll();
+			System.out.println(temp.data);
+			if (temp.left != null) {
+				queue.add(temp.left);
+			}
+			/*
+			 * 由于右子节点会比其同一层次的左子节点的子节点先出列
+			 */
+			if (temp.right != null) {
+				queue.add(temp.right);
+			}
+		}
+	}
+
+	@Test
+	public void getMaxDepthTest() {
+		System.out.println(getMaxDepth(root));
+		System.out.println(getMaxDepthNoRecursive(root));
+	}
+
+	/**
+	 * 计算树的深度
+	 * @param root
+	 * @return
+	 */
+	public int getMaxDepth(BinaryTreeNode root) {
+		int leftDepth, rightDepth;
+		if (root == null) {
+			return 0;
+		}
+		leftDepth = getMaxDepth(root.left);
+		rightDepth = getMaxDepth(root.right);
+		if (leftDepth > rightDepth) {
+			return leftDepth + 1;
+		}
+		return rightDepth + 1;
+	}
+
+	/**
+	 * 非递归计算树的深度
+	 * 以空作为分隔符号，在遍历完每次后添加空，当弹出空时level+=1
+	 * @param root
+	 * @return
+	 */
+	public int getMaxDepthNoRecursive(BinaryTreeNode root) {
+		int level = 0; // 层数
+		LinkedList<BinaryTreeNode> queue = new LinkedList<>();
+		if (root == null) {
+			return level;
+		}
+		queue.add(root);
+		queue.add(null);
+		while (!queue.isEmpty()) {
+			root = queue.poll();
+			if (root == null) {
+				if (!queue.isEmpty()) {
+					queue.add(null);
+				}
+				level++;
+			} else {
+				if (root.left != null) {
+					queue.add(root.left);
+				}
+				if (root.right != null) {
+					queue.add(root.right);
+				}
+ 			}
+		}
+		return level;
 	}
 }

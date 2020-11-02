@@ -2,29 +2,22 @@
 
 # 术语
 
-* [根结点]无双亲的结点，一棵树最多一个根结点
+* **根结点：**	无双亲的结点，一棵树最多一个根结点
 
-* [边]双亲与孩子结点的链接
+* **边：**	双亲与孩子结点的链接
+* **叶子结点：**	无孩子结点的结点
+* **兄弟结点：**	拥有相同双亲的结点
+* **祖先结点：**	如果存在一条根结点到结点q的路径，并且p在该路线上，则p为q的祖先结点
+* **结点大小：**	子孙个数，包括其自身
+* **层：**	位于相同深度的所有结点的集合叫做树的层
+* **结点深度：**	根结点到该结点的路径长度
 
-* [叶子结点]无孩子结点的结点
-
-* [兄弟结点]拥有相同双亲的结点
-
-* [祖先结点]如果存在一条根结点到结点q的路径，并且p在该路线上，则p为q的祖先结点
-
-* [结点大小]子孙个数，包括其自身
-
-* [层]位于相同深度的所有结点的集合叫做树的层
-
-* [结点深度]根结点到该结点的路径长度
-
-* [结点高度]从该结点到最深结点的路径长度
-
-* [树的高度]树中所有结点高度最大值 / 根结点到最深结点的路径长度
+- **结点高度：**	从该结点到最深结点的路径长度
+- **树的高度：**	树中所有结点高度最大值 / 根结点到最深结点的路径长度
 
   > 深度与高度为分别以***根结点***与***最深结点***为***起点***的标量
 
-* [斜树]类链表的树，即除叶子结点每个结点仅一个孩子结点
+- **斜树：**	类链表的树，即除叶子结点每个结点仅一个孩子结点
 
 
 
@@ -32,10 +25,10 @@
 
 ## 二叉树类型
 
-- [严格二叉树] 除叶子结点外，每个结点均有两个孩子结点
+- **严格二叉树：**	除叶子结点外，每个结点均有两个孩子结点
 
-- [满二叉树] ***所有叶子结点都在同一层***的严格二叉树
-- [完全二叉树] 从左到右自上而下结点有序无遗漏的二叉树
+- **满二叉树：**	所有叶子结点都在同一层的严格二叉树
+- **完全二叉树：**	从左到右自上而下结点有序无遗漏的二叉树
 
 ## 二叉树性质
 
@@ -154,17 +147,17 @@ public class BinaryTreeNode {
 				if (stack.size() == 0) {
 					return;
 				} else {
-					if (stack.getFirst().right == null) {
+					if (stack.getFirst().right == null) { // 
 						root = stack.pop();
-						System.out.print(root.data);
-						if (root == stack.getFirst().right) {
+						System.out.print(root.data); // 输出当前结点
+						if (root == stack.getFirst().right) { // 当前元素是否为栈顶元素右子节点
 							System.out.print(stack.getFirst().data);
 							stack.pop();
 						}
 					}
 				}
-				if (stack.size() > 0) {
-					root = stack.getFirst().right;
+				if (stack.size() > 0) { // stack中的尾结点为root, 如果栈中仍然有数据说明刚刚输出了左子节点，下一步应该是输出右子树或遍历右子树的左子节点
+					root = stack.getFirst().right; // 找到同一层次的右结点
 				}else {
 					root = null;
 				}
@@ -173,3 +166,33 @@ public class BinaryTreeNode {
 	}
 ```
 
+- 非递归后序遍历（无回溯点）
+
+我在网上见到一个十分简便也易于理解的方法，其基本思路是这样的：**后序遍历的顺序为左右中，而前序遍历的顺序为中左右，如果在前序遍历的基础上，先遍历右子节点，再遍历左子节点，那么输出顺序为中右左，恰好为后序遍历的逆序输出。**
+
+代码见：`org.hc.learning.datastruct.tree.二叉树.BinaryTreeNode.postOrderNoRecursiveWithoutBacktracking`
+
+- 非递归后序遍历（回溯点）
+
+  ```java
+  public void postOrderNoRecursiveWithBacktracking(BinaryTreeNode root) {
+      LinkedList<BinaryTreeNode> stack = new LinkedList<>();
+      boolean hasBack = false; 															// 是否回溯过
+      while (root != null){
+          while ((root.left != null || root.right != null) && !hasBack) { 				// 遍历至子节点最深处 且当前结点未回溯过
+              stack.push(root);
+              root = root.left != null ? root.left : root.right;
+          }
+          System.out.print(root.data + " "); /*list.add(root);*/
+          if (stack.size() > 0) { 														// 如果栈中有元素
+              if (stack.getFirst().right == null || root == stack.getFirst().right) { 	// 首先判断是否已经回溯:右结点为空 或者 当前当前root为栈顶元素的右子树
+                  hasBack = true;
+                  root = stack.pop();
+              } else { 																	// 否则将右子树设置为root以便进行遍历:right 不为空 且 未回溯
+                  hasBack = false;
+                  root = stack.getFirst().right;
+              }
+          } else
+              break;
+      }
+  ```
