@@ -27,7 +27,7 @@ type /?
 # 查看端口被占用
 
 ``` bash
-netstat -aon|findstr #{pid}
+netstat -aon|findstr #{port}
 ```
 
 # 终止进程 taskkill
