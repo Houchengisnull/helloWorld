@@ -287,6 +287,7 @@ public class BinaryTreeNodeTest {
 		queue.add(null);
 		while (!queue.isEmpty()) {
 			root = queue.poll();
+			// 当前层遍历结束
 			if (root == null) {
 				if (!queue.isEmpty()) {
 					queue.add(null);
