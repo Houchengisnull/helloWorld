@@ -404,3 +404,18 @@ export hello=world
 - echo命令查看单个环境变量。例如:echo $PATH
 - env查看所有环境变量。例如:env
 - set查看所有本地定义环境变量
+
+# Linux和Windows之间传输文件
+
+通常在`Linux`和`Windows`之间传输工具，我们除了使用`ftp工具`，我们还可以通过以下两个命令实现：
+
+``` shell
+# 下载
+sz $filename
+sz $filename1 $filename2
+sz $directory/*
+
+# 上传
+rz $filename
+```
+
