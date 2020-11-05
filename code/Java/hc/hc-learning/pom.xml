@@ -107,5 +107,12 @@
 		  <artifactId>javax.inject</artifactId>
 		  <version>1</version>
 	  </dependency>
+
+	  <dependency>
+		<groupId>org.projectlombok</groupId>
+		<artifactId>lombok</artifactId>
+	  	<!-- 仅在编译期间生效，因为它只要将*.java编译为正确的*.class -->
+		<scope>provided</scope>
+	  </dependency>
   </dependencies>
 </project>

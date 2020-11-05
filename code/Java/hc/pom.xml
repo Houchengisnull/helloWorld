@@ -57,11 +57,19 @@
 		</dependency>
 		
 		<!-- druid连接池 -->
-		<!-- <dependency>
+		 <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.0.29</version>
-        </dependency> -->
+        </dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.5.5</version>
+		</dependency>
+
 
 	</dependencies>
 

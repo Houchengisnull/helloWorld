@@ -73,6 +73,10 @@ public class BinaryTreeNodeTest {
 	/**
 	 * 中左右
 	 * 非递归前序遍历
+	 * 在前序遍历中，
+	 * 由于先输出当前结点，所以右子树上的结点均未输出，
+	 * 只要我们将当前结点入栈，表明栈中结点的右子树均未输出
+	 * 当左子树遍历完成后，我们取出栈顶结点并回溯到其右结点即可实现前序遍历。
 	 */
 	public void preOrderNoRecursive(BinaryTreeNode root) {
 		LinkedList<BinaryTreeNode> stack = new LinkedList<>();
@@ -110,6 +114,11 @@ public class BinaryTreeNodeTest {
 	/**
 	 * 左中右
 	 * 非递归中序遍历
+	 *
+	 * 在中序遍历中，要求在输出当前结点前先输出左子树
+	 * 所以在遍历左子树时先不输出，将其入栈
+	 * 在抵达最深处后，先弹出栈栈顶元素，输出当前结点，
+	 * 判断如果存在右子树则遍历右子树。
 	 * @param root
 	 */
 	public void inOrderNoRecursive(BinaryTreeNode root) {
@@ -185,12 +194,13 @@ public class BinaryTreeNodeTest {
 	}
 
 	/**
-	 *  递推与递归不同的是,递推方法采用自底向上的方式产生计算序列,其首先计算规模问题最小的子问题的解,在此基础上依次计算规模较大的子问题的解,直到最后产生原问题的解
-	 *  大多数递归问题在求解过程中无法保证求解动作一直向前,往往需要设置一些回溯点
+	 * 递推与递归不同的是,递推方法采用自底向上的方式产生计算序列,其首先计算规模问题最小的子问题的解,在此基础上依次计算规模较大的子问题的解,直到最后产生原问题的解
+	 * 大多数递归问题在求解过程中无法保证求解动作一直向前,往往需要设置一些回溯点
 	 *
-	 *  假设存在结点a, a.left -> b, b.right -> c
-	 *  其非递归后序遍历流程
-	 *
+	 * 实现后序遍历的关键:在判断当前结点是否为栈顶元素的右子树
+	 * 首先同样将左子树均放入栈中至最深处
+	 * 输出左子结点后，"获取"栈顶元素的右子结点，如果不为空则遍历其左子树
+	 * 输出右子结点后，并且其为栈顶元素的右子结点则设置回溯标识符号，令其下次不进入该结点
 	 */
 	public void postOrderNoRecursiveWithBacktracking(BinaryTreeNode root) {
 		LinkedList<BinaryTreeNode> stack = new LinkedList<>();
@@ -198,11 +208,11 @@ public class BinaryTreeNodeTest {
 		while (root != null){
 			while ((root.left != null || root.right != null) && !hasBack) { 				// 遍历至子节点最深处 且当前结点未回溯过
 				stack.push(root);
-					root = root.left != null ? root.left : root.right;
+				root = root.left != null ? root.left : root.right;
 			}
 			System.out.print(root.data + " "); /*list.add(root);*/
 			if (stack.size() > 0) { 														// 如果栈中有元素
-				if (stack.getFirst().right == null || root == stack.getFirst().right) { 	// 首先判断是否已经回溯:右结点为空 或者 当前当前root为栈顶元素的右子树
+				if (stack.getFirst().right == null || root == stack.getFirst().right) { 	// 首先判断是否已经回溯:右结点为空 或者 当前结点为栈顶元素的右子树
 					hasBack = true;
 					root = stack.pop();
 				} else { 																	// 否则将右子树设置为root以便进行遍历:right 不为空 且 未回溯
@@ -279,6 +289,7 @@ public class BinaryTreeNodeTest {
 	 */
 	public int getMaxDepthNoRecursive(BinaryTreeNode root) {
 		int level = 0; // 层数
+
 		LinkedList<BinaryTreeNode> queue = new LinkedList<>();
 		if (root == null) {
 			return level;
