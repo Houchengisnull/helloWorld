@@ -264,9 +264,11 @@ public class TreeNode {
 
 - **目的：**	裁剪斜树
 
-  在极端情况下，`BST`的搜索复杂的为O(n)，二叉树将退化成链表结构，我们需要对树进行平衡，将其搜索的复杂度降为O(logn)。
+  在极端情况下，`BST`的搜索复杂的为O(n)，二叉树将退化成链表结构，我们需要对树进行平衡，将其查找、插入、删除的复杂度降为O(logn)。
 
 通常用HB(k)表示平衡二叉树，k为左子树与右子树的高度差，有时又叫**平衡因子**。
+
+> 又称为AVL树以纪念其发明者——Adelson-Velskii and Landis。
 
 ## AVL Tree (Adelson-Velskii and Landis Tree)
 
