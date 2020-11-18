@@ -2,6 +2,10 @@ package org.hc.learning.algorithm.base64;
 
 import org.bouncycastle.util.encoders.Base64;
 
+/**
+ * https://www.liaoxuefeng.com/wiki/897692888725344/949441536192576
+ * 2020.11.18 已经看不懂两年前具体的代码实现了，今天复习一下Base64的思想
+ */
 public class MyBase64 {
 	
 	private final static String mapper = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
