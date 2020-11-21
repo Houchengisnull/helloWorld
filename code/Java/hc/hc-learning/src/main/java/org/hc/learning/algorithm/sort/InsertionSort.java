@@ -5,7 +5,7 @@ import org.hc.learning.thread.forkjoin.learning.sum.MakeArray;
 
 /**
  * 插入排序
- * 插入排序时一种稳定的排序
+ * 插入排序是一种稳定的排序
  */
 public class InsertionSort extends Sort<Integer>{
     /**
