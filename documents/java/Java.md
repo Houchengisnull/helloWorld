@@ -624,9 +624,126 @@ Date parse() {
 
 解决办法有很多，比如每次创建一个`SimpleDateFormat instance`、`synchronized`、`ThreadLocal`，我们需要根据实际情况选择合适的解决方案。
 
+# 时间格式化1.8
+
+在`JDK1.8`中引入了一些新的格式化工具，今天为大家介绍个人在工作中有用到的。
+
 ## DateTimeFormatter
 
-`JDK8`引入了新的`DateTimeFormatter`，它是一个线程安全的时间日期格式化类。
+`JDK8`引入了新的`DateTimeFormatter`，它是一个**线程安全**的时间日期格式化类。
+
+在只有一个`SimpleDateFormat`实例的情况下，它将在多线程环境下共用同一个成员变量——`Calendar`对象，所以在多线程环境下会出现一些奇怪的问题。
+
+- 我们可以为方法中创建`SimpleDateFormat`对象，确保其为线程私有；
+- 也可以结合`threadLocal`，令每个线程持有自己的`SimpleDateFormat`对象；
+- 最后我们可以直接使用`JDK1.8`中的`DateTimeFormatter`。
+
+但注意`DateTimeFormatter`对格式的处理在毫秒后与`SimpleDateFormatter`有些许不同，在实际开发中我们需要确保我们的结果为业务所需。
+
+``` java
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+LocalDateTime now = LocalDateTime.now();
+System.out.println(formatter.format(now));
+```
+
+## LocalDateTime
+
+在使用`DateTimeFormatter`来格式化时间时，我们同样需要使用与其配套的一系列时间工具。
+
+比如`LocalDateTime`，它可以直接根据操作系统获取当地时间。
+
+首先它通过静态方法`now()`来获取时间。
+
+``` java
+public static LocalDateTime now(Clock clock) {
+    Objects.requireNonNull(clock, "clock");
+    final Instant now = clock.instant();  // called once
+    ZoneOffset offset = clock.getZone().getRules().getOffset(now);
+    return ofEpochSecond(now.getEpochSecond(), now.getNano(), offset);
+}
+```
+
+它将返回一个不可变对象。
+
+当通过`now()`返回对象后，其不再随时间而改变
+
+``` java
+System.out.println("------------ 查看LocalDateTime对象是否随时间变化 ------------");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime last = LocalDateTime.now();
+        String lastValue = formatter.format(last);
+        System.out.println("last第一次格式化:" + lastValue);
+        // 线程沉睡一秒
+        Thread.sleep(1000);
+        // 当通过now()获取对象实例后, 不随时间变化
+        String lastValueSecond = formatter.format(last);
+        System.out.println("last第二次格式化:" + lastValueSecond);
+        LocalDateTime now = LocalDateTime.now();
+        String nowValue = formatter.format(now);
+        System.out.println("now 第一次格式化:" + nowValue);
+        System.out.println("LocalDateTime对象是否随时间变化:" + nowValue.equals(lastValue));
+```
+
+- 多线程环境下更新`lastAccess`
+
+```java
+import lombok.SneakyThrows;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class LocalDateTimeInConcurrency {
+
+    static LocalDateTime lastAccess = LocalDateTime.now();
+    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss'Z'");
+    static final Integer threadNum = 5;
+
+    public static void main(String[] args ) {
+        ExecutorService executorService = Executors.newFixedThreadPool(threadNum);
+        for (Integer i = 0; i < threadNum; i++) {
+            executorService.execute(new Runnable() {
+                @SneakyThrows
+                @Override
+                public void run() {
+                    while (true) {
+                        // synchronized (lastAccess) { // 由于lastAccess对象的引用不断在改变，所以依然会出现线程安全问题
+                        synchronized (LocalDateTimeInConcurrency.class) {
+                            String format = lastAccess.format(formatter);
+                            System.out.println(Thread.currentThread().getName() + " get last Access:" + format);
+                            lastAccess = LocalDateTime.now();
+                            Thread.sleep(1000);
+                        }
+                    }
+                }
+            });
+        }
+    }
+}
+```
+
+## ZonedDateTime
+
+而`ZonedDateTime`是个可以设置时区的时间工具，如下我们可以获取系统时区。用法与`LocalDateTime`类似。
+
+``` java
+/** 通过Instant创建ZonedDateTime对象
+*/
+Instant now = Instant.now();
+ZonedDateTime zondeDateTime = now.atZone(ZonedId.systemDefault());
+System.out.println(zonedDateTime);
+System.out.println(zonedDateTime.format(formatter));
+```
+
+## Instant
+
+获取时间戳，与`System.currentTimeMillis()`效果相同。
+
+``` java
+System.out.println("------------ Instant获取时间戳");
+        System.out.println("Instant.now().toEpochMilli()" + Instant.now().toEpochMilli());
+        System.out.println("System.currentTimeMillis:" + System.currentTimeMillis());
+```
 
 # JDBC
 
