@@ -179,18 +179,25 @@ insert into tablename (date_col) value (sysdate + 1);
   SQL> show parameter recover;
   
   # 删除归档日志
+  
+  # 查找rman工具所在目录
+  find / -name rman
+  # 找到oracle的bin目录下的rman工具
+  
+  # 连接数据库
+  rman target /
   # RMAN
   # RMAN 检查归档日志
   RMAN> crosscheck archivelog all; 
   RMAN> list expire archivelog all
-  # 清理全部
+# 清理全部
   RMAN> delete expired archivelog all;
-  # 删除7天前的日志
+# 删除7天前的日志
   RMAN> delete archivelog until time "sysdate-7";
   # RMAN 检查归档日志是否已经删除
   RMAN> crosscheck archivelog all; 
   ```
-
   
-
+  
+  
   
