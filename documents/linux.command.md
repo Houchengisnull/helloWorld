@@ -97,6 +97,17 @@ $ rm -r #{directory}
 
 https://blog.csdn.net/chyychfchx/article/details/52687935
 
+## 压缩与解压
+
+``` shell
+# 压缩文件
+$ tar -zcvf #{directory}
+# 解压文件
+$ tar -zxvf #{directory}
+```
+
+
+
 # 网络
 
 ## host
