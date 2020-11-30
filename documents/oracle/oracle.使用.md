@@ -190,14 +190,23 @@ insert into tablename (date_col) value (sysdate + 1);
   # RMAN 检查归档日志
   RMAN> crosscheck archivelog all; 
   RMAN> list expire archivelog all
-# 清理全部
-  RMAN> delete expired archivelog all;
-# 删除7天前的日志
-  RMAN> delete archivelog until time "sysdate-7";
-  # RMAN 检查归档日志是否已经删除
-  RMAN> crosscheck archivelog all; 
   ```
-  
-  
-  
-  
+- 清理全部
+
+  ```` bash
+  RMAN> delete expired archivelog all;
+  ````
+
+- 删除7天前的日志
+
+  ``` shell
+  RMAN> delete archivelog until time "sysdate-7";
+  ```
+
+- RMAN 检查归档日志是否已经删除
+
+  ``` shell
+  RMAN> crosscheck archivelog all;   
+  ```
+
+-
