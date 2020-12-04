@@ -83,7 +83,7 @@ chowd -R 777 #{directory}
 
 http://blog.sina.com.cn/s/blog_8610084f0102xx2k.html
 
-# 删除文件 rm
+## 删除文件 rm
 
 ``` shell
 $ rm #{file}
