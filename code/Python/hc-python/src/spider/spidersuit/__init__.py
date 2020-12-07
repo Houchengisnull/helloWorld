@@ -48,8 +48,12 @@ class SpiderMan :
 
     def download(self, url, cookie, data):
         data_byte = parse.urlencode(data).encode(self.ENCODING)
-        res = self.new_request(url, cookie, data_byte)
-        return res
+        req = request.Request(url)
+        req.add_header(self.USER_AGENT, self.USER_AGENT_VALUE)
+        if cookie is not None :
+            req.add_header(self.COOKIE, cookie)
+        res = request.urlopen(req, data_byte)
+        return res.read()
 
     @staticmethod
     def parse_json(response_string):
