@@ -70,6 +70,6 @@ public class UseCountDownLatch {
         }
 
         latch.await();
-        System.out.println("Main do ites work........");
+        System.out.println("Main do its work........");
     }
 }
