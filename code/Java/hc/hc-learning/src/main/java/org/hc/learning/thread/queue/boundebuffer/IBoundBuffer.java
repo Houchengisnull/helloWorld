@@ -1,6 +1,6 @@
 package org.hc.learning.thread.queue.boundebuffer;
 
-public interface IBoundeBuffer<T> {
+public interface IBoundBuffer<T> {
     /**
      * 阻塞存放元素到队列尾部
      * @param element

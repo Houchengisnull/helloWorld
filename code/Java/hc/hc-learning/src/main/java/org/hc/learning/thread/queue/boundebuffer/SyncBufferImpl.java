@@ -9,7 +9,7 @@ import java.util.LinkedList;
  * 每次插入或者移除元素将唤醒所有线程
  * @param <T>
  */
-public class SyncBufferImpl<T> implements IBoundeBuffer<T>{
+public class SyncBufferImpl<T> implements IBoundBuffer<T>{
     private static final Logger logger = LoggerFactory.getLogger(SyncBufferImpl.class);
     private LinkedList<T> queue = new LinkedList<>();
     private int capacity = DEFAULT_CAPACITY;
@@ -29,7 +29,7 @@ public class SyncBufferImpl<T> implements IBoundeBuffer<T>{
             // 阻塞
             wait();
         }
-        logger.debug("{} put {} into queue.", Thread.currentThread().getName(), element);
+        /*logger.debug("{} put {} into queue.", Thread.currentThread().getName(), element);*/
         queue.addLast(element);
         notifyAll();
     }
@@ -40,7 +40,7 @@ public class SyncBufferImpl<T> implements IBoundeBuffer<T>{
             wait();
         }
         T element = queue.removeFirst(); // 应该先获取元素再唤醒
-        logger.debug("{} take {} from queue.", Thread.currentThread().getName(), element);
+        /*logger.debug("{} take {} from queue.", Thread.currentThread().getName(), element);*/
         notifyAll();
         return element;
     }

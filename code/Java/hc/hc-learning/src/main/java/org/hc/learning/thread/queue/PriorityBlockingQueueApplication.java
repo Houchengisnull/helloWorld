@@ -10,7 +10,7 @@ public class PriorityBlockingQueueApplication {
     private static final int CAPACITY = 10;
 
     @Test
-    public void a() {
+    public void prioritySort() {
         PriorityBlockingQueue<String> queue = new PriorityBlockingQueue(CAPACITY, new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
