@@ -48,6 +48,15 @@ public class MyThreadPool implements Executor {
         taskQueue.put(command);
     }
 
+    public void destroy() {
+        logger.debug("ready destroy pool");
+        for (int i = 0; i < threads.length; i++) {
+            threads[i].interrupt();
+            threads[i] = null; // help gc
+        }
+        taskQueue.clear();
+    }
+
     /**
      * 为控制线程的生命周期
      * 我们需要重写Thread
@@ -59,10 +68,13 @@ public class MyThreadPool implements Executor {
         @SneakyThrows
         @Override
         public void run() {
-            while (true) {
+            while (!isInterrupted()) {
                 Runnable task = taskQueue.take();
-                logger.debug("my pool {} run", Thread.currentThread().getName());
-                task.run();
+                if (task != null) {
+                    logger.debug("my pool {} run", Thread.currentThread().getName());
+                    task.run();
+                }
+                task = null;
             }
         }
     }
