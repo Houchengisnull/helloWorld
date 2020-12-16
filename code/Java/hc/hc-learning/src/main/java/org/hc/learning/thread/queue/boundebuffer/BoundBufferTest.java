@@ -9,6 +9,8 @@ import java.util.concurrent.*;
 /**
  * 测试结果
  * JDK胜出
+ *
+ * 在移除日志打印后，synchronized实现阻塞队列SyncBufferImpl效率最高
  */
 public class BoundBufferTest extends TestCase {
     private static final int DEFAULT_THREAD_NUM = 4;
