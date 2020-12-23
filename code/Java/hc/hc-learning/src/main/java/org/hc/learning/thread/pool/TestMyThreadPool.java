@@ -7,9 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 public class TestMyThreadPool extends TestCase {
 
@@ -45,6 +43,15 @@ public class TestMyThreadPool extends TestCase {
 		//
 		extPool.invokeAll(tasks);
 		extPool.shutdownNow();
+	}
+
+	@Test
+	public void 自定义线程工厂() {
+		// 默认情况下, 无任务时不会创建线程
+		ExecutorService pool = new ThreadPoolExecutor(coreSize, maxSize, 10, TimeUnit.SECONDS, queue, new MyThreadPoolFactory());
+		// Prepared create a thread in core pool.
+		// ((ThreadPoolExecutor) pool).prestartCoreThread();
+		((ThreadPoolExecutor) pool).prestartAllCoreThreads();
 	}
 
 }
