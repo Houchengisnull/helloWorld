@@ -60,7 +60,47 @@ $ java -verbose
 
 - 参考
 
-  https://blog.csdn.net/echizao1839/article/details/80890490
+  <a href='https://blog.csdn.net/echizao1839/article/details/80890490'>Java enum常见的用法</a>
+  
+  <a href='http://www.imooc.com/article/302066'>恕我直言，我怀疑你没怎么用过枚举</a>
+  
+  ## 使用枚举的原因
+  
+  在开发过程中，我们常常需要定义常量。譬如：
+  
+  ``` java
+  @Data
+  public class LikeLevel {
+      public static final int LIKE = 1; // 喜欢
+      public static final int LOVE = 2; // 爱
+      public static final int VERY_LIKE = 3; // 非常喜欢
+  }
+  ```
+  
+  在调用时，常常
+  
+  ``` java
+  public void doWhatByLevel(int like) {
+      if (like == Like) {
+          doLike();
+      }
+      if (like == LOVE) {
+          makeLove();
+      }
+  }
+  ```
+  
+  的确使用`int`也能正常使用，但是失去了对传入参数约束的作用。我们可以直接将`1`、`2`以及我们没有定义的值`99`传入，那么代码的行为可能会超出我们的预料。
+  
+  为了更好的约束程序员传入的变量。
+  
+  我们最好通过枚举来定义。
+  
+  ``` java
+  public enum LikeEnum {
+      Like, Love, VeryLike
+  }
+  ```
 
 ## 常量定义
 
@@ -121,7 +161,59 @@ public enum Color{
 }
 ```
 
+## 消除if-else
 
+在第一个例子中，`doWhatByLevel(int)`使用`if-else`来完成不同的参数完成不同的操作的功能。
+
+``` java
+public void doWhatByLevel(int like) {
+    if (like == Like) {
+        doLike();
+    }
+    if (like == LOVE) {
+        makeLove();
+    }
+}
+```
+
+实际上，通过***枚举+接口***，我们可以令我们的代码更加优雅。
+
+``` java
+public interface LikeAction {
+	void do();
+}
+
+public enum LikeEnum implements LikeAction{
+    Like {
+        @Override
+        public void do() {
+            // 表白
+        }
+    },
+    
+    Love {
+        @Override
+        public void do() {
+            // 做点什么吧
+        }
+    },
+    
+    VeryLike {
+        @Override 
+        public void do () {
+            // 散花
+        }
+    }
+}
+```
+
+这样子的话，我们可以将`doWhatByLevel(LikeEnum)`的代码去掉`if-else`，看官请看。是不是优雅多了。
+
+``` java
+public void doWhatLevel(LikeEnum likeLevel) {
+    likeLevel.do();
+}
+```
 
 # 面向对象
 
