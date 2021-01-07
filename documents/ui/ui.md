@@ -6,6 +6,18 @@
 >
 > 不过，虽然身为服务端开发人员，但在这个过程中，对桌面应用产生了小小的兴趣，希望能对这个领域有更多的了解。
 
+# 常用方式
+
+<a href='https://zhuanlan.zhihu.com/p/69109695'>快速了解Electron：新一代基于Web的跨平台桌面技术</a>
+
+## 原生开发
+
+直接将语言编译成可执行文件，调用系统API。开发技术要高，运行效率较高。
+
+## 托管平台
+
+通过平台或虚拟机完成二次加载编译或解释运行。
+
 # 常用的桌面应用开发工具
 
 JavaFX11出来了Java的GUI有希望吗？ - 朴拙的瘦子的回答 - 知乎 https://www.zhihu.com/question/305434657/answer/621961635
@@ -98,6 +110,8 @@ https://gitee.com/openjfxcn
 > 来源：知乎
 > 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
+> 以上的*ml指定是`xml`或`html`等标记语言。
+
 ## microsoft
 
 ### MFC
@@ -142,5 +156,9 @@ https://github.com/duilib/duilib
 
 Electron的原理很简单，基本上就是使用我们常见的chrome浏览器的内核为基础通过nodejs和底层操作系统进行操作交互。
 
-https://www.jianshu.com/p/752b469519b0
+- **Chromium**
+
+- **Node.js**
+
+  <a href='https://www.jianshu.com/p/752b469519b0'>Electron跨平台桌面级应用开发框架</a>
 
