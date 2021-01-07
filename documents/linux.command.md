@@ -85,6 +85,13 @@ http://blog.sina.com.cn/s/blog_8610084f0102xx2k.html
 
 ## 删除文件 rm
 
+<a href='https://blog.csdn.net/chyychfchx/article/details/52687935'>Linux命令-5：rm（Remove）命令</a>
+
+## 参数
+
+- **-r --recursive**	递归
+- **-f --force**	强制删除，无需确认
+
 ``` shell
 $ rm #{file}
 # 强制删除，系统无提示
@@ -94,8 +101,6 @@ $ rm -i *.log
 # 删除文件夹
 $ rm -r #{directory}
 ```
-
-https://blog.csdn.net/chyychfchx/article/details/52687935
 
 ## 压缩与解压
 
