@@ -5,8 +5,10 @@
 要开始`C/C++`编程，我们常常要安装以下几个组件：
 
 - **依赖类库**	比如`GNU`、`MinGW`、`MinGW-w64`，相当于`Java`中的`JDK`。
-- **编译器**	比如或者`clang`。`clang`仅是一个编译前端，并未实现`c标准库`。所以`c标准库`由`MinGW`提供。
+- **编译器**	比如`g++`或者`clang`。`clang`仅是一个编译前端，并未实现`c标准库`。所以`c标准库`由`MinGW`提供。
 - **构建工具**	比如`CMake`非必须，类似`Maven`、`Gradle`等工具。
+
+
 
 ## 基本概念
 
@@ -39,9 +41,14 @@
 
 意义为**GNU's Not Unix!**。
 
-`GNU`是`RichardStallman`在1983年发起的自由软件集体协作**计划**。其目标是创建一套完全**Free**的操作系统。
+`GNU`是`Richard Stallman`在1983年发起的自由软件集体协作**计划**。其目标是创建一套完全**Free**的操作系统。
 
 > `GNU Project`中有自己的内核——`Hurd`，但是其至今无法稳定使用。
+
+- [1985] 成立“自由软件基金会”（Free Software Foundation)，为`GNU Project`提供技术、法律、财政支持。
+- [1990] `GNU项目组`使用`Lisp`编写`Emacs`、`GCC`
+- [1991] `Linus`发布`Linux`内核
+- [1992] `Linux内核` + `GNU软件`=`GNU/Linux`
 
 ### Linux
 
@@ -93,6 +100,72 @@
 
   此外，`MinGW`项目已经停止维护。
 
+### LLVM
+
+- **全名**	`Low Level Virtual Machine`
+- **作者**	`Chris Latter`
+- **背景**	`Chris Latter`本想实现一个底层虚拟机，类似`JVM`，但是后来`LLVM`从未作为虚拟机使用。但人们仍然叫它`LLVM`，即使它与虚拟机毫无关系。
+
+#### 编译器结构
+
+- **传统编译器**
+
+  ![img](../images/c++/传统编译器结构.webp)
+  
+- **LLVM架构**
+
+  ![img](../images/c++/LLVM架构.webp)
+
+> - **Frontend**	前端：词法分析、语法分析、语义分析、生成中间代码
+> - **Optimizer**	优化器：优化中间代码
+> - **Backend**	生成机器码
+
+<hr>
+
+#### Feature 特点
+
+- 不同前后端使用统一中间代码`LLVM Intermediate Representation(LLVM IR)`
+- 如果需要支持一种新的编程语言，只需要实现一个新的前端
+- 如果需要支持一种新的硬件设备，只需要实现一个新的后端
+- 优化阶段是一个通用阶段，针对的是同一的`LLVM IR`
+- 相比之下，GCC的前端和后端没有分离，耦合在一起，所以`GCC`为了支持新的语言或者目标平台变得特别困难
+- `LLVM`现在被作为实现各种静态和运行时编译语言的通用基础结构（`GCC家族`、`Java`、`.NET`、`Python`、`Ruby`等
+
+> - license
+> - clang
+> - 良好定义与模块化
+> - 足够年轻、健壮，未被各方修改成一个难以被外人理解的奇形怪状的怪物。
+>
+> ——知乎用户 狗肉 花与果
+
+
+<hr>
+
+- 参考
+- <a href='https://www.jianshu.com/p/1367dad95445'>深入浅出让你理解什么是LLVM</a>
+
+- <a href='https://www.zhihu.com/question/20235742'>Clang 比 GCC 好在哪里？</a>
+
+### Clang
+
+`Clang`是`LLVM`的子项目，**基于`LLVM`架构的`C/C++/Objective-C`编译器前端**。
+
+![img](../images/C++/Clang)
+
+- 相比于GCC，Clang具有如下优点：
+
+- 编译效率高
+- 占用内存小，`Clang`生成`AST`（语法分析树）所占用的内存是`GCC`的1/5
+- 模块化设计
+- 诊断信息可读性强
+- 设计清晰简单，易于扩展增强
+
+### GPL协议
+
+个人理解为**免费代码协议**。
+
+需要注意的是它与**开源代码协议**，比如`Apache Licene 2.0`的异同。
+
 ## Python依赖
 
 在安装python类库`wordcloud`时出现以下错误：
@@ -111,6 +184,35 @@
 >  提取码：qu7o 
 
 > 如果条件允许，还是直接安装 visual studio比较好，在安装与选择版本上浪费太多时间实在是太boring了。
+
+## IDE
+
+目前支持`IDE`有很多。
+
+- **[Microsoft]** `Visual Studio`、`Visual Code`
+- **[JetBrains]**	`Clion`
+- **[Ecplise]**	`CDT插件`
+
+### Visual Code
+
+
+
+<a href='https://www.cnblogs.com/esllovesn/p/10012653.html'>Visual Studio Code 配置C/C++环境</a>
+
+- **[下载]**	`LLVM`、`MinGw-w64`
+
+- **[合并]**	将`MinGw-w64`中的所有文件及文件夹放在`$LLVM\目录下
+
+- **[配置]**	配置`Visual Studio Code`的`json`配置文件
+
+  1. launch.json
+  2. tasks.json
+  3. settings.json
+  4. c_cpp_properties.json
+
+  > - 如果没有合并`Clang`与`MinGW-W64`，需要将`c_cpp_properties.json`中的`compilerPath`填写为`MinGW`的完整路径，精确到`gcc.exe`。
+  >
+  > - 如果自己编写了头文件且不再`workspaceFolder`下，路径也要填写到`includePath`和`browse`中。
 
 # 编译
 
