@@ -166,6 +166,10 @@
 
 需要注意的是它与**开源代码协议**，比如`Apache Licene 2.0`的异同。
 
+### MFC
+
+`Microsoft Foundation Class`，微软基础类库。微软提供`C++`类库。
+
 ## Python依赖
 
 在安装python类库`wordcloud`时出现以下错误：
@@ -199,7 +203,7 @@
 
 <a href='https://www.cnblogs.com/esllovesn/p/10012653.html'>Visual Studio Code 配置C/C++环境</a>
 
-- **[下载]**	`LLVM`、`MinGw-w64`
+- **[下载]**	`LLVM`、`MinGw-w64`、`CMake`
 
 - **[合并]**	将`MinGw-w64`中的所有文件及文件夹放在`$LLVM\目录下
 
