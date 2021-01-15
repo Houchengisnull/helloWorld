@@ -197,6 +197,26 @@
 - **[JetBrains]**	`Clion`
 - **[Ecplise]**	`CDT插件`
 
+## 如何选择合适的IDE
+
+结合网上的一些评论，大概是这个样子的。
+
+- **大型项目**
+
+  `visual studio`是不二选择，**稳定、速度快、bug少**。
+
+- **懒人**
+
+  **大型工程bug多，速度慢**。
+
+  > 刚安装，速度确实慢。
+
+- **vscode**
+
+  最适合前端开发，轻量无敌。但对于`C++大型工程`，**折腾、bug多**。
+
+  > 最初，研究vscode的时间比学`C/C++`的时间还多。
+
 ### Visual Code
 
 
@@ -215,8 +235,47 @@
   4. c_cpp_properties.json
 
   > - 如果没有合并`Clang`与`MinGW-W64`，需要将`c_cpp_properties.json`中的`compilerPath`填写为`MinGW`的完整路径，精确到`gcc.exe`。
-  >
-  > - 如果自己编写了头文件且不再`workspaceFolder`下，路径也要填写到`includePath`和`browse`中。
+  >- 如果自己编写了头文件且不再`workspaceFolder`下，路径也要填写到`includePath`和`browse`中。
+  
+  > 即便按照官网的方式配置`vscode`的`c/c++`环境，构建体验还是很糟糕。
+
+#### vscode include问题
+
+首先需要将依赖项写在`cpp_propertiest.json`中，
+
+其次如果依然有问题，禁用一些插件，具体是哪些需要一步步测试。
+
+``` json
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "D:/Program Files/LLVM/**",
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "D:/Program Files/LLVM/bin/clang++.exe",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}
+```
+
+我引入了之后发现依然报错，最后发现是一款插件的问题——`Jupyter`。
+
+如果是`c`的话还要禁用`python`插件。
+
+- **参考**
+- <a href='https://blog.csdn.net/weixin_40694527/article/details/84251461'>关于VScode在Windows环境下c_cpp_properties.json文件配置问题</a>
+- <a href='https://blog.csdn.net/caoshiying/article/details/80870298'>Visual Studio Code报错：找不到iostream</a>
 
 # 编译
 
