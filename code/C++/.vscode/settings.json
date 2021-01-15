@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "iostream": "cpp"
+    }
+    , "code-runner.executorMap" : {
+        "cpp": "cd $dir && g++ $fileName -o $workspaceRoot\\bin\\$fileNameWithoutExt.exe && $workspaceRoot\\bin\\$fileNameWithoutExt.exe"
+    }
+}
