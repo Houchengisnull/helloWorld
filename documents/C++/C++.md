@@ -273,9 +273,14 @@
 
 如果是`c`的话还要禁用`python`插件。
 
+最后，还要在`File > Preferences > Settings`中把`clang.diagnostic.enable`关掉。
+
+> 不知道以后还会出现什么问题。
+
 - **参考**
 - <a href='https://blog.csdn.net/weixin_40694527/article/details/84251461'>关于VScode在Windows环境下c_cpp_properties.json文件配置问题</a>
 - <a href='https://blog.csdn.net/caoshiying/article/details/80870298'>Visual Studio Code报错：找不到iostream</a>
+- <a href='https://blog.csdn.net/q1410136042/article/details/83790967'>VScode编译C++，头文件显示not found的解决方法</a>
 
 # 编译
 

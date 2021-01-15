@@ -3,15 +3,33 @@
         {
             "name": "Win32",
             "includePath": [
+                "D:/Program Files/LLVM/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++",
+                "D:/Program Files/LLVM/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32",
+                "D:/Program Files/LLVM/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward",
+                "D:/Program Files/LLVM/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include",
+                "D:/Program Files/LLVM/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed",
+                "D:/Program Files/LLVM/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include",
                 "D:/Program Files/LLVM/**",
                 "${workspaceFolder}/**"
             ],
+            "browse": {
+                "path": [
+                    "D:/Program Files/LLVM/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++",
+                    "D:/Program Files/LLVM/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32",
+                    "D:/Program Files/LLVM/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward",
+                    "D:/Program Files/LLVM/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include",
+                    "D:/Program Files/LLVM/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed",
+                    "D:/Program Files/LLVM/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include",
+                    "D:/Program Files/LLVM/**",
+                    "${workspaceFolder}/**"
+                ]
+            },
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE"
             ],
-            "compilerPath": "D:/Program Files/LLVM/bin/clang++.exe",
+            "compilerPath": "D:/Program Files/LLVM/bin/g++.exe",
             "cStandard": "gnu17",
             "cppStandard": "gnu++14",
             "intelliSenseMode": "clang-x64"
