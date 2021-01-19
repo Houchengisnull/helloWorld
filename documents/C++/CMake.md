@@ -10,6 +10,18 @@
 
 对标`Java`生态中的`Maven`、`Gradle`等。
 
+- **工作流程**
+
+  ```mermaid
+  graph LR
+  	CMake -- CMakeLists.txt --> Makefile
+  	make -- Makefile --> *.exe
+  ```
+
+  1. `CMake`将根据`CMakeLists.txt`生成`Makefile`
+
+  2. `make`将根据`Makefile`生成`*.exe`
+
 # 参考
 
 - <a href='https://cmake.org/'>CMake官网</a>
