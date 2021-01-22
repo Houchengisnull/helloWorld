@@ -1,5 +1,9 @@
 [toc]
 
+# AWT
+
+`Abstract Window Toolkit`，抽象窗口工具包。
+
 # JFrame
 
 ## 设置图标
@@ -107,4 +111,34 @@ scroll.revalidate()
   }
   ```
 
+  # FAQ
+  
+  ## java.awt.HeadlessException: null
+  
+  - **headless**	无界面的
+  
+  <hr>
+  
+  在使用一些重量级的容器时，如果缺乏某些设备支持，将抛出`HeadlessException`。
+  
+  但像`Canvas`，`Panel`，`Image`组件作为轻量级容器，可以被赋予空的`peer`，
+  
+  并不会抛出`HeadlessException`。
+  
+  > 我也不知道`peer`在这里应该怎么理解。
+  
+  我在实现`threadFrame project`时发生了这个异常，只要将在启动界面前设置`JVM`的无界模式即可，
+  
+  ``` java
+  System.setProperty("java.awt.headless", "false");
+  ```
+  
+  应该是结合了`Spring boot`之后引入了这个问题，直接调用界面组件是ok的。
+  
+  <hr>
+  
+  - **参考**
+  
+    <a href='https://www.oracle.com/technical-resources/articles/javase/headless.html'>Using Headless Mode in the Java SE Platform</a>
+  
   
