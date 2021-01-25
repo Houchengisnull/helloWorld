@@ -1,8 +1,4 @@
-[TOC]
-
-# 官网文档
-
-https://docs.spring.io/spring/docs/4.3.28.RELEASE/spring-framework-reference/htmlsingle/#scheduling
+[toc]
 
 # Spring简史
 
@@ -31,7 +27,7 @@ https://docs.spring.io/spring/docs/4.3.28.RELEASE/spring-framework-reference/htm
 
 - **Spring-Aspects**:	基于 AspectJ的AOP支持；
 
-可参考《架构探险》
+可参考`《架构探险》`
 
 ## 消息 Messaging
 
@@ -76,6 +72,16 @@ https://docs.spring.io/spring/docs/4.3.28.RELEASE/spring-framework-reference/htm
 - **Spring LDAP**:	简化使用LDAP开发；
 - **Spring Session**:	提供一个API及实现来管理用户会话信息；
 
+# 四大原则
+
+- 使用`POJO`进行轻量级和最小侵入式开发
+
+- 通过`依赖注入`和基于接口编程实现松耦合
+
+- 通过`AOP`和默认习惯进行声明式编程
+
+- 使用`AOP`和默认模版减少模式化代码
+
 # IOC
 
 > 20180826
@@ -111,8 +117,9 @@ graph TD
 	--> ApplicationContextAware
 	--> ServletContextAware
 	--> BeanPostProcessor.postProcessBeforeInitialization
+    --> InitialzingBean.afterPropertiesSet
+	--> 调用自定义初始化方法
 	--> BeanPostProcessor.postProcessAfterInitialization
-	--> InitialzingBean.afterPropertiesSet
 	-- 销毁--> DestructionAwareBeanPostProcessors.postProcessBeforeDestruction
 	-- 销毁--> DisposableBean.destroy
 ```
@@ -147,21 +154,29 @@ graph TD
 
 12. <font color='red'>**`BeanPostProcessors.postProcessBeforeInitialization()`**</font>
 
-13. <font color='red'>**`BeanPostProcessors.postProcessAfterInitialization()`**</font>
-
-14. <font color='red'>**`InitializingBean.afterPropertiesSet()`**</font>
+13. <font color='red'>**`InitializingBean.afterPropertiesSet()`**</font>
 
     如果bean实现了`InitializingBean`接口，Spring将调用`afterPropertiesSet()`。同理，如果bean使用了`init-method`声明初始化方法，该方法也会被调用。
 
-15. `DestructionAwareBeanPostProcessors.postProcessBeforeDestruction()`
+14. <font color='red'>调用自定义`init-method`</font>
 
-16. <font color='red'>**`DisposableBean.destroy()`**</font>
+15. <font color='red'>**`BeanPostProcessors.postProcessAfterInitialization()`**</font>
+
+16. `DestructionAwareBeanPostProcessors.postProcessBeforeDestruction()`
+
+17. <font color='red'>**`DisposableBean.destroy()`**</font>
 
     如果bean实现了`DisposableBean`接口，`Spring`将调用`destroy()`。同理，如果bean使用了`destroy-method`声明销毁方法，该方法也会被调用。
 
 在`BeanFactory`接口的注释里详细地说明了Bean的生命周期。
 
 > Bean factory的实现应该尽可能支持标准的Bean生命周期。（渣翻译）
+
+##### @PostConstruct/@PreDestroy
+
+来自`javax.annotation`的注解
+
+> 尾部+'x'常常有扩展的意思。
 
 ### Aware接口
 
@@ -191,6 +206,60 @@ public interfacce BeanNameAware extends Aware{
 - <a href='https://www.cnblogs.com/javazhiyin/p/10905294.html'>深究Spring中Bean的生命周期</a>
 - <a href='https://www.cnblogs.com/zrtqsk/p/3735273.html'>Spring Bean的生命周期（非常详细）</a>
 - <a href='https://zhuanlan.zhihu.com/p/74260806'>Spring Aware 到底是什么？ - 日拱一兵的文章 - 知乎</a>
+
+### 依赖注入
+
+#### xml注入
+
+略。
+
+#### Anotation声明
+
+**@Component**	没有明确的角色；
+
+**@Service**	在`业务逻辑层（service）`使用；
+
+**@Repository**	在`数据访问层（dao）`使用；
+
+**@Controller**	在展现层使用；
+
+#### Annotation注入
+
+**@Autowired**	`Spring`提供注解；
+
+**@Inject**	`JSR-330`提供的注解；
+
+**@Resource**	`JSR-250`提供的注解；
+
+#### Java配置
+
+Java配置主要通过`@Configuration`和`@Bean`实现
+
+##### @Configuration
+
+声明当前类为配置类
+
+> spring文档说明：
+>
+> @Configuration is a class-level annotation indicating that an object is a source of bean definitions. @Configuration classes declare beans via public @Bean annotated methods.
+>
+> @Configuration 是一个类级注释，指示对象是一个bean定义的源。@Configuration 类通过 @bean 注解的公共方法声明bean。
+>
+> The @Bean annotation is used to indicate that a method instantiates, configures and initializes a new object to be managed by the Spring IoC container.
+
+通俗的讲`@Configuration`一般与`@Bean`注解配合使用，
+
+用`@Configuration`注解类等价与`XML`中配置`beans`，
+
+用`@Bean`注解方法等价于`XML`中配置 `bean`。
+
+何一个标注了`@Bean`的方法，其返回值将作为一个`bean`定义注册到Spring的IoC容器，方法名将默认成该bean定义的id。
+
+*-----20180821*
+
+##### @Bean
+
+将方法返回值 放置到 IOC容器
 
 ## BeanFactory
 
@@ -268,67 +337,7 @@ public interfacce BeanNameAware extends Aware{
 - **参考**
 - <a href='https://blog.csdn.net/pseudonym_/article/details/72826059'>Spring中BeanFactory和ApplicationContext的区别</a>
 
-# **Spring基础**
-
-## 四大原则
-
-- 使用`POJO`进行轻量级和最小侵入式开发
-
-- 通过`依赖注入`和基于接口编程实现松耦合；
-
-- 通过AOP和默认习惯进行声明式编程；
-
-- 使用AOP和默认模版（template）减少模式化代码；
-
-## 依赖注入
-
-### 声明Bean的注解
-
-**@Component**:	没有明确的角色；
-
-**@Service**:	在业务逻辑层（service）使用；
-
-**@Repository**:	在数据访问层（dao）使用；
-
-**@Controller**:	在展现层使用；
-
-### **注入Bean的注解**
-
-**@Autowired**:	Spring提供注解；
-
-**@Inject**:	JSR-330提供的注解；
-
-**@Resource**:	JSR-250 提供的注解；
-
-### Java配置
-
-Java配置主要通过`@Configuration`和`@Bean`实现
-
-#### **@Configuration**
-
-声明当前类为配置类
-
-> spring文档说明：
->
-> @Configuration is a class-level annotation indicating that an object is a source of bean definitions. @Configuration classes declare beans via public @Bean annotated methods.
->
-> @Configuration 是一个类级注释，指示对象是一个bean定义的源。@Configuration 类通过 @bean 注解的公共方法声明bean。
->
-> The @Bean annotation is used to indicate that a method instantiates, configures and initializes a new object to be managed by the Spring IoC container.
-
-通俗的讲`@Configuration`一般与`@Bean`注解配合使用，
-
-用`@Configuration`注解类等价与`XML`中配置`beans`，
-
-用`@Bean`注解方法等价于`XML`中配置 `bean`。
-
-何一个标注了`@Bean`的方法，其返回值将作为一个`bean`定义注册到Spring的IoC容器，方法名将默认成该bean定义的id。
-
-*-----20180821*
-
-#### **@Bean**
-
-将方法返回值 放置到 IOC容器
+# Spring基础
 
 ## **AOP**
 
