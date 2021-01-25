@@ -61,34 +61,212 @@ https://docs.spring.io/spring/docs/4.3.28.RELEASE/spring-framework-reference/htm
 ## **衍生生态**
 
 - **Spring Boot**:	遵循“约定优先配置”实现快速开发；
-
 - **Spring XD**:	简化大数据应用开发；
-
 - **Spring Cloud**:	为分布式系统开发提供工具集；
-
 - **Spring Data**:	对主流的关系型和NoSql数据库的支持；
-
 - **Spring Integration**:	通过消息机制对企业集成模式（EIP）的支持；
-
 - **Spring Batch**:	简化及优化大量数据的批处理操作；
-
 - **Spring Security**:	通过认证和授权保护应用；
-
 - **Spring HATEOAS**:	基于HATEOAS原则简化REST服务开发；
-
 - **Spring Social**:	与社交网络API（如FackBook、新浪微博等）的集成；
-
 - **Spring AMQP**:	对基于AMQP的消息的支持；
-
 - **SPring Mobile**:	提供对手机设备检测的功能，给不同的设备返回不同的页面支持；
-
 - **Spring for Android**：
-
 - **Spring Web Flow**:	基于Spring MVC提供基于向导流程式的Web应用开发；
-
 - **Spring LDAP**:	简化使用LDAP开发；
-
 - **Spring Session**:	提供一个API及实现来管理用户会话信息；
+
+# IOC
+
+> 20180826
+>
+> 学习Spring以来，一直在思考为什么要使用IOC容器？常常没感受到IOC的具体便利之处，我们直接使用一个配置类，类中存放public静态变量是否能<==> IOC呢？
+>
+> 我想答案是否定的，原因如下：
+>
+> 1、在实际开发过程中，类的结构相当复杂，在实例化同时需要实例化其子类，若直接使用代码配置，可读性较差，即类与类之间的关系无法清楚描述。
+>
+> 2、Spring并非单纯的IOC框架或AOP框架，Spring是一个一站式框架（一站式框架还号称狗屁的轻量级）。其中有许多常见的功能Spring均有所涉猎。而对使用其他功能时，最熟悉的当然是Spring的开发人员，而不是我们。为了简化对Spring的运用，设计该IOC再合理不过。交给IOC容器，我们使用时直接找容器而非形形色色的类。
+>
+> 3、对单例对象可读性的优化。
+
+## Bean
+
+### 生命周期
+
+
+
+```mermaid
+graph TD
+	实例化Bean
+    --> 注入Bean属性
+    --> BeanNameAware
+    --> BeanClassLoaderAware
+    --> BeanFactoryAware
+	--> EnvironmentAware
+	--> EmbeddedValueResolverAware
+	--> ResourceLoaderAware
+	--> ApplicationEventPublisherAware
+	--> MessageSourceAware
+	--> ApplicationContextAware
+	--> ServletContextAware
+	--> BeanPostProcessor.postProcessBeforeInitialization
+	--> BeanPostProcessor.postProcessAfterInitialization
+	--> InitialzingBean.afterPropertiesSet
+	-- 销毁--> DestructionAwareBeanPostProcessors.postProcessBeforeDestruction
+	-- 销毁--> DisposableBean.destroy
+```
+
+1. <font color='red'>**实例化Bean**</font>
+
+   顾名思义对应了我们最常用的`new`关键字，只是这部分的工作交给了`Spring`。代码量其实并没有减少，但最重要的是我们把这些对象交给了`Spring`管理，`Spring`就像一个幼儿园一样，给每一位小朋友安排桌位(开辟内存空间)。
+
+2. <font color='red'>**`BeanNameAware.setBeanName(String)`**</font>
+
+   **Spring将Bean的id传递给Bean**，就像是学校把学号告诉学生。在xml配置时代，最终也是将`id`保存在`IOC容器`中。
+
+3. `BeanClassLoaderAware.setBeanClassLoader(ClassLoader)`
+
+4. <font color='red'>**`BeanFactoryAware.setBeanFactory(BeanFactory)`**</font>
+
+5. `EnvironmentAware.setEnvironment(Environment)`
+
+6. `EmbeddedValueResolverAware.setEmbeddedValueResolver(StringValueResolver)`
+
+7. `ResourceLoaderAware.setResourceLoader(ResourceLoader)`
+
+8. `ApplicationEventPublisherAware.setApplicationEventPublisher(ApplicationEventPublisher)`
+
+9. `MessageSourceAware.setMessageSource(MessageSource)`
+
+10. <font color='red'>**`ApplicationContextAware.setApplicationContext(ApplicationContext)`**</font>
+
+11. `ServletContext.setServletContext(ServletContext)`
+
+    仅在应用在一个`WebApplicationContext`中运行时可以使用。
+
+12. <font color='red'>**`BeanPostProcessors.postProcessBeforeInitialization()`**</font>
+
+13. <font color='red'>**`BeanPostProcessors.postProcessAfterInitialization()`**</font>
+
+14. <font color='red'>**`InitializingBean.afterPropertiesSet()`**</font>
+
+    如果bean实现了`InitializingBean`接口，Spring将调用`afterPropertiesSet()`。同理，如果bean使用了`init-method`声明初始化方法，该方法也会被调用。
+
+15. `DestructionAwareBeanPostProcessors.postProcessBeforeDestruction()`
+
+16. <font color='red'>**`DisposableBean.destroy()`**</font>
+
+    如果bean实现了`DisposableBean`接口，`Spring`将调用`destroy()`。同理，如果bean使用了`destroy-method`声明销毁方法，该方法也会被调用。
+
+在`BeanFactory`接口的注释里详细地说明了Bean的生命周期。
+
+> Bean factory的实现应该尽可能支持标准的Bean生命周期。（渣翻译）
+
+### Aware接口
+
+> - **aware**
+>
+>   意识到、察觉到、对...有感受
+
+`Aware`是一个标记性接口，表明其子类接口的作用。
+
+``` java
+public interface Aware {}
+```
+
+比如比较通俗易懂的`BeanNameAware`，这里的`Name`理解成幼儿园小朋友的学号或者花名更好。
+
+``` java
+public interfacce BeanNameAware extends Aware{
+   void setBeanName(String name);
+}
+```
+
+它的作用差不多是让幼儿园的小朋友们对自己的部分属性产生意识。比如老师是谁，爸爸妈妈是谁，我是谁，我来自哪里，我来这里干什么......
+
+> IOC最大亮点是bean对Spring容器的存在是没有意识的。如果使用了`Aware`系列接口，`Bean`将会和`Spring`容器耦合。
+
+- **参考**
+- <a href='https://www.cnblogs.com/javazhiyin/p/10905294.html'>深究Spring中Bean的生命周期</a>
+- <a href='https://www.cnblogs.com/zrtqsk/p/3735273.html'>Spring Bean的生命周期（非常详细）</a>
+- <a href='https://zhuanlan.zhihu.com/p/74260806'>Spring Aware 到底是什么？ - 日拱一兵的文章 - 知乎</a>
+
+## BeanFactory
+
+
+
+![img](../../images/java.spring/wps1.jpg)
+
+### Implements
+
+- **XmlWebApplication**
+
+- **AbstractXmlApplicationContext**
+
+- **ClassPathXmlApplicationContext**
+
+- **FileSystemXmlApplicationContext**
+
+- **AnnotationConfigApplicationContext**
+
+>- 2018.8.26
+>
+>  今天又认识一个`AnnotationConfigApplicationContext`
+>
+>  头部还有一个`SimpleJndiBeanFactory`，直觉告诉我只有和`Jndi`有关都要重视。
+>
+>- 2020.7.31
+>
+>   两年过去了，还是没看到这儿。甚是遗憾。
+>
+>- 2021.1.25
+>
+>  两年半过去了，感觉以前跟着书本做的笔记真乱（PS:虽然这本书还是没读完）。
+
+## FAQ
+
+### Bean中id与name的区别
+
+在2020年1月25日，`Spring boot`的应用越来越多。历史中通过`xml`配置的方式已渐渐淘汰，所以这个知识点应用得也越来越少。
+
+如果不温习一下的话，我也不太容易把握`id`和`name`的区别。这逐渐变成一个较冷的知识点。
+
+打个比方，在幼儿园的花名册上是出现学号一样的同学是不妥的，但是姓名重复缺失无法避免。这里的花名册就是指我们的xml配置文件，学号即bean的id，姓名则是bean的name。
+
+实际上不配置id或者name的话，Spring会按照类全名给我们的bean分配一个id，若是重复会加上序号以区分。比如：张家的小孩子我们叫他张大，张二，张三。
+
+再比如：
+
+``` xml
+<!-- name重复的情况 -->
+<!-- 实际id com.hello.UserInfo -->
+<bean class="com.hello.UserInfo">  
+    <property name="accountName"></property>  
+</bean>  
+<!-- 实际id com.hello.UserInfo#1 -->
+<bean class="com.hello.UserInfo">  
+    <property name="accountName"></property>  
+</bean>  
+<!-- 实际id com.hello.UserInfo#2 -->
+<bean class="com.hello.UserInfo">  
+    <property name="accountName"></property>  
+</bean> 
+```
+
+而且在`@Bean`注解中仅`name`与`value`属性，这说明Spring实际上并没有像id与name的区分bean。
+
+- **参考**
+- <a href='http://blog.sina.com.cn/s/blog_5c68ccb80100yte3.html'>Spring中bean的id属性和name属性（转载）</a>
+
+### BeanFactory与ApplicationContext的区别
+
+`BeanFactory`是`Spring`中比较原始的组件，从命名上来看功能比较纯粹。所以它无法支持其他组件的功能，比如`AOP`、`Web`等。
+
+而`ApplicationContext`则是`BeanFactory`的子类，支持更多功能。应用上下文，从命名来看就明白它的功能比较一言难尽。
+
+- **参考**
+- <a href='https://blog.csdn.net/pseudonym_/article/details/72826059'>Spring中BeanFactory和ApplicationContext的区别</a>
 
 # **Spring基础**
 
@@ -101,48 +279,6 @@ https://docs.spring.io/spring/docs/4.3.28.RELEASE/spring-framework-reference/htm
 - 通过AOP和默认习惯进行声明式编程；
 
 - 使用AOP和默认模版（template）减少模式化代码；
-
-## IOC
-
-20180826
-
-学习Spring以来，一直在思考为什么要使用IOC容器？常常没感受到IOC的具体便利之处，我们直接使用一个配置类，类中存放public静态变量是否能<==> IOC呢？
-
-我想答案是否定的，原因如下：
-
-1、在实际开发过程中，类的结构相当复杂，在实例化同时需要实例化其子类，若直接使用代码配置，可读性较差，即类与类之间的关系无法清楚描述。
-
-2、Spring并非单纯的IOC框架或AOP框架，Spring是一个一站式框架（一站式框架还号称狗屁的轻量级）。其中有许多常见的功能Spring均有所涉猎。而对使用其他功能时，最熟悉的当然是Spring的开发人员，而不是我们。为了简化对Spring的运用，设计该IOC再合理不过。交给IOC容器，我们使用时直接找容器而非形形色色的类。
-
-3、对单例对象可读性的优化。
-
-### BeanFactory接口
-
-![img](../../images/java.spring/wps1.jpg)
-
-### 常用IOC工厂
-
-- XmlWebApplication
-
-- AbstractXmlApplicationContext
-
-- ClassPathXmlApplicationContext
-
-- FileSystemXmlApplicationContext
-
-- AnnotationConfigApplicationContext
-
->- 2018.8.26
->
->今天又认识一个`AnnotationConfigApplicationContext`
->
->头部还有一个`SimpleJndiBeanFactory`，直觉告诉我只有和`Jndi`有关都要重视。
->
->- 2020.7.31
->
->  两年过去了，还是没看到这儿。甚是遗憾。
->
->
 
 ## 依赖注入
 
@@ -451,7 +587,7 @@ NameMatchMethodPointcutAdvisor —— 根据方法名称进行匹配的切面
 
 StaticMatchMethodPointcutAdvisor —— 匹配静态方法的切面
 
-# **Spring常用配置**
+# Spring常用配置
 
 ## **Bean的Scope**
 
@@ -469,13 +605,9 @@ StaticMatchMethodPointcutAdvisor —— 匹配静态方法的切面
 
 ## Spring EL 和资源调运
 
-### @Value
+- **@Value**
 
 见`helloWorld\code\Java\hc\hc-learning\src\main\java\org\hc\learning\spring\el`
-
-## Bean的生命周期
-
-<https://www.cnblogs.com/zrtqsk/p/3735273.html>
 
 ## Profile
 
