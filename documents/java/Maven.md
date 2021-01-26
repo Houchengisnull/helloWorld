@@ -84,6 +84,64 @@ https://blog.csdn.net/tyrroo/article/details/77017190
 mvn dependency:tree
 ```
 
+# Archetype 原型
+
+> - **2021.1.26**
+>
+>   今天学习`javafx`的时候，遗漏了官网中需要修改`archetype artifactId`的要求。导致反复出现构建失败。类似这种错误。
+>
+>   <a href='https://stackoverflow.com/questions/59696029/the-desired-archetype-does-not-exist'>The desired archetype does not exist</a>
+>   
+>   尽管这篇文章中构建失败的原因和我不太一样，但错误信息是一样的。
+>   
+>   虽然花费了不少时间，但是有所收获。在漫漫编程路上发现越来越多的分岔路。😢😢😢😢😢😢😢😢
+
+- **作用**	生成`Maven`项目骨架（项目的目录结构和`pom.xml`）
+
+  只要给对应的`Archetype`插件提供基本的信息：
+
+  1. `groupId`
+  2. `artifactId`
+  3. `version`
+
+  就可以快速生成项目的原型。需要注意的是，在使用`IDE`时，实际上的`artifactId`并不一定是默认的`artifactId`。
+
+  比如在学习`javafx`的过程中，`IDEA`默认填写的是`javafx-maven-archetypes`，但根据官网上的描绘应该是`javafx-archetype-fxml`或者`javafx-archetype-simple`。
+
+- **命令行使用**
+
+  ``` shell
+  mvn archetype:generate
+  ```
+
+  其中`archtype`是`maven-archetype-plugin`的缩写；
+
+  `generate`是我们创建maven项目的目标名称，对应`maven-archetype-quickstart`、`javafx-archetype-fxml`、`javafx-archetype-simple`等。
+
+另外在中央仓库中有许多`Archetype`插件，比如：
+
+- **maven-archtype-quickstart**
+
+  当我们直接在命令行输入`mvn archetype:generate`时，没有指定使用哪个原型，那么默认便是`quickstart`。
+
+- **maven-archetype-webapp**
+
+  快速创建一个`Web`应用
+
+- **AppFuse Archetype**
+
+  一个集成了很多开源工具的项目。
+
+<hr>
+
+- **参考**
+
+  <a href='http://c.biancheng.net/view/5298.html'>Archetype插件的介绍和使用</a>
+
+
+
+
+
 # 解决依赖冲突
 
 ## spring-boot log4j日志未生成
