@@ -172,11 +172,152 @@ graph TD
 
 > Bean factory的实现应该尽可能支持标准的Bean生命周期。（渣翻译）
 
-##### @PostConstruct/@PreDestroy
+#### @PostConstruct/@PreDestroy
 
-来自`javax.annotation`的注解
+来自`javax.annotation`的注解。
 
 > 尾部+'x'常常有扩展的意思。
+
+由`JSR-250`提出，包括`@PostConstruct`、`@PreDestroy`、`@Resource`。
+
+> - `JSR`
+>
+>   全称`Java Specification Requests`，意思是`Java规范提案`，是指向`JCP`提出新增标准化技术规范的正式请求。
+>
+> - `JCP`
+>
+>   全称`Java Community Process`，是一个开放的国际组织，其职能是发展和更新。其维护的规范包括`J2ME`、`J2SE`、`J2EE`、`XML`等。
+>
+>   由`SUN`在1995年创立，由一个非正式的`Process`演进成数百名来自世界各地的成员共同监督`Java`发展的正式`Process`。
+>
+>   这里我不知道该如何表明`Process`的意思，觉得不论是组织还是程序都有歧义，所以用`Process`代替。
+
+在实际开发过程中，我们常常用`@PostConstruct`与`@PreDestroy`来替代`init-method`与`destroy-method`方法。
+
+`Spring`是通过`BeanPostPostProcessor`接口来满足`JSR 250`中这两个注解的要求的。**所以，在Bean的生命周期中，`@PostConstruct`在`init-method`方法之前生效**。
+
+``` mermaid
+graph BT
+	CommonAnnotationBeanPostProcessor --继承--> InitDestroyAnnotationBeanPostProcessor -- implements --> BeanProcessor
+```
+
+关键步骤在`InitDestroyAnnotationBeanPostProcessor`这个类中。
+
+``` java
+    @Override
+	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+        // 获得生命周期元数据
+		LifecycleMetadata metadata = findLifecycleMetadata(bean.getClass());
+		try {
+            // 调用初始化方法
+			metadata.invokeInitMethods(bean, beanName);
+		}
+		catch (InvocationTargetException ex) {
+			throw new BeanCreationException(beanName, "Invocation of init method failed", ex.getTargetException());
+		}
+		catch (Throwable ex) {
+			throw new BeanCreationException(beanName, "Failed to invoke init method", ex);
+		}
+		return bean;
+	}
+	
+	/**
+	* 如果生命周期缓存或是生命周期为空, 则构建返回一个新的元数据对象
+	*/
+	private LifecycleMetadata findLifecycleMetadata(Class<?> clazz) {
+		if (this.lifecycleMetadataCache == null) {
+			// Happens after deserialization, during destruction...
+			return buildLifecycleMetadata(clazz);
+		}
+		// Quick check on the concurrent map first, with minimal locking.
+		LifecycleMetadata metadata = this.lifecycleMetadataCache.get(clazz);
+		if (metadata == null) {
+			synchronized (this.lifecycleMetadataCache) {
+				metadata = this.lifecycleMetadataCache.get(clazz);
+				if (metadata == null) {
+					metadata = buildLifecycleMetadata(clazz);
+					this.lifecycleMetadataCache.put(clazz, metadata);
+				}
+				return metadata;
+			}
+		}
+		return metadata;
+	}
+
+	private LifecycleMetadata buildLifecycleMetadata(final Class<?> clazz) {
+		final boolean debug = logger.isDebugEnabled();
+		LinkedList<LifecycleElement> initMethods = new LinkedList<LifecycleElement>();
+		LinkedList<LifecycleElement> destroyMethods = new LinkedList<LifecycleElement>();
+		Class<?> targetClass = clazz;
+
+		do {
+			final LinkedList<LifecycleElement> currInitMethods = new LinkedList<LifecycleElement>();
+			final LinkedList<LifecycleElement> currDestroyMethods = new LinkedList<LifecycleElement>();
+
+			ReflectionUtils.doWithLocalMethods(targetClass, new ReflectionUtils.MethodCallback() {
+				@Override
+				public void doWith(Method method) throws IllegalArgumentException, IllegalAccessException {
+					if (initAnnotationType != null) {
+                       	  // 该方法是否被init annotation标记
+						if (method.getAnnotation(initAnnotationType) != null) {
+							LifecycleElement element = new LifecycleElement(method);
+							currInitMethods.add(element);
+							if (debug) {
+								logger.debug("Found init method on class [" + clazz.getName() + "]: " + method);
+							}
+						}
+					}
+					if (destroyAnnotationType != null) {
+						// 该方法是否被destroy annotation标记	
+                          if (method.getAnnotation(destroyAnnotationType) != null) {
+							currDestroyMethods.add(new LifecycleElement(method));
+							if (debug) {
+								logger.debug("Found destroy method on class [" + clazz.getName() + "]: " + method);
+							}
+						}
+					}
+				}
+			});
+
+			initMethods.addAll(0, currInitMethods);
+			destroyMethods.addAll(currDestroyMethods);
+			targetClass = targetClass.getSuperclass();
+		}
+		while (targetClass != null && targetClass != Object.class);
+
+		return new LifecycleMetadata(clazz, initMethods, destroyMethods);
+	}
+```
+
+而这个`initAnnotationType`与`destroyAnnotationType`又是从哪里来的呢？我们回到`CommonAnnotationBeanProcessor`，看它的构造方法：
+
+``` java
+/**
+* 直接将@PostConstruct与@PreDestroy设置给initAnnotationType与destroyAnnotationType
+*/
+public CommonAnnotationBeanPostProcessor() {
+		setOrder(Ordered.LOWEST_PRECEDENCE - 3);
+		setInitAnnotationType(PostConstruct.class);
+		setDestroyAnnotationType(PreDestroy.class);
+		ignoreResourceType("javax.xml.ws.WebServiceContext");
+}
+```
+
+通过`CommonAnnotationBeanPostProcessor`的构造方法，令`Spring`容器能够处理`@PostConsturct`与`@PreDestroy`注解。
+
+<hr>
+
+- **参考**
+
+- <a href='https://blog.csdn.net/qq_18975791/article/details/81003701'>Spring JSR-250 注释</a>
+
+- <a href='https://baijiahao.baidu.com/s?id=1601590295750043294&wfr=spider&for=pc'>JSR 250 免费百科全书</a>
+
+- <a href='https://baike.baidu.com/item/JCP'>JCP</a>
+
+- <a href='https://blog.csdn.net/u010900754/article/details/95018759?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control'>【Java】Spring init-method和@PostConstruct 原理</a>
+
+  
 
 ### Aware接口
 
@@ -337,11 +478,9 @@ Java配置主要通过`@Configuration`和`@Bean`实现
 - **参考**
 - <a href='https://blog.csdn.net/pseudonym_/article/details/72826059'>Spring中BeanFactory和ApplicationContext的区别</a>
 
-# Spring基础
+# AOP
 
-## **AOP**
-
-### **简介**
+## 简介
 
 早期AOP开源项目：`AspectJ`
 
@@ -367,7 +506,7 @@ Java配置主要通过`@Configuration`和`@Bean`实现
 
 传说中的前辈大概为表胸腹中纵横天下之心气，设计出了“正交编程”——**AOP**。依这个形势来看，将来会不会还有三维编程、四维编程、空间编程.....
 
-### 概念
+## 概念
 
 1、前置增强：实现`org.springframework.aop.MethodBeforeAdvice`接口
 
