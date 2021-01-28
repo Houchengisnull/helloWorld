@@ -35,6 +35,14 @@
 
 在`debug`时发生这个错误，但是从`javafx-archetype-fxml`这个模板直接拉下来的项目并没有发生这个问题。同样的，在直接运行时也没有问题。
 
+<hr>
+
+- **参考**
+
+  [缺少 JavaFX 运行时组件, 需要使用该组件来运行此应用程序](https://www.pianshen.com/article/95271003964/)
+
+
+
 
 
 ## maven clean compile package javafx:run 报错: -release无法解析
