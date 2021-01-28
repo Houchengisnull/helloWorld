@@ -1,11 +1,14 @@
 [TOC]
 
-# 简述
-Optional 类是一个可以为null的容器对象。如果值存在则isPresent()方法会返回true，调用get()方法会返回该对象。
-Optional 是个容器：它可以保存类型T的值，或者仅仅保存null。Optional提供很多有用的方法，这样我们就不用显式进行空值检测。
-Optional 类的引入很好的解决空指针异常。
+# Optional
 
-# 类方法  
+## 简述
+
+`Optional` 类是一个可以为`null`的容器对象。如果值存在则`isPresent()`方法会返回`true`，调用`get()`方法会返回该对象。
+`Optional`是个容器：它可以保存类型`T`的值，或者仅仅保存`null`。`Optional`提供很多有用的方法，这样我们就不用显式进行空值检测。
+`Optional` 类的引入很好的解决空指针异常。
+
+## 类方法  
 
 | 序号 | 方法 & 描述                                                  |
 | :--- | :----------------------------------------------------------- |
@@ -25,7 +28,7 @@ Optional 类的引入很好的解决空指针异常。
 | 14   | **<X extends Throwable> T orElseThrow(Supplier<? extends X> exceptionSupplier)**如果存在该值，返回包含的值，否则抛出由 Supplier 继承的异常 |
 | 15   | **String toString()**返回一个Optional的非空字符串，用来调试  |
 
-## of
+- **of**
 
 ```java
 //创建一个值为张三的String类型的Optional
@@ -34,7 +37,7 @@ Optional<String> ofOptional = Optional.of("张三");
 Optional<String> nullOptional = Optional.of(null);
 ```
 
-## ofNullable
+- **ofNullable**
 
 ```
 //为指定的值创建Optional对象，不管所传入的值为null不为null，创建的时候都不会报错
@@ -42,14 +45,14 @@ Optional<String> nullOptional = Optional.ofNullable(null);
 Optional<String> nullOptional = Optional.ofNullable("list");
 ```
 
-## empty
+- **empty**
 
 ```java
 //创建一个空的String类型的Optional对象
 Optional<String> emptyOptional = Optional.empty();
 ```
 
-## get
+- **get**
 
 如果我们创建的Optional对象中有值存在则返回此值，如果没有值存在，则会抛出 
 NoSuchElementException异常。
@@ -59,7 +62,7 @@ Optional<String> stringOptional = Optional.of("张三");
 System.out.println(stringOptional.get());
 ```
 
-## orElse
+- **orElse**
 
 如果创建的Optional中有值存在，则返回此值，否则返回一个默认值
 
@@ -71,7 +74,7 @@ Optional<String> emptyOptional = Optional.empty();
 System.out.println(emptyOptional.orElse("李四"));
 ```
 
-## orElseGet
+- **orElseGet**
 
 ```java
 Optional<String> stringOptional = Optional.of("张三");
@@ -82,7 +85,7 @@ System.out.println(emptyOptional.orElseGet(() -> "orElseGet"));
 
 ```
 
-## orElseThrow
+- **orElseThrow**
 
 如果创建的Optional中有值存在，则返回此值，否则抛出一个由指定的Supplier接口生成的异常
 
@@ -106,7 +109,7 @@ private static class CustomException extends RuntimeException {
 }
 ```
 
-## filter
+- **filter**
 
 ```java
 Optional<String> stringOptional = Optional.of("zhangsan");
@@ -115,7 +118,7 @@ stringOptional = Optional.empty();
 System.out.println(stringOptional.filter(e -> e.length() > 5).orElse("lisi"));
 ```
 
-## map
+- **map**
 
 ```java
 //map方法执行传入的lambda表达式参数对Optional实例的值进行修改,修改后的返回值仍然是一个Optional对象
@@ -126,7 +129,7 @@ stringOptional = Optional.empty();
 System.out.println(stringOptional.map(e -> e.toUpperCase()).orElse("失败"));
 ```
 
-个人觉得该例子难理解 map() 方法实际用处，见以下代码  
+个人觉得该例子难理解`map()`方法实际用处，见以下代码  
 
 ```java
 public static String getChampionName(Competition comp) throws IllegalArgumentException {
@@ -138,9 +141,7 @@ public static String getChampionName(Competition comp) throws IllegalArgumentExc
 }
 ```
 
-
-
-## flagMap
+- **flagMap**
 
 如果创建的Optional中的值存在，就对该值执行提供的Function函数调用，返回一个Optional类型的值，否 
 则就返回一个空的Optional对象.flatMap与map（Funtion）方法类似，区别在于flatMap中的mapper返回 
@@ -156,7 +157,7 @@ System.out.println(stringOptional.flatMap(e -> Optional.empty()).orElse("失败"
 
 ```
 
-## ifPresent
+- **ifPresent**
 
 ```java
 Optional<String> stringOptional = Optional.of("zhangsan");
@@ -164,12 +165,11 @@ stringOptional.ifPresent(e-> System.out.println("我被处理了。。。"+e));
 
 ```
 
-# 参考
+<hr>
 
-Java8 如何正确使用 Optional
 
-http://www.importnew.com/26066.html
+- **参考**
 
-理解、学习与使用 JAVA 中的 OPTIONAL
+- [Java8 如何正确使用 Optional](http://www.importnew.com/26066.html)
 
-https://blog.csdn.net/zknxx/article/details/78586799
+- [理解、学习与使用 JAVA 中的 OPTIONAL](https://blog.csdn.net/zknxx/article/details/78586799)
