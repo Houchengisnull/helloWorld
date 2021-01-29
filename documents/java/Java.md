@@ -1,5 +1,23 @@
 [TOC]
 
+# 常见术语
+
+当你渐渐深入时，你会注意到这些人或单位或用语常常出现在眼前，为了更好的学习`Java`特性，知道他们是干嘛的想干嘛也许也有用处。
+
+## JSR
+
+全称`Java Specification Requests`，意思是`Java规范提案`，是指向`JCP`提出新增标准化技术规范的正式请求。
+
+## JCP
+
+全称`Java Community Process`，是一个开放的国际组织，其职能是发展和更新。其维护的规范包括`J2ME`、`J2SE`、`J2EE`、`XML`等。
+
+由`SUN`在1995年创立，由一个非正式的`Process`演进成数百名来自世界各地的成员共同监督`Java`发展的正式`Process`。
+
+这里我不知道该如何表明`Process`的意思，觉得不论是组织还是程序都有歧义，所以用`Process`代替。
+
+> 实际上在学习`@PostConstruct`有见过，特地总结在`Java`笔记里。
+
 # command
 
 ## 查看JDK安装地址
