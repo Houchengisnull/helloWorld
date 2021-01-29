@@ -1,84 +1,107 @@
 [toc]
 
-`Java9`是一个过渡版本，`oracle`的下一个长期维护版本是`java11`。所以有人说：“也许以后Java世界分裂为两种：Java8和Java11以后。”
+# New Feature
 
-# 新特性
+- **Module System**
+- **Modular JDK**
 
-- **模块系统**
-
-  `Java9`最大变化。
+<hr>
 
 - **REPL(JShell)**
 
   交互式编程环境，类似`python command`。
 
-- **HTTP2 客户端**
-
-- **改进Javadoc**
-
-  支持在`Javadoc`中进行搜索。
-
-- **多版本兼容JAR**
-
-  允许创建特定版本`JRE`中运行时选择使用`class`版本。
-
-- **集合工厂方法**
-
-  在`List`、`Set`和`Map`接口中，新的静态工厂方法可以创建这些集合的不可变实例。
-
 - **进程 API**
 
   通过`Process`、`ProcessHandle`及其嵌套接口`Info`来控制管理操作系统进程。
 
-- **改进Stream API**
-
-- **改进try-with-resources**
-
-- **改进@Deprecated**
-
-- **改进Diamond Operator**
-
-- **改进Optional**
-
-- **多分辨率图形API**
-
-- **改进CompletableFuture API**
-
-- **轻量级JSON API**
-
-- **响应式流API**
-
 <hr>
 
-- **参考**
-- [Java 9 新特性](https://www.runoob.com/java/java9-new-features.html)
-
-- [Java 14都快出来了，为什么还有那么多人执着于Java 8？ - blindpirate的回答 - 知乎](https://www.zhihu.com/question/360985479/answer/956242314)
-- [也许以后Java世界分裂为两种：Java8和Java11以后 - 忠实的码农的文章 - 知乎](https://zhuanlan.zhihu.com/p/59585738)
-
-> - **2021-1-28**
->
->   一方面，个人觉得自`Oracle`维护`JDK`以来，有许多鸡肋或者无足轻重的改动，甚至无视`Java`特性过于追求完美的引进一些其他语言的特性，让`Java`在往一个奇怪的方向靠拢。
->
->   另一方面，也许这就是程序员精益求精的体现。
->
->   也许是`oracle`没有瞄准好`Java`的未来在哪里，以致于`JDK8`仍旧是`Java`中最活跃的版本。
->
->   另外大家能看看这个升级JDK的血泪史——[Java 14都快出来了，为什么还有那么多人执着于Java 8？ - blindpirate的回答 - 知乎](https://www.zhihu.com/question/360985479/answer/956242314)
-
-# 模块化 Modular
-
-> - **2021-1-28**
->
->   由于使用`JavaFX`的需要，简单看一下`Java9`的模块化。
-
-## 为什么要模块化
-
-
-
-<hr>
+不一一枚举了，直接看官网吧。
 
 - **refer**
-- [为什么要模块化](https://www.cnblogs.com/tigerhsu/p/9877733.html)
-- [关于java9模块化的意义](https://www.v2ex.com/amp/t/459610)
-- [Java 9的模块化--壮士断"腕"的涅槃 - 欧阳辰的文章 - 知乎](https://zhuanlan.zhihu.com/p/24800180)
+- [JDK 9](http://openjdk.java.net/projects/jdk9/)
+- [JDK 9 Release Notes](https://www.oracle.com/java/technologies/javase/v9-issues-relnotes.html)
+
+# Module
+
+## 说在前面
+
+`Modular`是JDK9最大的变化。
+
+但如非必要，我不建议特地去学习。
+
+- **refer**
+
+- [Java 14都快出来了，为什么还有那么多人执着于Java 8？ - blindpirate的回答 - 知乎 ](https://www.zhihu.com/question/360985479/answer/956242314)
+
+- [Java 14都快出来了，为什么还有那么多人执着于Java 8？ - 北南的回答 - 知乎](https://www.zhihu.com/question/360985479/answer/1451078193)
+- [JDK 9 发布仅数月，为何在生产环境中却频遭嫌弃？](https://blog.csdn.net/csdnnews/article/details/78722304)
+
+因为在学习`javafx13`的过程中在运行时有一个`bug`，是由于`modular`导致的。为了研究与弄清问题本质，所以才特地了解一下`Modular`。
+
+在了解`Modular`的过程中，觉得这个功能比较鸡肋。`Java`真的要舍去自己的优势去和`python`与`nodejs`抢市场吗？也许编程语言真的有它的生命周期，`Java`正在渐渐老去。
+
+`Oracle`真的要瞄准好`Java`的未来才是。
+
+> - **Glavo**
+>
+>   个人感觉挺失望的。
+>
+>   <u>`Java 9`库上的改动很小，`API`上的变动更小，而语法新特性貌似一样都没有，所以对我来说，`Java 9`没有太大的吸引力。</u>
+
+## Define
+
+模块是一个被命名的代码与数据的自描述集合。
+
+- 代码
+
+- 数据
+
+  `resource`和一些静态信息。
+
+## Module JDK
+
+- [JEP 200](http://openjdk.java.net/jeps/200)
+
+`JDK 9`可以在编译、构建、运行期间进行组合。
+
+它将运来复杂的`JDK`拆分成各个精简的模块。
+
+- **查看JDK模块**
+
+  ``` shell
+  java --list-modules
+  ```
+
+此外，在我们使用模块化功能时，通过反编译`module-info.class`可见默认添加了`java.base`模块。
+
+## Module System
+
+- [JEP 261](http://openjdk.java.net/jeps/261)
+
+### Phases
+
+新增`link time`在编译阶段与运行阶段期间，用于装配和优化一个自定义`run-time image`——运行镜像，并提供连接工具`jlink`。
+
+### Motivation
+
+基于`Jigsaw`实现，令`Java`程序更容易扩展到小型设备上。
+
+## Declare
+
+`模块`的自描述表现其声明中。
+
+``` java
+module com.foo.bar{
+    requires org.baz.qux;
+    exports com.foo.bar.alpha;
+    exports com.foo.bar.beta;
+}
+```
+
+- **requires**	表明`com.foo.bar`模块依赖其他模块。
+- **exports**	指定`package`中的`public `可以被其他模块使用。
+
+按照约定，模块声明文件`module-info.java`在`root目录`下。
+
