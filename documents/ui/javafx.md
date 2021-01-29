@@ -31,19 +31,17 @@
 
 # FAQ
 
-## <font color='red'>错误: 缺少 JavaFX 运行时组件, 需要使用该组件来运行此应用程序</font>
+## 错误: 缺少 JavaFX 运行时组件, 需要使用该组件来运行此应用程序
 
 在`debug`时发生这个错误，但是从`javafx-archetype-fxml`这个模板直接拉下来的项目并没有发生这个问题。同样的，在直接运行时也没有问题。
 
-<hr>
+这是`Java 9`新特性模块化导致的。
 
 - **参考**
 
-  [缺少 JavaFX 运行时组件, 需要使用该组件来运行此应用程序](https://www.pianshen.com/article/95271003964/)
+  [在 Intellij IDEA 里使用 OpenJFX (JavaFX)](https://my.oschina.net/tridays/blog/2222909)
 
-
-
-
+  [jdk11 + maven 打包JavaFX11](https://blog.csdn.net/xizi1103/article/details/104015406)
 
 ## maven clean compile package javafx:run 报错: -release无法解析
 

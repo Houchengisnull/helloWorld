@@ -64,6 +64,8 @@
 
 - [JEP 200](http://openjdk.java.net/jeps/200)
 
+![img](../images/java9/jdk8_jdk9_compare.png)
+
 `JDK 9`可以在编译、构建、运行期间进行组合。
 
 它将运来复杂的`JDK`拆分成各个精简的模块。
@@ -101,7 +103,22 @@ module com.foo.bar{
 ```
 
 - **requires**	表明`com.foo.bar`模块依赖其他模块。
+
 - **exports**	指定`package`中的`public `可以被其他模块使用。
+
+- **opens**	指定开放包
+
+- **open**	指定开放模块
+
+- **uses**	使用接口的名字，实现可由其他模块提供
+
+- **provides .. with...**	指定一个或多个接口的实现类
+
+  ``` java
+  module java.computer{
+      provieds com.computer.Icomputer with com.computter.impl.Dell;
+  }
+  ```
 
 按照约定，模块声明文件`module-info.java`在`root目录`下。
 
@@ -145,4 +162,6 @@ module com.foo.bar{
   java --module-path hello.jar --module hello.world
   ```
 
-  
+# FAQ
+
+## lombok无法编译通过
