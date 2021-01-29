@@ -105,3 +105,44 @@ module com.foo.bar{
 
 按照约定，模块声明文件`module-info.java`在`root目录`下。
 
+# jlink
+
+`Modular`是为了更容易地扩展至小型设备上。如果我们的程序依然使用原来巨大的`jdk/jre`那么毫无意义。
+
+所以`java 9`新增了`jlink`工具以简化`jre`，它将按需生成`jre`。
+
+> 裁剪后的`jre`应该又被称为`run-time image`。
+
+- **查看项目模块**
+
+  ``` shell
+  jdepts --list-deps Helloworld.jar
+  ```
+
+- **裁剪**
+
+  ``` java
+  jlink --module-path jmods --add-modules java.base --output minijre
+  ```
+
+> `java.base`是最基础的模块，所有模块依赖它。
+
+# jmod
+
+自`jdk 9`后，其目录结构发生改变。多了一个`jmods`文件夹，里面有很多`*.jmod`。
+
+`*.jmod`本质是压缩包，里面包含了`*.class`和其他资源文件。
+
+- **jar >> jmod**
+
+  ``` shell
+  jmod create --class-path Helloworld.jar Helloworld.jmod
+  ```
+
+- **运行**
+
+  ``` shell
+  java --module-path hello.jar --module hello.world
+  ```
+
+  
