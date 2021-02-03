@@ -84,6 +84,14 @@ https://blog.csdn.net/tyrroo/article/details/77017190
 mvn dependency:tree
 ```
 
+# debug
+
+``` bat
+mvn -x package
+```
+
+增加`-x`参数将进入`debug`模式进行打印。
+
 # Archetype 原型
 
 > - **2021.1.26**

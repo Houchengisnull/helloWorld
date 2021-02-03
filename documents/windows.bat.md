@@ -82,6 +82,11 @@ C:\Users\admin\AppData\Local\Programs\Python\Python38\python.exe
   start %path%
   ```
 
+# 退出
+
+- **ctrl + c**
+- **exit**
+
 # 文件
 
 ## 复制 copy

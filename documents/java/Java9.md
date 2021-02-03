@@ -22,6 +22,7 @@
 - **refer**
 - [JDK 9](http://openjdk.java.net/projects/jdk9/)
 - [JDK 9 Release Notes](https://www.oracle.com/java/technologies/javase/v9-issues-relnotes.html)
+- [Java Platform, Standard Edition What’s New in Oracle JDK 9](https://docs.oracle.com/javase/9/whatsnew/toc.htm#JSNEW-GUID-C23AFD78-C777-460B-8ACE-58BE5EA681F6)
 
 # Module
 
@@ -163,5 +164,9 @@ module com.foo.bar{
   ```
 
 # FAQ
+
+## IntelliJ Idea 2018无法正确运行Java 9
+
+更新至`IntelliJ Idea 2020`
 
 ## lombok无法编译通过
