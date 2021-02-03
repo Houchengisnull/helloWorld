@@ -26,6 +26,9 @@
 
 # Module
 
+- **refer**
+- [jdk9模块快速入门](https://segmentfault.com/a/1190000015420994)
+
 ## 说在前面
 
 `Modular`是JDK9最大的变化。
@@ -170,3 +173,52 @@ module com.foo.bar{
 更新至`IntelliJ Idea 2020`
 
 ## lombok无法编译通过
+
+在更新到`IntelliJ Idea 2020`后，报错信息也不一样了。
+
+根据新的报错信息，发现还需要引入两个依赖。
+
+``` xml
+<dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>1.3.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+</dependency>
+```
+
+<hr>
+
+- **lombok version**
+
+  至少使用`1.18.6`版本，否则将会导致找不到任一模块的错误而无法编译。
+
+<hr>
+
+如果需要在控制台打印日志信息，我们还要添加具体的日志实现。比如`logback`
+
+``` xml
+<dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+```
+
+我直接添加了这个能正常打印了。
+
+<hr>
+
+- **refer**
+- [Error: java.lang.module.ResolutionException: Module lombok does not read a module that exports org.mapstruct.ap.spi #1806](https://github.com/rzwitserloot/lombok/issues/1806)
+- [IDEA 2020.3 lombok失效问题](https://blog.csdn.net/weixin_46927507/article/details/110947964)
+- [mapstruct使用详解](https://www.cnblogs.com/mmzs/p/12735212.html)
