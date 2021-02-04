@@ -20,7 +20,20 @@
 
 # command
 
-## 编译
+## run
+
+### java 9 parameters
+
+
+- **--module-path**	指定模块路径
+
+- **-m**	指定主模块及`mainClass`，格式：`模块名/全限定类名`， 例如：“`hc/com.houc.module.ModuleApplication`”。
+
+- **--show-module-resolution**	打印运行时引用模块。注意该参数不可以放在最后面
+
+  
+
+## compile
 
 ``` shell
 $ javac -d $target -sourcepath $source 
@@ -28,16 +41,11 @@ $ javac -d $target -sourcepath $source
 
 `javac`是`jdk`的`bin`目录下的编译工具。
 
-- **参数**
+### 参数
+
 - **-d**	指定`.class`生成目录
 - **-cp/-classpath**	指定`classpath`
 - **-sourcepath**	指定源文件
-
-<hr>
-
-- **java 9 参数**
-- **--module-path**	指定模块路径
-- **-m**	指定主模块及`mainClass`，格式：`模块名/全限定类名`， 例如：“`hc/com.houc.module.ModuleApplication`”。
 
 ## 查看JDK安装地址
 

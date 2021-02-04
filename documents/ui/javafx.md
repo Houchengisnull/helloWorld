@@ -35,6 +35,15 @@
 
 # Application
 
+`Application.launch(args)`是阻塞方法。这样才能在显示窗口的程序不退出。
+
+``` java
+log.debug("******** start ********");
+Application.launch(UIAlignmentApplication.class, args);
+Application.launch(SameSizeButtonApplication.class, args);
+log.debug("******** end ********");
+```
+
 # 场景图
 
 ## Stage 舞台
@@ -101,6 +110,43 @@
 - **锚面板(AnchorPane)**
 
   `AnchorPane`布局面板可以让你将节点锚定到面板的顶部、底部、左边、右边或者中间位置。当窗体的大小变化时，节点会保持与其锚点之间的相对位置。一个节点可以锚定到一个或者多个位置，并且多个节点可以被锚定到同一个位置。
+
+##  调整节点大小与对齐
+
+### 调整节点大小
+
+布局通过以下两个方法得到`Node`的预设大小`PreferredSize`：
+
+- **prefWidth(height)**
+- **prefHeight(width)**
+
+1. 在默认情况下，UI控件会根据其所包含的内容来自动计算**预设大小属性的默认值**。
+
+   例如，按钮(Button)被计算出来的大小取决于标签文本的长度和字体大小，再加上按钮图标的大小。一般来说，计算出来的大小刚好能让控件及其标签完全显示可见。
+
+2. UI控件根据其典型用途还提供了**默认的最小和最大值**。
+
+   例如，Button的默认最大值就是其预设大小，因为一般来说你不会想让按钮任意变大。然而ScrollPane的最大值却是不受限制的，因为一般来说你会希望它们能够变大并充满所有的可用空间。
+
+### 对齐内容
+
+每个布局面板都有一个默认的对齐方式，比如说：在`VBox`中，`Node`是居上对齐；在`HBox`中，`Node`是居左对齐。
+
+通常，我们可以使用`Pane`的`setAlignment(Pos)`来控制`Node`和`Pane`的对齐方式。对齐属性常量有以下枚举类型可选：
+
+- **HPos**	水平对齐方式
+- **Pos**	水平与垂直对齐方式
+- **VPos**	垂直对齐方式
+
+但实际上，`setAlignment(Pos)`并不支持传入参数为`VPos`或`HPos`，而且构造方法声明为`private`。我们并不能自定义`Pos`的属性，只能以下形式来传入`Pos`：
+
+``` java
+VBox pane = new VBox();
+pane.getChildren().add(new Button("一个按钮"));
+pane.setAlignment(POS.center);
+```
+
+挺好的，避免程序员乱来。说明`javafx`封装得还是不错的。
 
 ## CSS
 
