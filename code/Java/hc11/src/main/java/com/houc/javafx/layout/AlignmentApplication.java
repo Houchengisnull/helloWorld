@@ -7,15 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class AlignmentApplication extends Application {
-
-    public static void main(String[] args) {
-        log.debug("******* main ********");
-        launch(args);
-    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
