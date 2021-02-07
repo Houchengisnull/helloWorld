@@ -19,17 +19,11 @@ public class StatePrintTask implements Runnable{
     private static int times = 10;
     private static /*volatile*/ Integer currentState = 0;
     private static AtomicInteger atomCurrentState = new AtomicInteger(0);
-    private Integer outterState;
+    private static byte[] lock = new byte[0];
+
 
     public StatePrintTask(int state){
         this.state = state;
-        // 统计总数
-        this.size++;
-    }
-
-    public StatePrintTask(int state, Integer outterState){
-        this.state = state;
-        this.outterState = outterState;
         // 统计总数
         this.size++;
     }
@@ -65,29 +59,25 @@ public class StatePrintTask implements Runnable{
     }
 
     public void printThreadNameAtom() {
-        int t = atomCurrentState.get();
-        while ((t = atomCurrentState.get()) % size != state) {
-
-        }
+        int t;
+        while ((t = atomCurrentState.get()) % size != state) {}
         System.out.print(Thread.currentThread().getName() + (t%size + 1 == size? "\n": ""));
         atomCurrentState.addAndGet(1);
     }
 
     public void printThreadNameSync(){
-            synchronized (outterState) {
-                if (outterState%3 != state) {
-                    log.debug(Thread.currentThread().getName() + " wait {}", System.identityHashCode(outterState));
+            synchronized (lock) {
+                while (currentState%3 != state) {
                     try {
-                        outterState.wait();
+                        lock.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                } else {
-                    System.out.print(Thread.currentThread().getName() + (outterState%size + 1 == size? "\n": ""));
-                    outterState++;
-                    log.debug(Thread.currentThread().getName() + " notifyAll, {}", System.identityHashCode(outterState));
-                    outterState.notify();
                 }
+
+                System.out.print(Thread.currentThread().getName() + (currentState%size + 1 == size? "\n": ""));
+                currentState++;
+                lock.notifyAll();
             }
     }
 }

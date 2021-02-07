@@ -12,16 +12,15 @@ import lombok.extern.slf4j.Slf4j;
 public class SortedExecuteTaskByNotifyWait {
 
     public static void main(String[] args) {
-        int size = 3;
 /*
         Thread aThread = new Thread(new StatePrintTask(0), "A");
         Thread bThread = new Thread(new StatePrintTask(1), "B");
         Thread cThread = new Thread(new StatePrintTask(2), "C");
 */
         Integer state = new Integer(0);
-        Thread aThread = new Thread(new StatePrintTask(0, state), "A");
-        Thread bThread = new Thread(new StatePrintTask(1, state), "B");
-        Thread cThread = new Thread(new StatePrintTask(2, state), "C");
+        Thread aThread = new Thread(new StatePrintTask(0), "A");
+        Thread bThread = new Thread(new StatePrintTask(1), "B");
+        Thread cThread = new Thread(new StatePrintTask(2), "C");
 
         /*Thread cThread = new Thread(new StatePrintTask(2), "C");*/
         aThread.start();

@@ -26,12 +26,8 @@
 
 
 - **--module-path**	指定模块路径
-
 - **-m**	指定主模块及`mainClass`，格式：`模块名/全限定类名`， 例如：“`hc/com.houc.module.ModuleApplication`”。
-
 - **--show-module-resolution**	打印运行时引用模块。注意该参数不可以放在最后面
-
-  
 
 ## compile
 
