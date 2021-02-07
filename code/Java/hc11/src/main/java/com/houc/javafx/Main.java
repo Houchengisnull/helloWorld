@@ -1,7 +1,6 @@
-package com.houc.com.houc.javafx;
+package com.houc.javafx;
 
 import com.houc.javafx.layout.SameSizeButtonApplication;
-import com.houc.javafx.layout.UIAlignmentApplication;
 import javafx.application.Application;
 import lombok.extern.slf4j.Slf4j;
 
