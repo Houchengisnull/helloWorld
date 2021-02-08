@@ -60,7 +60,7 @@ log.debug("******** end ********");
   public class Stage extends Window {}
   ```
 
-## Scene 场景
+## Scene 场景图
 
 `Scene Graph`，是构建`JavaFX`应用的入口。它是一个树状结构，包含一个根结点。
 
@@ -74,6 +74,35 @@ log.debug("******** end ********");
   ```
 
   每个节点都具有一个`id`、`样式类`(见`Styleable`)与`包围盒`。除了`Window`与`Scene`外，所有元素本质都是`Node`，即使是`Pane`。
+
+# 控件
+
+控件内容很多，简单得不想说。
+
+# WebView
+
+`javafx`内嵌浏览器，基于开源`Web`浏览器引擎`Webkit`。
+
+## 作用
+
+- 加载本地或远程`URL`的`HTML`内容
+- 获取`Web`历史
+- 执行`Javascript`脚本
+- 执行由`Javascript`向上调用`javafx`
+- 管理`web`上的弹出式`pop-up`窗口
+- 为内嵌浏览器应用特效
+
+## 架构
+
+![4_2_1 webview-structure](../images/javafx/4_2_1-webview-structure.png)
+
+### WebEngine
+
+提供基本的`web`页面功能。
+
+### WebView
+
+是`Node`的扩展，封装了`WebEngine`。负责将`HTML`内容加入程序的场景中，并提供各种属性和方法来应用特效和变换。
 
 # 布局
 
@@ -113,6 +142,8 @@ log.debug("******** end ********");
 
 ##  调整节点大小与对齐
 
+使用`javafx`内置布局面板的主要好处是<u>`node`的大小和对齐方式是由布局面板控制的</u>。
+
 ### 调整节点大小
 
 布局通过以下两个方法得到`Node`的预设大小`PreferredSize`：
@@ -122,11 +153,11 @@ log.debug("******** end ********");
 
 1. 在默认情况下，UI控件会根据其所包含的内容来自动计算**预设大小属性的默认值**。
 
-   例如，按钮(Button)被计算出来的大小取决于标签文本的长度和字体大小，再加上按钮图标的大小。一般来说，计算出来的大小刚好能让控件及其标签完全显示可见。
+   例如，按钮`(Button)`被计算出来的大小取决于标签文本的长度和字体大小，再加上按钮图标的大小。一般来说，计算出来的大小刚好能让控件及其标签完全显示可见。
 
 2. UI控件根据其典型用途还提供了**默认的最小和最大值**。
 
-   例如，Button的默认最大值就是其预设大小，因为一般来说你不会想让按钮任意变大。然而ScrollPane的最大值却是不受限制的，因为一般来说你会希望它们能够变大并充满所有的可用空间。
+   例如，`Button`的默认最大值就是其预设大小，因为一般来说你不会想让按钮任意变大。然而`ScrollPane`的最大值却是不受限制的，因为一般来说你会希望它们能够变大并充满所有的可用空间。
 
 ### 对齐内容
 
@@ -148,7 +179,30 @@ pane.setAlignment(POS.center);
 
 挺好的，避免程序员乱来。说明`javafx`封装得还是不错的。
 
-## CSS
+# CSS
+
+`css`可用于布局或调整样式。
+
+`javafx`默认的`stylesheet`是`modena.css`。
+
+- **解压并查看`modena.css`**
+
+``` bat
+jar xf jfxrt.jar com/sun/javafx/scene/control/skin/modena/modena.css
+```
+
+- **覆盖.root样式类**
+
+可以通过修改`.root`样式类快速更改界面外观。`.root`将应用到`Scene`实例的`root node`。由于`scene`的所有`node`都在该`root node`中，所以`.root`样式类中的`style`将被应用到所有的`node`上。
+
+但需要注意的是，在我们根结点为`Group`类型时不生效。
+
+## 添加样式表
+
+``` java
+Scene scene = new Scene(new Group(), 500, 400);
+scene.getStylesheets().add(getClass().getResource("/css/test.css").toString());
+```
 
 # FAQ
 
