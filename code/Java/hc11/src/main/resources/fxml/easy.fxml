@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            prefHeight="400.0" prefWidth="600.0">
+        <top>
+            <Label style="-fx-background-color: green" text="Page Title"/>
+        </top>
+        <center>
+            <Label text="Some data here"/>
+        </center>
+</BorderPane>
