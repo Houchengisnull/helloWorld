@@ -2,5 +2,11 @@
     -fx-font-size: 16px;
     -fx-font-family: "Courier New";
     -fx-background-color: #CCFF99;
+}
 
+#fancytext {
+    -f-font: 100px Tahoma;
+    -fx-fill: linear-gradient(from 0% 0% to 100% 200%, repeat,aqua 0%,red 50%);
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
 }

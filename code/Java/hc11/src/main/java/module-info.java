@@ -10,4 +10,5 @@ module hc {
     exports com.houc.javafx.css;
     exports com.houc.javafx.layout;
     exports com.houc.javafx.ui;
+    exports com.houc.javafx.text;
 }
