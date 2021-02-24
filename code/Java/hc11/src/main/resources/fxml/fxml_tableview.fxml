@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.control.cell.*?>
 <?import javafx.scene.layout.*?>
@@ -20,8 +17,10 @@
     <TableView fx:id="tableView" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="300">
         <columns>
             <TableColumn fx:id="firstNameColumn" text="First Name" prefWidth="100">
+                <!-- 通过cellValueFactory设置元素值 -->
                 <cellValueFactory><PropertyValueFactory property="firstName"/>
                 </cellValueFactory>
+                <!-- 通过cellFactory设置元素样式 -->
                 <cellFactory>
                     <FormattedTableCellFactory alignment="CENTER" />
                 </cellFactory>
@@ -29,7 +28,7 @@
                     <PropertyValueFactory property="firstName" />
                 </cellValueFactory>
             </TableColumn>
-
+            <!-- 通过prefWidth定义列宽 -->
             <TableColumn text="Last Name" prefWidth="100">
                 <cellValueFactory><PropertyValueFactory property="lastName" />
                 </cellValueFactory>
@@ -40,6 +39,7 @@
                 </cellValueFactory>
             </TableColumn>
         </columns>
+        <!-- 数据与表格关联 -->
         <items>
             <FXCollections fx:factory="observableArrayList">
                 <Person email="jacob.smith@example.com" firstName="Jacob" lastName="Smith" />
