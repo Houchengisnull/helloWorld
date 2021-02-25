@@ -204,6 +204,308 @@ Scene scene = new Scene(new Group(), 500, 400);
 scene.getStylesheets().add(getClass().getResource("/css/test.css").toString());
 ```
 
+# FXML
+
+`FXML`时一种基于`XML`的语言，用于将用户界面与应用程序逻辑代码分离。
+
+- `FXML`并未定义`schema`，它具有一个基本的预定义结构；
+
+- `FXML`直接映射为`Java`代码；
+
+  大多数`JavaFX`类可以被映射为`XML`元素，并且大多数的`Bean`属性都会被映射为元素的属性。
+
+  从`MVC`设计模式的角度来看，`FXML`文件描述用户界面是其中的`View`部分。
+
+  `Controller`是一个`Java`类，可以选择实现`Initializable`接口，用于将其声明为`FXML`文件的控制器。
+
+  `Model`部分包括了领域模型对象，使用`Java`代码来定义并通过`Controller`来与`View`关联。
+
+## 优势
+
+- `Web`开发者更为熟悉的`UI`开发方式；
+- 结构清晰
+- `FXML`不是编译型语言，不需要重新编译即可看到用户界面的改变；
+- 任何基于`JVM`的语言均可使用`FXML`；
+- 可以在`FXML`可用于构建服务、任务或领域对象，以及使用`JavaScript`或其他脚本语言；
+
+## FXML Project基本架构
+
+- **.java**
+- **jfxml**
+- **Controller**
+
+### 定义数据模型
+
+- **SimpleStringProperty**
+
+  我们通过这个类可以将`jfxml`中的元素与数据模型中的属性绑定。
+
+比如我们有一个表格页面。
+
+- **TableView**
+
+  ``` xml
+  <?import javafx.collections.*?>
+  <?import javafx.geometry.*?>
+  <?import javafx.scene.control.*?>
+  <?import javafx.scene.control.cell.*?>
+  <?import javafx.scene.layout.*?>
+  <?import com.houc.javafx.fxml.*?>
+  
+  <GridPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx" alignment="CENTER" hgap="10.0" vgap="10.0"
+      fx:controller="com.houc.javafx.fxml.FXMLTableViewController">
+      <padding>
+          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+      </padding>
+      <Label style="-fx-font: NORMAL 20 Tahoma;" text="Address Book" GridPane.columnIndex="0" GridPane.rowIndex="0">
+      </Label>
+      <TableView fx:id="tableView" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="300">
+          <columns>
+              <TableColumn fx:id="firstNameColumn" text="First Name" prefWidth="100">
+                  <cellValueFactory><PropertyValueFactory property="firstName"/>
+                  </cellValueFactory>
+                  <cellFactory>
+                      <FormattedTableCellFactory alignment="CENTER" />
+                  </cellFactory>
+                  <cellValueFactory>
+                      <PropertyValueFactory property="firstName" />
+                  </cellValueFactory>
+              </TableColumn>
+  
+              <TableColumn text="Last Name" prefWidth="100">
+                  <cellValueFactory><PropertyValueFactory property="lastName" />
+                  </cellValueFactory>
+              </TableColumn>
+  
+              <TableColumn text="Email Address" >
+                  <cellValueFactory><PropertyValueFactory property="email" />
+                  </cellValueFactory>
+              </TableColumn>
+          </columns>
+          <items>
+              <FXCollections fx:factory="observableArrayList">
+                  <Person email="jacob.smith@example.com" firstName="Jacob" lastName="Smith" />
+                  <Person email="isabella.johnson@example.com" firstName="Isabella" lastName="Johnson" />
+                  <Person email="ethan.williams@example.com" firstName="Ethan" lastName="Williams" />
+                  <Person email="emma.jones@example.com" firstName="Emma" lastName="Jones" />
+                  <Person email="michael.brown@example.com" firstName="Michael" lastName="Brown" />
+              </FXCollections>
+          </items>
+          <!-- 启动时排序 -->
+          <sortOrder>
+              <fx:reference source="firstNameColumn" />
+          </sortOrder>
+      </TableView>
+  
+      <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="0"
+            GridPane.rowIndex="2">
+          <TextField fx:id="firstNameField" promptText="First Name"
+                     prefWidth="90"/>
+          <TextField fx:id="lastNameField" promptText="Last Name"
+                     prefWidth="90"/>
+          <TextField fx:id="emailField" promptText="email"
+                     prefWidth="150"/>
+          <Button text="Add" onAction="#addPerson"/>
+      </HBox>
+  </GridPane>
+  ```
+
+- **Person**
+
+  ``` java
+  public class Person {
+  
+      private final SimpleStringProperty firstName = new SimpleStringProperty("");
+      private final SimpleStringProperty lastName = new SimpleStringProperty("");
+      private final SimpleStringProperty email = new SimpleStringProperty("");
+  
+      public Person() {
+          this("", "", "");
+      }
+  
+      public Person(String firstName, String lastName, String email) {
+          setFirstName(firstName);
+          setLastName(lastName);
+          setEmail(email);
+      }
+  
+      public String getFirstName() {
+          return firstName.get();
+      }
+  
+      public void setFirstName(String fName) {
+          firstName.set(fName);
+      }
+  
+      public String getLastName() {
+          return lastName.get();
+      }
+  
+      public void setLastName(String fName) {
+          lastName.set(fName);
+      }
+  
+      public String getEmail() {
+          return email.get();
+      }
+  
+      public void setEmail(String fName) {
+          email.set(fName);
+      }
+  
+  }
+  ```
+
+- **Controller**
+
+  ``` java
+  public class FXMLTableViewController extends Application {
+  	// @FXML标记该字段将映射到 ui上
+      @FXML private TableView<Person> tableView;
+      @FXML private TextField firstNameField;
+      @FXML private TextField lastNameField;
+      @FXML private TextField emailField;
+  
+      @FXML
+      protected void addPerson(ActionEvent event) {
+          ObservableList<Person> data = tableView.getItems();
+          data.add(new Person(firstNameField.getText(), lastNameField.getText(), emailField.getText()));
+          firstNameField.setText("");
+          lastNameField.setText("");
+          emailField.setText("");
+      }
+  
+      public static void main(String[] args) {
+          launch(args);
+      }
+  
+      @Override
+      public void start(Stage primaryStage) throws Exception {
+          primaryStage.setTitle("FXML Table View example");
+          Pane load = (Pane) FXMLLoader.load(getClass().getResource("/fxml/fxml_tableview.fxml"));
+          Scene scene = new Scene(load);
+          primaryStage.setScene(scene);
+          primaryStage.show();
+      }
+  
+  }
+  ```
+
+### Callback
+
+我们可以通过该接口实现对单元格样式的回调。
+
+``` java
+public class FormattedTableCellFactory <S, T> implements Callback<TableColumn<S, T>, TableCell<S, T>> {
+
+    private TextAlignment alignment;
+    private Format format;
+
+    public TextAlignment getAlignment() {
+        return alignment;
+    }
+
+    public void setAlignment(TextAlignment alignment) {
+        this.alignment = alignment;
+    }
+
+    public Format getFormat() {
+        return format;
+    }
+
+    public void setFormat(Format format) {
+        this.format = format;
+    }
+
+    @Override
+    public TableCell<S, T> call(TableColumn<S, T> stTableColumn) {
+        TableCell<S, T> cell = new TableCell<S, T>() {
+            @Override
+            public void updateItem(Object item, boolean empty) {
+                if (item == getItem()) {
+                    return;
+                }
+                super.updateItem((T) item, empty);
+                if (item == null) {
+                    super.setText(null);
+                    super.setGraphic(null);
+                } else if (format != null) {
+                    super.setText(format.format(item));
+                } else if (item instanceof Node) {
+                    super.setText(null);
+                    super.setGraphic((Node) item);
+                } else {
+                    super.setText(item.toString());
+                    super.setGraphic(null);
+                }
+            }
+        };
+        cell.setTextAlignment(alignment);
+        switch (alignment) {
+            case CENTER:
+                cell.setAlignment(Pos.CENTER);
+                break;
+            case RIGHT:
+                cell.setAlignment(Pos.CENTER_RIGHT);
+                break;
+            default:
+                cell.setAlignment(Pos.CENTER_LEFT);
+                break;
+        }
+        return cell;
+    }
+}
+```
+
+### 使用脚本语言
+
+在`fxml`文件中的`XML doctype`声明之后添加`Java Script`声明。
+
+``` html
+<?language javascript?>
+<GridPane xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10" styleClass="root">
+    <stypesheets>
+    	<URL value="@Login.css"/>
+    </stypesheets>
+</GridPane>
+<fx:script source="fxml_example.js"/>
+<fx:script>
+	function handleSubmitButtonAction() {
+    	actiontarget.setText("Calling the JavaScript");
+    }
+</fx:script>
+```
+
+# Controller
+
+## 初始化
+
+- **Callback**
+
+  在`JavaFX2.0`中，对`Controller`的创建过程是没有任何控制的，导致应用无法使用依赖注入系统管理`Controller`的初始化，比如`Google Guice`或`Spring`。
+
+  在`JavaFX2.1`中，增加一个`Callback`接口来对`Controller`的构造进行代理。
+
+``` java
+public interface Callback {
+    public Object getController(Class<?> type);
+}
+```
+
+​		向`FXMLLoader`对象提供一个`Controller Factory`，则加载器会将`Controller`的构造过程委托给`Factory`。对应的实现类应该返回一个`null`标志其有没有或者无法创建一个对应类型的`Controller`。此时加载器启用默认的`Controller`构造机制。实现类可以服用`Controller`，令其实例被多个`FXML`文档共享。
+
+​		这样做的意义是**Controller属性的注入不应该以此种方式来进行，这样会导致在Controller的属性中仅包含最近加载的文档的值。**
+
+- **Initializable**
+
+  在`JavaFX2.1`及以前版本中，`Controller`类需要实现`Initializable`接口，令关联`FXML`加载完毕后获得通知。
+
+  在`JavaFX2.2`这不是必须的，`FXMLLoader`仅会简单查找`Controller`的`initialize()`
+
+  > 与其他`FXML`回调方法类似（比如事件处理器）。
+
+  
+
 # FAQ
 
 ## 错误: 缺少 JavaFX 运行时组件, 需要使用该组件来运行此应用程序
@@ -221,3 +523,4 @@ scene.getStylesheets().add(getClass().getResource("/css/test.css").toString());
 ## maven clean compile package javafx:run 报错: -release无法解析
 
 将`maven`所使用的`jdk`换成`jdk15`。
+
