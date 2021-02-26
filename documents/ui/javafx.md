@@ -476,6 +476,44 @@ public class FormattedTableCellFactory <S, T> implements Callback<TableColumn<S,
 </fx:script>
 ```
 
+## 使用Css
+
+### Node添加样式类
+
+- **css**
+
+  ``` css
+  .myStyle {
+      -fx-background-color: #CCFF99;
+  }
+  ```
+
+- **fxml**
+
+  ``` xml
+  <Button styleClass="myStyle">
+  	Hello world
+  </Button>
+  ```
+
+### Node添加样式
+
+- **fxml**
+
+  ``` xml
+  <Button style="-fx-background-color:  #CCFF99">
+  	Hello world
+  </Button>
+  ```
+
+## fxml中引入样式表
+
+``` xml
+<stylesheets>
+	<URL value="@../style/frame.css"/>
+</stylesheets>
+```
+
 # Controller
 
 ## 初始化
