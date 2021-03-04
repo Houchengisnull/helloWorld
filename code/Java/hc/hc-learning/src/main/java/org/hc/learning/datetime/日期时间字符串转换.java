@@ -3,11 +3,9 @@ package org.hc.learning.datetime;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 @Slf4j
 public class 日期时间字符串转换 {
@@ -69,4 +67,10 @@ public class 日期时间字符串转换 {
         log.debug("string >> Instant -------- LocalDateTime.parse().toInstant().toEpochMilli() [UTC时间戳]>> {}", instant.toEpochMilli());
     }
 
+    @Test
+    public void long2Instant(){
+        long l = System.currentTimeMillis();
+        Instant instant = Instant.ofEpochMilli(l);
+        log.debug("long >> Instant -------- Instant.ofEpochMilli({}) >> {} ", l , instant.getEpochSecond());
+    }
 }
