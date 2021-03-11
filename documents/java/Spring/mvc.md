@@ -68,9 +68,9 @@ public @interface GetMapping {
 }
 ```
 
-## 方法参数
+## Handler方法
 
-### Handler方法
+### 修饰方法形参
 
 #### @RequestParam
 
@@ -102,6 +102,46 @@ public void handle(
 ) {
     // ...
 }
+```
+
+### 方法返回值
+
+#### ResponseEntity
+
+类似`@ResponseBody`，但是包含响应状态与响应头。
+
+``` java
+@GetMapping("/something")
+public ResponseEntity<String> handle() {
+    String body = "...";
+    String etag = "...";
+    return ResponseEntity.ok().eTag(etag).build(body);
+}
+
+/**
+* 返回文件
+*/
+@PostMapping("/download")
+public ResponseEntity<byte[]> download() {
+    byte[] bytes = service.getFileByte();
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentDispositionFormData("attachment", filename);
+    headers.setContentLength(bytes.length);
+    headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+	return new ResponseEntity(bytes, headers, HttpStatus.OK);
+}
+
+/**
+* 返回json
+*/
+@GetMapping("/getMessage")
+public ResponseEntity<Map<String, Object>> query() {
+    Map<String, Object> result = new HashMap();
+    result.put("message", "查询成功");
+    result.put("code", 0)
+    return new ResponseEntity<Map<String, Object>>(result, HttpStatus.OK);
+}
+
 ```
 
 # Model 接口
