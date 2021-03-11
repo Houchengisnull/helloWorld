@@ -58,7 +58,7 @@ public class ZipUtils {
         for (Map.Entry<String, byte[]> entry : entries) {
             ZipUtils.putZipEntry(entry.getKey(), entry.getValue(), zip);
         }
-        zip.finish();
+        /*zip.finish();*/
         zip.close();
 
         byteOutput.close();
@@ -73,7 +73,7 @@ public class ZipUtils {
         for (Map.Entry<String, InputStream> entry : entries) {
             ZipUtils.putZipEntry(entry.getKey(), entry.getValue(), zip);
         }
-        zip.finish();
+        /*zip.finish();*/
         zip.close();
 
         byteOutput.close();
@@ -113,8 +113,8 @@ public class ZipUtils {
     public void makeZipByteByMap() {
         HashMap<String, byte[]> map = new HashMap<>();
         map.put("Hello.txt", "Hello".getBytes());
-        map.put("Hello A.txt", "Hello".getBytes());
-        map.put("Hello B.txt", "Hello".getBytes());
+        map.put("Hello A.txt", "Hello A".getBytes());
+        map.put("Hello B.txt", "Hello B".getBytes());
 
         byte[] bytes = getZipByteArray(map);
         FileOutputStream fileOutput = new FileOutputStream("C:\\Users\\DHAdmin\\Desktop\\world.map.zip");
