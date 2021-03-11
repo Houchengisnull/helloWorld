@@ -65,6 +65,16 @@ https://blog.csdn.net/WinstonLau/article/details/83278653
 
 3、启动IDEA并输入破解码；
 
+## 20.3 破解
+
+- https://pan.baidu.com/s/1tq9yjkoLeR4wPtk243Z_Vg
+
+  提取码：`s68r`
+
+- 参考
+
+- [IDEA 2020.3.2 破解版下载_安装教程（可激活至2099年,亲测有效）](https://www.exception.site/essay/how-to-free-use-idea-202021-by-resigter-code)
+
 # Project Structure
 
 ## Project Setting
