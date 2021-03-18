@@ -111,8 +111,8 @@ log.debug("******** end ********");
 面板是一种布局容器。
 
 <hr>
-### 基本介绍
 
+### 基本介绍
 
 - **BorderPane**
 
@@ -216,6 +216,12 @@ jar xf jfxrt.jar com/sun/javafx/scene/control/skin/modena/modena.css
 Scene scene = new Scene(new Group(), 500, 400);
 scene.getStylesheets().add(getClass().getResource("/css/test.css").toString());
 ```
+
+<hr>
+
+- **参考**
+
+- [JavaFX CSS Reference Guide](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/doc-files/cssref.html)
 
 # FXML
 
