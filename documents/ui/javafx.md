@@ -561,7 +561,32 @@ public interface Callback {
 
   > 与其他`FXML`回调方法类似（比如事件处理器）。
 
-  
+
+# FXML标签
+
+## TextArea
+
+``` xml
+<TextArea minHeight="Infinity" >我是一个TextArea</TextArea>
+```
+
+- **disabled**	
+
+  在`fxml`中没有`readonly`属性，我们可以通过`disabeld`来取代`readonly`，使其不可编辑。
+
+  ``` xml
+  <TextArea disabled="true">不可编辑的TextArea</TextArea>
+  ```
+
+# FXML常见属性
+
+### Infinity
+
+表示无穷大，通常可以用于设置节点的长度或者宽度。也可以使用`-Infinity`表示负无穷大。
+
+``` xml
+<TextArea minHeight="Infinity" >我是一个TextArea</TextArea>
+```
 
 # FAQ
 
