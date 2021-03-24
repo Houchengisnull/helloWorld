@@ -259,3 +259,87 @@ public class TestDemo {
 ```
 
 个人认为项目实际环境会更加复杂，该单元测试可用于创建接口并测试接口是否能接收数据时。
+
+# RestEasy
+
+`RestEasy`同样是一个以`jaxrs-api.jar`为基础、实现`JAX-RS`标准的`RESTFull`框架，是`JBoss`的开源项目之一。
+
+## 文件上传
+
+最近实现一个文件上传功能，项目使用`RestEasy`实现。
+
+一开始没注意用的是`RestEasy`，以`Spring mvc`的方式实现总是出错，还以为是没有配置合适的`Resolver`。
+
+最后发现项目使用了`RestEasy`。
+
+``` java
+/**
+* @timestamp 时间戳
+* @input 
+*/
+@POST
+@Path("/upload")
+@Consumes(MediaType.MULTIPART_FORM_DATA)
+@Produces(MediaType.APPLICATION_JSON)
+public ResultBean upload(@QueryParam("timestamp") String timestamp, MultipartFormDataInput input) {
+    Map<String, List<InputPart>> uploadForm = input.getFormDataMap();
+	for(String key : uploadForm) {
+        List<InputPart> inputPart = uploadForm.get(key);
+        for (InputPart input : inputParts) {
+            String body = inputPart.getBodyAsString();
+            System.out.println(key + ":" + bodyAsString);
+        }
+    }
+	String code = service.addByTxt(uploadForm);
+    return new ResultBean(code);
+}
+```
+
+可能大家会觉得使用`MultipartFormDataInput`来接收请求不是很方便——无法将`request`与`bean`一一映射。本着精益求精地想法，研究一会儿后搞定。
+
+``` java
+/**
+* @timestamp 时间戳
+* @input 
+*/
+@POST
+@Path("/upload")
+@Consumes(MediaType.MULTIPART_FORM_DATA)
+@Produces(MediaType.APPLICATION_JSON)
+public ResultBean upload(@QueryParam("timestamp") String timestamp, @MultipartForm Form form) {
+	String code = service.addByTxt(form);
+    return new ResultBean(code);
+}
+```
+
+- **Form**
+
+``` java
+@Iombok
+public class Form {
+    
+    @FormParam("file")
+    private byte[] file;
+    
+    /**
+    * 文件名称
+    */
+    @FormParam("name")
+    private String name;
+    
+    /**
+    * 公司名称
+    */
+    @FormParam("company")
+    private String company;
+    
+    /**
+    * 公司规模
+    */
+    private Integer amount;
+}
+```
+
+需要注意的是，使用`Integer`时，`RestEasy`无法很好地处理空字符串或者`Null`的情况，这里会出现一个异常。就不上源码了，领会精神。
+
+总体而言，个人觉得`Spring mvc`用起来更加得心应手。
