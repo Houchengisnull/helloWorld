@@ -943,3 +943,160 @@ MD5-Digest: ZnTIQ2aQAtSNIOWXI1pQpw==
 ```
 
 这段内容中定义类签名的类名，计算摘要的算法名以及摘要。通过摘要我们可以确定代码是否被纂改过。
+
+# 代理模式
+
+## JDK动态代理
+
+> “代理无处不在，例如在公司要上外网，要在浏览器里设置一个HTTP代理...”
+>
+> ——《架构探险》
+
+- 原因
+
+  `Java`不支持动态性，无法在运行时修改一个类。
+
+- 涉及技术
+
+  类加载、动态代理等。
+
+- 应用场景
+
+  热部署、`AOP`。
+
+- 意义
+
+  例子：
+
+  在某些函数（方法）调用前后加上日志目录；
+
+  给某些函数（方法）加上事务支持；
+
+  给某些函数（方法）加上权限控制；
+
+  在笔者看来，仿佛编程分为`纵向编程`与`横向编程`。
+
+  我们从事的关于业务逻辑上的代码编写便是纵向编程。而这些需要依赖“动态技术”的，<u>在不修改源代码情况下令程序流程发生改变的代码编写就是横向编程。</u>
+
+  也就是为了保证程序的**开闭原则**。
+
+### UML
+
+> - **2018-09-01**
+>
+>   关于为什么JDK动态代理需要接口：
+>
+>   在给一个VB项目添加非功能性需求时，比如捕捉异常，断线重连......一下就想到使用代理模式，我在调用一个对象前首先需要代理对象拥有和被代理对象一样的方法，那么当然第一就想到`inteface`啦，然而VB好像没有`interface`......
+
+``` mermaid
+classDiagram
+
+IHelloWorld <-- HelloWorld : implements
+IHelloWorld : sayHello()
+LoggerHandler *-- Logger : call
+LoggerHandler *-- HelloWorld : call
+HelloWorld : sayHello()
+InvocationHandler <-- LoggerHandler : implements
+InvocationHandler : invoke()
+
+```
+
+- **过程解析**
+  1. 将被代理对象`HelloWorld`作为参数传给`LoggerHandler`；
+  2. 在运行时动态生成一个实现`IHelloWorld`的类`class`；
+  3. 通过类加载器动态将该类加载到`JVM方法区`；
+  4. 再通过该类生成一个代理对象；
+  5. 在调用代理对象`sayHello()`时，通过`LoggerHandler`的`invoke()`来调用其`sayHello()`；
+
+### InvocationHandler
+
+动态生成的代理对象在调用方法时，将调用该接口中的`invoke`方法。
+
+- **LoggerHandler**
+
+``` java
+/**
+ * 动态代理 例子
+ * @author Administrator
+ *
+ */
+public class LoggerHandler implements InvocationHandler{
+	
+	/**
+	 * 被代理的对象
+	 */
+	private Object target;
+	
+	public LoggerHandler( Object target ) {
+		this.target = target;
+	}
+
+	@Override
+	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+		System.out.println("startLog()");
+		Object result = method.invoke(target, args);
+		System.out.println("endLog()");
+		return result;
+	}
+
+}
+```
+
+- **调用过程**
+
+``` java
+import java.lang.reflect.Proxy;
+
+public class Main {
+
+	public static void main(String[] args) {
+		IHelloWorld helloWorld = new HelloWorld();
+		LoggerHandler handler = new LoggerHandler(helloWorld);
+		/**
+		 * 动态生成一个IHelloWorld对象 proxy
+		 */
+		IHelloWorld proxy = (IHelloWorld) Proxy.newProxyInstance(
+				Thread.currentThread().getContextClassLoader(),	// 获得当前类加载器
+				helloWorld.getClass().getInterfaces(),
+				handler);
+		proxy.sayHello();
+	}
+
+}
+```
+
+### 局限
+
+- 被代理的类必须实现接口
+
+## 其他
+
+- 参考
+- [妈蛋！空降的老大叫写得代码全部都得要Mock，看来得996了 - 不加班程序员的文章 - 知乎](https://zhuanlan.zhihu.com/p/357610982)
+
+除了`JDK动态代理`外，代理模式还有其他的实现方式：
+
+- 自定义类加载器
+- 动态修改字节码
+
+市场上许多`Mock工具`运用了代理模式。其中像`PowerMock`通过自定义类加载器实现，像`JMockit`、`TestableMock(阿里系)`则通过修改类的字节码实现。
+
+两种方式都将修改类的字节码，但是`自定义类加载器`通过完全接管类的加载过程来实现，而`动态修改字节码`则在类加载完成后对字节码文件进行“二次修改”。
+
+> - **Mock工具**
+>
+>   模拟工具
+
+### CGLib
+
+像`Spring`、`Hibernate`均使用`CGLib`来实现其切面编程。
+
+- 参考
+- [深入理解CGLIB动态代理机制](https://www.jianshu.com/p/9a61af393e41?from=timeline&isappinstalled=0)
+
+> 使用CGLIB创建代理速度较慢，但创建代理后运行速度非常快，JDK动态代理正好相反。
+
+#### 局限
+
+- 被代理的类不能被`final`声明
+- 被代理的方法不能被`final`声明
