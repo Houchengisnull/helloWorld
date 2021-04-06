@@ -95,6 +95,14 @@ AND page_.NUM <= #{end}
 
 `ROWNUM`是在已经产生的数据上生成编号，所以在使用`ROWNUM`时需要保证已有数据的基础上。
 
+> - **2021-4-6**
+>
+>   `ROWNUM`的作用应该是`oracle`对`select`语句的查询结果进行编号，也就是说先执行`select`语句，得到查询结果后，`oracle`将对这个查询结果一一编号。
+>
+>   那么`ROWNUM`的生效在`WHERE`之后。
+>
+>   经过验证，确实如此。
+
 ## 计算时间
 
 - https://www.cnblogs.com/yanghj010/p/5109714.html
