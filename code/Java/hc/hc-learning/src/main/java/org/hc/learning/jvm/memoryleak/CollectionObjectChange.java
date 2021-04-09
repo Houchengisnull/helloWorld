@@ -30,7 +30,7 @@ public class CollectionObjectChange {
         if (removeResult) {
             System.out.println("remove P3成功");
         } else {
-            System.out.println("remove P3s失败");
+            System.out.println("remove P3失败");
         }
 
         for (Person person : set)
@@ -42,7 +42,7 @@ public class CollectionObjectChange {
         if (addResult) {
             System.out.println("add P3成功");
         } else {
-            System.out.println("add P3s失败");
+            System.out.println("add P3失败");
         }
         System.out.println("总共有:"+set.size()+" 个元素!"); //结果：总共有:4 个元素!
         for (Person person : set)
