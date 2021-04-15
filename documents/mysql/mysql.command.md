@@ -1,15 +1,86 @@
 [TOC]
 
-# mysqld --initialize
+# 安装
 
-初始化
+- **参考**
+- [Windows下安装MySQL详细教程](https://www.jianshu.com/p/e676799ed3af)
 
-- `mysqld --initialize`创建随机密码root用户/`mysqld --initialize-insecure`创建无密码root用户
-- 创建`data`文件夹
+## mysqld --initialize
 
-# mysqld --console
+- **初始化**
+
+``` mysql
+# 生成随机密码 root用户 的初始化
+mysqld --initialize
+# 生成空密码 root用户 的初始化
+mysqld --initialize-insecure
+```
+
+初始化将创建`root`用户及`data`文件夹
+
+## mysqld --console
 
 可用于在mysql server 发生错误时查看错误信息。有效排除错误。
+
+## mysqld --install
+
+- 将`mysql`注册为`Windows`服务：
+
+``` mysql
+mysqld --install %server_name%
+```
+
+- 卸载`mysql`服务
+
+``` mysql
+mysqld --uninstall %server_name%
+```
+
+## 启动
+
+``` bash
+# 启动mysql服务
+net start mysql
+
+# 关闭mysql服务
+net stop mysql 
+```
+
+- **参考**
+- [MySQL 成功安装，但是无法启动](https://bbs.csdn.net/topics/391950830)
+- [MYSQL服务无法启动，服务没有任何错误；解决方法](https://blog.csdn.net/qq_37915248/article/details/82631398)
+
+## Faq
+
+### 缺少环境组件redistrubutable
+
+- 报错信息
+
+  `This application requires Visual Studio 2019 Redistributable. Please install the Redistributable then run this installer again.`
+
+`mysql`运行在`VC++`环境下，而`redistrubutable`为`VC++`环境必要组件。
+
+- 参考
+
+- [mysql8安装This application requires Visual Studio 2019 Redistributable问题及连接navicat时1251问题的解决](https://blog.csdn.net/mengjie0617/article/details/105148847/)
+
+- `redistrubutable`下载地址
+
+  [The latest supported Visual C++ downloads](https://support.microsoft.com/en-us/topic/the-latest-supported-visual-c-downloads-2647da03-1eea-4433-9aff-95f26a218cc0)
+
+# 修改密码
+
+进入`mysql`客户端后，输入：
+
+``` mysql
+alter user 'root'@'localhost' identified by 'new_password'
+```
+
+或者使用`mysqladmin`程序修改：
+
+``` mysql
+mysqladmin -u root -p password newPassword
+```
 
 # 最大连接数和修改最大连接数
 
