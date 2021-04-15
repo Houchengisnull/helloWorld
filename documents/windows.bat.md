@@ -24,6 +24,14 @@ type /?
 
 `pause`
 
+# 查找进程
+
+- **FI** 过滤器
+
+``` bash
+tasklist /FI "PID eq 18272"
+```
+
 # 查看端口被占用
 
 ``` bash
