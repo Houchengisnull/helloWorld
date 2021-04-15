@@ -6,7 +6,35 @@
 
 http://mirrors.sohu.com/mysql/MySQL-8.0/
 
-# 安装报错
+# 安装
+
+- **初始化**
+
+  在配置多个`MySql`实例时，可以修改`my.ini`中的端口号`port`、服务名`server-id`、实例地址`basedir`、数据地址`datadir`。
+
+  ``` bash
+  # 生成随机密码的初始化
+  mysqld --initialize
+  # 生成空密码的初始化
+  mysqld --initialize-insecure
+  ```
+
+- **注册MySql服务**
+
+  ``` bash
+  # 默认服务名 mysql
+  mysqld --install
+  # my.ini中server-id对应的服务名
+  mysqld --install mysql_hello
+  ```
+
+- **卸载MySql服务**
+
+  ``` bash
+  mysqld --uninstall %server_name%
+  ```
+
+## 安装报错
 
 - 报错信息
 
@@ -23,6 +51,13 @@ http://mirrors.sohu.com/mysql/MySQL-8.0/
   https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
 
 # 启动
+
+- **启动与关闭**
+
+  ``` bash
+  net start mysql
+  net stop mysql
+  ```
 
 - 参考
 
@@ -73,3 +108,10 @@ https://www.cnblogs.com/EasonJim/p/8128196.html
 使用`注意`中第三点
 
 https://www.jb51.net/article/147131.htm
+
+# 修改密码
+
+``` bash
+mysqladmin -u root -p password newPassword
+```
+
