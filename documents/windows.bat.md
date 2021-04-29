@@ -6,7 +6,19 @@
 
 # 注释
 
-`::`
+`::`|`rem`
+
+# 输入参数
+
+``` bat
+run.bat helloWorld
+```
+
+- **run.bat**
+
+``` bat
+echo %1
+```
 
 # 查看帮助信息
 
