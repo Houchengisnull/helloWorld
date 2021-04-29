@@ -43,6 +43,15 @@ $ javac -d $target -sourcepath $source
 - **-cp/-classpath**	指定`classpath`
 - **-sourcepath**	指定源文件
 
+## jar
+
+### 解压
+
+``` bat
+# 解压 jar war
+jar -xvf HelloWorld.war
+```
+
 ## 查看JDK安装地址
 
 ``` shell
