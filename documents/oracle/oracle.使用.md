@@ -4,14 +4,36 @@
 
 ## 表
 
-- 创建
+- **创建**
 
 ``` sql
-create table tablename (
-	"id" NUMBER(11) primary key ,
-    "name" VARCHAR2(11 CHAR),
-    "is_enable" NUMBER(1) DEFAULT(1)
+CREATE TABLE STUDENT (
+	"ID" NUMBER(11) PRIMARY KEY ,
+    "NAME" VARCHAR2(11 CHAR),
+    "IS_ENABLE" NUMBER(1) DEFAULT(1)
 );
+```
+
+- **修改表结构**
+
+``` sql
+# 增加主键
+ALTER TABLE "MYORACLE"."STUDENT" ADD PRIMARY KEY ("ID"); 
+
+# 增加队列
+ALTER TABLE STUDENT ADD (STATUS NUMBER(1), GRADE NUMBER(3));
+
+# 增加注释
+COMMENT ON COLUMN STUDENT.STATUS is "学习状态";
+COMMENT ON COLUMN STUDENT.GRADE is "学生年级";
+
+# 删除字段
+ALTER TABLE STUDENT DROP COLUMN GRADE;
+
+# 修改字段
+# 修改字段长度
+ALTER TABLE STUDENT MODIFY (STATUS VARCHAR2(10));
+ALTER TABLE STUDENT RENAME COLUMN STATUS TO STUDY_STATUS;
 ```
 
 ## 序列
@@ -103,9 +125,20 @@ AND page_.NUM <= #{end}
 >
 >   经过验证，确实如此。
 
-## 计算时间
+## 函数
 
-- https://www.cnblogs.com/yanghj010/p/5109714.html
+### 截取时间
+
+``` sql
+// 获取时间的时
+SELECT TO_CHAR(SYSDATE, 'hh24') D from dual;
+// 获取时间的日
+SELECT TO_CHAR(SYSDATE, 'dd') D from dual;
+```
+
+### 计算时间
+
+- [Oracle 计算两个时间的差值](https://www.cnblogs.com/yanghj010/p/5109714.html)
 
 ``` sql
 // 天
