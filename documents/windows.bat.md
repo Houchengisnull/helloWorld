@@ -20,6 +20,88 @@ run.bat helloWorld
 echo %1
 ```
 
+## 转义字符
+
+- **参考**
+- [解放双手！ bat 批处理自动化运行程序](https://zhuanlan.zhihu.com/p/125033413)
+- [^是批处理中的转义符](http://blog.sina.com.cn/s/blog_65d50aab0102xeu2.html)
+
+`^`是批处理中的转义字符，将特殊字符转换为普通字符。例如：
+
+``` bat
+@echo off
+set /a a=123
+set /a b=456
+if %a% geq %b% (
+  echo %a%^>=%b%
+) else (
+  echo %a%^<%b% 
+)
+pause
+```
+
+# &，&&，|与||
+
+- **&**
+
+  表示任务在后台执行
+
+- **&&**
+
+  表示前一条任务执行成功时，才执行后一条命令。
+
+  例如：
+
+  ``` bat
+  echo 'hello' && echo 'world'
+  ```
+
+- **|**
+
+  表示管道，上一条命令的输出作为下一条命令参数。
+
+- **||**
+
+  表示上一条命令执行失败后，才执行下一条命令。
+
+# 搜索 Find
+
+``` bat
+type hello.txt | find "world"
+```
+
+用于在文件中搜索特定字符串，通常也作为条件判断的铺垫。
+
+# 循环
+
+- **参考**
+
+  [for/F命令详解](https://www.cnblogs.com/hinata-sen/p/7443007.html)
+
+  [BAT读取文件](https://blog.csdn.net/lengyuezuixue/article/details/81387141)
+
+- **查看SVN中更新文件**
+
+  ``` bat
+  # 将svn最近10条记录保存到history.txt
+  svn log -v -l 10 >> history.txt
+  
+  # 假设项目名为demo,代码在SVN上保存路径如下
+  # demo
+  # | - src
+  # 		| - com.hello.main
+  # | - test
+  for /f "tokens=2" %%i in ('findstr "demo"')
+  ```
+
+  
+
+# 查看文件内容 type
+
+``` bat
+type hello.txt
+```
+
 # 查看帮助信息
 
 `/?`
