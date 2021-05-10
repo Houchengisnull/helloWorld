@@ -2,6 +2,33 @@
 
 # DDL
 
+## 表空间与用户
+
+``` sql
+/* 创建用户myoracle*/
+CREATE USER myorcl identified by "password";
+/* 授权 */
+GRANT CREATE SESSION TO myorcl;
+GRANT CREATE TABLE TO myorcl;
+GRANT CREATE TABLESPACE TO myorcl;
+GRANT CREATE VIEW TO myorcl;
+/* 授权用户创建序列 */
+GRANT CREATE SEQUENCE,SELECT ANY SEQUENCE TO myorcl;
+
+/* 创建表空间 */
+CREATE TABLESPACE my_orcl_space;
+DROP TABLESPACE my_orcl_space;
+
+/* 用户授权 */
+ALTER USER myorcl quota unlimited on my_orcl_space;
+```
+
+- **删除用户**
+
+``` sql
+DROP USER my_orcl cascade;
+```
+
 ## 表
 
 - **创建**
@@ -250,4 +277,15 @@ insert into tablename (date_col) value (sysdate + 1);
   RMAN> crosscheck archivelog all;   
   ```
 
--
+# FAQ
+
+## 无法删除当前连接用户
+
+``` sql
+/* 查看用户连接情况 */
+SELECT username,sid,serial# from v$session;
+
+/* 找到退出用户sid与serial */
+ALTER SYSTEM KILL SESSION '532,4562';
+```
+

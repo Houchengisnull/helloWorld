@@ -50,13 +50,20 @@ SELECT name, value FROM V$PARAMETER WHERE name = 'db_block_size'
 
   https://www.cnblogs.com/dunjidan/p/4033573.html
 
+### 数据库对象
+
+数据库对象指的是在`Oracle`中所具有特殊功能的组件，统称为`数据库对象`。比如：`表`、`视图`、`约束`、`索引`、`存储过程`等等。
+
 ### 用户
 
-`oracle用户`是用连接数据库和访问数据库对象的
+`oracle用户`是用连接`数据库`和访问`数据库对象`的
 
 ### 模式
 
-`数据库对象`的集合。`模式对象`是数据库数据的逻辑结构。
+`数据库对象`的集合。`模式对象`是数据库数据的***逻辑结构***。
+
+> For all intents and purposes you can consider a user to be a schema and a schema to be a user.
+> 在任何情况下你都可以把用户和schema当作同一个东西。
 
 ### 用户和模式的区别
 
@@ -142,6 +149,27 @@ SELECT name, value FROM V$PARAMETER WHERE name = 'db_block_size'
 `脏缓存块`存储已修改过但还没写入数据文件的信息。当通过`update statement`对某个缓存块中数据修改后，数据库将这个缓存块标记为脏缓存块。
 
 当满足一定条件时，将脏缓存块数据写入数据库文件中。
+
+# session、sid、serial
+
+- **参考**
+- [Oracle session的SID和Serial#的概念](http://blog.sina.com.cn/s/blog_c33497610102v54f.html)
+
+## sid
+
+`sid`用于标识一个`session`，与`process`对应。
+
+一个`process`一般对应一个`session`，在`session`结束后，新的`session`建立时，`sid`被复用。
+
+## Serial#
+
+`oracle`通过它来识别具有相同`sid`的不同`session`。
+
+可通过`conn user/passwd`命令发起新的`session`。
+
+``` sql
+SELECT username,sid,serial# from v$session;
+```
 
 # 注意
 
