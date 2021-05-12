@@ -74,6 +74,8 @@ type hello.txt | find "world"
 
 # 循环
 
+> 在循环中，我们常常需要用`!`取代`%`
+
 - **参考**
 
   [for/F命令详解](https://www.cnblogs.com/hinata-sen/p/7443007.html)
@@ -94,7 +96,42 @@ type hello.txt | find "world"
   for /f "tokens=2" %%i in ('findstr "demo"')
   ```
 
+
+# 字符串处理
+
+## 字符串替换
+
+- **常规**
+
+  ``` bat
+  set a=Helloworld
+  set b=world
+  echo %a:world= Hugo%
+  ```
+
+- **循环中的字符串替换**
+
+  关键在于使用两个`!`而非`%`将整个表达式引用起来，`:`后为被替换的字符串，`=`后为替换的字符串。
+
+  ``` bat
+  set relative=com.houc
   
+  for /f "tokens=2" %%i in ('findstr "com" svn.txt') do (
+  	set l=%%i
+  	echo !l:%relative%=!
+  )
+  ```
+
+## 字符串拼接
+
+使用`"`将表达式引用起来时，表明这个表达式在做`字符串拼接`的工作。在循环体中时，`%`会失效，需要用`!`。
+
+``` bat
+set a=1
+set b=99
+set "combine=%a%+%b%=100"
+echo %combine%
+```
 
 # 查看文件内容 type
 

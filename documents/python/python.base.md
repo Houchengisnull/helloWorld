@@ -152,6 +152,16 @@ https://www.cnblogs.com/7tiny/p/7209608.html
 
 # 循环
 
+## foreach
+
+``` python
+''' 输出脚本参数 '''
+import sys
+
+for i in sys.argv:
+    print(argv)
+```
+
 ## while
 
 ``` python

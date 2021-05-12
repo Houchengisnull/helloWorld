@@ -257,7 +257,7 @@ insert into tablename (date_col) value (sysdate + 1);
   # RMAN
   # RMAN 检查归档日志
   RMAN> crosscheck archivelog all; 
-  RMAN> list expire archivelog all
+  RMAN> list expired archivelog all
   ```
 - 清理全部
 
