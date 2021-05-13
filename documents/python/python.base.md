@@ -152,6 +152,16 @@ https://www.cnblogs.com/7tiny/p/7209608.html
 
 # 循环
 
+## for-index
+
+``` python
+fruits = ['banana', 'apple']
+for index in range(len(fruits)):
+    print '当前水果:', fruits[index]
+    
+print "Good bye!"
+```
+
 ## foreach
 
 ``` python
@@ -175,20 +185,42 @@ else:
 
 # 字符串
 
+## 以...开头/结尾
+
+``` python
+if str.startswith('Hello') :
+    print 'start with Hello'
+if str.endswith('.java'):
+    print 'end with .java'
+```
+
+## 替换
+
+``` python
+new_str = old_str.replace('hello', 'world')
+```
+
+## 长度
+
+``` python
+str = 'Hello world'
+print len(str)
+```
+
 ## 类型转换
 
 - 字符串转整形
 
   ``` python
   stringType = "1"
-  intType = str(stringType)
+  intType = int(stringType)
   ```
 
 - 整形转字符串
 
   ``` python
   intType = 1
-  stringType = int(intType)
+  stringType = str(intType)
   ```
 
 
@@ -201,6 +233,17 @@ import re
 rep = re.compile("1f\d.+")
 signature = rep.sub("", signature)
 ```
+
+# 集合
+
+- **排序**
+
+  ``` python
+  arr = [3, 2, 5, 7]
+  arr.sort()
+  for i in arr:
+      print i
+  ```
 
 # 异次元口袋——python类库
 
