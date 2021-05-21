@@ -51,7 +51,19 @@ rabbitmq-plugins enable rabbitmq_management`
   rabbitmq-plugins enablt rabbitmq_management
   ```
 
-- 默认端口：15672
-- 默认用户：guest
-- 默认密码：guest
+- 默认端口：`15672`
+
+- 默认用户：`guest`
+
+- 默认密码：`guest`
+
+# 查看状态
+
+进入`rabbitmq`的安装目录：
+
+``` shell
+rabbitmqctl status
+```
+
+
 
