@@ -379,30 +379,72 @@ https://www.xuebuyuan.com/1760563.html
 
 http://blog.itpub.net/145274/viewspace-591473/
 
-# 弱引用的应用场景
+# 引用 Reference
 
-- 弱引用的概念
+## 软引用
 
-  > JVM发生GC时，一定回收弱引用。
+当要发生`OOM`前，回收软引用。
 
-  强引用在置空时才可以被JVM的GC回收
+``` java
+/**
+* -Xms10m -Xmx10m -XX:+PrintGCDetails
+*/
+User user = new User();
+user.setId("1");
+user.setName("Houcheng");
+SoftReference<User> userCache = new SoftReference(user);
+user = null;
 
-  ``` java
-  Object obj = new Object();
-  obj = null;
-  ```
+System.out.println(userCache.get());
+System.gc();
+System.out.println(userCache.get() == null);
 
-  但手动置空对象对于程序员来说，**繁琐且违背自动回收的思想。**平常情况下，手动置空不需要程序员来做，因为在Java中，对于调用它的方法执行完毕后，指向它的引用会从栈帧中“pop up”。下次GC时将回收它。
+List<byte[]> bytes = new ArrayList<>();
+for (int i = 0; i < 10; i++) {
+    try {
+        System.out.println(userCache.get());
+        bytes.add(new byte[1024 * 1024]);
+    } catch (OutOfMemoryError e) {
+        System.err.println(userCache.get());
+    }
+}
+```
 
-- Cache
+### 软引用应用场景
 
-  但也有例外，缓存对象正是程序员运行需要的，那么只要程序运行，Cache对象的引用就不会被回收。随着Cache中的Reference越来越多，GC无法回收的对象也会越来越多。
+缓存
 
-  由于无法被自动回收，那就需要程序员手动释放这些引用占据的内存，而这却违背了GC本质——自动回收可回收的对象。
+## 弱引用
+
+**弱引用的概念**
+
+> `JVM`发生`GC`时，一定回收弱引用。
+
+强引用在置空时才可以被`JVM`的`GC`回收
+
+``` java
+Object obj = new Object();
+obj = null;
+```
+
+但手动置空对象对于程序员来说，**繁琐且违背自动回收的思想。**平常情况下，手动置空不需要程序员来做，因为在Java中，对于调用它的方法执行完毕后，指向它的引用会从栈帧中“pop up”。下次`GC`时将回收它。
+
+### 弱引用的应用场景
+
+- **ThreadLocal**
+- **WeakHashMap**
+
+<hr>
+
+- **Cache**
+
+  但也有例外，缓存对象正是程序员运行需要的，那么只要程序运行，Cache对象的引用就不会被回收。随着Cache中的Reference越来越多，`GC`无法回收的对象也会越来越多。
+
+  由于无法被自动回收，那就需要程序员手动释放这些引用占据的内存，而这却违背了`GC`本质——自动回收可回收的对象。
 
   于是就有`WeakReference`。
 
-- Example
+- **Example**
 
   ``` java
   
@@ -450,7 +492,15 @@ http://blog.itpub.net/145274/viewspace-591473/
   
   ```
 
-https://blog.csdn.net/qq_33663983/article/details/78349641
+- **参考**
+
+[WeakReference 学习和使用]([WeakReference 学习和使用_眼界决定境界-CSDN博客_weakreference使用](https://blog.csdn.net/qq_33663983/article/details/78349641))
+
+## 虚引用
+
+- 虚引用唯一的应用场景
+
+能令对象在被垃圾回收时收到一个系统通知。
 
 # Java中常见的内存泄漏场景
 
