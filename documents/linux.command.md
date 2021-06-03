@@ -1,5 +1,21 @@
 [TOC]
 
+-  [Linux命令大全(手册)](https://www.linuxcool.com/)
+
+# Shell
+
+## #! /bin/shell
+
+- [#!/bin/sh简介](https://www.cnblogs.com/fengliu-/p/9999854.html)
+
+在`shell`中`#`是注释，而`#!`却不是，需要我们当成一个整体来对待。最常见的即:
+
+``` shell
+#!/bin/sh
+```
+
+这条语句用于定义我们执行`shell`脚本的程序在系统中的位置。如果我们的`shell`脚本中没有这条语句，那么系统默认运行`C shell csh`。
+
 # 系统
 
 ## 系统版本
@@ -225,6 +241,26 @@ $ cat /proc/#{pid}/status
 
 # 进程
 
+## 后台运行
+
+- [Linux shell中&，&&，|，||的用法](https://www.cnblogs.com/unknown404/p/10355705.html)
+- [shell 脚本中&和&&的区别](https://www.jianshu.com/p/1f8996860d52)
+
+``` shell
+java -jar SpringBootPorjectName.jar 2>&1 1>/dev/null &
+```
+
+程序在后台运行。
+
+- 与`&&`的区别：
+
+  ``` shell
+  #1 a和b同时进行
+  a & b
+  #2 a运行成功后再运行b
+  a && b
+  ```
+
 ## 查看
 
 ```
@@ -325,6 +361,10 @@ https://blog.csdn.net/baozijiaruqing/article/details/80645082
 
 # vi/vim
 
+## 查找
+
+在`vi/vim`中输入`/`开搜索文件中你需要查找的字符串。
+
 ## 模式
 
 ### 命令模式
@@ -396,7 +436,7 @@ export CLASSPATH=./JAVA_HOME/lib;./JAVA_HOME/bin
 
 > 修改后若要立即生效需要运行
 
-```
+```shell
 # source /etc/profile
 ```
 
@@ -404,14 +444,14 @@ export CLASSPATH=./JAVA_HOME/lib;./JAVA_HOME/bin
 
 修改 用户目录下 .bash_profile (具体文件看linux版本,比如 ./bashrc)
 
-```
+```shell
 # vi /etc/profile
 export CLASSPATH=./JAVA_HOME/lib;$JAVA_HOME/jre/lib
 ```
 
 ### 临时变量
 
-```
+```shell
 export hello=world
 ```
 
