@@ -6,9 +6,9 @@
 
 ## Gitblit
 
-- 在-windows-上部署-gitblit
+- 在`windows`上部署`gitblit`
 
-https://blog.csdn.net/longintchar/article/details/80787907
+[在 Windows 上部署 gitblit](https://blog.csdn.net/longintchar/article/details/80787907)
 
 # 分支模型 Git Flow
 

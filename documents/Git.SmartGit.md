@@ -6,5 +6,10 @@
 
 此时我们需要：
 
-- Edit > Preferences > Hosting Providers
-- 设置Account
+- `Edit` > `Preferences` > `Hosting Providers`
+- 设置`Account`
+
+# 国际化
+
+- `Edit` > `Preferences` > `User Interface`
+- 在`User Interface`下有`Language`选项
