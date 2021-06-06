@@ -259,9 +259,71 @@ Java兼容性测试
 
 - 初始OSGi
 
-  https://www.cnblogs.com/zhaoxinshanwei/p/8376696.html
+  [【OSGI】1.初识OSGI-到底什么是OSGI](https://www.cnblogs.com/zhaoxinshanwei/p/8376696.html)
 
-  https://blog.51cto.com/9291927/2125230
+  [架构设计——OSGI规范](https://blog.51cto.com/9291927/2125230)
+
+# 编译JDK
+
+- **windows**	[只需几步，轻轻松松编译OpenJDK8](https://zhuanlan.zhihu.com/p/114547511)
+
+- **Ubuntu-16.04.6**	[编译OpenJDK8](https://blog.csdn.net/zmken497300/article/details/89927427)
+
+> 想要一探JDK内部的实现机制，最便捷的路径之一就是自己编译一套JDK，通过阅读和跟踪调试JDK源码去了解Java技术体系的原理，虽然门槛会高一点，但肯定会比阅读各种书籍、文章更加贴近本质。
+
+## 获取源码
+
+- [OpenJDK - 官网](https://openjdk.java.net/)
+
+### mercurial
+
+- [OpenJDK - mercurial](http://hg.openjdk.java.net/)
+
+实际上，从国内克隆`mercurial`仓库上的`JDK`源码太慢了，建议直接去下载一份打包，这样做更加快捷。
+
+但使用`mercurial`的好处就是可以阅读各个大神的修改日志。
+
+### Github
+
+- [OpenJDK - Github](https://github.com/openjdk)
+
+## 构建编译环境
+
+> 无论在什么平台下编译，都建议读者认真阅读一遍源码中的`README-builds.html`文档。
+>
+> [JDK8 README-build.html](http://hg.openjdk.java.net/jdk8/jdk8/raw-file/tip/README-builds.html)
+
+- **JDK Source Code**	`JDK源代码`
+
+- **Bootstrap JDK**
+
+  在`OpenJDK`中，有的代码使用`C++`编写，有的代码使用`Java`自身实现，编译这些`Java`代码需要一个可用的`JDK`，官方称之为`Bootstrap JDK`。比如需要编译`OpenJDK7`，则要`Bootstrap JDK`版本至少为`JDK6u14`或之后版本。
+
+- **Ant**
+
+- **GCC`/`binutils**
+
+### 在Ubuntu上下载编译JDK所需依赖
+
+``` shell
+sudo apt-get install
+	build-essential
+    gawk
+    m4
+    openjdk-6-jdk
+    libasound2-dev
+    libcups2-dev
+    libxrender-dev
+    xorg-dev
+    xutils-dev 
+    x11proto-print-dev 
+    binutils 
+    libmotif3 
+    libmotif-dev
+    ant
+```
+
+折腾了一天，发现即使是网易的`APT源`也无法完整的包含以上清单。
 
 # 卷2 Java内存区域与内存溢出异常
 
