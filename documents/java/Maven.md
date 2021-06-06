@@ -58,17 +58,17 @@
 
 # 在IDEA中使用Maven
 
-https://www.cnblogs.com/sigm/p/6035155.html
+[使用IntelliJ IDEA 配置Maven（入门）](https://www.cnblogs.com/sigm/p/6035155.html)
 
 ## 在IDEA中使用Maven构建Web应用
 
-https://blog.csdn.net/u012826756/article/details/79478973
+[idea使用maven构建web应用](https://blog.csdn.net/u012826756/article/details/79478973)
 
 # 手动导入jar
 
 依赖插件
 
-https://blog.csdn.net/tyrroo/article/details/77017190
+[maven install 插件介绍](https://blog.csdn.net/tyrroo/article/details/77017190)
 
 ``` xml
 <dependency>
