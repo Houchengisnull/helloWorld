@@ -125,3 +125,22 @@ https://www-01.ibm.com/support/docview.wss?uid=swg21229860
 https://blog.csdn.net/hou09tian/article/details/78586432
 
 https://blog.csdn.net/herobox/article/details/52402260
+
+# 远程桌面连接
+
+`mstsc`
+
+# 查看资源被占用
+
+`任务管理器 > 性能 > 资源管理器`
+
+# Windows 10
+
+## 系统配置
+
+`MSConfig`
+
+### 启动
+
+点击`打开任务管理器`手动关闭开机启动项。
+
