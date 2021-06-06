@@ -4,7 +4,7 @@
 
 > d 代表了daemon (守护进程)，例如`vsFTPd`、`mysqld`。通常为某系统的服务端程序。
 
-https://blog.csdn.net/comeoncomputer/article/details/78681193
+- [为什么中linux中各种服务都带一个d呢？](https://blog.csdn.net/comeoncomputer/article/details/78681193)
 
 # 目录结构
 
@@ -52,7 +52,7 @@ drwx-rwx-x ...
 
 ### 参考
 
-https://www.cnblogs.com/pengyunjing/p/8543026.html
+[linux下查看所有用户及所有用户组](https://www.cnblogs.com/pengyunjing/p/8543026.html)
 
 ## shell
 
@@ -63,4 +63,27 @@ https://www.cnblogs.com/pengyunjing/p/8543026.html
 ```
 
 该语句将引用根目录下路径的`ksh`
+
+# 发行版
+
+## Ubuntu
+
+- [官网](http://old-releases.ubuntu.com/)
+
+有操作界面的`Linux`系统。
+
+### 修改密码
+
+- [ubuntu 设置root用户密码并实现root用户登录](https://segmentfault.com/a/1190000018164314)
+
+``` shell
+# 修改root用户密码
+sudo passwd
+```
+
+
+
+# VMware
+
+- **密钥**	`YF390-0HF8P-M81RQ-2DXQE-M2UT6`
 
