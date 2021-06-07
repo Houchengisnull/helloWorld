@@ -34,15 +34,15 @@ public class 活锁 {
             String name = Thread.currentThread().getName();
             long last = System.currentTimeMillis();
             while (finishFood < food) {
-                // System.out.println(name + "等待中");
+                 System.out.println(name + "等待中");
                 if (菜刀.tryLock()) {
-                    /*System.out.println(name + "获得了菜刀");*/
+                    System.out.println(name + "获得了菜刀");
                     if (案板.tryLock()) {
-                        /*System.out.println(name + "获得了案板");
-                        System.out.println(name + "开始切菜");*/
+                        System.out.println(name + "获得了案板");
+                        System.out.println(name + "开始切菜");
                         Thread.sleep(厨子A切菜时间);
                         finishFood ++;
-                        /*System.out.println(name + "切菜完毕");*/
+                        System.out.println(name + "切菜完毕");
                         案板.unlock();
                     }
                     菜刀.unlock();
@@ -67,15 +67,15 @@ public class 活锁 {
             String name = Thread.currentThread().getName();
             long last = System.currentTimeMillis();
             while (finishFood < food) {
-                // System.out.println(name + "等待中");
+                 System.out.println(name + "等待中");
                 if (案板.tryLock()) {
-                    /*System.out.println(name + "获得了案板");*/
+                    System.out.println(name + "获得了案板");
                     if (菜刀.tryLock()) {
-                        /*System.out.println(name + "获得了菜刀");
-                        System.out.println(name + "开始切菜");*/
+                        System.out.println(name + "获得了菜刀");
+                        System.out.println(name + "开始切菜");
                         Thread.sleep(厨子B切菜时间);
                         finishFood ++;
-                        /*System.out.println(name + "切菜完毕");*/
+                        System.out.println(name + "切菜完毕");
                         菜刀.unlock();
                     }
                     案板.unlock();
