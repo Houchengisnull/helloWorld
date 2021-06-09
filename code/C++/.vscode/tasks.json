@@ -8,7 +8,7 @@
             "label": "Compile", // 任务名称，与launch.json的preLaunchTask相对应
             "command": "clang++", // 要使用的编译器
             "args": [
-                "${workspaceFolder}\\${fileBasenameNoExtension}.cpp",
+                "${workspaceFolder}\\src\\${fileBasenameNoExtension}.cpp",
                 "-o", // 指定输出文件名，不加该参数则默认输出a.exe
                 "${workspaceFolder}\\bin\\${fileBasenameNoExtension}.exe",
                 "-g", // 生成和调试有关的信息
