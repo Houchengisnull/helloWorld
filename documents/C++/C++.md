@@ -219,13 +219,11 @@
 
 ### Visual Code
 
-
-
 <a href='https://www.cnblogs.com/esllovesn/p/10012653.html'>Visual Studio Code 配置C/C++环境</a>
 
 - **[下载]**	`LLVM`、`MinGw-w64`、`CMake`
 
-- **[合并]**	将`MinGw-w64`中的所有文件及文件夹放在`$LLVM\目录下
+- **[合并]**	将`MinGw-w64`中的所有文件及文件夹放在`$LLVM\`目录下
 
 - **[配置]**	配置`Visual Studio Code`的`json`配置文件
 
