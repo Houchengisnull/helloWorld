@@ -18,6 +18,7 @@
 -  [JavaFX 15](https://openjfx.cn/index.html)
 -  [JavaFX中文资料](http://www.javafxchina.net/blog)
 - [JavaFX 教程 （中文）](https://code.makery.ch/zh-cn/library/javafx-tutorial/)
+- [Client Technologies: Java Platform, Standard Edition (Java SE) 8 Release 8 (oracle.com)](https://docs.oracle.com/javase/8/javase-clienttechnologies.htm)
 
 # 概述
 
