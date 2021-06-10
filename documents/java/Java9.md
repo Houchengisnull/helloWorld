@@ -56,31 +56,29 @@
 
 ## 模块化的历史
 
-### OSGi
-
 > - **2021-6-5**
 >
 >   今天在读《深入理解Java虚拟机》时，读`<1.5 展望Java技术的未来>`，发现对模块化的一些叙述。
 >
 >   觉得有点意思，便记录下来。
-
-- ***模块化是解决应用系统与技术平台越来越复杂、越来越庞大问题的重要途经。***
-
-  作为一名`Java开发人员`，我理解的`应用系统`便是`Java程序`，而`技术平台`指的是`JDK`或`JRE`。大部分情况下，我们在生产环境安装的都是一整套`JRE`，而`JDK8`的`JRE`就有180MB。
-
-  如果我只是开发一个简单的程序，根本不会用到`JRE`所有的功能。要是我们能把`JRE`拆开那将节省很多空间。
-
-- ***随着OSGi技术的发展，各个厂商在JCP中对模块化规范的激烈斗争***
-
-  要拆分不容易（要解耦不容易），我们的模块之间依赖必须要低（`高内聚低耦合`）,而`OSGi(Open Service Gateway Initiative)`就是做这样一件事情，不单单是逻辑上解耦，甚至是物理上的解耦。
-
-  [【OSGI】1.初识OSGI-到底什么是OSGI](https://blog.csdn.net/acmman/article/details/50848595)
+>   
+> - ***模块化是解决应用系统与技术平台越来越复杂、越来越庞大问题的重要途经。***
+>
+>   作为一名`Java开发人员`，我理解的`应用系统`便是`Java程序`，而`技术平台`指的是`JDK`或`JRE`。大部分情况下，我们在生产环境安装的都是一整套`JRE`，而`JDK8`的`JRE`就有180MB。
+>
+>   如果我只是开发一个简单的程序，根本不会用到`JRE`所有的功能。要是我们能把`JRE`拆开那将节省很多空间。
+>
+> - ***随着OSGi技术的发展，各个厂商在JCP中对模块化规范的激烈斗争***
+>
+>   要拆分不容易（要解耦不容易），我们的模块之间依赖必须要低（`高内聚低耦合`）,而`OSGi(Open Service Gateway Initiative)`就是做这样一件事情，不单单是逻辑上解耦，甚至是物理上的解耦。
+>
+>   [【OSGI】1.初识OSGI-到底什么是OSGI](https://blog.csdn.net/acmman/article/details/50848595)
 
 ### 模块化之争
 
-在2007年，`Sun`提出`JSR-277: Java Module System`，但受挫于`IBM`提交的`JSR-291：Dynamic Component Support for Java SE(实际就是OSGi R4.1)`。但`Sun`作为`Java创始者`，不能接受一个无法由它控制的规范，在整个`JDK 6`期间拒绝把任何`模块化技术`内置到`JDK`中。
-
-在`JDK7`期间，`SUN`提交了`JSR-294：Improved Modularity Support in the Java Programming Language`，尽管该提案未被通过，但`Sun`独立于`JCP`在`Open JDK`中建立了一个`Jigsaw`（拼图）。
+>在2007年，`Sun`提出`JSR-277: Java Module System`，但受挫于`IBM`提交的`JSR-291：Dynamic Component Support for Java SE(实际就是OSGi R4.1)`。但`Sun`作为`Java创始者`，不能接受一个无法由它控制的规范，在整个`JDK 6`期间拒绝把任何`模块化技术`内置到`JDK`中。
+>
+>在`JDK7`期间，`SUN`提交了`JSR-294：Improved Modularity Support in the Java Programming Language`，尽管该提案未被通过，但`Sun`独立于`JCP`在`Open JDK`中建立了一个`Jigsaw`（拼图）。
 
 总之在模块化之争中，`Sun`处于劣势，实在是有够好笑的，整个过程是像小孩子打架一样。
 
@@ -90,21 +88,17 @@
 
 模块是一个被命名的代码与数据的自描述集合。
 
-- 代码
+- **代码**
 
-- 数据
-
-  `resource`和一些静态信息。
+- **数据**	`resource`和一些静态信息。
 
 ## Module JDK
 
-- [JEP 200](http://openjdk.java.net/jeps/200)
+- [JEP 200 : The Modular JDK](http://openjdk.java.net/jeps/200)
 
 ![img](../images/java9/jdk8_jdk9_compare.png)
 
-`JDK 9`可以在编译、构建、运行期间进行组合。
-
-它将运来复杂的`JDK`拆分成各个精简的模块。
+`JDK9`可以在<u>编译、构建、运行期间</u>进行组合。`oracle`将原本复杂的`JDK`拆分成各个精简的模块。
 
 - **查看JDK模块**
 
@@ -116,17 +110,17 @@
 
 ## Module System
 
-- [JEP 261](http://openjdk.java.net/jeps/261)
+- [JEP 261 : Module System](http://openjdk.java.net/jeps/261)
 
-### Phases
+### Phases 阶段
 
 新增`link time`在编译阶段与运行阶段期间，用于装配和优化一个自定义`run-time image`——运行镜像，并提供连接工具`jlink`。
 
-### Motivation
+### Motivation 动机
 
 基于`Jigsaw`实现，令`Java`程序更容易扩展到小型设备上。
 
-## Declare
+## 声明模块
 
 `模块`的自描述表现其声明中。
 
@@ -160,11 +154,9 @@ module com.foo.bar{
 
 # jlink
 
-`Modular`是为了更容易地扩展至小型设备上。如果我们的程序依然使用原来巨大的`jdk/jre`那么毫无意义。
+`Modular`是为了更容易地扩展至小型设备上。如果我们的程序依然使用原来巨大的`jdk/jre`那么毫无意义。**所以`java 9`新增了`jlink`工具以简化`jre`，它将按需生成`jre`。**
 
-所以`java 9`新增了`jlink`工具以简化`jre`，它将按需生成`jre`。
-
-> 裁剪后的`jre`应该又被称为`run-time image`。
+> 裁剪后的`jre`应该被称为`run-time image`。
 
 - **查看项目模块**
 
@@ -175,10 +167,9 @@ module com.foo.bar{
 - **裁剪**
 
   ``` java
+  // `java.base`是最基础的模块，所有模块依赖它。
   jlink --module-path jmods --add-modules java.base --output minijre
   ```
-
-> `java.base`是最基础的模块，所有模块依赖它。
 
 # jmod
 
@@ -212,14 +203,14 @@ module com.foo.bar{
 
 ``` xml
 <dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct-processor</artifactId>
-            <version>1.3.0.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.25</version>
+    <groupId>org.mapstruct</groupId>
+    <artifactId>mapstruct-processor</artifactId>
+    <version>1.3.0.Final</version>
+</dependency>
+<dependency>
+    <groupId>org.slf4j</groupId>
+    <artifactId>slf4j-api</artifactId>
+    <version>1.7.25</version>
 </dependency>
 ```
 
@@ -235,15 +226,15 @@ module com.foo.bar{
 
 ``` xml
 <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>1.1.2</version>
-        </dependency>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-classic</artifactId>
+    <version>1.1.2</version>
+</dependency>
+<dependency>
+    <groupId>ch.qos.logback</groupId>
+    <artifactId>logback-core</artifactId>
+    <version>1.1.2</version>
+</dependency>
 ```
 
 我直接添加了这个能正常打印了。
