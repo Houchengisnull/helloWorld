@@ -18,6 +18,12 @@
 
 > 实际上在学习`@PostConstruct`有见过，特地总结在`Java`笔记里。
 
+## JEP
+
+- [JEP 索引](http://openjdk.java.net/jeps/0)
+
+`JEP`，全称`JDK Enhancement-Proposal & Roadmap Process`。该组织主要负责`JDK`的维护，而`JCP`负责`Java API`的维护。
+
 # command
 
 ## run
