@@ -114,6 +114,18 @@ public class TestController {
 }
 ```
 
+### 设置代理
+
+``` java
+SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
+InetSocketAddress address = new InetSocketAddress("192.168.0.1", 8080);
+Proxy proxy = new Proxy(Proxy.Type.HTTP, address);
+factory.setProxy(proxy);
+
+RestTemplate template = new RestTemplate();
+template.setRequestFactory(factory);
+```
+
 ### 设置底层连接方式
 
 我们可以使用`RestTemplate`的无参构造方法快速实现一个`Restful`接口调用。同样可以结合`HttpClient`与`HttpComponentsClientHttpRequestFactory`设置一些请求属性，并将通过一个请求工厂快速达到我们的目的。
