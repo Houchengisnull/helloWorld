@@ -1,11 +1,5 @@
 [toc]
 
-- 参考
-
-  https://blog.csdn.net/zhm3023/article/details/82217222
-
-  https://blog.csdn.net/qq_36505948/article/details/82734133
-
 # 安装Erlang
 
 > `Erlang`是一种通用的面向并发的编程语音。
@@ -28,14 +22,12 @@ erl
 
 如果开启MQ服务识别，出现`BOOT FAILED`
 
-https://www.jianshu.com/p/264717dcbd1f
-
-要注意不能把`Rabbit MQ`安装在含中文字符或空格的路径下。
+需要检查是否将`Rabbit MQ`安装在含中文字符或空格的路径下。
 
 ## 安装管理插件
 
 ``` bat
-rabbitmq-plugins enable rabbitmq_management`
+rabbitmq-plugins enable rabbitmq_management
 ```
 
 - 出现`Applying plugin configuration to rabbit@XXX failed`
@@ -48,7 +40,7 @@ rabbitmq-plugins enable rabbitmq_management`
   rabbitmq-service install
   rabbitmq-service start
   # 重新安装插件
-  rabbitmq-plugins enablt rabbitmq_management
+  rabbitmq-plugins enable rabbitmq_management
   ```
 
 - 默认端口：`15672`
@@ -56,6 +48,25 @@ rabbitmq-plugins enable rabbitmq_management`
 - 默认用户：`guest`
 
 - 默认密码：`guest`
+
+## FAQ
+
+- [安装RabbitMQ出现init terminating in do_boot的解决方法 - 简书 (jianshu.com)](https://www.jianshu.com/p/264717dcbd1f)
+
+- [windows 安装 rabbitmq ERLANG_HOME not set correctly](https://blog.csdn.net/weixin_34279184/article/details/92173659)
+
+  最初以为`erlang`安装有问题，于是卸载了重装。最后发现问题出在`rabbitmqctrl.bat`。
+
+  ``` bat
+  "!ERLANG_HOME!\bin\erl.exe" ^
+          -pa "!RABBITMQ_EBIN_ROOT!" ^
+          -noinput -hidden ^
+          -s rabbit_prelaunch ^
+          !RABBITMQ_NAME_TYPE! rabbitmqprelaunch!RANDOM!!TIME:~9! ^
+          -extra "!RABBITMQ_NODENAME!"
+  ```
+
+  其中要求环境变量`ERLANG_HOME`为`bin`目录的父路径。
 
 # 查看状态
 
