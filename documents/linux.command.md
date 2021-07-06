@@ -187,12 +187,13 @@ $ rm -r #{directory}
 
 ``` shell
 # 压缩文件
-$ tar -zcvf #{directory}
+$ tar -zcvf #{compress_file} #{directory}
+# 例如
+$ tar -zcvf hello.tar.gz ./hello
+
 # 解压文件
 $ tar -zxvf #{directory}
 ```
-
-
 
 # 网络
 
