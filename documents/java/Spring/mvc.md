@@ -106,6 +106,10 @@ public void handle(
 
 ### 方法返回值
 
+#### ResponseBody
+
+将方法的返回值放入Http响应的响应体(Response Body)中。
+
 #### ResponseEntity
 
 类似`@ResponseBody`，但是包含响应状态与响应头。
