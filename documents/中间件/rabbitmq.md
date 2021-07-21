@@ -7,6 +7,8 @@
 - [RabbitMQ笔记一：消息队列和RabbitMQ及AMQP协议介绍](https://www.jianshu.com/p/6e6821604efc)
 - **实现语言**	`Erlang`
 
+![img](../images/messagequeue/rabbitmq.arch.jpg)
+
 ## 用途
 
 - 异步处理
@@ -50,6 +52,47 @@
 
 > - 如何理解“路由”？
 > - 2021-7-14 暂时理解为转发就好了。
+
+# Exchange
+
+- **参考**
+- [RabbitMQ笔记三：四种类型Exchange](https://www.jianshu.com/p/04f443dcd8bd)
+
+## 作用
+
+服务器不会把消息直接塞进队列(`Queue`)，而是发送给交换机(`Exchange`)。再根据消息附带的规则，`Exchange`将会决定消息投递到哪个队列中。
+
+- **routing key**
+
+  消息附带的规则称为`路由键(routing key)`。
+
+- **binding key**
+
+  队列和交换机之间的绑定。
+
+## `Exchange`类型有四种：
+
+- **Direct Exchange**
+
+  将消息中的`Routing key`与该`Exchange`关联的所有`Binding`中的`Routing key`匹配，如果**相等**则发送到该`Binding`对应的`Queue`。
+
+- **Topic Exchange**
+
+  将消息中的`Routing key`与该`Exchange`关联的所有`Binding`中的`Routing key`匹配，如果**匹配**则发送到该`Binding`对应的`Queue`。
+
+- **Fanout Exchange**
+
+  忽略`Routing key`， 直接将消息转发给所有`binding`的队列中。
+
+- **Headers Exchange**
+
+  将消息中的`headers`与该`Exchange`相关联的所有`Binding`中的**参数**进行匹配，如果**匹配**则发送到绑定的队列中。
+
+## Routing Key匹配规则
+
+- **\***	匹配一个单词
+- **#**	匹配任意字符
+- **\*,#**	只能写在`.`左右，且不能挨着字符
 
 # Publisher Confirms 消息确认
 
