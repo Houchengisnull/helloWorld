@@ -6,7 +6,8 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+/*import org.springframework.boot.test.SpringApplicationConfiguration;*/
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -21,7 +22,12 @@ import hc.web.mapper.UserMapper;
  */
 @SuppressWarnings("deprecation")
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(Application.class)
+@SpringBootTest(classes = {Application.class})
+/**
+ * @SpringApplicationConfiguration在1.4.0版本后不可用
+ * 以@RunWith与@SpringBootTest代替
+ */
+// @SpringApplicationConfiguration(Application.class)
 public class UnitTesting {
 	@Autowired
 	private UserMapper userMapper;
