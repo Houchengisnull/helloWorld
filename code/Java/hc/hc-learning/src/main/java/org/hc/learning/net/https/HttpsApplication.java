@@ -1,4 +1,4 @@
-package org.hc.learning.net;
+package org.hc.learning.net.https;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
