@@ -1,7 +1,7 @@
 package org.hc.learning.net.hessian.client;
 
 import com.caucho.hessian.client.HessianProxyFactory;
-import org.hc.learning.net.hessian.server.service.HelloService;
+import org.hc.learning.net.hessian.client.service.HelloService;
 
 import java.net.MalformedURLException;
 

@@ -1,6 +1,6 @@
 package org.hc.learning.net.hessian.client;
 
-import org.hc.learning.net.hessian.server.service.HelloService;
+import org.hc.learning.net.hessian.client.service.HelloService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
