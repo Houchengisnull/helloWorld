@@ -284,6 +284,12 @@ public void doWhatLevel(LikeEnum likeLevel) {
 
 ZO01设置了禁止转载，就不将他的回答copy上去了。个人以为确实是个直击灵魂的问题。
 
+## 匿名内部类
+
+### 一个冷知识:匿名内部类也会生成class文件
+
+比如在`Hello.java`中有一个匿名内部类，那么编译后除了生成`Hello.class`，还会生成`Hello$1.class`。
+
 # 克隆
 
 克隆的目的是快速获取一个对象副本
