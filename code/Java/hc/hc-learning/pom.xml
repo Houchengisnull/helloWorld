@@ -121,5 +121,17 @@
 		  <version>1.2.61</version>
 		  <scope>compile</scope>
 	  </dependency>
+	  <!-- Hessian 轻量级RPC工具 -->
+	  <dependency>
+		  <groupId>com.caucho</groupId>
+		  <artifactId>hessian</artifactId>
+		  <version>4.0.60</version>
+	  </dependency>
+	  <!-- HessianServiceExplorer依赖spring-boot-starter-web -->
+	  <dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-web</artifactId>
+	  </dependency>
+
   </dependencies>
 </project>
