@@ -181,8 +181,15 @@ https://blog.csdn.net/jiankunking/article/details/73188603
 
   - inherit 继承
 
-![1561804023049](https://github.com/Houchengisnull/helloWorld/blob/master/documents/images/idea/idea_pyhton_plugin.png)
+![1561804023049](images/idea/idea_pyhton_plugin.png)
 
 ## 参考
 
-https://www.cnblogs.com/zlslch/p/7976893.html
+- [IDEA里如何安装Python插件打造开发环境（图文详解）](https://www.cnblogs.com/zlslch/p/7976893.html)
+
+# FAQ
+
+## IntelliJ idea 控制台（Console）里的查找功能
+
+- [IntelliJ idea 控制台（Console）里的查找功能](https://blog.csdn.net/x41990/article/details/99673562)
+
