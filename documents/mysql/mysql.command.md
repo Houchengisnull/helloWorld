@@ -68,6 +68,15 @@ net stop mysql
 
   [The latest supported Visual C++ downloads](https://support.microsoft.com/en-us/topic/the-latest-supported-visual-c-downloads-2647da03-1eea-4433-9aff-95f26a218cc0)
 
+### MySQL8.0安装
+
+在安装`MySQL8.0`时，没有`MySQL5.7`那样简单，只要点击`next`就ok。
+
+需要先执行`mysqld --initialize`初始化，再执行`net start mysql`来启动`MySQL`服务。
+
+- **参考**
+- [mysql8.0.20安装配置教程](https://www.cnblogs.com/2020javamianshibaodian/p/12906655.html)
+
 # 修改密码
 
 进入`mysql`客户端后，输入：
@@ -95,11 +104,11 @@ show VARIABLES like '%max_allowed_packet%’
 
 # 显示所有与mysql连接进程
 
-show full processlist
+`show full processlist`
 
 # Err:1205 Lock wait timeout exceeded
 
-<https://www.cnblogs.com/cchust/p/3585847.html>
+- [Mysql Error:1205错误诊断](https://www.cnblogs.com/cchust/p/3585847.html)
 
 ## 普通方式
 
@@ -139,64 +148,96 @@ FROM information_schema.innodb_lock_waits w
 
 ## 查看日志
 
+``` bash
 show variables like 'log_%';
 show variables like 'general%';
+```
 
 ## 开启日志
 
+``` bash
 set GLOBAL general_log = 'OFF'
+```
 
 ## 查看二进制日志(用于恢复database)
 
+``` bash
 show master log; show binary log;
+```
 
 ## 查询慢查询属性
 
+``` bash
 show VARIABLES LIKE '%slow%';
-查询慢查询限制时间
+```
+
+- **查询慢查询限制时间**
+
+``` bash
 show VARIABLES LIKE 'long_query_time';
-开启慢查询日志
+```
+
+- **开启慢查询日志**
+
+``` bash
 set GLOBAL slow_query_log = OFF;
-查询执行时间95名之后statements
-select * from sys.statements_with_runtimes_in_95th_percentile ORDER BY avg_latency desc;
+```
+
+- **查询执行时间95名之后statements**
+
+``` sql
+select * 
+from sys.statements_with_runtimes_in_95th_percentile 
+ORDER BY avg_latency desc;
+```
 
 # 性能查询
 
-> SHOW　GLOBAL STATUS LIKE 'Questions';
-> SHOW GLOBAL STATUS LIKE 'Com_select';
-> SHOW GLOBAL STATUS LIKE 'Com_insert'; SHOW GLOBAL STATUS LIKE 'Com_delete'; SHOW GLOBAL STATUS LIKE 'Com_update'; SHOW GLOBAL STATUS LIKE 'Com_commit'; SHOW GLOBAL STATUS LIKE 'Com_rollback';
+``` bash
+SHOW　GLOBAL STATUS LIKE 'Questions';
+SHOW GLOBAL STATUS LIKE 'Com_select';
+SHOW GLOBAL STATUS LIKE 'Com_insert'; SHOW GLOBAL STATUS LIKE 'Com_delete'; SHOW GLOBAL STATUS LIKE 'Com_update'; SHOW GLOBAL STATUS LIKE 'Com_commit'; SHOW GLOBAL STATUS LIKE 'Com_rollback';
+```
 
 # 引擎
 
 ## show useful engine
 
-> show engines;
+``` mysql
+show engines;
+```
 
 ## 显示表引擎
 
-> show table status from #{database};
+``` sql
+show table status from #{database};
+```
 
 ## 修改表引擎
 
-``` 
+``` sql
 ALTER TABLE #{tablename} ENGINE=InnoDB;
 ALTER TABLE #{tablename} ENGINE=MEMORY;
 ```
-
-
 
 # MySQL缓存
 
 ## 查询缓存开启
 
-> show variables like '%query_cache_type%'
+``` mysql
+show variables like '%query_cache_type%'
+```
 
 # 索引
 
 ## 查看表索引
 
-> show keys from #{table}
+``` mysql
+show keys from #{table}
+```
 
 ## 查看索引
 
+``` mysql
 show index from #{table}
+```

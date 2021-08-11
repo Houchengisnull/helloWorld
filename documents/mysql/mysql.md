@@ -25,11 +25,13 @@ http://mirrors.sohu.com/mysql/MySQL-8.0/
 show collation;
 ```
 
-https://www.cnblogs.com/EasonJim/p/8128196.html
+- [MySQL中character set与collation的理解](https://www.cnblogs.com/EasonJim/p/8128196.html)
 
-# MySQL乱码
+# FAQ
 
-## 注意
+## MySQL乱码
+
+### 注意
 
 - `mysql`启动时的字符集,在`my.ini`文件中配置 `default-character-set=字符集` ,放在,[WinMySQLadmin]之上; 
 
@@ -44,9 +46,9 @@ https://www.cnblogs.com/EasonJim/p/8128196.html
 >
 > `Server`中显示正常，在将数据插入数据库后中文显示为??
 
-## 解决
+### 解决
 
 使用`注意`中第三点
 
-https://www.jb51.net/article/147131.htm
+- [mysql中插入表数据中文乱码问题的解决方法](https://www.jb51.net/article/147131.htm)
 
