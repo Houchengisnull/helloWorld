@@ -191,5 +191,16 @@ https://blog.csdn.net/jiankunking/article/details/73188603
 
 ## IntelliJ idea 控制台（Console）里的查找功能
 
+- **原因**
+
+  笔者在最初学习时使用`Ecplise`，所以在使用`IDEA`时，更换了`Ecplise`的快捷键。此时，`Find`的快捷键为空。
+
+  我们可以从`Setting > Keymap > Main menu > Edit > Find > Find`中看到对应的快捷键。
+
+- **解决**
+
+  1. 重新设置不冲突的快捷键
+  2. `Edit > Find > Find...`
+
 - [IntelliJ idea 控制台（Console）里的查找功能](https://blog.csdn.net/x41990/article/details/99673562)
 
