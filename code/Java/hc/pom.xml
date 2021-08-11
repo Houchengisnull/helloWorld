@@ -52,13 +52,13 @@
             <version>1.0.29</version>
         </dependency>
 
+		<!-- 2021-8-11 这个依赖下载不了，暂时注释掉 -->
 		<!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
-		<dependency>
+		<!--<dependency>
 			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
 			<version>0.9.5.5</version>
-		</dependency>
-
+		</dependency>-->
 
 	</dependencies>
 

@@ -2,30 +2,30 @@
 
 # Spring简史
 
-- 第一阶段：xml配置；
+- 第一阶段：`xml`配置；
 
 - 第二阶段：注解配置；
 
-- 第三阶段：Java配置；（Spring 4.x 与 Spring Boot都推荐Java配置）
+- 第三阶段：`Java`配置；（`Spring 4.x`与`Spring Boot`都推荐`Java`配置）
 
 # Spring体系
 
 ## 核心容器
 
-- **Spring-core核心工具类**:	Spring其他模块大量使用Spring-core
-- **Spring-Beans**:	Spring定义Bean的支持；
+- **Spring-core核心工具类**:	`Spring`其他模块大量使用`Spring-core`
+- **Spring-Beans**:	`Spring`定义`Bean`的支持；
 
-- **Spring-Context**:	运行时Spring容器；
+- **Spring-Context**:	运行时`Spring`容器；
 
-- **Spring-Context-Support**:	Spring容器对第三方包的集成支持；
+- **Spring-Context-Support**:	`Spring`容器对第三方包的集成支持；
 
 - **Spring-Expression**:	使用表达式语言在运行时查询和操作对象；
 
 ## AOP
 
-- **SpringAOP**:	基于代理的AOP支持；
+- **SpringAOP**:	基于代理的`AOP`支持；
 
-- **Spring-Aspects**:	基于 AspectJ的AOP支持；
+- **Spring-Aspects**:	基于`AspectJ`的`AOP`支持；
 
 可参考`《架构探险》`
 
@@ -35,28 +35,28 @@
 
 ## Web
 
-- **Spring-Web**:	提供基础的Web集成的功能，在Web项目中提供Spring容器；
-- **Spring-Webmvc**:	提供基于Servlet的SpringMVC；
-- **Spring-WebSocket**:	提供WebSocket功能；
+- **Spring-Web**:	提供基础的`Web`集成的功能，在`Web`项目中提供`Spring`容器；
+- **Spring-Webmvc**:	提供基于`Servlet`的`SpringMVC`；
+- **Spring-WebSocket**:	提供`WebSocket`功能；
 
-- **Spring-Webmvc-Portlet**:	提供Portlet环境支持；
+- **Spring-Webmvc-Portlet**:	提供`Portlet`环境支持；
 
 ## 数据访问/集成 Data Access / Integration
 
-- **Spring-JDBC**:	 提供以JDBC访问数据库的支持；
+- **Spring-JDBC**:	 提供以`JDBC`访问数据库的支持；
 - **Spring-TX**:	提供编程式和声明式的事务支持；
 
-- **Spring-ORM**:	提供对 对象/关系 映射技术的支持；
+- **Spring-ORM**:	提供对`对象/关系映射技术`的支持；
 
-- **Spring-OXM**:	 提供对 对象/xml 映射技术的支持；
+- **Spring-OXM**:	 提供对`对象/xml映射技术`的支持；
 
-- **Spring-JMS**:	提供对JMS的支持；
+- **Spring-JMS**:	提供对`JMS`的支持；
 
 > Spring框架部份内容笔者亦未学习过，但为日后需要时留有印象，故作笔记。
 
 ## **衍生生态**
 
-- **Spring Boot**:	遵循“约定优先配置”实现快速开发；
+- **Spring Boot**:	遵循***约定优先配置***实现快速开发；
 - **Spring XD**:	简化大数据应用开发；
 - **Spring Cloud**:	为分布式系统开发提供工具集；
 - **Spring Data**:	对主流的关系型和NoSql数据库的支持；
@@ -156,7 +156,7 @@ graph TD
 
 13. <font color='red'>**`InitializingBean.afterPropertiesSet()`**</font>
 
-    如果bean实现了`InitializingBean`接口，Spring将调用`afterPropertiesSet()`。同理，如果bean使用了`init-method`声明初始化方法，该方法也会被调用。
+    如果`bean`实现了`InitializingBean`接口，Spring将调用`afterPropertiesSet()`。同理，如果bean使用了`init-method`声明初始化方法，该方法也会被调用。
 
 14. <font color='red'>调用自定义`init-method`</font>
 
@@ -194,7 +194,7 @@ graph TD
 
 在实际开发过程中，我们常常用`@PostConstruct`与`@PreDestroy`来替代`init-method`与`destroy-method`方法。
 
-`Spring`是通过`BeanPostPostProcessor`接口来满足`JSR 250`中这两个注解的要求的。**所以，在Bean的生命周期中，`@PostConstruct`在`init-method`方法之前生效**。
+`Spring`是通过`BeanPostProcessor`接口来满足`JSR 250`中这两个注解的要求的。**所以，在Bean的生命周期中，`@PostConstruct`在`init-method`方法之前生效**。
 
 ``` mermaid
 graph BT
@@ -772,41 +772,41 @@ StaticMatchMethodPointcutAdvisor —— 匹配静态方法的切面
 
   ``` xml
   <servlet>
-  ```
-
-​    <servlet-name>dispatcherServlet</servlet-name>
-​    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-
-​    <init-param>
-​      <param-name>contextConfigLocation</param-name>
-​      <param-value>classpath:config/applicationContext-mvc.xml</param-value>
-​    </init-param>
-
-​    <init-param>
-​     <param-name>spring.profiles.active</param-name>
-​     <param-value>production</param-value>
-​    </init-param>
+  	<servlet-name>dispatcherServlet</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  
+  	<init-param>
+  		<param-name>contextConfigLocation</param-name>
+      	<param-value>classpath:config/applicationContext-mvc.xml</param-value>
+      </init-param>
+  
+  	<init-param>
+          <param-name>spring.profiles.active</param-name>
+  		<param-value>production</param-value>
+  	</init-param>
   </servlet>
-
+  
   <servlet-mapping>
-​    <servlet-name>dispatcherServlet</servlet-name>
-​    <url-pattern>/</url-pattern>
+      <servlet-name>dispatcherServlet</servlet-name>
+      <url-pattern>/</url-pattern>
   </servlet-mapping>
   ```
 
 - Servlet 3.0
 
-​``` java
-public class WebInit implements WebApplicationInitializer {
-
-@Override
-
-Public void onStartup(ServletContext container) {
-	Container.setInitParameter(“spring,.profiles.default”, “dev”);
-}
-
-}
+  ``` java
+  public class WebInit implements WebApplicationInitializer {
+  
+      @Override
+  
+      Public void onStartup(ServletContext container) {
+          Container.setInitParameter(“spring,.profiles.default”, “dev”);
+      }
+  
+  }
   ```
+
+  
 
 代码示例
 
@@ -820,46 +820,49 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 public class ProfileConfig {
 
-​	@Bean
-​	@Profile("dev")
-​	public DemoBean devDemoBean() {
-​		return new DemoBean("dev");
-​	}
-​	
-​	@Bean
-​	@Profile("prod")
-​	public DemoBean prodDemoBean() {
-​		return new DemoBean("prod");
-​	}
+	@Bean
+	@Profile("dev")
+	public DemoBean devDemoBean() {
+		return new DemoBean("dev");
+	}
+	
+	@Bean
+	@Profile("prod")
+	public DemoBean prodDemoBean() {
+		return new DemoBean("prod");
+	}
 }
+
 class DemoBean {
 
-​	private String context;
+	private String context;
 
-​	public String getContext() {
-​		return context;
-​	}
+	public String getContext() {
+		return context;
+	}
 
-​	public void setContext(String context) {
-​		this.context = context;
-​	}
-​	public DemoBean(String context) {
-​		this.context = context;
-​	}
+	public void setContext(String context) {
+		this.context = context;
+	}
+    
+	public DemoBean(String context) {
+		this.context = context;
+	}
+    
 }
 
-​	public static void main(String[] args) {
-​		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-​		context.getEnvironment().setActiveProfiles("dev");
-​		context.register(ProfileConfig.class);
-​		context.refresh();
-​		DemoBean bean = context.getBean(DemoBean.class);
-​		System.out.println(bean.getContext());
-​		context.close();
-​	}
+public static void main(String[] args) {
+    AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+    context.getEnvironment().setActiveProfiles("dev");
+    context.register(ProfileConfig.class);
+    context.refresh();
+    DemoBean bean = context.getBean(DemoBean.class);
+    System.out.println(bean.getContext());
+    context.close();
+}
 ```
 
-# **事件（Application Event）**
+# 事件（Application Event）
 
 # Spring Event事件通知机制 源码学习
 
@@ -1252,8 +1255,11 @@ public class MyMessageConverter extends AbstractHttpMessageConverter<DemoObj>{
 
 ## @InitBinder
 
- <https://www.cnblogs.com/heyonggang/p/6186633.html>
+- **参考**
+
+- [SpringMVC中利用@InitBinder来对页面数据进行解析绑定](https://www.cnblogs.com/heyonggang/p/6186633.html)
 
 　在使用SpingMVC框架的项目中，经常会遇到页面某些数据类型是Date、Integer、Double等的数据要绑定到控制器的实体，或者控制器需要接受这些数据，如果这类数据类型不做处理的话将无法绑定。
 
 ​      这里我们可以使用注解@InitBinder来解决这些问题，这样SpingMVC在绑定表单之前，都会先注册这些编辑器。一般会将这些方法些在**BaseController**中，需要进行这类转换的控制器只需继承BaseController即可。其实Spring提供了很多的实现类，如CustomDateEditor、CustomBooleanEditor、CustomNumberEditor等，基本上是够用的。
+
