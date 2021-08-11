@@ -185,15 +185,7 @@ $ rm -r #{directory}
 
 ## 压缩与解压
 
-``` shell
-# 压缩文件
-$ tar -zcvf #{compress_file} #{directory}
-# 例如
-$ tar -zcvf hello.tar.gz ./hello
 
-# 解压文件
-$ tar -zxvf #{directory}
-```
 
 # 网络
 
@@ -425,6 +417,29 @@ https://blog.csdn.net/baozijiaruqing/article/details/80645082
 - `# ssh #{address} -l root`
 - `# ssh #{username}@#{address}`
 
+# 查看文件
+
+## cat
+
+`Linux`下最常见的查看命令。
+
+``` shell
+cat hello.txt
+```
+
+## grep
+
+`grep`命令用于查找文件里符合条件的字符串。在`windows`中与`findstr`功能相似。
+
+- **参数**
+
+  | 参数                                           | 作用                         |
+  | ---------------------------------------------- | ---------------------------- |
+  | `-A <显示行数>`或`--after-context=<显示函数>`  | After,查看符合条件之后的内容 |
+  | `-B <显示行数>`或`--before-context=<显示行数>` | Before                       |
+  | `-C`或`--context`                              | 符合条件前后的内容           |
+  |                                                |                              |
+
 # vi/vim
 
 ## 查找
@@ -475,7 +490,13 @@ https://blog.csdn.net/baozijiaruqing/article/details/80645082
 # tail #{filepath}
 ```
 
+## tail
 
+``` shell
+# -n 读取行数
+# -f 循环读取
+tail -n 10 -f hello.log
+```
 
 # 环境变量
 
@@ -535,7 +556,7 @@ export hello=world
 # 下载
 sz $filename
 sz $filename1 $filename2
-sz $directory/*
+sz $directory /*
 
 # 上传
 rz $filename
