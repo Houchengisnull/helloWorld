@@ -915,9 +915,30 @@ Spring容器本身功能，若使用了Spring Aware,Bean将会和Spring耦合。
 
 # 条件 @Conditional
 
+- **参考**
+- [Springboot 控制Bean是否注入](https://blog.csdn.net/weixin_43387685/article/details/110194309)
+- [Conditional模式下注册Bean的顺序问题](https://blog.csdn.net/m0_37607945/article/details/107878441)
+- [@ConditionalOnProperty来控制Configuration是否生效](https://www.jianshu.com/p/68a75c093023)
+
 `@Conditional`根据满足的某一特定条件创建一个特定的Bean。比方说，当某一个jar包在一个类路径下的时候，自动配置一个或多个Bean；或只有某个Bean被创建才会创建另外一个Bean。
 
 即根据特定条件来控制Bean的创建行为，进行一些自动配置。
+
+## @ConditionalOnProperty
+
+由于`@Conditional`注解的扫描及判断在`@Value`注入之前，所以如果我们需要根据配置文件来进行调节判断时，我们可以使用`@ConditionalOnProperty`来实现。
+
+- **name**
+- **havingValue**
+
+`@conditionalOnProperty`首先读取配置文件中`name`的值，再将该值与`havingValue`判断，匹配则通过。
+
+此外，我们还可以使用`Conditional`接口中`matches`方法里`conditionContext`来进行判断，
+
+``` java
+Environment environment = conditionContext.getEnvironment();
+String attri = environment.getProperty("attri"); // 来获取配置文件中的值
+```
 
 ## **组合注解与元注解**
 
