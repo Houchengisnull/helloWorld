@@ -913,10 +913,6 @@ Spring容器本身功能，若使用了Spring Aware,Bean将会和Spring耦合。
 
 见`helloWorld\code\Java\hc\hc-learning\src\main\java\org\hc\learning\spring\taskexecutor`
 
-# 定时任务 scheduled
-
-见`helloWorld\code\Java\hc\hc-learning\src\main\java\org\hc\learning\spring\scheduled`
-
 # 条件 @Conditional
 
 `@Conditional`根据满足的某一特定条件创建一个特定的Bean。比方说，当某一个jar包在一个类路径下的时候，自动配置一个或多个Bean；或只有某个Bean被创建才会创建另外一个Bean。
