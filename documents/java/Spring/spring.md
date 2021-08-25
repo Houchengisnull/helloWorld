@@ -948,8 +948,6 @@ String attri = environment.getProperty("attri"); // 来获取配置文件中的�
 
 代码地址:org.hc.learning.spring.annotation
 
- 
-
 ## @Enable\*注解的工作原理
 
 - **@EnableAspectJAutoProxy** 开启对AspectJ自动代理的支持
