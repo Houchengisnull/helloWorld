@@ -414,7 +414,7 @@ https://blog.csdn.net/baozijiaruqing/article/details/80645082
 
 ## 连接命令
 
-- `# ssh #{address} -l root`
+- `# ssh #{address} #{port} -l root`
 - `# ssh #{username}@#{address}`
 
 # 查看文件

@@ -133,6 +133,21 @@ set "combine=%a%+%b%=100"
 echo %combine%
 ```
 
+# 系统
+
+## 查看系统信息
+
+- **参考**
+- [查看Windows系统的开机、关机时间](https://blog.csdn.net/chao199512/article/details/86152449)
+
+这个命令可以帮助我们查看`windows`系统的开机、关机的时间。有时候系统自动或人为的被重启（关键开机或关机后没有人重新启动程序），导致我们的程序停止运行且日志没报错，这个命令可以帮助我们确认系统是否被重启。
+
+``` bat
+systeminfo
+```
+
+除此之外，我们还可以通过`windows`系统的`事件查看器`或`net statistics workstation`来查看系统的开机、关机时间。
+
 # 查看文件内容 type
 
 ``` bat
