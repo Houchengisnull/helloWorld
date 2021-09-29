@@ -64,6 +64,18 @@ jar -xvf HelloWorld.war
 $ java -verbose
 ```
 
+## 反编译查看魔数
+
+以前怀疑编译的`class`文件版本有问题时，总是通过文件对比工具来查看。
+
+今天学到一个新的技巧：
+
+``` shell
+javap -v Hello.class |grep major
+```
+
+
+
 # 位运算
 
 | 名称       | 符号 | 作用                         |
@@ -1171,3 +1183,15 @@ public class Main {
 
 - 被代理的类不能被`final`声明
 - 被代理的方法不能被`final`声明
+
+
+
+# FAQ
+
+## Java高编译低运行问题
+
+- 参考
+- [关于JDK1.7中keyset错误！NoSuchMethodErrorjava.util.concurrent.ConcurrentHashMap.keySet](https://developer.aliyun.com/ask/250705?spm=a2c6h.13524658)
+- [Java高编译低运行错误(ConcurrentHashMap.keySet)](https://www.cnblogs.com/superhedantou/p/5693113.html)
+
+在`JDK8`中`ConcurrentHashMap`，新增内部类`KeySetView`，在低版本环境中运行时会抛出该问题。
