@@ -173,3 +173,25 @@ stringOptional.ifPresent(e-> System.out.println("我被处理了。。。"+e));
 - [Java8 如何正确使用 Optional](http://www.importnew.com/26066.html)
 
 - [理解、学习与使用 JAVA 中的 OPTIONAL](https://blog.csdn.net/zknxx/article/details/78586799)
+
+# Lambda
+
+## removeIf
+
+- **参考**
+- [Java集合中removeIf的使用](https://blog.csdn.net/qq_33829547/article/details/80277956)
+- [lambda 表达式中removeif遇到的问题](https://blog.csdn.net/PANGPANGPANGJIA/article/details/113645383)
+
+在JDK8中，`Collection`以及其子类新加入了`removeIf()`，一行代码快速移除符合条件的元素。
+
+``` java
+List<String> list = new ArrayList<>();
+
+list.add("one");
+list.add("two");
+list.add("three");
+
+list.removeIf(ele -> ele.equals("two"));
+```
+
+但是需要注意的是，我们使用`Arrays.asList(T... a)`方法创建一个`List`对象调用`removeIf`时会抛出`java.lang.UnsupportedOperationException`。这是因为`Arrays.asList`返回的是其内部私有类`ArrayList`，这个类继承自`AbstractList`，而它并不支持`add`与`remove`。
