@@ -162,6 +162,18 @@ for index in range(len(fruits)):
 print "Good bye!"
 ```
 
+### range函数
+
+``` python
+print(range(5))
+# result
+# range(0,5)
+```
+
+在`python2.x`中，`range()`返回一个整数列表。
+
+>  `python3`中` range()` 返回的是一个可迭代对象（类型是对象），而不是列表类型， 所以打印的时候不会打印列表
+
 ## foreach
 
 ``` python
