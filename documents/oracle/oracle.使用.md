@@ -224,7 +224,7 @@ insert into tablename (date_col) value (sysdate + 1);
 - `to_date(string, format)`
 
   ``` sql
-  insert into tablename (date_col) value ('2020-08-15 17:00:00', 'yyyy-mm-dd hh24:mi"ss');
+  insert into tablename (date_col) value (to_date('2020-08-15 17:00:00', 'yyyy-mm-dd hh24:mi"ss'));
   ```
 
 # 清理归档日志
@@ -289,3 +289,8 @@ SELECT username,sid,serial# from v$session;
 ALTER SYSTEM KILL SESSION '532,4562';
 ```
 
+## ORA-00942 表或视图不存在
+
+- 使用`navicat`创建表会导致表名有双引号，需要在查询时增加双引号
+
+  建议直接使用`SQL语句`建表
