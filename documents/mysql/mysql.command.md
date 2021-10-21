@@ -77,7 +77,11 @@ net stop mysql
 - **参考**
 - [mysql8.0.20安装配置教程](https://www.cnblogs.com/2020javamianshibaodian/p/12906655.html)
 
-# 修改密码
+# 用户
+
+## 查询密码
+
+## 修改密码
 
 进入`mysql`客户端后，输入：
 
@@ -93,7 +97,7 @@ mysqladmin -u root -p password newPassword
 
 # 最大连接数和修改最大连接数
 
-<https://blog.csdn.net/wzygis/article/details/52461007>
+[MYSQL 查看最大连接数和修改最大连接数](https://blog.csdn.net/wzygis/article/details/52461007)
 
 # 接收数据包大小查看与设置
 
@@ -241,3 +245,4 @@ show keys from #{table}
 ``` mysql
 show index from #{table}
 ```
+
