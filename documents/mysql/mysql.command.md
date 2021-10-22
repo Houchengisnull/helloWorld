@@ -95,6 +95,34 @@ alter user 'root'@'localhost' identified by 'new_password'
 mysqladmin -u root -p password newPassword
 ```
 
+# 开启IP限制
+
+- [设置mysql允许外部IP连接的解决方法及遇到的坑说明](https://blog.csdn.net/weixin_42392874/article/details/80584624)
+
+- **授权**
+
+  ``` mysql
+  GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
+  ```
+
+  以上第一个`root`是用户名，第二个`root`是密码。
+
+- **刷新权限**
+
+  ``` mysql
+  flush privileges;
+  ```
+
+- 查询`user`表检查是否修改成功
+
+  ```` mysql
+  use mysql;
+  select user, host
+  from user;
+  ````
+
+  
+
 # 最大连接数和修改最大连接数
 
 [MYSQL 查看最大连接数和修改最大连接数](https://blog.csdn.net/wzygis/article/details/52461007)
