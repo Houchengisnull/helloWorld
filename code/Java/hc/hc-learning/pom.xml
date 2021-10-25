@@ -138,5 +138,12 @@
 		  <artifactId>spring-boot-starter-web</artifactId>
 	  </dependency>
 
+	  <!-- apache 网络开发包: 含FTP -->
+	  <dependency>
+		  <groupId>commons-net</groupId>
+		  <artifactId>commons-net</artifactId>
+		  <version>3.6</version>
+	  </dependency>
+
   </dependencies>
 </project>
