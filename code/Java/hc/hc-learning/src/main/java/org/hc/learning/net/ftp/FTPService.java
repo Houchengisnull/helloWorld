@@ -59,6 +59,12 @@ public interface FTPService {
     List<FTPFile> list(String path);
 
     /**
+     * 迭代遍历@path下所有文件/文件夹
+     * @param path
+     */
+    List<FTPFile> listTree(String path);
+
+    /**
      * 内置方法处理控制连接编码
      * @param fileName 文件名
      * @param encoding 编码

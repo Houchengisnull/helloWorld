@@ -9,6 +9,7 @@ import org.apache.commons.net.ftp.FTPReply;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Slf4j
@@ -32,7 +33,7 @@ public class QuickFTPClient implements FTPService{
         // init FTPClient
         client = new FTPClient();
         // 将FTP服务的发送命令与接受信息打印到控制台
-        client.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));
+        /*client.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));*/
         client.connect(host, port);
         int reply = client.getReplyCode();
         if (!FTPReply.isPositiveCompletion(reply)) {
@@ -160,6 +161,37 @@ public class QuickFTPClient implements FTPService{
         }
 
         return list;
+    }
+
+    @Override
+    public List<FTPFile> listTree(String path) {
+        String parent = path;
+        String currentPath = path;
+        List<FTPFile> result = null;
+        LinkedList<String> stack = new LinkedList<>();
+        do {
+            if (stack.size() > 0) {
+                currentPath = stack.pop();
+            }
+            log.debug("list {}", currentPath);
+            List<FTPFile> list = list(currentPath);
+
+            if (list == null) { // don't found any file/directory
+                break;
+            }
+            if (result == null) {
+                result = new ArrayList<>();
+            }
+            for (FTPFile ftpFile : list) {
+                if (ftpFile.isFile()) {
+                    log.debug("found file: {}", currentPath + "/" + ftpFile.getName());
+                    result.add(ftpFile);
+                } else {
+                    stack.push(currentPath + "/" + ftpFile.getName());
+                }
+            }
+        } while (stack.size() > 0);
+        return result;
     }
 
 }

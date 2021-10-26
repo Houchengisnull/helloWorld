@@ -67,6 +67,18 @@ public class FTPApplication {
 
         service.makeDirectory("/hello");
         service.makeDirectory("/hello/world");
+        System.out.println("***************************");
+        System.out.println("*                         *");
+        System.out.println("*        list tree        *");
+        System.out.println("*                         *");
+        System.out.println("***************************");
+        /**
+         * 迭代遍历文件树
+         */
+        List<FTPFile> ftpFiles = service.listTree(".");
+        /*for (FTPFile ftpFile : ftpFiles) {
+            System.out.println(ftpFile.getName());
+        }*/
     }
 
 }
