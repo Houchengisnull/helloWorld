@@ -23,7 +23,7 @@ public class QuickFTPClient implements FTPService{
     private String password;
     private String encoding;
 
-    private QuickFTPClient(String host, int port, String username, String password, String encoding) throws IOException {
+    public QuickFTPClient(String host, int port, String username, String password, String encoding) {
         // init Params
         this.host = host;
         this.port = port;
@@ -34,22 +34,35 @@ public class QuickFTPClient implements FTPService{
         client = new FTPClient();
         // 将FTP服务的发送命令与接受信息打印到控制台
         /*client.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out)));*/
-        client.connect(host, port);
-        int reply = client.getReplyCode();
-        if (!FTPReply.isPositiveCompletion(reply)) {
-            // connect failed
-            log.error("connection error!Please ensure network is connected!And check ip and port!");
+        try {
+            client.connect(host, port);
+            int reply = client.getReplyCode();
+            if (!FTPReply.isPositiveCompletion(reply)) {
+                // connect failed
+                log.error("connection error!Please ensure network is connected!And check ip and port!");
+            }
+            client.login(username, password);
+            client.setFileType(FTP.BINARY_FILE_TYPE);
+            client.enterLocalPassiveMode();
+            if (encoding.equalsIgnoreCase(UTF8)) { // pattern: UTF-8(忽略大小写)
+                client.sendCommand("OPTS UTF8", "ON");
+            }
+            client.setControlEncoding(encoding);
+        } catch (IOException e) {
+            log.debug(e.getMessage(), e);
         }
-        client.login(username, password);
-        client.setFileType(FTP.BINARY_FILE_TYPE);
-        client.enterLocalPassiveMode();
-        if (encoding.equalsIgnoreCase(UTF8)) { // pattern: UTF-8(忽略大小写)
-            client.sendCommand("OPTS UTF8", "ON");
-        }
-        client.setControlEncoding(encoding);
     }
 
-    public static FTPService getInstance(String host, int port, String username, String password, String encoding) {
+    /**
+     * 实际场景中, 系统使用的FTP服务的很可能不止一台，所以取消单例模式
+     * @param host ftp ip
+     * @param port ftp control port (default 21)
+     * @param username username
+     * @param password password
+     * @param encoding ftp control encoding
+     * @return
+     */
+    /*public static FTPService getInstance(String host, int port, String username, String password, String encoding) {
         if (instance == null) {
             synchronized (QuickFTPClient.class) {
                 if (instance == null) {
@@ -63,7 +76,7 @@ public class QuickFTPClient implements FTPService{
             }
         }
         return instance;
-    }
+    }*/
 
     @Override
     public byte[] download(String downloadPath) {

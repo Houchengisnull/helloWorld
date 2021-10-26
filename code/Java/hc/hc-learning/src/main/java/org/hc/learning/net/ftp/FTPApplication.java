@@ -22,13 +22,12 @@ public class FTPApplication {
      *      |- io.md
      *      |- python.base.md
      *      |- python.docx
-     * @param args
      */
     public static void main(String[] args) {
         /*
             正确
          */
-        FTPService service = QuickFTPClient.getInstance("127.0.0.1", 21, "ftpuser", "P@ssw0rd", "UTF-8");
+        FTPService service = new QuickFTPClient("127.0.0.1", 21, "ftpuser", "P@ssw0rd", "UTF-8");
         /*
             错误端口
          */
