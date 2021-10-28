@@ -195,3 +195,6 @@ list.removeIf(ele -> ele.equals("two"));
 ```
 
 但是需要注意的是，我们使用`Arrays.asList(T... a)`方法创建一个`List`对象调用`removeIf`时会抛出`java.lang.UnsupportedOperationException`。这是因为`Arrays.asList`返回的是其内部私有类`ArrayList`，这个类继承自`AbstractList`，而它并不支持`add`与`remove`。
+
+# Default关键字
+

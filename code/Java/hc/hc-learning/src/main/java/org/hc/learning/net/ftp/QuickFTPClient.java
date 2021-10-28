@@ -53,39 +53,14 @@ public class QuickFTPClient implements FTPService{
         }
     }
 
-    /**
-     * 实际场景中, 系统使用的FTP服务的很可能不止一台，所以取消单例模式
-     * @param host ftp ip
-     * @param port ftp control port (default 21)
-     * @param username username
-     * @param password password
-     * @param encoding ftp control encoding
-     * @return
-     */
-    /*public static FTPService getInstance(String host, int port, String username, String password, String encoding) {
-        if (instance == null) {
-            synchronized (QuickFTPClient.class) {
-                if (instance == null) {
-                    try {
-                        instance = new QuickFTPClient(host, port, username, password, encoding);
-                    } catch (IOException e) {
-                        log.error(e.getMessage(), e);
-                        instance = null;
-                    }
-                }
-            }
-        }
-        return instance;
-    }*/
-
     @Override
     public byte[] download(String downloadPath) {
         InputStream input = null;
         byte[] bytes = null;
         try {
-            String filepath = getFileNameAsISO88591(downloadPath, encoding);
+            String filepath = FTPService.getFileNameAsISO88591(downloadPath, encoding);
             input = client.retrieveFileStream(filepath);
-            bytes = read(input);
+            bytes = FTPService.read(input);
         } catch (UnsupportedEncodingException e) {
             log.error(e.getMessage(), e);
         } catch (IOException e) {
@@ -108,7 +83,7 @@ public class QuickFTPClient implements FTPService{
         ByteArrayInputStream input = new ByteArrayInputStream(bytes);
         String filepath = null;
         try {
-            filepath = getFileNameAsISO88591(storePath, encoding);
+            filepath = FTPService.getFileNameAsISO88591(storePath, encoding);
             result = client.storeFile(filepath, input);
         } catch (UnsupportedEncodingException e) {
             log.error(e.getMessage(), e);
@@ -122,7 +97,7 @@ public class QuickFTPClient implements FTPService{
     public boolean delete(String deletePath) {
         boolean result = false;
         try {
-            String filepath = getFileNameAsISO88591(deletePath, encoding);
+            String filepath = FTPService.getFileNameAsISO88591(deletePath, encoding);
             result = client.deleteFile(deletePath);
         } catch (UnsupportedEncodingException e) {
             log.error(e.getMessage(), e);
@@ -178,7 +153,6 @@ public class QuickFTPClient implements FTPService{
 
     @Override
     public List<FTPFile> listTree(String path) {
-        String parent = path;
         String currentPath = path;
         List<FTPFile> result = null;
         LinkedList<String> stack = new LinkedList<>();

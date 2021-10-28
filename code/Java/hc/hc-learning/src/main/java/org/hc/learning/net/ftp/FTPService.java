@@ -13,9 +13,7 @@ public interface FTPService {
     static final String ISO88591 = "ISO-8859-1";
     static final String GBK = "GBK";
     static final String UTF8 = "UTF-8";
-
-    // FTPService getInstance(String host, int port, String username, String password, String encoding);
-
+    
     /**
      * 下载
      * @param downloadPath 下载路径
@@ -71,7 +69,7 @@ public interface FTPService {
      * @return ISO8859-1编码的文件名
      * @throws UnsupportedEncodingException
      */
-    default String getFileNameAsISO88591(String fileName, String encoding) throws UnsupportedEncodingException {
+    static String getFileNameAsISO88591(String fileName, String encoding) throws UnsupportedEncodingException {
         return new String(fileName.getBytes(encoding), ISO88591);
     }
 
@@ -81,7 +79,7 @@ public interface FTPService {
      * @return
      * @throws IOException
      */
-    default byte[] read(InputStream input) throws IOException {
+    static byte[] read(InputStream input) throws IOException {
         int i = 0;
         byte[] buffer = new byte[1024];
         ByteArrayOutputStream output = new ByteArrayOutputStream();
