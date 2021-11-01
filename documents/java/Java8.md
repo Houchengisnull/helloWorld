@@ -198,3 +198,24 @@ list.removeIf(ele -> ele.equals("two"));
 
 # Default关键字
 
+- **参考**
+- [JDK8的default方法](https://zhuanlan.zhihu.com/p/31416186)
+- [jdk1.8新特性之default关键字](https://www.cnblogs.com/lc4j/p/11069172.html)
+
+## JDK8为什么在interface中增加Default关键字
+
+在`JDK8`中需要增加`Lambda`，但引入的问题是：比如说`forEach`既没有在`java.util.List`中声明，也没有在`java.util.Collection`中声明。而且在接口中声明一个新的方法，其实现类均要实现这个方法，工作量实在太大了。
+
+所以`Java`的维护者们为了解决这个问题，在`JDK8`中引入了**`虚拟扩展方法(Virtual extension methods)`**——增加`default`关键字，在不破坏现有的架构下，在接口中新增方法。
+
+以下为`Iterable`接口中的`forEach`实现：
+
+``` java
+default void forEach(Consumer<? super T> action) {
+    Objects.requireNonNull(action);
+    for (T t : this) {
+        action.accept(t);
+    }
+}
+```
+
