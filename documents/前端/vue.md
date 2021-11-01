@@ -1,5 +1,16 @@
 [toc]
 
+# 安装
+
+- **参考**
+
+  [windows环境搭建Vue开发环境](https://www.cnblogs.com/zhaomeizi/p/8483597.html)
+
+# 常用命令
+
+- **npm run dev**	本地运行
+- **npm run build**	构建
+
 # 名词
 
 - **vetur** `visual code`下的`vue`插件
