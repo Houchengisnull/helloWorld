@@ -103,9 +103,9 @@ FROM DBA_SEQUENCES
 
 - 参考
 
-  https://www.cnblogs.com/elikun/p/10101288.html
+  [Oracle分页](https://blog.csdn.net/yuyecsdn/article/details/91410802)
 
-  https://blog.csdn.net/yuyecsdn/article/details/91410802
+  [Oracle中rownum机制原理&用法详解](https://www.cnblogs.com/elikun/p/10101288.html)
 
 `ROWNUM`是`Oracle`的引入的虚列。
 
@@ -125,7 +125,7 @@ SELECT t.*, rownum
 FROM dual t;
 ```
 
-- 分页
+#### 分页
 
 ``` sql
 SELECT *
@@ -151,6 +151,24 @@ AND page_.NUM <= #{end}
 >   那么`ROWNUM`的生效在`WHERE`之后。
 >
 >   经过验证，确实如此。
+
+#### 错误的写法
+
+``` sql
+SELECT *
+FROM STUDENT
+WHERE ROWNUM > 1;
+```
+
+这样的查询语句是没有结果的。
+
+**这是因为`ROWNUM`是动态的！根据结果集实时变化的！**
+
+执行完`SELECT * FROM STUDENT`后，`oracle`对结果集进行筛选|更新。
+
+第一条记录`00001`的`ROWNUM`是0，那么`oracle`会把它去掉。
+
+接着`oracle`提携下一条记录`00002`后，由于去掉了上一条记录`00001`，记录`00002`的`ROWNUM`依然是0。循环往复，这条`SQL Statement`查不到结果。
 
 ## 函数
 
