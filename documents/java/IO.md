@@ -1,5 +1,7 @@
 [TOC]
 
+
+
 # 处理图片Base64
 
 当获得一个文件的`byte[]`时，中间需要通过以字符串的形式传播，那我们需要以`Base64`作为加密字节流。若直接调用以下代码：
@@ -79,6 +81,6 @@ class2.processDataFromInputStream(cbb.getInputStream());
 
 ## 参考
 
-https://www.jianshu.com/p/659a821d5118
+- [Java中3种OutputStream转InputStream的方法](https://www.jianshu.com/p/659a821d5118)
 
-https://www.cnblogs.com/xiohao/p/5073832.html
+- [java中如何将OutputStream转换为InputStream](https://www.cnblogs.com/xiohao/p/5073832.html)
