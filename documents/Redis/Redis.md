@@ -1,5 +1,53 @@
 [TOC]
 
+# 启动
+
+`redis-server`程序在`src`目录下：
+
+- 默认
+
+``` shell
+redis-server 
+```
+
+- 指定配置文件
+
+``` shell
+redis-server ../redis.conf
+```
+
+
+
+# redis配置地址绑定
+
+- **参考**
+
+  [redis设置允许远程连接](https://www.cnblogs.com/lishidefengchen/p/10668989.html)
+
+- **步骤**
+
+  打开`redis.conf`
+
+  1. 地址绑定
+
+     ``` text
+     bind 127.0.0.1 172.16.8.218
+     ```
+
+  2. 保护模式
+
+     ``` text
+     protected-mode no
+     ```
+
+  3. 密码
+
+     ``` text
+     requirepass redis_password
+     ```
+
+  > 参数前不可有空格
+
 # 缓存穿透
 
 查询不存在的数据，每次都将到持久层查询，导致缓存失效。
@@ -10,7 +58,7 @@
 
 空间效率极高的概率型算法
 
-![1557320189757](https://github.com/Houchengisnull/git_houcheng/documents/images/redis/boolm.png)
+![1557320189757](../images/redis/boolm.png)
 
 ### 优势
 
