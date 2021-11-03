@@ -192,12 +192,18 @@ taskkill -f -pid #{pid}
 
 # Runas
 
-允许用户用其他权限运行指定的工具和程序
+## 用其他用户/权限运行指定的工具和程序
 
 ``` bash
 # runas /profile /user:ourcomputer\ftpuser "C:Program Files\ftp.exe"
 # runas /profile /user:mymachine\ftpuser "C:Program Files\ftp.exe \"${params}\"
 ```
+
+- 使用管理员用户启动`cmd`
+
+  ``` bat
+  runas /user:administrator cmd
+  ```
 
 ## 参数
 
