@@ -87,9 +87,7 @@ scroll.revalidate()
 
 - 参考
 
-- 终于搞明白如何将一个JPanel放置到JScrollPane里面并显示滚动条了
-
-  https://blog.csdn.net/leongod/article/details/5967838?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param
+- [终于搞明白如何将一个JPanel放置到JScrollPane里面并显示滚动条了](https://blog.csdn.net/leongod/article/details/5967838?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param)
 
 # Graphics
 
