@@ -1,8 +1,159 @@
 [toc]
 
-# 画图
+# 什么是Markdown
 
-## 基本图形
+`Markdown`是现下程序员领域非常流行的文档格式。要我总结它的优点有三个：
+
+- 简单
+- 快速
+- 实用
+
+像`Github`、`码云`、`掘金`等技术网站已支持（并推荐）`Markdown`。
+
+`Markdown`还可以转换成`word`、`PDF`等我们常用的办公软件格式。
+
+# Markdown编辑器
+
+## Typora
+
+- **alt + /**	 查看源码
+
+# 常见语法
+
+## 目录
+
+``` markdown
+[toc]
+```
+
+> 有的编辑器可能不支持`[toc]`
+
+## 标题
+
+``` markdown
+# 大标题
+## 标题
+### 小标题
+```
+
+## 换行
+
+两个空格+回车。但是如果你结合了`Typora`(或者其他好用的编辑器)，你就可以直接换行了。
+
+## 字体
+
+*斜体文本*
+_斜体文本_
+**粗体文本**
+__粗体文本__
+***粗斜体文本***
+___粗斜体文本___
+
+## 线条
+
+***
+
+* * *
+
+*****
+
+- - -
+
+----------
+
+~~BAIDU.COM~~
+
+<u>带下划线文本</u>
+
+## 批注
+
+大家好，[^小批注]的使用时这样子的。
+
+[^小批注]: 我是批注的内容
+
+# 列表
+
+## 无序列表
+
+* 第一项
+  * 嘿嘿
+  * 哈哈
+* 第二项
+
+> 实际上无序列表可以使用'-'、'*'、'+'
+
+## 区块与代码
+
+> 这是区块
+
+- java
+
+``` java
+public class HelloWorld{
+	public static void main(String[] args) {
+        System.out.println("Hello world");
+    }
+}
+```
+
+- python
+
+``` python
+print('Hello world');
+```
+
+- sql
+
+``` sql
+-- 找出姓侯的学生
+SELECT *
+FROM student
+WHERE name like '侯%'
+```
+
+# 插入超链接
+
+- <a href='www.baidu.com'>百度</a>
+
+- [谷歌](www.google.com)
+
+# 表格
+
+| 表头   | 表头   |
+| ------ | ------ |
+| 单元格 | 单元格 |
+| 单元格 | 单元格 |
+
+
+
+# 绘图
+
+## sequence
+
+``` sequence
+participant 老板
+participant 员工
+
+老板 - 员工 : 在不在
+员工 -- 老板 : 在的怎么了?
+Note left of 老板: 是不是又在摸鱼?
+老板 - 员工 : 在干嘛?
+员工 -- 老板 : 在认真工作!
+Note right of 员工 : 怀疑我?
+```
+
+
+
+## mermaid
+
+- [mermaid 使用 （javascript 流程图 甘特图 序列图）](https://blog.csdn.net/Cribug8080/article/details/88595314)
+- [mermaid工具](https://blog.csdn.net/liuxiao723846/article/details/83544588)
+
+中文释义：美人鱼。
+
+`node.js`实现的绘制流程图、甘特图、时序图的工具。且`mermaid`相比`sequence`功能更加丰富。
+
+### 基本图形
 
 ```mermaid
 graph TD
@@ -13,9 +164,7 @@ graph TD
     id2((带文本的圆形))
 ```
 
-
-
-## 线条
+### 线条
 
 ``` mermaid
 graph LR
@@ -30,7 +179,9 @@ graph LR
     A8[A] == 描述 ==> B8[B] 
 ```
 
-## 子流程
+### 流程图
+
+#### 子流程
 
 ```mermaid
 graph TB
@@ -52,7 +203,7 @@ graph TB
 
   <a href='https://www.jianshu.com/p/b421cc723da5'>如何在Markdown中画流程图</a>
 
-# 时序图
+### 时序图
 
 - **参考**
   - [Markdown 进阶技能：用代码画时序图](https://zhuanlan.zhihu.com/p/70261692)	`mermaid`用法
@@ -61,41 +212,20 @@ graph TB
 <hr>
 
 - **实线**	代表请求
-
 - **虚线**	代表返回
-
 - **末尾[X]**	异步消息，无需等待
 
-  ``` mermaid
-  sequenceDiagram
-      participant 老板A
-      participant 员工A
-  
-      老板A ->> 员工A : “在这里我们都是兄弟！”
-      老板A -x 员工A : 画个饼
-      员工A -->> 老板A : 鼓掌
-  ```
+``` mermaid
+sequenceDiagram
+    participant 老板A
+    participant 员工A
 
-  
-
-## sequence
-
-``` sequence
-participant 老板
-participant 员工
-
-老板 - 员工 : 在不在
-员工 -- 老板 : 在的怎么了?
-Note left of 老板: 是不是又在摸鱼?
-老板 - 员工 : 在干嘛?
-员工 -- 老板 : 在认真工作!
-Note right of 员工 : 怀疑我?
-
+    老板A ->> 员工A : “在这里我们都是兄弟！”
+    老板A -x 员工A : 画个饼
+    员工A -->> 老板A : 鼓掌
 ```
 
-## mermaid
-
-`mermaid`相比`sequence`功能更加丰富。
+---
 
 ``` mermaid
 sequenceDiagram
@@ -107,7 +237,7 @@ sequenceDiagram
     服务器 -->> - 小程序 : token
 ```
 
-### 激活框
+#### 激活框
 
 ``` mermaid
 sequenceDiagram
@@ -118,7 +248,7 @@ sequenceDiagram
     员工B -->> - 老板B : 鼓掌
 ```
 
-### 注解
+#### 注解
 
 ``` mermaid
 sequenceDiagram
@@ -127,7 +257,7 @@ sequenceDiagram
     Note over 老板A,老板B : 对996感兴趣
 ```
 
-### 循环
+#### 循环
 
 ``` mermaid
 sequenceDiagram
@@ -140,7 +270,7 @@ sequenceDiagram
     end
 ```
 
-### 选择
+#### 选择
 
 ``` mermaid
 sequenceDiagram    
@@ -158,7 +288,7 @@ sequenceDiagram
     取款机 -->> 土豪 : 退卡
 ```
 
-### 可选
+#### 可选
 
 ``` mermaid
 sequenceDiagram
@@ -169,7 +299,7 @@ sequenceDiagram
     end
 ```
 
-### 并行
+#### 并行
 
 ``` mermaid
 sequenceDiagram
@@ -186,7 +316,7 @@ sequenceDiagram
     员工C -->> 老板C : 9点下班
 ```
 
-# UML
+### UML
 
 ``` mermaid
 classDiagram
@@ -199,4 +329,24 @@ HelloWorld : sayHello()
 InvocationHandler <-- LoggerHandler : implements
 InvocationHandler : invoke()
 ```
+
+### 甘特图
+
+``` mermaid
+gantt
+dateFormat  MM-DD
+title BigPlan
+
+section step 1
+仔细观察 :active, p1, 10-28, 1d
+悄悄观察 : p2, after p1, 1d
+认真观察 : p3, after p2, 1d
+
+section step 2
+仔细制作 : p4, 11-01, 2d
+认真制作 : p5, 11-02, 3d
+
+```
+
+
 
