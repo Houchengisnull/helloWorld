@@ -93,7 +93,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
-                    <mainClass>com.houc.App</mainClass>
+                    <mainClass>com.houc.javafx.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>
