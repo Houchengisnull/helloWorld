@@ -844,6 +844,8 @@ Date parse() {
 
 在`JDK1.8`中引入了一些新的格式化工具，今天为大家介绍个人在工作中有用到的。
 
+
+
 ## DateTimeFormatter
 
 `JDK8`引入了新的`DateTimeFormatter`，它是一个**线程安全**的时间日期格式化类。
@@ -960,6 +962,22 @@ System.out.println("------------ Instant获取时间戳");
         System.out.println("Instant.now().toEpochMilli()" + Instant.now().toEpochMilli());
         System.out.println("System.currentTimeMillis:" + System.currentTimeMillis());
 ```
+
+## 转化
+
+``` mermaid
+graph LR
+	String -- DateTimeFormatter--> LocalDateTime
+	String -- DateTimeFormatter.withZone--> ZonedDateTime
+	LocalDateTime -- atZone--> ZonedDateTime
+	ZonedDateTime -- toLocalDate--> LocalDateTime
+	Instant -- ofInstant --> ZonedDateTime
+	ZonedDateTime -- toInstant --> Instant 
+	LocalDateTime -- ZonedOffset--> Instant
+	Instant -- ZonedOffset --> LocalDateTime
+```
+
+
 
 # JDBC
 
