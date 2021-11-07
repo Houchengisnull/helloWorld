@@ -151,6 +151,10 @@ https://blog.csdn.net/yanguo110/article/details/80430200
 
 # Plugins
 
+## MyBatis插件Free Mybatis plugin
+
+免费的`mybatis`插件，支持`mapper`与`xml`之间的跳转。
+
 ## Activiti 插件乱码
 
 修改`idea`配置文件
