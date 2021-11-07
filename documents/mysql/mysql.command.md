@@ -97,6 +97,8 @@ mysqladmin -u root -p password newPassword
 
 # 开启IP限制
 
+## 5.6版本
+
 - [设置mysql允许外部IP连接的解决方法及遇到的坑说明](https://blog.csdn.net/weixin_42392874/article/details/80584624)
 
 - **授权**
@@ -120,6 +122,24 @@ mysqladmin -u root -p password newPassword
   select user, host
   from user;
   ````
+
+
+## 8.0版本
+
+- [is not allowed to connect to this mysql server](https://blog.csdn.net/iiiiiilikangshuai/article/details/100905996)
+
+  ```  mysql
+  use mysql;
+  
+  -- 检查用户关联host
+  select host from user where user='root';
+  
+  -- 允许所有ip登录
+  update user set host='%' where user='root';
+  
+  -- 刷新配置
+  flush privileges;
+  ```
 
   
 
