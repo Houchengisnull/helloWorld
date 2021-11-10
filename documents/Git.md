@@ -196,6 +196,15 @@ git reset #{verison} #{filename}
 
 ​	但是怎么禁止推送还是很迷惑...
 
+- 再设置一下
+
+  勾选`Require a pull request before merging`，再勾选`Require a pull request before merging`。
+
+``` txt
+remote: error: GH006: Protected branch update failed for refs/heads/feature_branch_protection_rule.        
+remote: error: At least 1 approving review is required by reviewers with write access.        
+```
+
 # 异常
 
 ## Couldn't find remote ref refs/heads/xxx [core]
