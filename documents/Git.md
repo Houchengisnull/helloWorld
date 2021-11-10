@@ -170,6 +170,14 @@ git reset #{verison} #{filename}
 
 # 保护分支
 
+## Github
+
+进入`仓库 - Settings - Branches - Add rule`。然后参考：
+
+- [About protected branches](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/about-protected-branches)
+
+### 测试一下
+
 - 设置保护分支
 
 设置完成后做一些小改动以推送。
