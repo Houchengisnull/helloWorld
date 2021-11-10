@@ -168,6 +168,54 @@ git log -number #{filename}
 git reset #{verison} #{filename}
 ```
 
+# 保护分支
+
+- 设置保护分支
+
+设置完成后做一些小改动以推送。
+
+目前保护分支的名称是`feature_branch_protection_rule`。
+
+推送成功后怀疑是由于使用的是管理员账号，勾选`Include administrators`再测试。
+
+奇怪了，居然又推送成功了。
+
+将`Branch name pattern`修改成`*protection*`测试下。
+
+- 删除分支时发现
+
+  ``` txt
+  C:\Users\admin\Desktop\helloWorld> git.exe -c "credential.helper=C:/Program\ Files/SmartGit/lib/credentials.cmd" push --porcelain --progress origin :refs/heads/feature_branch_protection_rule
+  remote: error: GH006: Protected branch update failed for refs/heads/feature_branch_protection_rule.        
+  remote: error: Cannot delete this protected branch        
+  failed to push some refs to 'https://github.com/Houchengisnull/helloWorld.git'
+  To https://github.com/Houchengisnull/helloWorld.git
+  ! :refs/heads/feature_branch_protection_rule [remote rejected] (protected branch hook declined)
+  Done
+  ```
+
+​	但是怎么禁止推送还是很迷惑...
+
+- 设置`Require approvals`
+
+  勾选`Require a pull request before merging`，再勾选`Require approvals`。
+
+  ``` text
+  remote: error: GH006: Protected branch update failed for refs/heads/feature_branch_protection_rule.        
+  remote: error: At least 1 approving review is required by reviewers with write access.        
+  ```
+
+- 设置为`Dismiss stale pull request approvals when new commits are pushed`
+
+  勾选`Require a pull request before merging`，再勾选`Dismiss stale pull request approvals when new commits are pushed`。
+
+  ``` text 
+  remote: error: GH006: Protected branch update failed for refs/heads/feature_branch_protection_rule.        
+  remote: error: Changes must be made through a pull request. 
+  ```
+
+
+
 # 异常
 
 ## Couldn't find remote ref refs/heads/xxx [core]
