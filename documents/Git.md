@@ -174,6 +174,8 @@ git reset #{verison} #{filename}
 
 目前保护分支的名称是`feature_branch_protection_rule`。
 
+推送成功后怀疑是由于使用的是管理员账号，勾选`Include administrators`再测试。
+
 # 异常
 
 ## Couldn't find remote ref refs/heads/xxx [core]
