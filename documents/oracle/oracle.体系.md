@@ -202,7 +202,9 @@ FROM v$instance;
 
 一个`process`一般对应一个`session`，在`session`结束后，新的`session`建立时，`sid`被复用。
 
-> 此处`SID`为会话进程的`SID`，`Service`中`SID`指数据库实例的`SID`。
+> 此处`SID`为会话进程/线程的`SID`，`Service`中`SID`指数据库实例的`SID`。
+>
+> 讲实话我也不清楚这里开辟的是进程or线程。
 
 ### Serial#
 
