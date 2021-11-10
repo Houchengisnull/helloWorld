@@ -352,6 +352,30 @@ SELECT FILE_NAME, TABLESPACE_NAME FROM DBA_DATA_FILES;
 SELECT NAME FROM v$controlfile;
 ```
 
+## 查询表空间
+
+- **参考**
+
+  [oracle 如何查看当前用户的表空间名称](https://www.cnblogs.com/xielong/p/9001595.html)
+
+``` sql
+-- 查询用户所在表空间
+SELECT DEFAULT_TABLESPACE
+FROM dba_users
+WHERE USERNAME='用户名'
+
+-- 查看所有表空间
+SELECT * FROM dba_tablespaces;
+SELECT * FROM v$tablespace;
+
+-- 查询用户下所有表
+SELECT * FROM user_tables;
+SELECt * FROM dba_tables WHERE owner='用户名';
+
+```
+
+
+
 # 数据类型
 
 ## DATE

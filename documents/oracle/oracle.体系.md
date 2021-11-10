@@ -44,11 +44,21 @@ SELECT name, value FROM V$PARAMETER WHERE name = 'db_block_size'
 - **undo**：撤销表空间，当用户对数据表进行修改操作时，`oracle`系统自动使用撤销表空间临时存放修改前数据
 - **users**：用户表空间，是`oracle`建议用户使用的表空间，可以在表空间上创造各种数据对象
 
+在使用Navicat查询数据库时，仅体现了`schema`，并没有体现`表空间`这种逻辑结构。但不用怀疑表空间是的存在。
+
+``` sql
+-- 查询所以表空间
+SELECT * 
+FROM dba_tablespaces;
+```
+
+
+
 ## 用户[user]与模式[schema]
 
 - 参考
 
-  https://www.cnblogs.com/dunjidan/p/4033573.html
+  [Oracle 用户（user)和模式(schema)的区别](https://www.cnblogs.com/dunjidan/p/4033573.html)
 
 ### 数据库对象
 
@@ -124,7 +134,7 @@ SELECT name, value FROM V$PARAMETER WHERE name = 'db_block_size'
 
 ## 数据高速缓存
 
-- https://blog.csdn.net/dream361/article/details/53447132
+- [oracle运行速度与效率高的秘密](https://blog.csdn.net/dream361/article/details/53447132)
 
   `数据高速缓存`跟操作系统缓存类似，它保存最近从`数据文件`中读取的`数据块`。
 
@@ -150,28 +160,62 @@ SELECT name, value FROM V$PARAMETER WHERE name = 'db_block_size'
 
 当满足一定条件时，将脏缓存块数据写入数据库文件中。
 
-# session、sid、serial
+# 常见概念
+
+## Instance
+
+- [oracle 数据库、实例、服务名、SID](https://www.cnblogs.com/ahudyan-forever/p/6016784.html)
+- [Oracle数据库查看SID和service_name](https://www.cnblogs.com/rusking/p/7762343.html)
+
+`Instance`这个单词我们常常翻译成`实例`。但实际上在计算机科学中，`Instance`指操作系统中一系列的**`进程`**以及为这些进程所分配的**`内存块`**。
+
+而我们常说的`数据库实例(instance)`就是数据库的后台进程/线程以及共享内存区。而`数据库(database)`则指物理操作系统文件或磁盘的集合。
+
+作为一名严谨的程序员，我们不应该把其弄混淆。
+
+``` sql
+-- 查询实例名称
+SELECT *
+FROM v$instance;
+```
+
+## Service
+
+指对外公开的服务名。
+
+> 打个比方，你的名字叫小明，但是你有很多外号。你父母叫你小明，但是朋友都叫你的外号。
+>
+> 这里你的父母就是oracle实例，小明就是sid，service name就是你的外号。
+
+我们打开`SQL/Plus`，执行`show parameter service`即可查看。
+
+> 此处概念里的`SID`，即数据库实例名称，注意与下文中`SID`区分。
+
+## session、sid、serial
 
 - **参考**
 - [Oracle session的SID和Serial#的概念](http://blog.sina.com.cn/s/blog_c33497610102v54f.html)
 
-## sid
+### sid
 
 `sid`用于标识一个`session`，与`process`对应。
 
 一个`process`一般对应一个`session`，在`session`结束后，新的`session`建立时，`sid`被复用。
 
-## Serial#
+> 此处`SID`为会话进程的`SID`，`Service`中`SID`指数据库实例的`SID`。
+
+### Serial#
 
 `oracle`通过它来识别具有相同`sid`的不同`session`。
 
 可通过`conn user/passwd`命令发起新的`session`。
 
 ``` sql
-SELECT username,sid,serial# from v$session;
+SELECT username,sid,serial# 
+FROM v$session;
 ```
 
-# 注意
+### 注意
 
 - `oracle`数据库内存配置要大
 - 不要在数据库服务器上运行其他服务。除硬件资源争夺外，还会导致数据库高速缓存块不连续。
