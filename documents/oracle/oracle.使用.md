@@ -1,5 +1,15 @@
 [toc]
 
+# 连接
+
+``` shell
+SQL > conn /as sysdba
+Connected.
+SQL > grant create view to scott;
+SQL > conn scott/tiger
+Connected.
+```
+
 # DDL
 
 ## 表空间与用户
@@ -94,6 +104,124 @@ SELECT seq_name.NEXTVAL from dual;
 SELECT SEQUENCE_OWNER, SEQUENCE_NAME
 FROM DBA_SEQUENCES
 ```
+
+## 视图
+
+- **参考**
+
+  [Oracle视图详解](https://www.cnblogs.com/cxdanger/p/9914307.html)
+
+  [Materialized View](https://www.cnblogs.com/benio/archive/2011/06/10/2077414.html)
+
+- **基表概念**
+
+  `视图(View)`通常是一种逻辑结构(不占用任何物理空间)，也叫`虚表`。
+
+- **只读视图**
+
+  其次，对视图中数据的修改，也将改动`基表`中的数据。但是如果我们在创建视图时，增加`with read only`，即可设置这个视图是`只读视图`。
+
+  > 防止用户通过视图间接修改表。
+
+- **物化视图(Materialized View)**
+
+  占用`存储空间`的视图。
+
+### 作用
+
+- 提供各种数据表现形式
+
+- 隐藏数据的逻辑复杂性并简化查询语句
+
+- 提供安全性
+
+  屏蔽基表中某些敏感信息，譬如用户证件号、手机号。
+
+- 简化用户权限管理
+
+  将视图权限授予用户，而不必将基表中某些列的权限授予用户。
+
+### 使用
+
+#### 创建视图
+
+- **语法**
+
+``` sql
+CREATE [OR REPLACE] [FORCE] VIEW [schema.]view_name
+	[(column1, column2,...)]
+	AS
+	SELECT ...
+	[WITH CHECK OPTION] [constraint constraint_name]
+	[WITH READ ONLY];
+```
+
+- **OR REPLACE**	如果存在同名视图，则使用新视图替代。
+
+- **FORCE**	强制创建视图，无视基表是否存在、是否有权限
+
+- **WITH CHECK OPTION**	
+
+  例如：
+
+  ``` sql
+  -- 创建一个视图: 查询部门号为10的人员
+  CREATE VIEW vw_emp_check
+  AS SELECT emp_no
+  	, emp_name
+  	, job
+  	, dept_no
+  	FROM EMP
+  	WHERE dept_no = 10
+  WITH CHECK OPTION;
+  
+  -- 插入一条记录
+  INSERT INTO vw_emp_check VALUES('3', '张三', '工程师', '20');
+  -- 由于20号部门不在视图查询范围内, 将报错'违反检查约束'
+  ```
+
+  对视图的增删改查操作，必须是`select`可以查询到的数据。
+
+##### 只读视图
+
+``` sql
+CREATE VIEW vw_emp_readonly AS
+SELECT emp_no
+	, emp_name
+	, job
+FROM emp
+WITH READONLY;
+```
+
+##### 授予权限
+
+- 授予创建视图的权限
+
+``` sql 
+GRANT CREATE VIEW TO scott;
+```
+
+#### 删除视图
+
+``` sql
+DROP VIEW vw_test_drop;
+```
+
+#### 实体化视图(Materialized View)
+
+- 意义
+
+  预先计算并保存表连接、聚集等耗时较多的操作，从而快速得到结果。
+
+
+
+> - [Materialized View](https://www.cnblogs.com/benio/archive/2011/06/10/2077414.html)
+>
+> 这两天帮用户重写一个package. 原来的package含有三层loop,每层loop包含一个显式cursor. 运行需要2-3天。
+>
+> 我用materialized view重写底下两层的显式cursor.结果相同的参数，10分钟就跑出来了。
+>
+> Mv真的是效率很高啊.这两天要好好研究一下，现在先转一个介绍文档.
 
 # DML
 
