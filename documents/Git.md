@@ -178,6 +178,8 @@ git reset #{verison} #{filename}
 
 奇怪了，居然又推送成功了。
 
+将`Branch name pattern`修改成`*protection*`测试下。
+
 # 异常
 
 ## Couldn't find remote ref refs/heads/xxx [core]
