@@ -176,6 +176,8 @@ git reset #{verison} #{filename}
 
 推送成功后怀疑是由于使用的是管理员账号，勾选`Include administrators`再测试。
 
+奇怪了，居然又推送成功了。
+
 # 异常
 
 ## Couldn't find remote ref refs/heads/xxx [core]
