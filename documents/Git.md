@@ -196,14 +196,25 @@ git reset #{verison} #{filename}
 
 ​	但是怎么禁止推送还是很迷惑...
 
-- 再设置一下
+- 设置`Require approvals`
 
-  勾选`Require a pull request before merging`，再勾选`Require a pull request before merging`。
+  勾选`Require a pull request before merging`，再勾选`Require approvals`。
 
-``` txt
-remote: error: GH006: Protected branch update failed for refs/heads/feature_branch_protection_rule.        
-remote: error: At least 1 approving review is required by reviewers with write access.        
-```
+  ``` text
+  remote: error: GH006: Protected branch update failed for refs/heads/feature_branch_protection_rule.        
+  remote: error: At least 1 approving review is required by reviewers with write access.        
+  ```
+
+- 设置为`Dismiss stale pull request approvals when new commits are pushed`
+
+  勾选`Require a pull request before merging`，再勾选`Dismiss stale pull request approvals when new commits are pushed`。
+
+  ``` text 
+  remote: error: GH006: Protected branch update failed for refs/heads/feature_branch_protection_rule.        
+  remote: error: Changes must be made through a pull request. 
+  ```
+
+
 
 # 异常
 
