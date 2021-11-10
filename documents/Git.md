@@ -168,6 +168,12 @@ git log -number #{filename}
 git reset #{verison} #{filename}
 ```
 
+# 保护分支
+
+设置完成后做一些小改动以推送。
+
+目前保护分支的名称是`feature_branch_protection_rule`。
+
 # 异常
 
 ## Couldn't find remote ref refs/heads/xxx [core]
