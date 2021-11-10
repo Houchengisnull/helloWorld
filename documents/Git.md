@@ -170,6 +170,8 @@ git reset #{verison} #{filename}
 
 # 保护分支
 
+- 设置保护分支
+
 设置完成后做一些小改动以推送。
 
 目前保护分支的名称是`feature_branch_protection_rule`。
@@ -179,6 +181,20 @@ git reset #{verison} #{filename}
 奇怪了，居然又推送成功了。
 
 将`Branch name pattern`修改成`*protection*`测试下。
+
+- 删除分支时发现
+
+  ``` txt
+  C:\Users\admin\Desktop\helloWorld> git.exe -c "credential.helper=C:/Program\ Files/SmartGit/lib/credentials.cmd" push --porcelain --progress origin :refs/heads/feature_branch_protection_rule
+  remote: error: GH006: Protected branch update failed for refs/heads/feature_branch_protection_rule.        
+  remote: error: Cannot delete this protected branch        
+  failed to push some refs to 'https://github.com/Houchengisnull/helloWorld.git'
+  To https://github.com/Houchengisnull/helloWorld.git
+  ! :refs/heads/feature_branch_protection_rule [remote rejected] (protected branch hook declined)
+  Done
+  ```
+
+​	但是怎么禁止推送还是很迷惑...
 
 # 异常
 
