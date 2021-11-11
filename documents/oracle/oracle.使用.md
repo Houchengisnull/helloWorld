@@ -223,6 +223,14 @@ DROP VIEW vw_test_drop;
 >
 > Mv真的是效率很高啊.这两天要好好研究一下，现在先转一个介绍文档.
 
+## 同义词
+
+`同义词(Synonym)`是数据库对象的一个别名。
+
+``` sql
+CREATE [OR REPLACE] SYSNONYM [schema.]synonym_name FOR [schema.]object_name
+```
+
 # DML
 
 ## 查询
