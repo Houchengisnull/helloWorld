@@ -63,5 +63,7 @@
 
 - **sendRequest**
 
-  用于在沙盒中发送请求，比如需要在调用查看接口前先调用登录接口，或者在调用A接口后返回重定向，我们将`Response Header`中的`Location`替换成新的`url`。
+  用于在沙盒中发送请求，比如需要在调用查看接口前先调用登录接口，或者在调用A接口后返回重定向，我们将`Response Header`中的`Location`替换成新的`url`。、
+
+  > 重定向这种情况主要用于新请求的`Request Header`、`Request Param`或`Request Body`无法从`Response Header`得到足够的`argument`时使用。
 
