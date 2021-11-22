@@ -1,5 +1,7 @@
 [toc]
 
+- [Markdown 入门教程](https://www.wenjiangs.com/docs/markdown-introduction)
+
 # 什么是Markdown
 
 `Markdown`是现下程序员领域非常流行的文档格式。要我总结它的优点有三个：
@@ -318,6 +320,48 @@ sequenceDiagram
 
 ### UML
 
+#### 类图
+
+##### 类图的关系|线条
+
+| Type   | Description |
+| :----- | :---------- |
+| `<|--` | 继承关系    |
+| `*--`  | 组成关系    |
+| `o--`  | 集合关系    |
+| `-->`  | 关联关系    |
+| `--`   | 实现连接    |
+| `..>`  | 依赖关系    |
+| `..|>` | 实现关系    |
+| `..`   | 虚线连接    |
+
+``` mermaid
+classDiagram
+  classA --|> classB : 继承
+  classC --* classD : 组成
+  classE --o classF : 集合
+  classG --> classH : 关联
+  classI -- classJ : 实线连接
+  classK ..> classL : 依赖
+  classM ..|> classN : 实现
+  classO .. classP : 虚线连接
+```
+
+##### 类修饰符
+
+```mermaid
+classDiagram
+class 形状 {
+    <<interface>>
+    定点数
+    绘制()
+}
+```
+
+##### 示例
+
+- **示例1**
+
 ``` mermaid
 classDiagram
 
@@ -326,9 +370,38 @@ IHelloWorld : sayHello()
 LoggerHandler *-- Logger : call
 LoggerHandler *-- HelloWorld : call
 HelloWorld : sayHello()
+HelloWorld : String who
 InvocationHandler <-- LoggerHandler : implements
 InvocationHandler : invoke()
 ```
+
+- **示例2**
+
+  ```mermaid
+  classDiagram
+  	鸟 --|> 动物 : 继承
+    翅膀 "2" --> "1" 鸟 : 组合
+    动物 ..> 氧气 : 依赖
+    动物 ..> 水 : 依赖
+    
+  	class 动物 {
+      <<interface>>
+      +有生命
+      +新陈代谢(氧气, 水)
+      +繁殖()
+  	}
+  	
+  	class 鸟 {
+  		+羽毛
+  		+有角质喙没有牙齿
+  		+下蛋()
+  	}
+  	class 鸟 {
+  		+羽毛
+  		+有角质喙没有牙齿
+  		+下蛋()
+  	}
+  ```
 
 ### 甘特图
 
