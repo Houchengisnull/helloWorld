@@ -148,12 +148,6 @@ systeminfo
 
 除此之外，我们还可以通过`windows`系统的`事件查看器`或`net statistics workstation`来查看系统的开机、关机时间。
 
-# 查看文件内容 type
-
-``` bat
-type hello.txt
-```
-
 # 查看帮助信息
 
 `/?`
@@ -248,6 +242,18 @@ C:\Users\admin\AppData\Local\Programs\Python\Python38\python.exe
 - **exit**
 
 # 文件
+
+## 查看目录树
+
+``` bat
+tree
+```
+
+## 查看文件
+
+``` bat
+type hello.txt
+```
 
 ## 复制 copy
 
