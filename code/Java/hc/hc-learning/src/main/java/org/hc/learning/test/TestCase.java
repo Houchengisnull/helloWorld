@@ -9,6 +9,10 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * # feautre
+ * - 在单元测试时快速计算耗时。
+ */
 public class TestCase {
 
     private LocalDateTime last;
