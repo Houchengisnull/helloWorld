@@ -168,7 +168,7 @@ chowd -R 777 #{directory}
 
 <a href='https://blog.csdn.net/chyychfchx/article/details/52687935'>Linux命令-5：rm（Remove）命令</a>
 
-## 参数
+### 参数
 
 - **-r --recursive**	递归
 - **-f --force**	强制删除，无需确认
