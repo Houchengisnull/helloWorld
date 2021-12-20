@@ -141,5 +141,48 @@ https://www.cnblogs.com/sandea/p/7116751.html
 - **refer**
 - [Log4j2 还是 Logback？2020 年Java 日志框架到底哪个性能好？](http://www.cainiaoxueyuan.com/bc/17731.html)
 
+## Log4j2 2.*.0漏洞修复
 
+- **参考**
+- [Apache Log4j漏洞修复](https://cloud.tencent.com/developer/article/1917626)
+
+> - 2021-12-20
+> - 近期Log4j2爆出严重漏洞，影响版本范围[2.0.0, 2.15.0)
+
+需要将`Log4j2`的版本升级到`2.15.0.RC2`，如果项目的`Maven`直接引入:
+
+``` xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-log4j2</artifactId>
+    <version>2.2.0.RELEASE</version>
+</dependency>
+```
+
+只需要将其注释并替换为:
+
+``` xml
+<dependency>
+      <groupId>com.xx.framework</groupId>
+      <artifactId>xx-log4j2-starter</artifactId>
+      <exclusions>
+          <dependency>
+              <groupId>org.apache.logging.log4j</groupId>
+              <artifactId>log4j-api</artifactId>
+          </dependency>
+          <exclusion>
+              <groupId>org.apache.logging.log4j</groupId>
+              <artifactId>log4j-core</artifactId>
+          </exclusion>
+          <exclusion>
+              <groupId>org.apache.logging.log4j</groupId>
+              <artifactId>log4j-jul</artifactId>
+          </exclusion>
+          <exclusion>
+              <groupId>org.apache.logging.log4j</groupId>
+              <artifactId>log4j-slf4j-impl</artifactId>
+          </exclusion>
+      </exclusions>
+  </dependency>
+```
 
