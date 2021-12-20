@@ -981,7 +981,9 @@ graph LR
 
 # JDBC
 
-## 无需`Class.forName(String className)`注册驱动
+## 注册驱动
+
+### JDBC4.0
 
 在`JDK6/JDBC4.0`之后，注册数据库驱动无需再通过
 
@@ -989,13 +991,37 @@ graph LR
 Class.forName("com.mysql.jdbc.Driver");
 ```
 
+## Blob
+
+在数据库中可以使用`Blob`来存储字节数组。但通常的做法是存储图片的`url`或者`uri`，查看图片时后端返回结果后，浏览器对图片再次请求。
+
+- **读取**
+
+  通常情况下，我们要将`Blob`转换成`byte[]`再进行处理：
+
+  ``` java
+  private byte[] readBlob(Blob blob) throws IOException, SQLException{
+      InputStream input = blob.getBinaryStream();
+      int i = 0;
+      byte[] buffer = new byte[1024];
+      ByteArrayOutputStream output = new ByteArrayOutputStream();
+      while((i = input.read(buffer)) > 0) {
+          output.write(buffer, 0, i);
+      }
+      byte[] bytes = output.toByteArray();
+      input.close();
+      output.close();
+      return bytes;
+  }
+  ```
+
 ## 异常
 
 - `A ResourcePool could not acquire a resource from its primary factory or source`
 
   在部署公司某系统连接`oracle`时，`c3p0`连接池由于神秘原因无法从数据库服务器中获取连接，导致出现该错误。
 
-  经过百度与同事帮助，分析原因为`JDK`、`oracle`、`c3p0连接池`及相关数据库连接驱动(`ojdbc6`\`ojdbc7`)之间存在差异造成的。
+  经过百度与同事帮助，分析原因为`JDK`、`oracle`、`c3p0连接池`及相关数据库连接驱动(`ojdbc6`、`ojdbc7`)之间存在差异造成的。
 
   最后，听取同事建议，将数据库连接池切换为`Druid`后，项目成功运行。
 
