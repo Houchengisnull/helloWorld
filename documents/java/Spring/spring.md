@@ -1,5 +1,33 @@
 [toc]
 
+
+
+# 如何使用Spring官网
+
+浏览器输入官网地址https://spring.io/projects/spring-boot/。
+
+![image-20220104104855843](../../images/java.spring/spring-framework-doc.png)
+
+
+
+随后在其官网上，包含：
+
+- `OVERVIEW`
+
+- `LEARN`
+
+  更为具体的文档就在这个模块下。
+
+  ![image-20220104105731920](../../images/java.spring/spring-framework-doc-learn.png)
+
+- `SUPPORT`
+
+  各版本的支持日期。
+
+- `SAMPLES`
+
+  比较复杂的样例，比如使用`spring-boot`搭建一个网站。
+
 # Spring简史
 
 - 第一阶段：`xml`配置；
