@@ -3,8 +3,6 @@
 - **参考**
 - [官网](https://redis.io/documentation)
 
-
-
 # 启动
 
 `redis-server`程序在`src`目录下：
@@ -21,7 +19,7 @@ redis-server
 redis-server ../redis.conf
 ```
 
-# 鉴权
+# 安全
 
 ## 修改密码
 
@@ -36,6 +34,15 @@ redis-server ../redis.conf
   ``` shell
   config set requirepass [password]
   ```
+
+## 鉴权
+
+``` shell
+redis > AUTH passowrd
+"OK"
+```
+
+# 配置
 
 ## 配置地址绑定
 
@@ -66,6 +73,29 @@ redis-server ../redis.conf
      ```
 
   > 参数前不可有空格
+
+## 配置最大连接数
+
+``` shell
+redis > config get maxclients
+
+1) "maxclients"
+2) "10000"
+```
+
+# 连接
+
+## Ping
+
+连接正常返回`PONG`，否则返回连接错误。
+
+## 查看连接
+
+- **CLIENT LIST**
+- **CLIENT SETNAME**
+- **CLIENT GETNAME**
+- **CLIENT PAUSE**
+- **CLIENT KILL**
 
 # 删除
 
@@ -105,7 +135,34 @@ flushall [ASYNC|SYNC]
 flushdb [ASYNC|SYNC]
 ```
 
+# 架构
 
+## 单线程
+
+### 原因
+
+## 客户端连接过程
+
+### Socket
+
+- **TCP**
+  1. 非阻塞模式
+  2. TCP_NODELAY
+
+## 非阻塞多路复用模型
+
+# 分布式锁
+
+- **参考**
+- [分布式锁](http://www.redis.cn/topics/distlock.html)
+- [Redis分布式锁使用不当，酿成一个重大事故，超卖了100瓶飞天茅台！！！ - 老刘的文章 - 知乎 ](https://zhuanlan.zhihu.com/p/362755550)
+- [为什么redis可以做分布式锁，是因为redis是单线程的吗? - Leon的回答 - 知乎 ](https://www.zhihu.com/question/317687988/answer/2223528054)
+
+## 锁设计
+
+### setnx
+
+## RedLock
 
 # 缓存穿透
 
