@@ -77,6 +77,12 @@ net stop mysql
 - **参考**
 - [mysql8.0.20安装配置教程](https://www.cnblogs.com/2020javamianshibaodian/p/12906655.html)
 
+# 查看版本
+
+``` mysql
+SELECT version();
+```
+
 # 用户
 
 ## 查询密码

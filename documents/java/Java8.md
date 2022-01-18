@@ -166,15 +166,53 @@ stringOptional.ifPresent(e-> System.out.println("我被处理了。。。"+e));
 ```
 
 <hr>
-
-
 - **参考**
 
 - [Java8 如何正确使用 Optional](http://www.importnew.com/26066.html)
 
 - [理解、学习与使用 JAVA 中的 OPTIONAL](https://blog.csdn.net/zknxx/article/details/78586799)
 
+# Stream
+
+> 项目中大量使用`Stream`处理`Collection`，感受最深的就是代码量大大减少。
+>
+> 但是问题在于当业务复杂时不够灵活，也不利于扩展。
+
 # Lambda
+
+## 方法引用::
+
+- 静态方法引用
+
+  ``` java
+  Person::getAge
+  ```
+
+- 实例方法引用
+
+  ``` java
+  System.out::println
+  ```
+
+- 超类方法引用
+
+  ``` java
+  super::methodname
+  ```
+
+- 类构造器方法引用
+
+  ``` java
+  ArrayList::new
+  ```
+
+- 数组构造器引用
+
+  ``` java
+  String[]::new
+  ```
+
+> 个人感受仅是用于区分对象与方法，意义不大。
 
 ## removeIf
 

@@ -1,5 +1,10 @@
 [TOC]
 
+- **参考**
+- [官网](https://redis.io/documentation)
+
+
+
 # 启动
 
 `redis-server`程序在`src`目录下：
@@ -16,9 +21,23 @@ redis-server
 redis-server ../redis.conf
 ```
 
+# 鉴权
 
+## 修改密码
 
-# redis配置地址绑定
+- 方法1
+
+  1. 修改配置文件`redis.conf`；
+  2. 修改其中的`requirepass`属性；
+  3. 重启`redis`；
+
+- 方法2
+
+  ``` shell
+  config set requirepass [password]
+  ```
+
+## 配置地址绑定
 
 - **参考**
 
@@ -47,6 +66,46 @@ redis-server ../redis.conf
      ```
 
   > 参数前不可有空格
+
+# 删除
+
+``` shell
+redis > set key1 "Hello"
+"OK"
+redis > set key2 "World"
+"OK"
+redis > DEL key1 key2 key3
+(integer) 2
+redis >
+```
+
+> 该命令不支持通配符方式：
+>
+> ``` shell
+> DEL key*
+> ```
+
+# 清理
+
+## FLUSHALL
+
+清空所有数据库。
+
+在默认情况下，同步清空所有数据库。
+
+``` shell
+flushall [ASYNC|SYNC]
+```
+
+## FLUSHDB
+
+清理当前数据库
+
+``` shell
+flushdb [ASYNC|SYNC]
+```
+
+
 
 # 缓存穿透
 
