@@ -795,7 +795,12 @@ StaticMatchMethodPointcutAdvisor —— 匹配静态方法的切面
 
 - 启动`Java进程`时添加`spring.profiles.active`参数；
 
+  ``` bat
+  java -Dspring.profiles.active=dev -jar hello.jar
+  ```
+
 - `Web`项目设置在`Servlet`的`context parameter`中；
+
 - Servlet 2.5及以下
 
   ``` xml

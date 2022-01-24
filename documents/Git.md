@@ -108,7 +108,7 @@ $ git commit -m "hello world"
 
 `git rebase --abort`
 
-# 合并
+# Merge
 
 在将其他分支的代码合并到当前分支时，如果那个分支是当前分支的父分支，为了保持图表的可读性和可追踪性，可以考虑用 `git rebase` 来代替 `git merge`；反过来或者不是父子关系的两个分支以及互相已经 `git merge` 过的分支，就不要采用 `git rebase` 了，避免出现重复的冲突和提交节点。
 
@@ -120,6 +120,10 @@ $ git commit -m "hello world"
 | squash           | 提交,并合并到过去提交             |
 | fixup           | 提交,并合并到过去提交，且撤回本次提交信息             |
 | drop           | 移除本次提交             |
+
+# Rebase
+
+
 
 # stash
 

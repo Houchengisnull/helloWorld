@@ -62,12 +62,6 @@
 
 就如同我们只是有这个存根，当我们的请求发送给`server`后，`server`会根据存根找到具体的实现。借用`Java`中的`interface`，我们在本地声明了接口，但是具体实现却在`server`上。
 
-# 常用RPC框架
-
-- Dubbo
-- gRPC
-- Hessian
-
 # Web Service
 
 - **参考**
@@ -101,6 +95,36 @@
 
 这些是自己在处理类似功能时，感受最深的体验。
 
+## 要素
+
+### SOAP
+
+简单对象访问协议，`Simple Object Access Protocol`。
+
+是一种基于XML描述客户端与服务端之间的数据交换格式协议。
+
+### WSDL
+
+WebService定义语言，`WebService Definition Language`。
+
+是一种基于[^XSD]描述WebService的语言。
+
+[XSD]: XML Schema Definition
+
+### UDDI
+
+统一发现和集成服务，`Universal Description Discovery and Integration`。
+
+是一个用于存放`WebService`服务信息的目录服务。
+
 ## 原理
 
 ![img](../images/net/webservice.png)
+
+## 
+
+# 常用RPC框架
+
+- Dubbo
+- gRPC
+- Hessian
