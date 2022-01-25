@@ -38,15 +38,30 @@ cat /proc/version
 $ getconf LONG_BIT
 ```
 
+
+
+# 磁盘
+
 ## 查看磁盘IO信息
 
 - iotop
 - iostat
 
-## 查看文件占用空间
+## 查看文件空间 du
 
 ``` shell
 $ du -sk -m ./
+```
+
+## 查看磁盘空间 df
+
+``` shell
+# 查看磁盘空间大小
+# a 所有
+# h 以KB, MB, GB格式显示
+$ df -ah
+# 查看磁盘索引(inode)占用大小
+$ df -i
 ```
 
 # su 切换用户
@@ -181,6 +196,11 @@ $ rm -f #{file}
 $ rm -i *.log
 # 删除文件夹
 $ rm -r #{directory}
+
+# 删除当前文件夹下所有文件及文件夹
+$ rm -rf *
+# argument list too long
+$ find . | xargs -i rm {}
 ```
 
 ## 压缩与解压 tar
