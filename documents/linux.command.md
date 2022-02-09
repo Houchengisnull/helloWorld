@@ -404,10 +404,19 @@ $ cat /proc/#{pid}/status
 
 # 进程
 
-## 后台运行
+## ps
 
-- [Linux shell中&，&&，|，||的用法](https://www.cnblogs.com/unknown404/p/10355705.html)
-- [shell 脚本中&和&&的区别](https://www.jianshu.com/p/1f8996860d52)
+process status
+
+## 管道符 |
+
+在`shell`，管道符`|`用于将上一条命令的输出作为下一条命令的参数。
+
+``` shell
+ps -ef|grep 3306
+```
+
+## 后台运行 &
 
 ``` shell
 java -jar SpringBootPorjectName.jar 2>&1 1>/dev/null &
@@ -415,20 +424,10 @@ java -jar SpringBootPorjectName.jar 2>&1 1>/dev/null &
 
 程序在后台运行。
 
-- 与`&&`的区别：
+## &&与||
 
-  ``` shell
-  #1 a和b同时进行
-  a & b
-  #2 a运行成功后再运行b
-  a && b
-  ```
-
-## 查看
-
-```
-# ps -ef | grep #{process_name}
-```
+- **&&**	若左边的命令执行成功，则执行右边的命令。
+- **||**	若左边的命令执行失败，则执行右边的命令。
 
 ## kill
 
