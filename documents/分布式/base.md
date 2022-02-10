@@ -37,8 +37,35 @@
     - Business Process Management，BPM	业务流程编排
     - Service Data Object, SDO	服务数据对象
     - Service Component Architecture，SCA	服务组件架构
+  
 - Microservices	微服务架构
+
 - Cloud Native	后微服务时代/云原生
   - Kubernetes
   - Spring Cloud
+  
+  |          | Kubernetes              | Spring Cloud          |
+  | -------- | ----------------------- | --------------------- |
+  | 弹性伸缩 | Autoscaling             | N/A                   |
+  | 服务发现 | KubeDNS / CoreDNS       | Spring Cloud Eureka   |
+  | 配置中心 | ConfigMap / Secret      | Spring Cloud Config   |
+  | 服务网关 | Ingress Controller      | Spring Cloud Zuul     |
+  | 负载均衡 | Load Balancer           | Spring Cloud Ribbon   |
+  | 服务安全 | RBAC API                | Spring Cloud Security |
+  | 跟踪监控 | Metrics API / Dashboard | Spring Cloud Turbine  |
+  | 降级熔断 | N/A                     | Spring Cloud Hystrix  |
+  
 - Serverless	无服务架构
+
+# 通信
+
+# 事务
+
+## 本地事务
+
+## 全局事务
+
+## 共享事务
+
+## 分布式事务
+
