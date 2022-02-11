@@ -51,7 +51,7 @@ REST全称是Representational State Transfer，表征状态转移。
 - 统一接口
 - 按需代码
 
-实际上，REST是一种设计思想，而不仅仅是一套URL设计规范。HTTP本身就是REST思想的最佳范例。
+实际上，REST是一种设计思想，而不仅仅是一套URL设计规范。HTTP本身就是REST思想的最佳实践。
 
 # 常见要求
 
