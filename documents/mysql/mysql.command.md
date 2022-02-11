@@ -38,6 +38,8 @@ mysqld --uninstall %server_name%
 
 ## 启动
 
+- windows
+
 ``` bash
 # 启动mysql服务
 net start mysql
@@ -46,9 +48,14 @@ net start mysql
 net stop mysql 
 ```
 
-- **参考**
-- [MySQL 成功安装，但是无法启动](https://bbs.csdn.net/topics/391950830)
-- [MYSQL服务无法启动，服务没有任何错误；解决方法](https://blog.csdn.net/qq_37915248/article/details/82631398)
+- linux
+
+``` shell
+# 5.0
+service mysqld start
+# 5.7
+service mysql start
+```
 
 ## Faq
 

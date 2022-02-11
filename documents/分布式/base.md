@@ -61,11 +61,154 @@
 
 # 事务
 
+- Atomic	原子性
+- Isolation	隔离性
+- Durability	持久性
+
 ## 本地事务
+
+- ARIES理论
+
+- 场景
+
+  单服务单数据源
+
+### 实现原子性与持久性
+
+- Commit Logging
+
+- Write-Ahead Logging
+
+  - Analysis	分析阶段
+
+    找出commit却未持久化的日志记录
+
+  - Redo	重做阶段
+
+    重新持久化
+
+  - Undo	回滚阶段
+
+    回滚对写入但未commit的记录
+
+- Shadow Paging
+
+- 策略
+
+  - FORCE
+
+    在事务提交后，同时完成写入
+
+  - STEAL
+
+    在事务提交前，允许提前写入
+
+  - NO-FORCE
+
+    在事务提交后，不要求立即写入
+
+  |                     | FORCE | STEAL | NO-FORCE |
+  | ------------------- | ----- | ----- | -------- |
+  | Commit Logging      | √     | ×     | √        |
+  | Write-Ahead Logging | √     | √     | √        |
+
+### 实现隔离性
+
+- 原理
+
+  加锁
+
+- 锁类型
+
+  - X-Lock
+
+  - S-Lock
+
+  - Range Lock
+
+    ``` sql
+    # 范围锁示例
+    SELECT * FROM books WHERE price < 100 FOR UPDATE;
+    ```
 
 ## 全局事务
 
+- 场景
+
+  单服务多数据源
+
+- X/Open XA	处理事务架构
+
+  - 全局事务管理器，用于协调全局事务
+  - 局部事务管理器，用于处理本地事务
+  - JTA
+    - XADataSource
+    - XAResource
+
+- 2PC	两段式提交
+
+  - 准备阶段
+  - 提交阶段
+
+- 3PC	三段式提交
+
+  - CanCommit
+  - PreCommit
+  - DoCommit
+
 ## 共享事务
+
+- 场景
+
+  多服务单数据源
 
 ## 分布式事务
 
+- CAP理论
+
+  - Consistency	一致性
+  - Availabilty	可用性
+  - Partition Tolerance	分区容忍性
+
+- 一致性
+
+  - 强一致性
+
+    - CAP
+    - ACID
+
+  - 弱一致性
+
+    即不保证一致性
+
+  - 最终一致性
+
+    - BASE
+
+### 可靠事件队列
+
+- 最终一致性
+- 最大努力交付
+- 问题
+  - 缺乏隔离性
+
+### TCC事务
+
+Try-Confirm-Cancel
+
+- 过程
+  - Try	尝试执行阶段
+  - Confirm	确认执行阶段
+  - Cancel	取消执行阶段
+- 问题
+  - 业务侵入性强
+- 类库
+  - Seata
+
+### SAGA事务
+
+- 思想
+
+  通过补偿代替回滚
+
+### AT事务
