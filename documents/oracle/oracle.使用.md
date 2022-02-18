@@ -334,6 +334,21 @@ ROUND(TO_NUMBER(END_DATE - START_DATE) * 24 * 60 * 60)
 ROUND(TO_NUMBER(END_DATE - START_DATE) * 24 * 60 * 60 * 60)
 ```
 
+### 拼接字符串
+
+``` sql
+# concat
+SELECT CONCAT('当前时间:', TO_CHAR(sysdate, 'yyyy-MM-dd')) current_time
+FROM daul;
+
+# ||
+SELECT *
+FROM students
+WHERE name like '%' || '子' || '%'
+```
+
+
+
 ## 查询oracle版本
 
 ``` sql
