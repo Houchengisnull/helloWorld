@@ -15,7 +15,9 @@ Connected.
 ## 表空间与用户
 
 ``` sql
-/* 创建用户myoracle*/
+/* 创建用户myoracle
+* 注意此处需要使用双引号
+*/
 CREATE USER myorcl identified by "password";
 /* 授权 */
 GRANT CREATE SESSION TO myorcl;
