@@ -4,13 +4,149 @@
 
   [java命令--jstack 工具](https://www.cnblogs.com/kongzhongqijing/articles/3630264.html)
 
-# 使用
+
+
+# 基本介绍
+
+- 命令行工具
+
+  | 名称 | 作用 |
+  | ------ | ------------------------ |
+   | jps    | 虚拟机进程状况工具       |
+  | jstat  | 虚拟机统计信息监视工具   |
+  | jinfo  | Java配置信息工具         |
+  | jmap   | Java内存映像工具         |
+  | jhat   | 虚拟机堆转储快照分析工具 |
+  | jstack | Java堆栈跟踪工具         |
+
+- 可视化工具
+
+  | 名称 | 作用 |
+  | -------- | -------------------- |
+  | JConsole | Java监视与管理控制台 |
+  | VisualVM | 多合一故障处理工具   |
+
+- 其他
+
+    | 名称 | 作用 |
+  | -------- | -------------------- |
+  | MAT | ecplise提供内存分析工具 |
+
+# jps
+
+虚拟机进程状况工具。
+
+- 常用参数
+
+  | 参数 | 作用                                             |
+  | ---- | ------------------------------------------------ |
+  | -q   | 只显示进程号                                     |
+  | -m   | 输出主函数传入的参数                             |
+  | -l   | 输出应用程序主类完整 package 名称或 jar 完整名称 |
+  | -v   | 列出 jvm 参数                                    |
+  
+
+# jstat
+
+是用于监视虚拟机各种运行状态信息的命令行工具。它可以显示本地或者远程虚拟机进程中的类装载、内存、垃圾收集、JIT 编译等运行数据，在没有GUI图形界面，只提供了纯文本控制台环境的服务器上，它将是运行期定位虚拟机性能问题的首选工具。
+
+``` shell
+# 打印10次进程号为pid的gc信息, 每次间隔250ms
+jstat -gc <pid> 250 10
+```
+
+- 常用参数
+
+  | 参数              | 作用                 |
+  | ----------------- | -------------------- |
+  | -class            | 类加载器             |
+  | -compiler         | JIT                  |
+  | -gc               | GC堆状态             |
+  | -gccapacity       | 各区大小             |
+  | -gccause          | 最近一次GC统计和原因 |
+  | -gcnew            | 新区统计             |
+  | -gcnewcapacity    | 新区大小             |
+  | -gcold            | 老区统计             |
+  | -gcoldcapacity    | 老区大小             |
+  | -gcpermcapacity   | 永久区大小           |
+  | -gcutil           | GC统计汇总           |
+  | -printcompilation | HotSpot编译统计      |
+
+# jinfo
+
+查看和修改(运行期间)虚拟机的参数 。
+
+- 常用参数
+
+  | 参数          | 作用                                                         |
+  | ------------- | ------------------------------------------------------------ |
+  | -sysprops     | 可以查看由System.getProperties()取得的参数                   |
+  | -flag         | 未被显式指定的参数的系统默认值                               |
+  | -flags        | 显示虚拟机的参数                                             |
+  | -flag +[参数] | 增加参数，仅限于java -XX:+PrintFlagsFinal -version查询出来的manageable参数 |
+  | -flag -[参数] | 修改参数                                                     |
+
+- manageable参数
+
+  ``` shell
+  C:\Users\admin>java -XX:+PrintFlagsFinal -version|findstr manageable
+       intx CMSAbortablePrecleanWaitMillis           = 100                                    {manageable} {default}
+       intx CMSTriggerInterval                       = -1                                     {manageable} {default}
+       intx CMSWaitDuration                          = 2000                                   {manageable} {default}
+       bool HeapDumpAfterFullGC                      = false                                  {manageable} {default}
+       bool HeapDumpBeforeFullGC                     = false                                  {manageable} {default}
+       bool HeapDumpOnOutOfMemoryError               = false                                  {manageable} {default}
+      ccstr HeapDumpPath                             =                                        {manageable} {default}
+      uintx MaxHeapFreeRatio                         = 70                                     {manageable} {default}
+      uintx MinHeapFreeRatio                         = 40                                     {manageable} {default}
+       bool PrintClassHistogram                      = false                                  {manageable} {default}
+       bool PrintConcurrentLocks                     = false                                  {manageable} {default}
+  ```
+
+  
+
+# jmap
+
+用于生成堆转储快照（一般称为 heapdump 或 dump 文件）。jmap的作用并不仅仅是为了获取dump文件，它还可以查询finalize执行队列、Java堆和永 
+
+久代的详细信息，如空间使用率、当前用的是哪种收集器等。
+
+和jinfo命令一样，jmap有不少功能在Windows平台下都是受限的，除了生成 dump文件的-dump 选项和用于查看每个类的实例、空间占用统计的-histo选项在所有操作系统都提供之外，其余选项都只能在Linux/Solaris下使用。 
+
+``` shell
+jmap -dump:live,format=b,file=heap.bin <pid>
+```
+
+- 参数
+
+  | 参数   | 作用                           |
+  | ------ | ------------------------------ |
+  | -dump  | 生成堆转储快照                 |
+  | -histo | 查看每个类的实例、空间占用统计 |
+
+# jhat
+
+用于分析jmap生成的堆转储快照。
+
+``` shell
+jhat dump <file>
+```
+
+执行完命令后，jhat将分析结果展示在7000端口上，我们可以使用浏览器查看执行结果。由于分析堆转储快照耗费内存，所以不推荐在服务器上使用。
+
+# jstack
+
+用于生成线程快照。
+
+> 在代码中可以用java.lang.Thread类的getAllStackTraces()方法用于获取虚拟机中所有线程的StackTraceElement对象。使用这个方法可以通过简单的几行代码就完成 jstack 的大部分功能，在实际项目中不妨调用这个方法做个管理员页面，可以随时使用浏览器来查看线程堆栈。
+
+## 使用
 
 ``` shell
 jstack $pid
 ```
 
-## 正常运行的线程堆栈
+### 正常运行的线程堆栈
 
 - **NormalTask**
 
@@ -140,7 +276,7 @@ jstack $pid
 
   处于`Runnable`的仅有`pool-1-thread-1`。
 
-## 自旋运行的线程堆栈
+### 自旋运行的线程堆栈
 
 - **NullTask**
 
@@ -197,7 +333,7 @@ jstack $pid
 
   可见即使没有日志输出，但是`pool-1-thread-1`与`pool-1-thread-2`同样为`Runnable`状态。
 
-## 死锁的线程堆栈
+### 死锁的线程堆栈
 
 - **DeadLockTask**
 
@@ -287,3 +423,12 @@ jstack $pid
   ```
 
   显而易见的出现死锁。
+
+## 线程Dump分析工具
+
+- [Online Java Thread Dump Analyzer (spotify.github.io)](http://spotify.github.io/threaddump-analyzer/)
+- [IBM Thread and Monitor Dump Analyze for Java](https://www.ibm.com/developerworks/community/groups/service/html/communitystart?communityUuid=2245aa39-fa5c-4475-b891-14c205f7333c)
+
+# JConsole
+
+# VisualVM
