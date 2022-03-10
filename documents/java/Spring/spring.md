@@ -198,13 +198,9 @@ graph TD
 
 在`BeanFactory`接口的注释里详细地说明了Bean的生命周期。
 
-> Bean factory的实现应该尽可能支持标准的Bean生命周期。（渣翻译）
-
 #### @PostConstruct/@PreDestroy
 
 来自`javax.annotation`的注解。
-
-> 尾部+'x'常常有扩展的意思。
 
 由`JSR-250`提出，包括`@PostConstruct`、`@PreDestroy`、`@Resource`。
 
@@ -378,27 +374,39 @@ public interfacce BeanNameAware extends Aware{
 
 ### 依赖注入
 
-#### xml注入
+#### 声明
 
-略。
+##### 注解方式
 
-#### Anotation声明
+- **@Component**	没有明确的角色
 
-**@Component**	没有明确的角色；
+- **@Service**	在`业务逻辑层（service）`使用
 
-**@Service**	在`业务逻辑层（service）`使用；
+- **@Repository**	在`数据访问层（dao）`使用
 
-**@Repository**	在`数据访问层（dao）`使用；
+- **@Controller**	在展现层使用
 
-**@Controller**	在展现层使用；
+#### 注入
 
-#### Annotation注入
+##### 注解方式
 
-**@Autowired**	`Spring`提供注解；
+- **@Autowired**	Spring提供注解
 
-**@Inject**	`JSR-330`提供的注解；
+  当项目中存在一个以上相同类型的Bean时，比如说配置了多个数据源，这时需要通过限定注解@Qualifier与@Autowired搭配使用。
 
-**@Resource**	`JSR-250`提供的注解；
+  ``` java
+  @Autowired
+  @Qualifier("master")
+  private DataSource master;
+  
+  @Autowired
+  @Qualifier("slave")
+  private DataSource slave;
+  ```
+
+- **@Inject**	`JSR-330`提供的注解
+
+- **@Resource**	`JSR-250`提供的注解
 
 #### Java配置
 
