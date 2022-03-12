@@ -135,6 +135,21 @@ flushall [ASYNC|SYNC]
 flushdb [ASYNC|SYNC]
 ```
 
+# 发布订阅
+
+``` shell
+# 发布
+publish chat.queue "hello world"
+
+# 订阅
+subscribe chat.queue
+```
+
+- 缺点
+  - 消息无法持久化，存在丢失风险
+  - 没有ACK机制，发布方不确保订阅方成功接收
+  - 广播机制，下游消费能力取决于消费者本身
+
 # 架构
 
 ## 单线程
