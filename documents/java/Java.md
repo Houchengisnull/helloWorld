@@ -631,6 +631,16 @@ public class CollectionObjectChange {
 
 https://www.cnblogs.com/panxuejun/p/5883044.html
 
+# Object
+
+## finialize
+
+垃圾回收器准备回收时，先调用`finalize()`。
+
+> 知乎 [Pandora](https://www.zhihu.com/people/pandora-5-21)
+>
+> 主要是对一些非Java method开辟的内存，如jni调用native method，做资源释放前置处理，当然方法体内处理方法还是调用c/c++的析构函数
+
 # System
 
 ## identityHashCode
