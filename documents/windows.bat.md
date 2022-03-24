@@ -246,7 +246,11 @@ C:\Users\admin\AppData\Local\Programs\Python\Python38\python.exe
 ## 查看目录树
 
 ``` bat
+# 默认只显示目录名称
 tree
+tree /D
+# 显示文件名
+tree /F
 ```
 
 ## 查看文件

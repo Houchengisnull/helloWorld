@@ -167,9 +167,14 @@ show VARIABLES like '%max_allowed_packet%’
 > 设置方式1 : set global max_allowed_packet = #{max_allowed_packet};
 > 设置方式2 : 修改配置文件 my.cfg
 
-# 显示所有与mysql连接进程
+# Show
 
-`show full processlist`
+##  进程
+
+``` mysql
+# 显示所有与mysql连接进程
+show full processlist;
+```
 
 # Err:1205 Lock wait timeout exceeded
 
@@ -177,12 +182,14 @@ show VARIABLES like '%max_allowed_packet%’
 
 ## 普通方式
 
-  show full processlist;
-  kill #{pid}
+``` shell
+show full processlist;
+kill #{pid}
+```
 
 ## 升级1
 
-```
+```sql
 /* 显示当前事务 */
 select * from information_schema.INNODB_trx; 
 select * from information_schema.INNODB_locks;

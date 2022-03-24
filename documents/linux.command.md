@@ -255,6 +255,27 @@ cat hello.txt
   | `-C`或`--context`                              | 符合条件前后的内容           |
   |                                                |                              |
 
+## fuser
+
+用于查询给定文件或目录的相关用户或进程信息
+
+``` shell
+# 查询socket和文件系统使用者
+fuser -v -n tcp 9999
+              USER     PID    ACCESS   COMMAND
+9999/tcp:     root     11861   F....    socket
+
+# 查询文件和目录使用者
+fuser /root
+/root:               17923c 24869c
+```
+
+# 文件目录
+
+## dirname
+
+返回文件全路径中的目录部分。
+
 # vi/vim
 
 ## 查找
@@ -293,6 +314,20 @@ cat hello.txt
 - [Linux vi/vim](http://www.runoob.com/linux/linux-vim.html)
 
 # 网络
+
+## route
+
+``` shell
+# 查看默认路由
+route -n
+Kernel IP routing table
+Destination Gateway Genmask Flags Metric Ref Use Iface
+0.0.0.0 10.80.50.1 0.0.0.0 UG 0 0 0 bond0
+10.80.50.0 0.0.0.0 255.255.255.0 U 0 0 0 bond0
+169.254.0.0 0.0.0.0 255.255.0.0 U 1003 0 0 bond0
+```
+
+> `route -n`返回值中包含Destination 值为 0.0.0.0 且 Flags值为UG，说明默认路由生效；未包含说明默认路由未生效。
 
 ## host
 
@@ -473,31 +508,16 @@ ss -s
 
 - **-a** all
 - **-o** 显示ip
-
 - **-t** 只显示TCP端口
 - **-u** 只显示UDP端口
 - **-l** 仅显示监听套接字(能够读写与收发通讯协议(protocol)的程序)
 - **-p** 显示进程标识符和程序名称，每一个套接字/端口都属于一个程序
 - **-n** 不进行DNS轮询，显示IP(这样可以加快查询的时间)
-
-## 根据端口查找进程pid
+- -r 查看默认路由
 
 ``` shell
+# 查看TCP端口
 netstat -atlpn | grep 3306
-```
-
-
-
-## 查看tcp端口
-
-```shell
-# netstat -tnlp
-```
-
-## 通过pid/port查看占用port/pid
-
-``` shell
-$ netstat -nap | grep #{pid/port}
 ```
 
 # pidof
@@ -506,18 +526,6 @@ $ netstat -nap | grep #{pid/port}
 
 ``` shell
 $ pidof nginx
-```
-
-# 查看主机路由
-
-- `genmask` `子网掩码`
-
-``` shell
-$ route -n
-```
-
-``` shell
-$ netstat -rn
 ```
 
 # ssh
@@ -557,6 +565,17 @@ https://blog.csdn.net/baozijiaruqing/article/details/80645082
 # -f 循环读取
 tail -n 10 -f hello.log
 ```
+
+# set
+
+``` shell
+# 关闭脚本的冗余输出
+set -x
+# 显示脚本的冗余输出
+set +x
+```
+
+
 
 # 环境变量
 
