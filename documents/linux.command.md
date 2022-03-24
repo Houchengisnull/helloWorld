@@ -143,6 +143,17 @@ $ locale
 $ groups #{username}
 ```
 
+# 执行
+
+## source
+
+读取并执行文件，通常使用`.`代替
+
+``` shell
+# 与./helloWorld等价, 可以执行二进制程序
+source helloWorld.sh
+```
+
 # 文件
 
 ## 创建文件夹 mkdir
@@ -269,6 +280,10 @@ fuser -v -n tcp 9999
 fuser /root
 /root:               17923c 24869c
 ```
+
+## sed
+
+编辑文件
 
 # 文件目录
 
