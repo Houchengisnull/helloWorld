@@ -94,6 +94,8 @@ Inter-Process Communication，IPC
 
 # 发行版
 
+![img](.\images\linux\version.jpeg)
+
 ## Ubuntu
 
 - [官网](http://old-releases.ubuntu.com/)
@@ -108,8 +110,4 @@ Inter-Process Communication，IPC
 # 修改root用户密码
 sudo passwd
 ```
-
-# VMware
-
-- **密钥**	`YF390-0HF8P-M81RQ-2DXQE-M2UT6`
 
