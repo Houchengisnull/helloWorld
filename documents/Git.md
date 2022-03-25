@@ -2,13 +2,19 @@
 
 [TOC]
 
+- **参考**
+- [Git的诞生](https://www.liaoxuefeng.com/wiki/896043488029600/896202815778784)
+
+- [Rebase](https://www.liaoxuefeng.com/wiki/896043488029600/1216289527823648)
+
+- [团队开发中的 Git 实践]([团队开发中的 Git 实践 (qq.com)](https://mp.weixin.qq.com/s/1uAxTzqWvP0ccePf7c3Z2w))
+- [Git 合并多次 commit 、 删除某次 commit](https://blog.csdn.net/al_assad/article/details/81145856)
+
 # 安装Git Server
 
 ## Gitblit
 
-- 在`windows`上部署`gitblit`
-
-[在 Windows 上部署 gitblit](https://blog.csdn.net/longintchar/article/details/80787907)
+- [在 Windows 上部署 gitblit](https://blog.csdn.net/longintchar/article/details/80787907)
 
 # 分支模型 Git Flow
 
@@ -25,31 +31,31 @@
 - feature——某个功能点正在开发阶段；
 - release——发布定期要上线的功能。
 
-# 查看
-
-## 查看当前状态
+# git status
 
 ``` shell
 $ git status
 ```
 
-- 显示已修改但未提交的文件
-- 显示*not staged*的文件
-- 显示`untracked`的文件
+# git diff
 
-## 查看本次修改的具体内容
+查看本次修改的具体内容
 
 ``` shell
 $ git diff
 ```
 
-# 查看日志
+# git log
 
-`git log`
+``` shell
+$ git log
+```
 
-# 暂存区 stage
+# stage
 
-## 移除暂存区中文件
+暂存区。
+
+## 移除
 
 - 已存在repository中
 
@@ -63,7 +69,7 @@ $ git diff
   $ git rm --cached #{filename}
   ```
 
-## 添加文件至暂存区
+## 添加
 
 ``` shell
 $ git add #{filename}
@@ -76,7 +82,7 @@ $ git add .
 $ git add --all
 ```
 
-# 提交
+# commit
 
 - 提交时的粒度是一个小功能点或者一个 bug fix，这样进行恢复等的操作时能够将「误伤」减到最低；
 - 用一句简练的话写在第一行，然后空一行稍微详细阐述该提交所增加或修改的地方；
@@ -98,17 +104,7 @@ $ git add --all
 $ git commit -m "hello world"
 ```
 
-## 通过Rebase合并
-
-- 对最近4个`commit`合并
-
-  `git rebase -i HEAD~4`
-
-## 撤消Rebase
-
-`git rebase --abort`
-
-# Merge
+# merge
 
 在将其他分支的代码合并到当前分支时，如果那个分支是当前分支的父分支，为了保持图表的可读性和可追踪性，可以考虑用 `git rebase` 来代替 `git merge`；反过来或者不是父子关系的两个分支以及互相已经 `git merge` 过的分支，就不要采用 `git rebase` 了，避免出现重复的冲突和提交节点。
 
@@ -121,13 +117,21 @@ $ git commit -m "hello world"
 | fixup           | 提交,并合并到过去提交，且撤回本次提交信息             |
 | drop           | 移除本次提交             |
 
-# Rebase
+# rebase
 
+## 通过Rebase合并
 
+- 对最近4个`commit`合并
+
+  `git rebase -i HEAD~4`
+
+## 撤消Rebase
+
+`git rebase --abort`
 
 # stash
 
-`stash` 备份当前工作区到Git栈
+- **stash**	备份当前工作区到Git栈。
 
 ## 用法一 备份本地修改
 
@@ -228,18 +232,8 @@ git reset #{verison} #{filename}
 
 
 
-# 异常
+# FAQ
 
 ## Couldn't find remote ref refs/heads/xxx [core]
 
-https://blog.csdn.net/Tyro_java/article/details/76064584
-
-# 参考
-
-https://www.liaoxuefeng.com/wiki/896043488029600/1216289527823648
-
-https://www.liaoxuefeng.com/wiki/896043488029600/896202815778784
-
-https://mp.weixin.qq.com/s/1uAxTzqWvP0ccePf7c3Z2w
-
-https://blog.csdn.net/al_assad/article/details/81145856
+- [Fix fatal: Couldn't find remote ref refs/heads/xxx [core] fatal: The remote end hung up unexpectedly](https://blog.csdn.net/Tyro_java/article/details/76064584)

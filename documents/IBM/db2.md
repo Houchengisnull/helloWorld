@@ -45,10 +45,6 @@ db2stop
 db2start
 ```
 
-
-
-
-
 ## 参考
 
-https://www.cnblogs.com/revo/p/8817758.html
+- [db2事务日志已满解决办法](https://www.cnblogs.com/revo/p/8817758.html)

@@ -1,5 +1,13 @@
 [TOC]
 
+- **参考**
+
+- [什么是Feed流](http://www.sohu.com/a/231371811_114819)
+
+- [Feed](https://baike.baidu.com/item/Feed/15181)
+
+- [feed流推荐系统设计](https://blog.csdn.net/xwc35047/article/details/82996808)
+
 # 什么是Feed流
 
 >  feed是将用户主动订阅的若干消息源组合在一起形成内容聚合器，帮助用户持续地获取最新的订阅源内容。feed流即持续更新并呈现给用户内容的信息流。
@@ -50,21 +58,3 @@ RSS订阅是站点用来和其他站点之间共享内容的一种简易方式�
 ## RSS文件
 
 一个RSS文件就是一段规范的XML数据，该文件一般以rss，xml或者rdf作为后缀。发布一个RSS文件（一般称为RSS Feed）后，这个RSS Feed中包含的信息就能直接被其他站点调用，而且由于这些数据都是标准的XML格式，所以也能在其他的终端和服务中使用，如PDA、手机、[邮件列表](https://baike.baidu.com/item/%E9%82%AE%E4%BB%B6%E5%88%97%E8%A1%A8)等。
-
-# 参考
-
-什么是Feed流
-
-http://www.sohu.com/a/231371811_114819
-
-百度百科
-
-https://baike.baidu.com/item/Feed/15181
-
-## feed流推荐系统设计
-
-https://blog.csdn.net/xwc35047/article/details/82996808
-
-## kafka
-
-https://www.cnblogs.com/likehua/p/3999538.html

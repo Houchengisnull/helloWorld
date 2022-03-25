@@ -1,16 +1,18 @@
 [toc]
 
-- 
+- **参考**
 
-# CMake是什么
+- <a href='https://cmake.org/'>CMake官网</a>
+- <a href='https://blog.csdn.net/zhuiyunzhugang/article/details/88142908'>超详细的cmake教程</a>
+
+# CMake
 
 > CMake is an open-source, cross-platform family of tools designed to build, test and package software.
 >
-> `CMake`是一款开源、跨平台的打包工具。
 
-对标`Java`生态中的`Maven`、`Gradle`等。
+`CMake`是一款开源、跨平台的打包工具，如同Java生态中的Maven、Gradle等工具一样。
 
-- **工作流程**
+- 工作流程
 
   ```mermaid
   graph LR
@@ -18,22 +20,17 @@
   	make -- Makefile --> *.exe
   ```
 
-  1. `CMake`将根据`CMakeLists.txt`生成`Makefile`
+  1. CMake将根据CMakeLists.txt生成Makefile
 
-  2. `make`将根据`Makefile`生成`*.exe`
-
-# 参考
-
-- <a href='https://cmake.org/'>CMake官网</a>
-- <a href='https://blog.csdn.net/zhuiyunzhugang/article/details/88142908'>超详细的cmake教程</a>
+  2. make将根据Makefile生成`*.exe
 
 # FAQ
 
-## `Visual Studio Code`提示`CMake可执行文件不正确...`
+## Visual Studio Code提示CMake可执行文件不正确...
 
 - 原因
 
-  `Visual Studio Code`仅仅安装`extends`是不够的，还需要我们手动安装`CMake`。
+  Visual Studio Code仅仅安装extends是不够的，还需要我们手动安装CMake。
 
 - 参考
 
