@@ -16,6 +16,14 @@
 
 这条语句用于定义我们执行`shell`脚本的程序在系统中的位置。如果我们的`shell`脚本中没有这条语句，那么系统默认运行`C shell csh`。
 
+## $?
+
+上一条命令的返回
+
+## if
+
+![img](images/linux/if.jpeg)
+
 # 系统
 
 ## 系统版本
@@ -237,6 +245,11 @@ $ tar -zxvf target.tar.gz
 # 查找/etc目录下名称为http.conf的文件
 $ find /etc -name http.conf
 $ find /etc -name '*http*'
+
+# -print 打印
+# -exe 执行command命令
+# -ok 执行command命令前询问用户
+$ find path -option [-print] [-exec -ok command] {} \;
 ```
 
 ### 查找可执行文件 which
@@ -284,6 +297,11 @@ fuser /root
 ## sed
 
 编辑文件
+
+``` shell
+# 将application.yml中的MySQL替换为mysql
+sed -i "s|MySQL|mysql|g" application.yml
+```
 
 # 文件目录
 
