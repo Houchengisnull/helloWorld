@@ -13,6 +13,11 @@ public class TestController {
 
     @GetMapping("/")
     public String test(){
+        try {
+            Thread.sleep(5000l);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return "测试成功";
     }
 
