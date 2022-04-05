@@ -309,6 +309,24 @@ sed -i "s|MySQL|mysql|g" application.yml
 
 返回文件全路径中的目录部分。
 
+# 文件传输
+
+## lrzsz
+
+通常在`Linux`和`Windows`之间传输工具，我们除了使用`ftp工具`，我们还可以通过以下两个命令实现：
+
+``` shell
+# 安装工具
+yum install lrzsz
+
+# 下载
+sz $filename
+sz $filename1 $filename2
+sz $directory /*
+
+# 上传
+rz $filename
+```
 # vi/vim
 
 ## 查找
@@ -363,6 +381,14 @@ Destination Gateway Genmask Flags Metric Ref Use Iface
 > `route -n`返回值中包含Destination 值为 0.0.0.0 且 Flags值为UG，说明默认路由生效；未包含说明默认路由未生效。
 
 ## host
+## 网络服务
+
+``` shell
+# 重启网络服务
+$ service network restart
+```
+
+## HOST
 
 ### 域名解析
 
@@ -374,7 +400,7 @@ Destination Gateway Genmask Flags Metric Ref Use Iface
 
 /etc/host.conf ：指定域名解析的顺序（是从本地的hosts文件解析还是从DNS解析） <https://www.cnblogs.com/sunfie/p/5138065.html>
 
-## 查看ip地址
+## IP地址
 
 ``` shell
 # ip addr
@@ -388,10 +414,101 @@ Destination Gateway Genmask Flags Metric Ref Use Iface
 $ iptraf-ng eth0
 ```
 
-## 查看网卡状态
+## 网卡状态
 
 ``` shell
 $ ethtool eth0
+```
+
+## 防火墙
+
+``` shell
+# 查看防火墙状态
+# 出现Active属性显示running则表示防火墙开启
+$ systemctl status firewalld.service
+
+# 开启防火墙
+$ systemctl stop firewalld.service
+
+# 关闭防火墙
+$ systemctl stop firewalld.service
+```
+
+### 开放端口
+
+``` shell
+# 查看开放端口
+firewall-cmd --list-ports
+# 开放防火墙3306端口TCP连接
+firewall-cmd --zone=public --add-port=3306/tcp --permanent
+# 重启防火墙
+firewall-cmd --reload
+```
+
+# net-tools
+
+## netstat
+
+- **-a** all
+- **-o** 显示ip
+- **-t** 只显示TCP端口
+- **-u** 只显示UDP端口
+- **-l** 仅显示监听套接字(能够读写与收发通讯协议(protocol)的程序)
+- **-p** 显示进程标识符和程序名称，每一个套接字/端口都属于一个程序
+- **-n** 不进行DNS轮询，显示IP(这样可以加快查询的时间)
+
+``` shell
+# 安装
+yum install net-tools
+
+# 查看TCP连接
+# netstat -tnlp
+```
+
+### 根据端口查找进程pid
+
+``` shell
+netstat -atlpn | grep 3306
+```
+
+### 根据pid/port查看占用port/pid
+
+``` shell
+$ netstat -nap | grep #{pid/port}
+```
+
+# ss 查看连接 
+
+在查看连接时`ss`比`lsof`输出信息更详细，可以看到`socket`的接收/发送队列、ino号。
+
+``` shell
+# 列出所有tcp连接
+ss -t
+# 列出所有处于监听状态的tcp连接
+ss -tl
+# 列出所有的udp连接
+ss -u
+# 列出连接时显示进程名与进程号pid
+ss -p
+# 统计socket
+ss -s
+```
+
+# lsof 查看端口
+
+- 参考
+- [Linux 命令神器：lsof](https://www.jianshu.com/p/a3aa6b01b2e1)
+
+> 而有一点要切记，在Unix中一切（包括网络套接口）都是文件。
+>
+> 
+>
+> 对于我，lsof替代了netstat和ps的全部工作。它可以带来那些工具所能带来的一切，而且要比那些工具多得多。
+
+查看FTP服务端口21
+
+``` shell
+# lsof -i:21 
 ```
 
 # 内存
@@ -503,55 +620,17 @@ java -jar SpringBootPorjectName.jar 2>&1 1>/dev/null &
 `# kill -s 9 #{port}`
 -s 9 即传递给进程信号为9, 9即强制,尽快结束进程
 
-# 查看端口 lsof
+# pidof
 
-- 参考
-- [Linux 命令神器：lsof](https://www.jianshu.com/p/a3aa6b01b2e1)
-
-> 而有一点要切记，在Unix中一切（包括网络套接口）都是文件。
->
-> 
->
-> 对于我，lsof替代了netstat和ps的全部工作。它可以带来那些工具所能带来的一切，而且要比那些工具多得多。
-
-查看FTP服务端口21
+用于查找指定名称的pid
 
 ``` shell
-# lsof -i:21 
+$ pidof nginx
 ```
 
-# 列出所有连接 ss
+# 查看主机路由
 
-在查看连接时`ss`比`lsof`输出信息更详细，可以看到`socket`的接收/发送队列、ino号。
-
-``` shell
-# 列出所有tcp连接
-ss -t
-# 列出所有处于监听状态的tcp连接
-ss -tl
-# 列出所有的udp连接
-ss -u
-# 列出连接时显示进程名与进程号pid
-ss -p
-# 统计socket
-ss -s
-```
-
-# netstat
-
-- **-a** all
-- **-o** 显示ip
-- **-t** 只显示TCP端口
-- **-u** 只显示UDP端口
-- **-l** 仅显示监听套接字(能够读写与收发通讯协议(protocol)的程序)
-- **-p** 显示进程标识符和程序名称，每一个套接字/端口都属于一个程序
-- **-n** 不进行DNS轮询，显示IP(这样可以加快查询的时间)
-- -r 查看默认路由
-
-``` shell
-# 查看TCP端口
-netstat -atlpn | grep 3306
-```
+- `genmask` `子网掩码`
 
 # pidof
 
@@ -659,18 +738,4 @@ export hello=world
 - echo命令查看单个环境变量。例如:echo $PATH
 - env查看所有环境变量。例如:env
 - set查看所有本地定义环境变量
-
-# Linux和Windows之间传输文件
-
-通常在`Linux`和`Windows`之间传输工具，我们除了使用`ftp工具`，我们还可以通过以下两个命令实现：
-
-``` shell
-# 下载
-sz $filename
-sz $filename1 $filename2
-sz $directory /*
-
-# 上传
-rz $filename
-```
 
