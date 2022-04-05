@@ -8,7 +8,38 @@ http://mirrors.sohu.com/mysql/MySQL-8.0/
 
 # 数据类型
 
-## text数据类型最大长度
+## int
+
+- 显示长度
+
+  ``` mysql
+  create table test_int_n (a int(4) zeorfill);
+  insert into test_int_n values(1);
+  insert into test_int_n values(123456);
+  ```
+
+  其中`a int(4)`中的`4`是该字段的显示长度。
+
+  例如插入1，则显示0001，以0补充。
+
+  当存储数字超过n位时，按照实际存储的数字显示。
+
+| type      | 字节 | 最小值 | 最大值 |
+| --------- | ---- | ------ | ------ |
+| tinyint   | 1    | -128   | 128    |
+| smallint  | 2    |        |        |
+| mediumint | 3    |        |        |
+| int       | 4    |        |        |
+| bigint    | 8    |        |        |
+
+## char
+
+| type    | 说明     | N的含义 | 是否有字符集 | 最大长度 |
+| ------- | -------- | ------- | ------------ | -------- |
+| char    | 定长字符 | 字符    | 是           | 255      |
+| varchar | 变长字符 | 字符    | 是           | 16384    |
+
+## text
 
 | type     | size      |      |
 | -------- | --------- | ---- |
@@ -16,6 +47,20 @@ http://mirrors.sohu.com/mysql/MySQL-8.0/
 | TEXT | 65,535 bytes | ~64kb |
 | MEDIUMTEXT | 16,777,215 bytes | ~16MB  |
 | LONGTEXT | 4,294,967,295 bytes | ~4GB   |
+
+## 时间类型
+
+| type      | 占用空间 | 表示范围                                        |
+| --------- | -------- | ----------------------------------------------- |
+| datetime  | 8        | 1000-01-01 00:00:00 ~ 9999-12-31 23:59:59       |
+| date      | 3        | 1000-01-01 ~ 9999-12-31                         |
+| timestamp | 4        | 1970-01-01 00:00:00UTC ~ 2038-01-19 03:14:07UTC |
+| year      | 1        | YEAR(2):1970-2070, YEAR(4):1901-2155            |
+| time      | 3        | -838:59:59 ~ 838:59:59                          |
+
+- datetime与timestamp的区别
+
+  datetime没有时区概念，而timestamp则有时区概念
 
 # character与collation
 
