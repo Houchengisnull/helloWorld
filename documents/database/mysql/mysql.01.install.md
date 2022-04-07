@@ -35,6 +35,8 @@ chown -R root .
 chown -R mysql data mysql-files
 
 # 启动
+# 如果没有写日志的权限则删除默认生成的/etc/my.cnf
+# 例如: mv my.cnf my.cnf.bak
 bin/mysqld_safe --user=mysql &
 
 ########## 配置开机启动 ##########
@@ -66,6 +68,55 @@ flush privileges;
 - 加载顺序
 
   ``` shell 
-  bin/mysqld_safe --user=mysql &
+  /usr/local/mysql/bin/mysqld --verbose --help |grep -A 1 'Default options’
+  
+  # 配置文件加载顺序
+  Default options are read from the following files in the given order:
+  /etc/my.cnf /etc/mysql/my.cnf /usr/local/mysql/etc/my.cnf ~/.my.cnf 
   ```
+
+  在windows环境下配置文件为`my.ini`。
+
+# 多实例安装
+
+``` shell
+cd /etc
+touch my.cnf
+```
+
+修改`my.cnf`:
+
+``` 
+[mysqld] 
+sql_mode="STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER" 
+
+[mysqld_multi] 
+mysqld=/usr/local/mysql/bin/mysqld_safe
+mysqladmin=/usr/local/mysql/bin/mysqladmin
+log=/var/log/mysqld_multi.log
+
+[mysqld1]
+server-id=slave_1
+socket=/tmp/mysql.sock1
+port=3307
+datadir=/data1 
+user=mysql
+performance_schema=off
+innodb_buffer_pool_size=32M
+skip_name_resolve=1
+log_error=error.log
+pid-file=/data1/mysql.pid1
+
+[mysqld2] 
+server-id=slave_2
+socket=/tmp/mysql.sock2
+port=3308
+datadir=/data2 
+user=mysql
+performance_schema=off
+innodb_buffer_pool_size=32M
+skip_name_resolve=1
+log_error=error.log
+pid-file=/data2/mysql.pid2 
+```
 

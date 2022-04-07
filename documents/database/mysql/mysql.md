@@ -60,7 +60,56 @@ http://mirrors.sohu.com/mysql/MySQL-8.0/
 
 - datetime与timestamp的区别
 
-  datetime没有时区概念，而timestamp则有时区概念
+  datetime没有时区概念，而timestamp则有时区概念。
+
+## Json类型
+
+5.7后支持。
+
+``` mysql
+create table json_user ( uid int auto_increment, data json, primary key(uid) );
+
+insert into json_user values ( null, '{ "name":"lison", "age":18, "address":"enjoy" }' ); 
+insert into json_user values ( null, '{"name":"james", "age":28, "mail":"james@163.com" }');
+
+# json_extract函数
+select json_extract(data, '$.name'), json_extract(data, '$.address')
+from json_user;
+
+# json_object函数
+insert into json_user values ( null, json_object("name", "enjoy", "email", "enjoy.com", "age",35) );
+
+# json_inser函数
+set @json = '{ "a": 1, "b": [2, 3]}'; 
+# 由于@json中已存在a字段, 故json_insert仅追加c字段
+select json_insert(@json, '$.a', 10, '$.c', '[true, false]'); 
+update json_user set data = json_insert(data, "$.address_2", "xiangxue") where uid = 1;
+
+# json_merge
+select json_merge('{"name": "enjoy"}', '{"id": 47}');
+```
+
+> @json与@@json的区别:
+>
+> @json用于局部变量，@@json用于系统变量，例如`select @@datadir;`等价于`SHOW VARIABLES LIKE '%datadir%';`
+
+### Json索引
+
+JSON类型数据本身无法直接创建索引，需要将需要索引的JSON数据重新生成虚拟列 (Virtual Columns) 之后，对该列进行索引。
+
+``` mysql
+create table test_inex_1( 
+    data json, 
+    # 创建虚拟列
+    gen_col varchar(10) generated always as (json_extract(data, '$.name')), 
+    index idx (gen_col) 
+); 
+
+insert into test_inex_1(data) values ('{"name":"king", "age":18, "address":"cs"}'); 
+insert into test_inex_1(data) values ('{"name":"peter", "age":28, "address":"zz"}'); 
+
+select * from test_inex_1;
+```
 
 # character与collation
 
@@ -71,6 +120,225 @@ show collation;
 ```
 
 - [MySQL中character set与collation的理解](https://www.cnblogs.com/EasonJim/p/8128196.html)
+
+# MySQL架构
+
+## 体系
+
+### 连接层
+
+``` mysql
+SHOW VARIABLES LIKE '%max_connections%';
+```
+
+### SQL处理层
+
+``` mermaid
+graph TD
+	查询 --> if{缓存是否命中}
+	if -- 否 --> 解析查询
+	解析查询 --> 优化
+	优化 --> 执行查询
+	if -- 是 --> 返回结果
+	执行查询 --> 返回结果
+```
+
+#### 缓存
+
+``` mysql
+# 查询缓存是否开启
+# InnoDB默认不开启
+SHOW VARIABLES LIKE '%query_cahce_type%';
+# 缓存默认值
+SHOW VARIABLES LIKE '%query_cache_size%'
+```
+
+生产环境下不建议开启，由于命中条件比较苛刻，要求两次查询请求完全一样，包括SQL语句、连接的数据库、协议版本、字符集等因素。
+
+#### 解析查询
+
+![img](..\..\images\mysql\sql_parse_order.png)
+
+#### 优化
+
+`SQL解析器`会通过优化器来优化程序员的SQL语句。
+
+``` mysql
+# 展示下面sql语句优化后的结果
+#
+explain select * from account t where t.id in (select t2.id from account t2);
+show warnings;
+
+# show warnings输出结果
+SELECT
+	`mall`.`t`.`id` AS `id`,
+	`mall`.`t`.`name` AS `name`,
+	`mall`.`t`.`balance` AS `balance` 
+FROM
+	`mall`.`account` `t2`
+	JOIN `mall`.`account` `t` 
+WHERE
+	(
+	`mall`.`t`.`id` = `mall`.`t2`.`id`)
+```
+
+## 逻辑结构
+
+> 在 mysql 中 database 和 schema 是等价的 。
+
+## 物理存储结构
+
+### DataDir
+
+指定所有建立的数据库存放位置。
+
+``` mysql
+SHOW VARIABLES LIKE 'datadir';
+```
+
+### 数据库
+
+### 表文件
+
+- **frm**
+
+  表结构文件。
+
+  ``` mysql
+  mysqlfrm --diagnostic /usr/local/mysql/data/mall/account.frm;
+  ```
+
+- **ibd**
+
+### mysql utilities
+
+查看`*.frm`中的表结构。
+
+``` mysql
+# 等价show create table account
+mysqlfrm --diagnostic /usr/local/mysql/data/mall/account.frm;
+```
+
+- **安装**
+
+  ``` shell
+  tar -zxvf mysql-utilities-1.6.5.tar.gz 
+  cd mysql-utilities-1.6.5 
+  python ./setup.py build 
+  python ./setup.py install
+  ```
+
+# 存储引擎
+
+``` mysql
+# 查看数据库支持存储引擎
+SHOW ENGINES;
+# 查看默认存储引擎
+SHOW VARIABLES LIKE '%storage_engine%';
+```
+
+## MyISAM
+
+- 不支持事务
+- 仅支持表锁
+
+MySQL5.5之前的默认存储引擎。
+
+``` mysql
+create table testmysam (
+    id int PRIMARY key
+) ENGINE=myisam;
+insert into testmysam VALUES(1),(2),(3);
+```
+
+创建后，会在数据库文件中出现三个文件`testmysam.frm`、`testmysam.myi`、`testmysam.myd`。
+
+- **myi**	index
+- **myd**	data
+
+`myisam`又名`堆表`，使用非聚集索引。
+
+### 表压缩
+
+``` mysql
+# 表压缩
+myisampack -b -f /usr/local/mysql/data/mall/testmysam.MYI
+```
+
+通常情况下，表压缩后不允许插入记录。
+
+### 适用场景
+
+- 非事务型应用
+- 只读类应用
+- 空间类应用
+
+由于`InnoDB`功能越来越强大，`MyISAM`绝大多数场景都不适合，因此`MyISAM`已停止维护。
+
+## InnoDB
+
+- 事务性存储引擎
+- 完全支持事务
+- 支持行级锁(并发程度更高)
+- Redo Log与Undo Log
+
+MySQL5.5 之后默认支持`InnoDB`。
+
+``` mysql
+# 查看日志buffer
+SHOW VARIABLES LIKE 'innodb_log_buffer_size'
+# 查看当前数据文件是否独立
+SHOW VARIABLES LIKE '%innodb_file_per_table%';
+```
+
+## CSV
+
+- 以`csv`格式存储数据
+
+### 数据文件
+
+- **.csv**	数据
+- **.csm**	表的元数据，例如表状态和数据量
+- **.frm**	表结构
+
+## Archive
+
+- **组成**
+  - 以`zlib`对表数据进行压缩
+  - 磁盘I/O更少
+  - 以`ARZ`格式存储数据
+- **特点**
+  - 只支持insert和select操作
+  - 只允许在自增ID列上加索引
+
+### 适用场景
+
+- 日志
+- 数据采集
+
+## Memory
+
+- 又称HEAP存储引擎，数据保存在内存中
+- 支持HASH索引和BTree索引
+- 所有字段固定长度varchar(10) = char(10)
+- 不支持BLOB和Text等大字段
+- 使用表锁
+- 最大由`max_heap_table_size`参数决定
+
+### 与临时表区别
+
+- 临时表
+  - 系统使用临时表
+    - 超过限制使用MyISAM
+    - 未超过使用Memory
+  - CREATE TEMPORARY TABLE 创建临时表
+
+### 适用场景
+
+- hash索引用于查找或者映射表
+  - 例如邮政编码与地区的对应表
+- 用于保存数据分析中产生的中间表
+- 用于缓存周期性聚合数据的结果表
 
 # FAQ
 
