@@ -108,7 +108,19 @@ create table test_inex_1(
 insert into test_inex_1(data) values ('{"name":"king", "age":18, "address":"cs"}'); 
 insert into test_inex_1(data) values ('{"name":"peter", "age":28, "address":"zz"}'); 
 
-select * from test_inex_1;
+########## 注意: 这里查询时需要带双引号 ##########
+select * from test_inex_1 where gen_col='"king"';
+```
+
+- 查询序列时毋须双引号
+
+``` mysql
+########## json_unquote ##########
+CREATE TABLE test_index_2 (
+ DATA json
+ , gen_col VARCHAR ( 10 ) generated always AS ( json_unquote( json_extract( DATA, "$.name" ) ))
+ , KEY idx ( gen_col ) 
+);
 ```
 
 # character与collation

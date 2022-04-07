@@ -80,13 +80,11 @@ flush privileges;
 # 多实例安装
 
 ``` shell
+########## 创建并修改/etc/my.cnf ########## 
 cd /etc
 touch my.cnf
-```
 
-修改`my.cnf`:
-
-``` 
+vi my.cnf
 [mysqld] 
 sql_mode="STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER" 
 
@@ -94,9 +92,13 @@ sql_mode="STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DAT
 mysqld=/usr/local/mysql/bin/mysqld_safe
 mysqladmin=/usr/local/mysql/bin/mysqladmin
 log=/var/log/mysqld_multi.log
+# 若需要一键关闭多实例,则配置多实例用户名及密码
+# user=root
+# pass=root
 
 [mysqld1]
-server-id=slave_1
+# server-id仅限数字
+server-id=11
 socket=/tmp/mysql.sock1
 port=3307
 datadir=/data1 
@@ -108,7 +110,7 @@ log_error=error.log
 pid-file=/data1/mysql.pid1
 
 [mysqld2] 
-server-id=slave_2
+server-id=12
 socket=/tmp/mysql.sock2
 port=3308
 datadir=/data2 
@@ -118,5 +120,64 @@ innodb_buffer_pool_size=32M
 skip_name_resolve=1
 log_error=error.log
 pid-file=/data2/mysql.pid2 
+
+########## 创建数据目录 ########## 
+mkdir /data1
+mkdir /data2
+chown mysql.mysql /data{1..2}
+
+# jU8n*eeGvq#;
+mysqld --initialize --user=mysql --datadir=/data1
+# 1m4V7Lehe&>/
+mysqld --initialize --user=mysql --datadir=/data2
+
+########## 配置开机启动 ##########
+cp /usr/local/mysql/support-files/mysqld_multi.server /etc/init.d/mysqld_multid
+chkconfig mysqld_multid on
+
+########## 安装perl依赖 ##########
+yum -y install perl perl-devel
+
+########## mysqld_multi ##########
+# 查看状态
+mysqld_multi report
+# 启动
+mysqld_multi start
+
+########## 修改密码 ##########
+mysql -u root -S /tmp/mysql.sock1 -p -P3307 
+mysql -u root -S /tmp/mysql.sock2 -p -P3308
+set password = 'root';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root'; 
+flush privileges;
+```
+
+## 开机启动
+
+由于`mysqld_multi`脚本缺少对环境变量的引用，我们可以自定义脚本实现MySQL多实例开机启动。
+
+``` shell
+#!/bin/bash
+# chkconfig: 2345 10 90
+export PATH=/user/local/mysql/bin:$PATH
+mysqld_multi start
+```
+
+## 关闭多实例
+
+- 命令关闭
+
+``` shell
+mysqld_multi report -u root -p root
+```
+
+- 配置用户名/密码
+
+``` shell
+vi /etc/my.cnf
+
+[mysqld_multi]
+user=root
+pass=root
 ```
 
