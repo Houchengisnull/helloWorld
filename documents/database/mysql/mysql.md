@@ -352,6 +352,42 @@ SHOW VARIABLES LIKE '%innodb_file_per_table%';
 - 用于保存数据分析中产生的中间表
 - 用于缓存周期性聚合数据的结果表
 
+## Ferderated
+
+- 提供访问远程MySQL服务器上表的方法
+- 本地不提供存储，数据全部放到远程服务器上
+- 本地需要保存表结构和远程服务器的连接信息
+
+``` mysql
+# 默认禁止
+[mysqld]
+sql_mode="STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER" 
+# 开启Ferderated存储引擎
+ferderated
+
+create database local;
+create database remote;
+
+create table remote_fed(
+    id auto_increament not null
+, c1 varchar(10) not null default ''
+, c2 char(10) not null default ''
+, primary key(id)) engine=INNODB;
+
+insert into remote_fed(c1,c2) values('aaa', 'bbb'),('ccc', 'ddd');
+
+create TABLE 'local_fed'(
+        id auto_increament not null
+, c1 varchar(10) not null default ''
+, c2 char(10) not null default ''
+, primary key(id)) engine=INNODB;
+) ENGINE=federated;
+```
+
+### 适用场景
+
+- 偶尔的统计分析及手工查询（某游戏行业）
+
 # FAQ
 
 ## MySQL乱码
