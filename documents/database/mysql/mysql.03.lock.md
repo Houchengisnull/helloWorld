@@ -133,4 +133,44 @@ kill thread_id;
 
 # 间隙锁
 
+间隙锁，`gap锁`。
+
 在MySQL中，将隔离级别设置为可重复读，即可解决幻读问题，借助的就是间隙锁。
+
+``` mysql
+CREATE TABLE T1(A INT PRIMARY KEY);
+
+INSERT INTO T1 VALUES (10),(11),(13),(20),(40);
+
+BEGIN;
+SELECT * FROM T1 WHERE A <= 13 FOR UPDATE;
+
+# OTHER SESSION
+INSERT INTO T1 VALUES (21); -- SUCCESS
+INSERT INTO T1 VALUES (19); -- FAILED
+```
+
+在可重复读隔离级别中会对主键为13的下个只20，并把这些数据加锁。
+
+``` mysql
+CREATE TABLE T2 (A INT PRIMARY KEY, B INT, KEY (B));
+
+INSERT INTO T2 VALUES(1,1),(3,1),(5,3),(8,6),(10,8);
+
+# SESSION1
+BEGIN;
+SELECT * FROM T2 WHERE B=3 FOR UPDATE;
+
+# 1 3 *5* 8 10
+# 1 1 *3* 6 8
+
+# SESSION2
+SELECT * FROM T2 WHERE A=5 LOCK IN SHARE MODE; -- FAILED
+INSERT INTO T2 VALUES(4,2); -- FAILED,因为b=2在(1,3]
+INSERT INTO T2 VALUES(6,5); -- FAILED,因为b=5在(3,6]
+INSERT INTO T2 VALUES(2,0); -- SUCCESS
+```
+
+- 二级索引锁住的范围是(1, 3],(3,6]
+- 主键索引锁住a=5的这条记录
+

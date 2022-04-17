@@ -50,6 +50,28 @@ SHOW CREATE TABLE '表名';
 
 ## 语法
 
+``` mysql
+##### 开启事务
+BEGIN;
+# (推荐)
+START TRANSACTION;
+BEGIN WORK;
+
+##### 回滚
+ROLLBACK;
+
+##### 提交
+COMMIT;
+
+##### 还原点
+INSERT STATEMENT1;
+SAVEPOINT S1;
+INSERT STATEMENT2;
+SAVEPOINT S1;
+
+ROLLBACK TO SAVEPOINT S2;
+```
+
 以`read uncommited`为例：
 
 - **read uncommited**
@@ -66,3 +88,4 @@ UPDATE account SET balance = balance -50 WHERE id = 1;
 
 ROLLBACK;
 ```
+
