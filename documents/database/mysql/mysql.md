@@ -151,6 +151,8 @@ show collation;
 
 ## 体系
 
+![image-20220418023143259](..\..\images\mysql\arch.png)
+
 ### 连接层
 
 ``` mysql
