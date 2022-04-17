@@ -32,6 +32,16 @@ http://mirrors.sohu.com/mysql/MySQL-8.0/
 | int       | 4    |        |        |
 | bigint    | 8    |        |        |
 
+## 浮点数
+
+| type    | 存储空间                            | 是否精确 |
+| ------- | ----------------------------------- | -------- |
+| float   | 4byte                               | N        |
+| double  | 8byte                               | N        |
+| decimal | 每4个字节占9个数字，小数点占1个数字 | Y        |
+
+- 金额相关尽量用decimal
+
 ## char
 
 | type    | 说明     | N的含义 | 是否有字符集 | 最大长度 |
@@ -61,6 +71,10 @@ http://mirrors.sohu.com/mysql/MySQL-8.0/
 - datetime与timestamp的区别
 
   datetime没有时区概念，而timestamp则有时区概念。
+  
+- datetime在5.6与5.7的区别
+
+  在5.6中占用5个字节，在5.7中占用8个字节。
 
 ## Json类型
 
