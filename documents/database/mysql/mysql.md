@@ -189,7 +189,7 @@ SHOW VARIABLES LIKE '%query_cache_size%'
 
 #### 优化
 
-`SQL解析器`会通过优化器来优化程序员的SQL语句。
+`SQL解析器`会通过`优化器`来优化程序员的SQL语句。
 
 ``` mysql
 # 展示下面sql语句优化后的结果
