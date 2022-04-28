@@ -15,13 +15,27 @@
 | ONE RPC       | External Data Representation              |                              |      |
 | CORBA         | Common Data Representation                | Internet Inter ORB Protocol  | OIDL |
 | Java RMI      | Java Object Serialization Stream Protocol | Java Remote Message Protocol |      |
-| gRPC          | Protocol Buffers                          |                              |      |
+| gRPC          | Protocol Buffers                          | Http 2.0                     |      |
 | Web Service   | XML Serialization                         | SOAP                         | WSDL |
 | 众多轻量级RPC | JSON Serialization                        |                              |      |
+| Dubbo         |                                           | TCP                          |      |
+
+> gRPC底层使用netty实现。
+
+RPC与具体网络分层、具体协议没有直接关系，只要实现了远程过程调用都被称为RPC。
 
 ## Stub
 
-Sever与Client都有Stub。在Java中实现RPC时，就是我们的定义的Interface。
+Sever与Client都有Stub。在Java中实现RPC时，就是我们的定义的Interface。	
+
+# 实现RPC
+
+实现RPC框架需要解决的问题：
+
+- **代理问题**	屏蔽网络连接细节
+- 序列化问题
+- 通信问题
+- 登记的服务实例化
 
 # WebService
 
