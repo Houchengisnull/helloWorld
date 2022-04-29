@@ -1,17 +1,19 @@
 package org.hc.learning.net.rpc.server;
 
 import lombok.SneakyThrows;
+
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 注册中心
  */
-public class EasyRpcRegisterContext {
+public class EasyRpcRegistryContext {
 
-    private ConcurrentHashMap<String, Object> serviceHolder;
+    private Map<String, Object> serviceHolder;
 
     @SneakyThrows
-    public EasyRpcRegisterContext(Class[] classes){
+    public EasyRpcRegistryContext(Class[] classes){
         serviceHolder = new ConcurrentHashMap<>();
         for (Class clazz : classes) {
             Object instance = clazz.newInstance();
