@@ -1,9 +1,8 @@
 package org.hc.learning.net.rpc.server;
 
 import lombok.SneakyThrows;
-
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 注册中心
@@ -14,7 +13,7 @@ public class EasyRpcRegistryContext {
 
     @SneakyThrows
     public EasyRpcRegistryContext(Class[] classes){
-        serviceHolder = new ConcurrentHashMap<>();
+        serviceHolder = new HashMap<>();
         for (Class clazz : classes) {
             Object instance = clazz.newInstance();
             Class[] interfaces = clazz.getInterfaces();
