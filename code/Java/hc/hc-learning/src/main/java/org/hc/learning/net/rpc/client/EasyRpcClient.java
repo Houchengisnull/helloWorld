@@ -7,7 +7,7 @@ public class EasyRpcClient {
 
     public static void main(String[] args) {
         String host = "127.0.0.1";
-        Integer port = 9999;
+        Integer port = 10001;
         EasyRpcServiceFactory factory = new EasyRpcServiceFactory(host, port);
 
         IHelloWorldService service = factory.create(IHelloWorldService.class);

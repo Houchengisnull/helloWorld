@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
 
 public class Server {
 
-    private static ExecutorService service
+    protected static ExecutorService service
             = Executors.newFixedThreadPool(
             Runtime.getRuntime().availableProcessors());
 
