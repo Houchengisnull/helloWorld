@@ -2,23 +2,23 @@
 
 ​	
 
-# I/O模型
+# IO模型
 
-## 阻塞式I/O
+## 阻塞式IO
 
-阻塞式I/O模型。
+阻塞式IO模型。
 
 ![image-20220428213716143](..\images\net\blockingio.png)
 
 进程会一直阻塞，直到数据拷贝完成。
 
-### Blocking I/O网络通信模型
+### Blocking IO网络通信模型
 
 ![image-20220429215340537](..\images\net\biomodel.png)
 
 一个客户端连接对应一个线程，在连接数较多情况下，系统资源占用大。
 
-### 伪异步I/O模型
+### 伪异步IO模型
 
 ![image-20220429215421300](..\images\net\noniomodel.png)
 
@@ -28,17 +28,19 @@
 - 异步响应
 - 控制线程资源
 
-## 非阻塞I/O
+## 非阻塞IO
 
 ![image-20220428213843262](..\images\net\nonblockingio.png)
 
-## I/O复用
+## IO多路复用
 
 ![image-20220428214058671](..\images\net\reproducibleio.png)
 
 相比阻塞式IO模型的优势：
 
 - 由一个线程检测多个网络通讯。
+
+在IO多路复用模型中，很明显增加了一个`返回可读条件`的过程。操作系统内核将会通知应用程序“数据准备就绪”。收到这个通知后，应用程序会读取缓冲区中的数据。
 
 ### select,poll,epoll
 
@@ -52,7 +54,7 @@ select,poll,epoll都是操作系统实现IO多路复用的机制。
 
 [^fd]:file descriptor.
 
-## 信号驱动I/O
+## 信号驱动IO
 
 ![image-20220428214623151](..\images\net\sigio.png)
 
@@ -60,7 +62,7 @@ socket需要按照一个信号处理函数，进程继续运行并不阻塞。
 
 当数据准备好后，进程会收到一个信号，可以在信号处理函数中调用I/O函数处理数据。
 
-## 异步I/O
+## 异步IO
 
 ![image-20220428214824429](..\images\net\asynxio.png)
 
