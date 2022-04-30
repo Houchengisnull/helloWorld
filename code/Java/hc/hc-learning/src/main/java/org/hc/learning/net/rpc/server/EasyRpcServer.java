@@ -15,13 +15,13 @@ import java.net.SocketAddress;
 
 public class EasyRpcServer extends Server {
 
-    private static EasyRpcRegisterContext context = null;
+    private static EasyRpcRegistryContext context = null;
 
     public static void main(String[] args) throws IOException {
         /*
         register service
          */
-        context = new EasyRpcRegisterContext(new Class[]{HelloWorldServiceImpl.class});
+        context = new EasyRpcRegistryContext(new Class[]{HelloWorldServiceImpl.class});
 
         /*
         start server

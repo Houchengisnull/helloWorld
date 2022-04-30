@@ -119,6 +119,30 @@ javap -v Hello.class |grep major
 
   比如异或运算`1^1=0`，`0^1=1`
 
+### 位或运算
+
+比如在NIO中，需要向selector注册两个事件。
+
+``` java
+channel.register(selector, SelectionKey.OP_WRITE|SelectionKey.OP_READ, buffer);
+```
+
+channel向selector注册了`SelectionKey.OP_WRITE|SelectionKey.OP_READ`，我们看源码这两个参数分别是：
+
+``` java
+public static final int OP_READ = 1 << 0;
+public static final int OP_WRITE = 1 << 2;
+```
+
+在处理位运算的时候，要把`int`想象成8个都是0的格子，`1<<0`与`1<<2`分别是将1左移0位/2位。
+
+- **OP_READ**	把1放到`0000 0000`的第0个位置，那么就是`0000 0001`。
+- **OP_WRITE**	把1放到`0000 0000`的第2个位置，那么就是`0000 0100`。
+
+至于这个或运算，就是两者结合而已，得到结果`0000 0101 `。
+
+实际上，就是将每个格子当作一个开关，检查这个格子是否是1，1意味着打开了这个开关。
+
 ## 位运算的优劣势
 
 - **优势:**	节省代码量，效率高，属性变动影响小

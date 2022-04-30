@@ -13,6 +13,9 @@ public class EasyRpcRegistryContext {
 
     @SneakyThrows
     public EasyRpcRegistryContext(Class[] classes){
+        /**
+         * 若要拆分注册中心与Provider，仍然要包装注册时的线程安全
+         */
         serviceHolder = new HashMap<>();
         for (Class clazz : classes) {
             Object instance = clazz.newInstance();
