@@ -45,7 +45,14 @@ public class NioServerHandle implements Runnable {
                 while (iterator.hasNext()) {
                     SelectionKey next = iterator.next();
                     iterator.remove(); // 必须显式remove, 否则事件无法被清理，始终保留在selectedKeys中
-                    handleInput(next);
+                    try {
+                        handleInput(next);
+                    } catch (Exception e) {
+                        next.cancel();
+                        if (next.channel() != null) {
+                            next.channel().close();
+                        }
+                    }
 
                 }
             } catch (IOException e) {
