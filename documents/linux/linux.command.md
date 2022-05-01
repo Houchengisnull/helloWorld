@@ -22,7 +22,7 @@
 
 ## if
 
-![img](images/linux/if.jpeg)
+![img](../images/linux/if.jpeg)
 
 # 系统
 
@@ -137,10 +137,13 @@ deb-src http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe
 
 
 
-# 查看编码 
+# 编码 
 
 ``` shell
 $ locale
+
+# 临时修改系统编码
+$ echo $LANG
 ```
 
 # 用户
