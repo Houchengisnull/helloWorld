@@ -24,58 +24,6 @@
 
 `JEP`，全称`JDK Enhancement-Proposal & Roadmap Process`。该组织主要负责`JDK`的维护，而`JCP`负责`Java API`的维护。
 
-# command
-
-## run
-
-### java 9 parameters
-
-
-- **--module-path**	指定模块路径
-- **-m**	指定主模块及`mainClass`，格式：`模块名/全限定类名`， 例如：“`hc/com.houc.module.ModuleApplication`”。
-- **--show-module-resolution**	打印运行时引用模块。注意该参数不可以放在最后面
-
-## compile
-
-``` shell
-$ javac -d $target -sourcepath $source 
-```
-
-`javac`是`jdk`的`bin`目录下的编译工具。
-
-### 参数
-
-- **-d**	指定`.class`生成目录
-- **-cp/-classpath**	指定`classpath`
-- **-sourcepath**	指定源文件
-
-## jar
-
-### 解压
-
-``` bat
-# 解压 jar war
-jar -xvf HelloWorld.war
-```
-
-## 查看JDK安装地址
-
-``` shell
-$ java -verbose
-```
-
-## 反编译查看魔数
-
-以前怀疑编译的`class`文件版本有问题时，总是通过文件对比工具来查看。
-
-今天学到一个新的技巧：
-
-``` shell
-javap -v Hello.class |grep major
-```
-
-
-
 # 位运算
 
 | 名称       | 符号 | 作用                         |
@@ -325,6 +273,12 @@ ZO01设置了禁止转载，就不将他的回答copy上去了。个人以为确
 ### 一个冷知识:匿名内部类也会生成class文件
 
 比如在`Hello.java`中有一个匿名内部类，那么编译后除了生成`Hello.class`，还会生成`Hello$1.class`。
+
+# String
+
+## String不可变
+
+
 
 # 克隆
 
