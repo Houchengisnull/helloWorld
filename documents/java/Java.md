@@ -419,7 +419,7 @@ https://blog.csdn.net/lovezhaohaimig/java/article/details/80372233
 
 ## 类加载顺序
 
-`paret first`，双亲委派机制。核心的类不可被仿照。
+`parent first`，双亲委派机制。核心的类不可被仿照。
 
 ## 参考
 
