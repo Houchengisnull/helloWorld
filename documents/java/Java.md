@@ -276,9 +276,32 @@ ZO01设置了禁止转载，就不将他的回答copy上去了。个人以为确
 
 # String
 
-## String不可变
+String是我们最常用的类之一，媲美基本数据类型。它具有两个特点：
 
+- 不可变
+- 驻留机制
 
+## 不可变
+
+不可变是指你无法修改一个String对象的值，除非你极端的使用反射机制。
+
+``` java
+ String text = "Hello";
+Field value = String.class.getDeclaredField("value");
+value.setAccessible(true);
+value.set(text, value.get("Hello world"));
+```
+
+- 不可变的实现
+
+  1. 将其内部的value变量声明为`private final`，以保证String不提供修改字符串的方法；
+  2. 将其类型声明为`final`，以保证不存在子类可以通过继承重写其方法;
+
+  **归根到底，String慎重的封装令使用者无法修改String的值。**
+
+- 原因
+
+  安全性。
 
 # 克隆
 
