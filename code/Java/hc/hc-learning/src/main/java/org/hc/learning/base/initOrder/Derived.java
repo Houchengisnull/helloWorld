@@ -1,4 +1,4 @@
-package org.hc.learning.extend.initOrder;
+package org.hc.learning.base.initOrder;
 
 public class Derived extends Base {
 
