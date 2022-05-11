@@ -308,49 +308,6 @@ WHERE ROWNUM > 1;
 
 接着`oracle`提携下一条记录`00002`后，由于去掉了上一条记录`00001`，记录`00002`的`ROWNUM`依然是0。循环往复，这条`SQL Statement`查不到结果。
 
-## 函数
-
-### 截取时间
-
-``` sql
-// 获取时间的时
-SELECT TO_CHAR(SYSDATE, 'hh24') D from dual;
-// 获取时间的日
-SELECT TO_CHAR(SYSDATE, 'dd') D from dual;
-```
-
-### 计算时间
-
-- [Oracle 计算两个时间的差值](https://www.cnblogs.com/yanghj010/p/5109714.html)
-
-``` sql
-// 天
-ROUND(TO_NUMBER(END_DATE - START_DATE))
-// 小时
-ROUND(TO_NUMBER(END_DATE - START_DATE) * 24)
-// 分钟
-ROUND(TO_NUMBER(END_DATE - START_DATE) * 24 * 60)
-// 秒
-ROUND(TO_NUMBER(END_DATE - START_DATE) * 24 * 60 * 60)
-// 毫秒
-ROUND(TO_NUMBER(END_DATE - START_DATE) * 24 * 60 * 60 * 60)
-```
-
-### 拼接字符串
-
-``` sql
-# concat
-SELECT CONCAT('当前时间:', TO_CHAR(sysdate, 'yyyy-MM-dd')) current_time
-FROM daul;
-
-# ||
-SELECT *
-FROM students
-WHERE name like '%' || '子' || '%'
-```
-
-
-
 ## 查询oracle版本
 
 ``` sql
@@ -399,7 +356,66 @@ SELECt * FROM dba_tables WHERE owner='用户名';
 
 ```
 
+# 函数
 
+## 时间
+
+### 截取时间
+
+``` sql
+// 获取时间的时
+SELECT TO_CHAR(SYSDATE, 'hh24') D from dual;
+// 获取时间的日
+SELECT TO_CHAR(SYSDATE, 'dd') D from dual;
+```
+
+### 计算时间
+
+- [Oracle 计算两个时间的差值](https://www.cnblogs.com/yanghj010/p/5109714.html)
+
+``` sql
+// 天
+ROUND(TO_NUMBER(END_DATE - START_DATE))
+// 小时
+ROUND(TO_NUMBER(END_DATE - START_DATE) * 24)
+// 分钟
+ROUND(TO_NUMBER(END_DATE - START_DATE) * 24 * 60)
+// 秒
+ROUND(TO_NUMBER(END_DATE - START_DATE) * 24 * 60 * 60)
+// 毫秒
+ROUND(TO_NUMBER(END_DATE - START_DATE) * 24 * 60 * 60 * 60)
+```
+
+## 字符串
+
+### 拼接字符串
+
+``` sql
+# concat
+SELECT CONCAT('当前时间:', TO_CHAR(sysdate, 'yyyy-MM-dd')) current_time
+FROM daul;
+
+# ||
+SELECT *
+FROM students
+WHERE name like '%' || '子' || '%'
+```
+
+### TRIM
+
+``` sql
+# 去除首尾空格
+SELECT TRIM(NAME)
+FROM STUDENT;
+
+# 去除字符串头部字符
+SELECT TRIM(LEADING '_' FROM NAME)
+FROM STUDENT;
+
+# 去除字符串尾部字符
+SELECT TRIM(TRAILING '_' FROM NAME)
+FROM STUDENT;
+```
 
 # 数据类型
 
