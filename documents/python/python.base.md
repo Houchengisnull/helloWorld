@@ -287,3 +287,24 @@ signature = rep.sub("", signature)
   ``` java
   pip install jieba
   ```
+
+``` shell
+# BeautifulSoup
+pip install bs4
+# 微信类库
+pip install itchat
+# 安装数据可视化
+pip install echarts-python
+# 安装词云
+pip install wordcloud
+# 安装jieba分词
+pip install jieba
+
+# 查看已安装类库
+pip list
+
+# 指定下载镜像
+# 使用清华大学镜像下载pillow
+pip install pillow -i https://pypi.tuna.tsinghua.edu.cn/simple/
+```
+
