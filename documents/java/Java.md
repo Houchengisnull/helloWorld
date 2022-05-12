@@ -865,13 +865,13 @@ Date parse() {
 
 解决办法有很多，比如每次创建一个`SimpleDateFormat instance`、`synchronized`、`ThreadLocal`，我们需要根据实际情况选择合适的解决方案。
 
-# 时间 JDK1.8
+# 时间
+
+## JDK8
 
 在JDK1.8中引入了一些新的格式化工具，今天为大家介绍个人在工作中有用到的。
 
-
-
-## DateTimeFormatter
+### DateTimeFormatter
 
 `JDK8`引入了新的`DateTimeFormatter`，它是一个**线程安全**的时间日期格式化类。
 
@@ -889,7 +889,7 @@ LocalDateTime now = LocalDateTime.now();
 System.out.println(formatter.format(now));
 ```
 
-## LocalDateTime
+### LocalDateTime
 
 在使用`DateTimeFormatter`来格式化时间时，我们同样需要使用与其配套的一系列时间工具。
 
@@ -965,7 +965,7 @@ public class LocalDateTimeInConcurrency {
 }
 ```
 
-## ZonedDateTime
+### ZonedDateTime
 
 而`ZonedDateTime`是个可以设置时区的时间工具，如下我们可以获取系统时区。用法与`LocalDateTime`类似。
 
@@ -978,17 +978,17 @@ System.out.println(zonedDateTime);
 System.out.println(zonedDateTime.format(formatter));
 ```
 
-## Instant
+### Instant
 
 获取时间戳，与`System.currentTimeMillis()`效果相同。
 
 ``` java
 System.out.println("------------ Instant获取时间戳");
-        System.out.println("Instant.now().toEpochMilli()" + Instant.now().toEpochMilli());
-        System.out.println("System.currentTimeMillis:" + System.currentTimeMillis());
+System.out.println("Instant.now().toEpochMilli()" + Instant.now().toEpochMilli());
+System.out.println("System.currentTimeMillis:" + System.currentTimeMillis());
 ```
 
-## 转化
+### 转化
 
 ``` mermaid
 graph LR
@@ -1001,8 +1001,6 @@ graph LR
 	LocalDateTime -- ZonedOffset--> Instant
 	Instant -- ZonedOffset --> LocalDateTime
 ```
-
-
 
 # JDBC
 
