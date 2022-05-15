@@ -56,6 +56,8 @@
 
   一般会有多个，负责与客户端的通信。
 
+![reactor-using-multiple](https://raw.githubusercontent.com/Houchengisnull/helloworld/master/documents/images/reactor-using-multiple.png)
+
 # Netty
 
 由JBoss提供的异步、事件驱动的网络应用程序框架工具。
@@ -90,34 +92,92 @@
 
 Channel是对Socket的抽象(封装)。
 
+- **Channel的生命周期**
+
+  | 生命周期            | 描述                                                         |
+  | ------------------- | ------------------------------------------------------------ |
+  | ChannelUnregistered | Channel已创建，但还未注册到EventLoop                         |
+  | ChannelRegistered   | Channel已注册到EventLoop                                     |
+  | ChannelActive       | Channel处于活动状态，已经连接到remote endpoint，可以接收和发送数据 |
+  | ChannelInactive     | Channel没有连接到remote endpoint                             |
+
+  当状态发送改变时，将会生成对应的事件，这些事件将转发给ChannelPipeline的ChannelHandler，随后对它们做出响应。
+
+- **Channel API**
+
+  | method              | description                                            |
+  | ------------------- | ------------------------------------------------------ |
+  | eventLoop           | 返回注册该Channel的EventLoop对象                       |
+  | pipeline[^pipeline] | 返回分配的Pipeline对象                                 |
+  | isActive            | 当前Channel是否活跃的                                  |
+  | localAddress        | 返回本地SocketAddress                                  |
+  | remoteAddress       | 返回远程SocketAddress                                  |
+  | write               | 写入数据，该数据将传递给ChannelPipeline，直到其被flush |
+  | flush               | 刷新至内核                                             |
+  | writeAndFlush       |                                                        |
+
+  [^pipeline]: 管道
+
 ### EventLoop
 
-EventLoop是对多路复用I/O模型中`select()`的抽象
+EventLoop是对多路复用I/O模型中`select()`的封装，或者说是反应器模式中reactor线程的封装，<u>用于监听网络连接生命周期中发生的事件</u>。
 
-### ChannelFuture
+如果从Java的角度来看，EventLoop则是`ScheduledExecutorService`的派生类——是一个仅有一个线程的线程池。
 
-用于异步通知
+回忆一下Reactor中的`Using Multiple Reactors`，Netty支持程序员可以根据配置和CPU核心数不同，创建多个EventLoop实例用以优化资源的使用。
 
-## Bootstrap
+> 通常EventLoop和Channel是一对多的关系。
 
-## Channel
+#### 线程管理
+
+``` java
+// 提交任务给eventLoop线程
+channel.evnetLoop().execute(task);
+```
+
+在Netty内部，若任务直接交给EventLoop线程，该任务将直接由EventLoop执行。否则EventLoop将该任务放入队列中，将调度该任务以稍后执行。
 
 ``` mermaid
 graph LR
-	subgraph client
-		SocketChannel
-		ChannelFuture
-		SocketChannel --> ChannelFuture
-	end
-	SocketChannel -- connect --> ServerSocketChannel
-	subgraph server
-		ServerSocketChannel
-	end
+
+task((任务))
+inEventLoop((在EventLoop中))
+task --> inEventLoop
+inEventLoop -- 在 --> execute((执行))
+inEventLoop -- 不在 --> put((放入队列))
 ```
 
 
 
-## ChannelFuture
+#### 线程分配
+
+``` mermaid
+graph LR
+EventLoopGroup -- 1:n --> EventLoop
+EventLoop -- 1:m --> Channel
+```
+
+EventLoopGroup负责为每个新创建的Channel分配一个EventLoop。一旦Channel被分配一个EventLoop，在该Channel的生命周期中都将使用该EventLoop及关联线程。
+
+- ThreadLocal
+
+  由于Channel共享同一个EventLoop线程完成I/O与事件监听，我们无法使用ThreadLocal来对Channel进行状态追踪。
+
+  
+
+#### EventLoopGroup
+
+线程池的线程组，包含多个`EventLoop`。
+
+### ChannelFuture
+
+在Netty中所有I/O都是异步的。
+
+为此，Netty提供ChannelFuture接口，以便在某个操作完成时得到通知。
+
+
+
+## Bootstrap
 
 ## ChannelInitializer
 
@@ -144,6 +204,10 @@ graph LR
 
 ### ChannelInboundHandler
 
+
+
+
+
 ### ChannelOutboundHandler
 
 ### ChannelHandlerAdapter
@@ -155,16 +219,6 @@ graph LR
 ## ChannelPipeline
 
 - 责任链模式
-
-## EventLoop
-
-实质只有一个线程的线程池。相当于NIO编程中的`Selector`，或者说`Reactor`模式中的`reactor`。
-
-即`EventLoop`中唯一的一个线程不断在执行`select()`，负责`Channel`的IO操作。
-
-### EventLoopGroup
-
-线程池的线程组，包含多个`EventLoop`。
 
 ## ByteBuf
 
