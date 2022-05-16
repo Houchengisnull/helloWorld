@@ -333,10 +333,7 @@ value.set(text, value.get("Hello world"));
 
 - **通过继承克隆接口**
 
-  1. 继承`Cloneable`接口;
-  2. 重写`clone()`;
-  3. 在`clone()`中调用`super.clone()`;
-  4. 对引用数据类型重复以上三步；
+  继承并重写`Cloneable`接口，并调用`super.clone()`，并对引用数据类型重复上述操作。
 
   ``` java
   @Override
@@ -351,7 +348,7 @@ value.set(text, value.get("Hello world"));
 - **工具**
 
   1. 通过`ObjectInputStream`，`ObjectOutputStream`实现对象的深克隆；
-  2. 借助`Spring`、`Hutool`的`BeanUtil`；
+  2. 借助`Spring`、`Hutool`的`BeanUtils`；
 
 # 类加载
 
@@ -410,12 +407,6 @@ value.set(text, value.get("Hello world"));
 ## 类加载顺序
 
 `parent first`，双亲委派机制。核心的类不可被仿照。
-
-## 参考
-
-https://www.xuebuyuan.com/1760563.html
-
-http://blog.itpub.net/145274/viewspace-591473/
 
 # 引用 Reference
 

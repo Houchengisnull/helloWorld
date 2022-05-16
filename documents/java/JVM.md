@@ -156,7 +156,7 @@ https://www.ibm.com/support/knowledgecenter/zh/SSAW57_9.0.0/com.ibm.websphere.nd
 - 344  Abortable Mixed Collections for G1 ：当 G1 垃圾回收器的回收超过暂停目标，则能中止垃圾回收过程。
 - JEP346  Promptly Return Unused Committed Memory from G1 ：改进 G1 垃圾回收器，以便在空闲时自动将 Java 堆内存返回给操作系统。
 
-# Java虚拟机发展史
+# JVM发展史
 
 > 也许还有一些程序员会注意到BEAJRockit和**IBM J9**，但对JVM的认识不仅仅这些。
 
