@@ -319,40 +319,39 @@ value.set(text, value.get("Hello world"));
 
 # 克隆
 
+- **参考**
+- [浅谈Java中的深克隆和浅克隆（阿里面试）](https://www.cnblogs.com/liqiangchn/p/9465186.html)
+
 克隆的目的是快速获取一个对象副本
 
-- 浅克隆
+| 克隆方式 | 描述                                                         |
+| -------- | ------------------------------------------------------------ |
+| 浅克隆   | 创建一个新对象，新对象属性和原对象完全一样，对于引用数据类型，仍指向原有属性所指向的对象的内存地址。 |
+| 深克隆   | 创建一个新对象，引用数据类型也被克隆，不再指向原有对象地址。 |
 
-  创建一个新对象，新对象属性和原对象完全一样，对于引用数据类型，仍指向原有属性所指向的对象的内存地址
+## 实现深克隆
 
-- 深克隆
+- **通过继承克隆接口**
 
-  创建一个新对象，引用数据类型也被克隆，不再指向原有对象地址
+  1. 继承`Cloneable`接口;
+  2. 重写`clone()`;
+  3. 在`clone()`中调用`super.clone()`;
+  4. 对引用数据类型重复以上三步；
 
-## 实现克隆
+  ``` java
+  @Override
+  public Object clone() throws CloneNotSupportedException {
+      //注意以下代码
+      Teacher teacher = (Teacher)super.clone();
+      teacher.setStudent((Student)teacher.getStudent().clone());
+      return teacher;
+  }
+  ```
 
-- 继承`Cloneable`接口
-- 重写`clone()`
-- 在`clone()`中调用`super.clone()`
+- **工具**
 
-> 在实现深克隆重写`clone()`方法时，对引用数据类型重复以上步骤，并调用该成员变量的`clone()`
-
-``` java
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        // TODO Auto-generated method stub
-        //注意以下代码
-        Teacher teacher = (Teacher)super.clone();
-        teacher.setStudent((Student)teacher.getStudent().clone());
-        return teacher;
-    }
-```
-
-- 参考
-
-https://www.cnblogs.com/liqiangchn/p/9465186.html
-
-https://blog.csdn.net/lovezhaohaimig/java/article/details/80372233
+  1. 通过`ObjectInputStream`，`ObjectOutputStream`实现对象的深克隆；
+  2. 借助`Spring`、`Hutool`的`BeanUtil`；
 
 # 类加载
 
