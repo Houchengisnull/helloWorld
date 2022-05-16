@@ -84,11 +84,9 @@
     - Linux的AIO底层实现仍然是epoll，因此性能上没有明显优势
     - AIO接收数据需要预先分配缓存，对连接数大流量小的情况非常浪费内存
 
-# Netty component
+# Netty核心组件
 
-## Netty核心组件
-
-### Channel
+## Channel
 
 Channel是对Socket的抽象(封装)。
 
@@ -118,7 +116,7 @@ Channel是对Socket的抽象(封装)。
 
   [^pipeline]: 管道
 
-### EventLoop
+## EventLoop
 
 EventLoop是对多路复用I/O模型中`select()`的封装，或者说是反应器模式中reactor线程的封装，<u>用于监听网络连接生命周期中发生的事件</u>。
 
@@ -128,7 +126,7 @@ EventLoop是对多路复用I/O模型中`select()`的封装，或者说是反应�
 
 > 通常EventLoop和Channel是一对多的关系。
 
-#### 线程管理
+### 线程管理
 
 ``` java
 // 提交任务给eventLoop线程
@@ -147,9 +145,7 @@ inEventLoop -- 在 --> execute((执行))
 inEventLoop -- 不在 --> put((放入队列))
 ```
 
-
-
-#### 线程分配
+### 线程分配
 
 ``` mermaid
 graph LR
@@ -163,19 +159,35 @@ EventLoopGroup负责为每个新创建的Channel分配一个EventLoop。一旦Ch
 
   由于Channel共享同一个EventLoop线程完成I/O与事件监听，我们无法使用ThreadLocal来对Channel进行状态追踪。
 
-  
-
-#### EventLoopGroup
+### EventLoopGroup
 
 线程池的线程组，包含多个`EventLoop`。
 
-### ChannelFuture
+## ChannelFuture
 
 在Netty中所有I/O都是异步的。
 
 为此，Netty提供ChannelFuture接口，以便在某个操作完成时得到通知。
 
+# Netty重要组件
 
+## ChannelHandler
+
+在使用Netty过程中，打交道最多的就是ChannelHandler。见名知意，ChannelHandler负责对通信数据的业务处理。
+
+- **Channel Handler生命周期**
+
+  | 生命周期        | 描述                                  |
+  | --------------- | ------------------------------------- |
+  | handlerAdded    | 当ChannelHandler添加到ChannelPipeline |
+  | handlerRemoved  | 当ChannelHandler移除ChannelPipeline   |
+  | exceptionCaught | 由错误产生时被调用                    |
+
+### ChannelInboundHandler
+
+### ChannelOutboundHandler
+
+### ChannelHandlerAdapter
 
 ## Bootstrap
 
@@ -199,20 +211,6 @@ EventLoopGroup负责为每个新创建的Channel分配一个EventLoop。一旦Ch
 ``` java
 // TODO
 ```
-
-## ChannelHandler
-
-### ChannelInboundHandler
-
-
-
-
-
-### ChannelOutboundHandler
-
-### ChannelHandlerAdapter
-
-#### ChannelHandler
 
 ## ChannelHandlerContext
 
