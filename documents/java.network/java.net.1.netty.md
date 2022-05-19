@@ -175,7 +175,7 @@ EventLoopGroup负责为每个新创建的Channel分配一个EventLoop。一旦Ch
 
 在使用Netty过程中，打交道最多的就是ChannelHandler。见名知意，ChannelHandler负责对通信数据的业务处理。
 
-- **Channel Handler生命周期**
+- **ChannelHandler生命周期**
 
   | 生命周期        | 描述                                  |
   | --------------- | ------------------------------------- |
@@ -183,11 +183,71 @@ EventLoopGroup负责为每个新创建的Channel分配一个EventLoop。一旦Ch
   | handlerRemoved  | 当ChannelHandler移除ChannelPipeline   |
   | exceptionCaught | 由错误产生时被调用                    |
 
+- **ChannelHandler子接口**
+
+  | 接口                   | 描述                           |
+  | ---------------------- | ------------------------------ |
+  | ChannelInboundHandler  | 处理入站数据及各种状态变化     |
+  | ChannelOutboundHandler | 处理出站数据并允许拦截所有操作 |
+
 ### ChannelInboundHandler
+
+- **ChannelInboundHandler生命周期**
+
+  以下生命周期方法会在数据被接收时或者对应Channel状态发生改变时被调用。
+
+  | 生命周期                  | 描述                                                         |
+  | ------------------------- | ------------------------------------------------------------ |
+  | channelRegistered         | 当Channel注册到EventLoop并且能处理I/O时被调用                |
+  | channelUnregistered       | 当Channel从EventLoop注销并且无法处理I/O时被调用              |
+  | channelInactive           | 当Channel离开Active状态并且不再连接remote endpoint时被调用   |
+  | channelReadComplete       | 当Channel上一个读操作完成时被调用                            |
+  | channelRead               | 当Channel读取数据时被调用                                    |
+  | channelWritabilityChanged | 当Channel可写状态发生改变时被调用                            |
+  | userEventTriggered        | 当ChannelInboundHandler.fireUserEventTriggered()被调用时被调用 |
 
 ### ChannelOutboundHandler
 
-### ChannelHandlerAdapter
+- **ChannelOutboundHandler API**
+
+  出站操作和数据将由ChannelOutboundHandler处理。它的方法将被Channel、Pipeline、ChannelHandlerContext调用。
+
+  | method     | 描述                                              |
+  | ---------- | ------------------------------------------------- |
+  | bind       | 当请求将Channel绑定到本地地址时被调用             |
+  | connect    | 当请求将Channel连接到远程节点时被调用             |
+  | disconnect | 当请求将Channel从远程节点断开时被调用             |
+  | close      | 当请求关闭Channel时被调用                         |
+  | deregister | 当请求将Channel从EventLoop注销时被调用            |
+  | read       | 当请求从Channel读取更多数据时被调用               |
+  | flush      | 当请求通过Channel将入队数据冲刷到远程节点时被调用 |
+  | write      | 当请求通过Channel将数据写到远程节点时被调用       |
+
+## ChannelPipeline
+
+当Channel被创建时，将会关联一个新的ChannelPipeline。<u>Channel既不能附加另外一个ChannelPipeline，也不能分离其当前的</u>
+
+- 责任链模式
+
+  ChannelInboundHandler与ChannelOutboundHandler将被安装到一个ChannelPipeline上，它们的执行顺序由添加顺序决定。
+
+  - 入站
+
+    如果一个消息或者其他入站事件被读取，那么它会从ChannelPipeline头部开始流动，最终到达ChannelPipeline尾端。
+
+  - 出站
+
+    如果是出站事件，那么从ChannelOutboundHandler链的尾部开始流动，直到它到达链的头部为止。
+
+    之后，数据将会到达网络传输层，通常触发一个写事件。
+
+## ChannelHandlerContext
+
+- 注意
+
+  作为处理器的上下文对象，其API与Channel、ChannelPipeline相同，但是这些同名方法若是被ChannelHandlerContext调用，则只会从当前关联的ChannelHandler开始，并且只会传播给下一个入站/上一个出站处理器。
+
+  而通过Channel、ChannelPipeline则会在整个责任链上起作用。
 
 ## Bootstrap
 
@@ -211,12 +271,6 @@ EventLoopGroup负责为每个新创建的Channel分配一个EventLoop。一旦Ch
 ``` java
 // TODO
 ```
-
-## ChannelHandlerContext
-
-## ChannelPipeline
-
-- 责任链模式
 
 ## ByteBuf
 
@@ -265,6 +319,26 @@ ReferenceCountUtil.release();
 不用显式释放。
 
 # Netty内置通信方式
+
+- NI/O
+
+  使用`java.nio.channels`作为基础，基于选择器的方式。
+
+- Epoll
+
+  由JNI驱动的`epoll()`和非阻塞I/O，这个传输只有在Linux上可用多种特性，比NI/O传输更快。
+
+- OI/O
+
+  使用`java.net`作为基础，使用阻塞流。
+
+- Local
+
+  VM内部通过管道进行通信的本地传输。
+
+- Embedded
+
+  允许使用ChannelHandler而又需要真正的网络传输，用于开发/测试阶段。
 
 # 粘包/半包
 
