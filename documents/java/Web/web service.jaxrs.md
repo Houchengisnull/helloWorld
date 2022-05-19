@@ -22,12 +22,13 @@
 - [Jersey是一个什么框架,价值在哪里？](https://www.jianshu.com/p/a9b0ebd4c3fe)
 
 <hr>
+`Jersey`是对`JAX-RS(JSR-311)`协议的实现，用于构建`RESTful Web Service`，也可以将`Jersey`理解为一个`RESTful`或者是`Web Service`框架。
 
-`Jersey`是对`JAX-RS(JSR-311)`协议的实现，用于构建`RESTful Web Service`，也可以将`Jersey`理解为一个`RESTful`或者是`WebService`框架。
+> 需要注意：Jersey并不是实现RPC中`Web Service`的框架，而是实现Web服务的工具，不要弄混淆，与之更相似的是`Spring MVC`。
 
 作为`Java开发者`，可能会觉得`Jersey`与我们常见的`MVC`框架很相似，比如`Spring mvc`。但它与`MVC`是有区别的，以`Spring mvc`为例：
 
-- **Jersey与Spring mvc的区别**
+- **Jersey与Spring MVC的区别**
 - `Jersey`提供`DI`，由`glassfish hk2`实现，即想单独使用`jersey`需要另外学习`Bean容器`
 - `Jersey`出发点是`RESTFull`，而`MVC`的出发点是`Web`，体现在接口设计方面
 - `Jersey`提倡一种子资源的概念，即`RESTFull`提倡所有`url`都是资源
