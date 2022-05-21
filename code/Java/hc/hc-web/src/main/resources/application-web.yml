@@ -1,10 +1,18 @@
-#配置springmvc的视图
+#
+# 配置spring mvc的视图
+#
 spring:
   mvc:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
-      
+    #
+    # spring 5 默认路径模式策略, @PathVariable支持{*spring}
+    # matching-strategy:
+    #   ant_pattern_parser (历史版本)
+    #   path_pattern_parser
+    pathmatch:
+      matching-strategy: path_pattern_parser
 server:  
   port: 8090  #配置端口
   session-timeout: 30  

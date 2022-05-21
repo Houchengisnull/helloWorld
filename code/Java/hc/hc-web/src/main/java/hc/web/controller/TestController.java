@@ -2,10 +2,7 @@ package hc.web.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
@@ -32,8 +29,16 @@ public class TestController {
     /**
      * {*spring}
      */
-    @GetMapping("/{*path}")
-    public String pathTest(@PathVariable("path") String path) {
+    @GetMapping("/get/{*path}")
+    public String getPathVariable(@PathVariable("path") String path) {
+        return path;
+    }
+
+    /**
+     * {*spring}
+     */
+    @PostMapping("/post/{*path}")
+    public String postPathVariable(@PathVariable("path") String path) {
         return path;
     }
 
@@ -49,4 +54,16 @@ public class TestController {
         return path;
     }*/
 
+    /*@GetMapping("get/**")
+    public String getPathVariableAll(){
+        return "request **";
+    }*/
+
+    /**
+     * Not supported by "spring.mvc.pathmatch.matching-strategy=ant-path-matche"
+      */
+    @GetMapping("get/**/test")
+    public String getPathVariableAll(){
+        return "request get/**/test";
+    }
 }
