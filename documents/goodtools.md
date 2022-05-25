@@ -25,6 +25,18 @@
 [^图1]:  切换
 [^图2]:  预览
 
+# Markdown
+
+## Typora
+
+- 过期
+
+  需要重新下载，覆盖安装。
+
+- 下载地址
+
+  https://www.typora.io/windows/dev_release.html
+
 # 图床
 
 ## upgit
