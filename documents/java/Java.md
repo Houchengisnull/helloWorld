@@ -1252,3 +1252,9 @@ public class Main {
 - [Java高编译低运行错误(ConcurrentHashMap.keySet)](https://www.cnblogs.com/superhedantou/p/5693113.html)
 
 在`JDK8`中`ConcurrentHashMap`，新增内部类`KeySetView`，在低版本环境中运行时会抛出该问题。
+
+## StackOverflowError：正则表达式栈溢出错误
+
+- [StackOverflowError：正则表达式栈溢出错误](https://www.jianshu.com/p/87d0175e1aed)
+
+今天遇到了这个错误，但是这只是表面现象，根本原因：**是我将图片的字节数组通过`JSONObject`包装后，再使用日志框架打印出来。**
