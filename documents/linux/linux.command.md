@@ -431,7 +431,7 @@ $ ethtool eth0
 $ systemctl status firewalld.service
 
 # 开启防火墙
-$ systemctl stop firewalld.service
+$ systemctl start firewalld.service
 
 # 关闭防火墙
 $ systemctl stop firewalld.service
