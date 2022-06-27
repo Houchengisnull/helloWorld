@@ -154,6 +154,15 @@ $ echo $LANG
 $ groups #{username}
 ```
 
+## 账户被锁
+
+``` shell
+# 查询用户被锁次数
+pam_tally2 --user admin
+# 重置用户被锁次数
+pam_tally2 --user=admin --reset
+```
+
 # 执行
 
 ## source
@@ -425,6 +434,10 @@ $ ethtool eth0
 
 ## 防火墙
 
+### firewalld
+
+- 查看状态
+
 ``` shell
 # 查看防火墙状态
 # 出现Active属性显示running则表示防火墙开启
@@ -437,7 +450,7 @@ $ systemctl start firewalld.service
 $ systemctl stop firewalld.service
 ```
 
-### 开放端口
+- 开放端口
 
 ``` shell
 # 查看开放端口
@@ -446,6 +459,13 @@ firewall-cmd --list-ports
 firewall-cmd --zone=public --add-port=3306/tcp --permanent
 # 重启防火墙
 firewall-cmd --reload
+```
+
+### iptables
+
+``` shell
+service iptables start
+service iptables stop
 ```
 
 # net-tools
