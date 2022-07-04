@@ -680,6 +680,12 @@ https://blog.csdn.net/baozijiaruqing/article/details/80645082
 - `# ssh #{address} #{port} -l root`
 - `# ssh #{username}@#{address}`
 
+## 查看网络连通性
+
+``` shell
+ssh -v -p 3306 127.0.0.1
+```
+
 # Yum
 
 `Yellow dog Updater , Modified`，为一款Shell前端软件包管理器。
