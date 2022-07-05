@@ -154,7 +154,7 @@ public class QuickFTPClient implements FTPService{
     @Override
     public List<FTPFile> listTree(String path) {
         String currentPath = path;
-        List<FTPFile> result = null;
+        List<FTPFile> result = new ArrayList<>();
         LinkedList<String> stack = new LinkedList<>();
         do {
             if (stack.size() > 0) {
@@ -163,12 +163,6 @@ public class QuickFTPClient implements FTPService{
             log.debug("list {}", currentPath);
             List<FTPFile> list = list(currentPath);
 
-            if (list == null) { // don't found any file/directory
-                break;
-            }
-            if (result == null) {
-                result = new ArrayList<>();
-            }
             for (FTPFile ftpFile : list) {
                 if (ftpFile.isFile()) {
                     log.debug("found file: {}", currentPath + "/" + ftpFile.getName());

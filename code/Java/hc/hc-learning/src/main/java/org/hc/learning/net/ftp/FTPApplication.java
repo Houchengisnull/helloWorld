@@ -75,9 +75,9 @@ public class FTPApplication {
          * 迭代遍历文件树
          */
         List<FTPFile> ftpFiles = service.listTree(".");
-        /*for (FTPFile ftpFile : ftpFiles) {
+        for (FTPFile ftpFile : ftpFiles) {
             System.out.println(ftpFile.getName());
-        }*/
+        }
     }
 
 }
