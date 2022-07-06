@@ -1,14 +1,13 @@
 package org.hc.learning.net.ftp;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
-
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -135,19 +134,13 @@ public class QuickFTPClient implements FTPService{
     @Override
     public List<FTPFile> list(String path) {
         FTPFile[] ftpFiles = null;
-        List<FTPFile> list = null;
+
         try {
             ftpFiles = client.listFiles(path);
         } catch (IOException e) {
             log.error(e.getMessage(), e);
         }
-        if (ftpFiles != null) {
-            list = new ArrayList<>();
-            for (FTPFile ftpFile : ftpFiles) {
-                list.add(ftpFile);
-            }
-        }
-
+        List<FTPFile> list = Arrays.asList(ftpFiles);
         return list;
     }
 
