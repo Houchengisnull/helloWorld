@@ -44,12 +44,12 @@ public class TestController {
 
     /**
      * 错误示例:
-     * /{method}//{*path} 若使用{*path},则仅支持一个@PathVariables
+     * /{method}/{*path} 若使用{*path},则仅支持一个@PathVariables
      * @param uri
      * @param path
      * @return
      */
-    /*@GetMapping("/{method}//{*path}")
+    /*@GetMapping("/{method}/{*path}")
     public String pathTest(@PathVariable("method")String uri, @PathVariable("path") String path) {
         return path;
     }*/
