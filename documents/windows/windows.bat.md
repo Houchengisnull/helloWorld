@@ -243,6 +243,12 @@ C:\Users\admin\AppData\Local\Programs\Python\Python38\python.exe
 
 # 文件
 
+## 查看当前目录
+
+``` bat
+dir
+```
+
 ## 查看目录树
 
 ``` bat
