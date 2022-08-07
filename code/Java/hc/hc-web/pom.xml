@@ -17,6 +17,12 @@
 	<dependency>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-web</artifactId>
+        <exclusions>
+            <exclusion>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-tomcat</artifactId>
+            </exclusion>
+        </exclusions>
 	</dependency>
 	<!-- jsp解析器 -->
 	<dependency>
@@ -68,6 +74,12 @@
           <groupId>junit</groupId>
           <artifactId>junit</artifactId>
           <scope>test</scope>
+      </dependency>
+
+      <dependency>
+          <groupId>org.jodd</groupId>
+          <artifactId>jodd-all</artifactId>
+          <version>3.9.1</version>
       </dependency>
 
   </dependencies>

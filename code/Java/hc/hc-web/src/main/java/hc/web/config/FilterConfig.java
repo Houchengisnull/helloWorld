@@ -1,6 +1,8 @@
 package hc.web.config;
 
 import hc.web.filter.FilterRegistrationFilter;
+import hc.web.filter.UpdateResponseWrapperFilter;
+import hc.web.filter.UpdateResponseWrapperSecondFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,6 +35,34 @@ public class FilterConfig {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(proxy);
         registration.addUrlPatterns("/*");
+        return registration;
+    }
+
+    /**
+     * 在过滤器中修改响应体
+     * @return
+     */
+    @Bean
+    public FilterRegistrationBean registerResponseWrapperFilter(){
+        UpdateResponseWrapperFilter filter = new UpdateResponseWrapperFilter();
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(filter);
+        registration.setOrder(5);
+        registration.addUrlPatterns("/responseWrapper/*");
+        return registration;
+    }
+
+    /**
+     * 在过滤器中修改响应体
+     * @return
+     */
+    @Bean
+    public FilterRegistrationBean registerSecondResponseWrapperFilter(){
+        UpdateResponseWrapperSecondFilter filter = new UpdateResponseWrapperSecondFilter();
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(filter);
+        registration.setOrder(10);
+        registration.addUrlPatterns("/responseWrapper/*");
         return registration;
     }
 
