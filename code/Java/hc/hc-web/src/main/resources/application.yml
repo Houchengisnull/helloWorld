@@ -6,5 +6,4 @@ spring:
 logging:
   level:
     root: error
-    hc.web.wrapper: debug
-    hc.web.filter.UpdateResponseWrapperFilter: debug
+    hc.web.advice.UpdateResponseAdvice: debug
