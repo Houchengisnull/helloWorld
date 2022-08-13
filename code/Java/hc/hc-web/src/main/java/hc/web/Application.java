@@ -13,10 +13,7 @@ import org.springframework.context.annotation.FilterType;
 @ServletComponentScan
 /*@SpringBootApplication*/
 @ComponentScan(basePackages = {
-        "hc.web.controller"
-        ,"hc.web.config"
-        , "hc.web.filter"
-        , "hc.web.advice"
+        "hc.web.*"
 }
 , excludeFilters = {@ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {TestController.class})})
 /*

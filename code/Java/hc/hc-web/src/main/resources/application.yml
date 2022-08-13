@@ -5,5 +5,5 @@ spring:
     active: web
 logging:
   level:
-    root: error
-    hc.web.advice.UpdateResponseAdvice: debug
+    root: info
+debug: false

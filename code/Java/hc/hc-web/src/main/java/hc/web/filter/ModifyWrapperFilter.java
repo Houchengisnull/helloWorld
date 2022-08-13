@@ -17,10 +17,21 @@ import java.util.function.Function;
 @WebFilter(urlPatterns = {"/decrypt/*"}, filterName = "decryptFilter")
 @Slf4j
 public class ModifyWrapperFilter implements Filter {
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
+    }
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         Function<String, String> modifyRequestBodyFun = Base64::decodeToString; // 解密函数
         Function<String, String> modifyResponseBodyFun = Base64::encodeToString; // 加密函数
         HttpUtil.modifyHttpData(request, response, chain, modifyRequestBodyFun, modifyResponseBodyFun);
+    }
+
+    @Override
+    public void destroy() {
+
     }
 }

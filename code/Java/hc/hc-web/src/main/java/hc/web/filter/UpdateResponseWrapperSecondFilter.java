@@ -18,6 +18,11 @@ public class UpdateResponseWrapperSecondFilter implements Filter {
 
 
     @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
+    }
+
+    @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         UpdateResponseBodyWrapper responseWrapper = new UpdateResponseBodyWrapper((HttpServletResponse) response);
         chain.doFilter(request, responseWrapper);
@@ -31,6 +36,11 @@ public class UpdateResponseWrapperSecondFilter implements Filter {
         String message = responseBody + "!";
 
         responseWrapper.setResponseBody(message);
+    }
+
+    @Override
+    public void destroy() {
+
     }
 
 }

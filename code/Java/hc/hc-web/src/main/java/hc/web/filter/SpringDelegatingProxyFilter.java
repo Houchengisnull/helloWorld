@@ -17,8 +17,18 @@ public class SpringDelegatingProxyFilter implements Filter {
     private String contextPath;
 
     @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
+    }
+
+    @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         log.info("@Value(\"server.servlet.context-path\"):{}", contextPath);
         filterChain.doFilter(servletRequest, servletResponse);
+    }
+
+    @Override
+    public void destroy() {
+
     }
 }
