@@ -179,5 +179,12 @@
 		  <artifactId>netty-all</artifactId>
 		  <version>4.1.28.Final</version>
 	  </dependency>
+
+	  <!-- Disruptor -->
+	  <dependency>
+		  <groupId>com.lmax</groupId>
+		  <artifactId>disruptor</artifactId>
+		  <version>3.4.2</version>
+	  </dependency>
   </dependencies>
 </project>
