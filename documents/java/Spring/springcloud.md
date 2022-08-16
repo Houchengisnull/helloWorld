@@ -72,3 +72,84 @@ javac -parameters <source files>
   ![image-javac-parameters-idea](../../images/javac-parameters-idea.png)
 
 在上图红框任意一处配置`-parameters`即可。
+
+##### javac -parameters
+
+``` java
+public class Hello {
+
+    private String hello;
+
+    public void setHello(String word) {
+        this.hello = hello;
+    }
+
+    public String getHello() {
+        return this.hello;
+    }
+
+    public static void main(String[] args) {
+        Hello h = new Hello();
+        h.setHello("-parameters");
+        System.out.println(h.getHello());
+    }
+
+}
+```
+
+分别使用`javac Hello.java`与`javac -parameters Hello.java`进行编译：
+
+- javac Hello.java编译后的字节码
+
+  ``` java
+  public class Hello {
+      private String hello;
+  
+      public Hello() {
+      }
+  
+      public void setHello(String var1) {
+          this.hello = this.hello;
+      }
+  
+      public String getHello() {
+          return this.hello;
+      }
+  
+      public static void main(String[] var0) {
+          Hello var1 = new Hello();
+          var1.setHello("-parameters");
+          System.out.println(var1.getHello());
+      }
+  }
+  ```
+
+  
+
+- javac -parameters Hello.java编译后的字节码
+
+  ``` java
+  public class Hello {
+      private String hello;
+  
+      public Hello() {
+      }
+  
+      public void setHello(String word) {
+          this.hello = this.hello;
+      }
+  
+      public String getHello() {
+          return this.hello;
+      }
+  
+      public static void main(String[] args) {
+          Hello var1 = new Hello();
+          var1.setHello("-parameters");
+          System.out.println(var1.getHello());
+      }
+  }
+  
+  ```
+
+  
