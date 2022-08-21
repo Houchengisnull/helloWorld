@@ -514,6 +514,62 @@ Java配置主要通过`@Configuration`和`@Bean`实现
 - **参考**
 - <a href='https://blog.csdn.net/pseudonym_/article/details/72826059'>Spring中BeanFactory和ApplicationContext的区别</a>
 
+## Spring Bean自动执行
+
+- **参考**
+- [Spring Bean 方法自动触发的N种方式](https://www.codenong.com/j5dda22be51882573530/)
+
+有时候我们需要在Bean初始化的之前、之后及销毁前做一些处理。
+
+- 比如在Bean初始化之前，我们最简单的方式就是利用@Postconstruct注解。
+
+- 如果需要在初始化之后，我们就需要利用Spring的`init-method`
+
+  ``` java
+  
+  @Slf4j
+  @Configuration
+  //@PropertySource(value = "classpath:application-nacos.yml")
+  public class NacosConfig  implements InitializingBean {
+  
+      /**
+       *
+       */
+      @Value("${spring.application.name}")
+      private String applicationName;
+  
+      @Value("${server.port}")
+      private Integer port;
+  
+      @NacosInjected
+      private NamingService namingService;
+  
+      /**
+       * 注入后自动注册
+       * @throws Exception
+       */
+      @Override
+      public void afterPropertiesSet() throws Exception {
+          String hostAddress = InetAddress.getLocalHost().getHostAddress();
+          log.info("服务注册:[{}]{}:{}", applicationName, hostAddress, port);
+          namingService.registerInstance(applicationName, hostAddress, port);
+      }
+  
+  }
+  ```
+
+  让Bean实现`InitializingBean`，在初始化后将调用`afterPropertiesSet()`。
+
+- 如果在销毁之前，则利用`DisposableBean`，在销毁前调用`destroy()`。
+
+  这种方式有些不实用，因为需要显式销毁实例，比如：
+
+  ``` java
+  context.close();
+  ```
+
+  但实际开发场景，我们并不会这么做，而关闭进程也是利用`kill`命令。导致程序极少执行`destroy()`。
+
 # AOP
 
 ## 简介
@@ -792,6 +848,10 @@ StaticMatchMethodPointcutAdvisor —— 匹配静态方法的切面
 - **@Value**
 
 见`helloWorld\code\Java\hc\hc-learning\src\main\java\org\hc\learning\spring\el`
+
+###  读取配置文件
+
+#### @ConfigurationProperties
 
 ## Profile
 
@@ -1124,198 +1184,3 @@ class AspectJAutoProxyRegistrar implements ImportBeanDefinitionRegistrar {
 `AnnotationMetadata`参数用来获得当前配置类上的注解
 
 `BeanDefinitionRegistry`参数用来注册`Bean`
-
-# 测试
-
-> 20190222之前做项目看了很多测试不得要领。想不到本书中有介绍，真的是“众里寻他千百度。蓦然回首，那人却在，灯火阑珊处。”
-
-单元测试只针对当前开发的类和方法进行测试，可以简单通过模拟依赖来实现，对运行环境没有依赖；但是仅仅进行单元测试是不够的，它只能证明当前类或方法能否正常工作，而我们需要指定系统的各个部分组合在一起是否能正常工作，这就是集成测试的意义。
-
- 
-
-单元测试 -> 继承测试
-
-继承测试为我们提供了一种无须部署或运行程序来完成验证系统各部分是否能正常协同工作。
-
-`Spring`通过`Spring TextContextFramework` 对集成测试提供了顶级支持，它不依赖特定测试框架，既可使用`Junit`，也可使用`TestNG`。
-
-`Spring`提供了一个`SpringJUnit4ClassRunner`类，它提供了`Spring TestContext Framework`功能。通过`@ContextConfiguration`来配置`Application Context`，通过`@ActiveProfiles`确定使用的`profile`。
-
- 
-
-代码见：
-
-`/hc-learning/src/test/java/org/hc/learning/DemoBeabIntegerationTests.java`
-
-`org.hc.learning.spring.fortest`
-
-# Spring MVC
-
-## **ViewResolver**
-
-`ViewResolver`是`Spring MVC`视图渲染核心机制；
-
-`Spring MVC`里有一个接口叫`ViewResolver`，实现这个接口重写方法`resiveViewName()`，这个接口的返回值是接口`View`，而`View`的职责就是使用`model`、`request`、`response`对象，并将渲染的视图返回给浏览器。
-
-``` java
-@Configuration
-@EnableWebMvc
-@ComponentScan(“”)
-Public class MyMvcConfig {
-    
-@Bean
-Public InternalResourceViewResolver viewResolver() {
-		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-		viewResolver.setPrefix(“/WEB-INF/classes/views/”);
-		viewResolver.setSuffix(“.jsp”);
-		viewResolver.setViewClass(JstlView.class);
-		Return viewResolver;
-	}
-}
-```
-
-## WebApplicationInitializer接口
-
-  是`Spring`提供用来配置`Servlet3.0 +`配置的接口，从而实现了替代`web.xml`位置
-
-  ``` java
-public class WebInitializer implements WebApplicationInitializer {
-
-@Override
-Public void onStartup(ServletContext servletContext) throws ServletException {
-    AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-    Ctx.register(MyMvcConfig.class);
-	Ctx.setServletContext(servletContext);
-	Dynamic servlet = servletContext.addServlet(“dispatcherServlet”, new DispatcherServlet(ctx));
-	Servlet.addMapping(“/”);
-	Servlet.setLoadOnStartup(1);
-}
-
-}
-  ```
-
-
-
-## @RestController
-
-``` java
-@RestController = @ResponseBody + @Controller
-@Request(value = “/getjson”, produces=”application/json;charset=UTF-8”)
-@Request(value = “/getxml”, produces=”application/xml;charset=UTF-8”)
-```
-
-## 静态资源映射
-
-``` java
-@Configuration
-@EnableWebMvc
-@ComponentScan(“”)
-Public class MyMvcConfig extends WebMvcConfigurerAdapter{
-
-@Bean
-Public InternalResourceViewResolver viewResolver() {
-	InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-	viewResolver.setPrefix(“/WEB-INF/classes/views/”);
-	viewResolver.setSuffix(“.jsp”);
-	viewResolver.setViewClass(JstlView.class);
-	Return viewResolver;
-}
-```
-
-``` java
-@Override
-Public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        Registry.addResourceHandler("/static/**").addResourceLocations("classpath");
-}
-```
-
-
-
-addResourceHandler 对外暴露路径
-
-addResourceLocations 文件放置位置
-
-EnableWebMvc开启SpringMVC支持 否则重写WebMvcConfigurerAdapter方法无效 
-
-## **Interceptor拦截器**
-
-## **ControllerAdvice控制器****建言**
-
-将控制器全局配置放置于一处，例如对异常的处理@ControllerAdvice + @ExceptionHandler
-
-### **MVC常用注解**
-
-@ExceptionHandler 用于全局处理控制器的异常
-
-@InitBinder 用来设置WebDataBinder，WebDataBinder用来自动绑定前台请求参数到Model
-
-@ModelAttribute 绑定键值对到Model，此处让全局的RequestMapping都能获得此处设置的键值
-
- 
-
-## **HttpMessageConverter**
-
-`HttpMessageConverter`用来处理`request`和`response`里的数据。
-
-`Spring`为我们内置了大量的`HttpMessageConverte`：
-
-`MappingJackson2HttpMessageConverter`
-
-`StringHttpMessageConverter`
-
- 
-
-``` java
-public class MyMessageConverter extends AbstractHttpMessageConverter<DemoObj>{
-
-	public MyMessageConverter() {
-		super(new MediaType("application","x-wisely",Charset.forName("UTF-8")));
-	}
-
-	// 该Converter支持类型
-	@Override
-	protected boolean supports(Class<?> clazz) {
-		return DemoObj.class.isAssignableFrom(clazz);
-	}
-
-	// 处理请求数据
-	@Override
-	protected DemoObj readInternal(Class<? extends DemoObj> clazz, HttpInputMessage inputMessage)
-			throws IOException, HttpMessageNotReadableException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	// 处理如何输出数据到response
-	@Override
-	protected void writeInternal(DemoObj t, HttpOutputMessage outputMessage)
-			throws IOException, HttpMessageNotWritableException {
-		
-	}
-}
-```
-
-## 服务器推送
-
-### ajax轮询 
-
-### 持有请求 
-
-客户端发送请求给服务器，服务抓住请求不放当有数据方返回，返回后客户端再向服务器发送请求；
-
-方式1基于sse(Server Send Event 服务端发送事件)
-
-方式2基于Sevlet3.0+异步方法特性
-
-### Websocket
-
-## @InitBinder
-
-- **参考**
-
-- [SpringMVC中利用@InitBinder来对页面数据进行解析绑定](https://www.cnblogs.com/heyonggang/p/6186633.html)
-
-　在使用SpingMVC框架的项目中，经常会遇到页面某些数据类型是Date、Integer、Double等的数据要绑定到控制器的实体，或者控制器需要接受这些数据，如果这类数据类型不做处理的话将无法绑定。
-
-​      这里我们可以使用注解@InitBinder来解决这些问题，这样SpingMVC在绑定表单之前，都会先注册这些编辑器。一般会将这些方法些在**BaseController**中，需要进行这类转换的控制器只需继承BaseController即可。其实Spring提供了很多的实现类，如CustomDateEditor、CustomBooleanEditor、CustomNumberEditor等，基本上是够用的。
-

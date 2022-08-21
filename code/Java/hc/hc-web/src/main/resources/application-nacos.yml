@@ -1,0 +1,17 @@
+nacos:
+  config:
+    server-addr: 127.0.0.1:8848
+    data-ids: application-web
+    type: yaml
+    bootstrap:
+      enable: true
+  discovery:
+    # nacos地址
+    server-addr: 127.0.0.1:8848
+    # 是否自动注册
+    auto-register: false
+    # 进程信息
+    register:
+      ip: 192.168.192.2
+      port: 8090
+      service-name: ${spring.application.name}

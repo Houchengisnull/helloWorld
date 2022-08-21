@@ -90,6 +90,20 @@
       <artifactId>tomcat-embed-jasper</artifactId>
       <scope>provided</scope>
     </dependency>-->
+
+    <!-- nacos 配置管理 -->
+    <dependency>
+      <groupId>com.alibaba.boot</groupId>
+      <artifactId>nacos-config-spring-boot-starter</artifactId>
+      <version>0.2.7</version>
+    </dependency>
+
+    <!-- nacos 服务发现 -->
+    <dependency>
+      <groupId>com.alibaba.boot</groupId>
+      <artifactId>nacos-discovery-spring-boot-starter</artifactId>
+      <version>0.2.7</version>
+    </dependency>
   </dependencies>
 
    <!--<dependencyManagement>
