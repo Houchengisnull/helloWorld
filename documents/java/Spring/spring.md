@@ -521,6 +521,10 @@ Java配置主要通过`@Configuration`和`@Bean`实现
 
 有时候我们需要在Bean初始化的之前、之后及销毁前做一些处理。
 
+### 生命周期
+
+首先，我们可以从Bean的生命周期的角度出发：
+
 - 比如在Bean初始化之前，我们最简单的方式就是利用@Postconstruct注解。
 
 - 如果需要在初始化之后，我们就需要利用Spring的`init-method`
@@ -569,6 +573,10 @@ Java配置主要通过`@Configuration`和`@Bean`实现
   ```
 
   但实际开发场景，我们并不会这么做，而关闭进程也是利用`kill`命令。导致程序极少执行`destroy()`。
+
+### ApplicationListener
+
+
 
 # AOP
 
