@@ -21,6 +21,10 @@
 
 > `nginx`启动成功后没有任何提示，可能这就是俄罗斯工程师的浪漫。
 
+# upstream
+
+ngx_http_upstream_module属于http模块，用于定义一组服务器。
+
 # FAQ
 
 ## Nginx 错误10013: An attempt was made to access a socket in a way forbidden
