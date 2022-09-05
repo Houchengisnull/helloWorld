@@ -14,7 +14,7 @@
     </appender>
 
     <!-- 设置日志输出级别 -->
-    <root level="ERROR">
+    <root level="INFO">
         <appender-ref ref="CONSOLE" />
     </root>
 
