@@ -3,7 +3,7 @@ spring:
   datasource :
     hc:
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/hc
+      jdbc-url: jdbc:mysql://localhost:3306/hc
       username: root
       password: root
       max-idle: 10
