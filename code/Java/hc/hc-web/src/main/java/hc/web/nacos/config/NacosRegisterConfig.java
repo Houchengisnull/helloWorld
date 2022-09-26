@@ -5,11 +5,12 @@ import com.alibaba.nacos.api.naming.NamingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
-
 import java.net.InetAddress;
 
 @Slf4j
+@Conditional(NacosCondition.class)
 @Configuration
 public class NacosRegisterConfig implements InitializingBean {
 

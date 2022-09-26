@@ -23,7 +23,7 @@ public class SpringDelegatingProxyFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        log.info("@Value(\"server.servlet.context-path\"):{}", contextPath);
+        log.debug("@Value(\"server.servlet.context-path\"):{}", contextPath);
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

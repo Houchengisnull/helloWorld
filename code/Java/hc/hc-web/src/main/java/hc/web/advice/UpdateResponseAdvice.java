@@ -27,7 +27,7 @@ public class UpdateResponseAdvice implements ResponseBodyAdvice<String> {
 
     @Override
     public String beforeBodyWrite(String body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
-        log.info("response body advice handle message:{}", body);
+        log.debug("response body advice handle message:{}", body);
         return StrUtil.format("Hello {}", body);
     }
 }

@@ -14,9 +14,9 @@ public class FilterRegistrationFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        log.info("FilterRegisterBean配置过滤器 >>>>>>>>>> request");
+        log.debug("FilterRegisterBean配置过滤器 >>>>>>>>>> request");
         chain.doFilter(request, response);
-        log.info("FilterRegisterBean配置过滤器 <<<<<<<<<< response");
+        log.debug("FilterRegisterBean配置过滤器 <<<<<<<<<< response");
     }
 
     @Override

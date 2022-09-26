@@ -4,12 +4,13 @@ import cn.hutool.core.io.FileUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.api.annotation.NacosInjected;
 import com.alibaba.nacos.api.config.ConfigService;
-import com.alibaba.nacos.api.config.annotation.NacosValue;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
 @Slf4j
+@Conditional(NacosCondition.class)
 @Configuration
 public class NacosJsonConfig implements InitializingBean {
 

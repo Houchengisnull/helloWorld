@@ -29,8 +29,8 @@ public class UpdateResponseWrapperSecondFilter implements Filter {
 
         byte[] buffer = responseWrapper.getResponseBody();
         String responseBody = new String(buffer);
-        log.info("Original response body:{}", responseBody);
-        log.info("Original response body size:{}", buffer.length);
+        log.debug("Original response body:{}", responseBody);
+        log.debug("Original response body size:{}", buffer.length);
 
         // write
         String message = responseBody + "!";
