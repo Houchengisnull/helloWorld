@@ -3,8 +3,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.hc</groupId>
-    <artifactId>hc</artifactId>
+    <groupId>org.hc</groupId>
+    <artifactId>hc-project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>hc-learning</artifactId>
