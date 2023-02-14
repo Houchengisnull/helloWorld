@@ -1,0 +1,1391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="264d45ab-c799-40e9-bb15-fcfc4e0792a5" name="Default Changelist" comment="20200729 注释调整">
+      <change beforePath="$PROJECT_DIR$/code/Java/hc/hc-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/code/Java/hc/hc-gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/resources/application.yml" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/code/Java/hc/target/" />
+    <ignored path="$PROJECT_DIR$/code/Java/hc/hc-learning/target/" />
+    <ignored path="$PROJECT_DIR$/code/Java/hc/hc-web/target/" />
+    <ignored path="$PROJECT_DIR$/code/Java/target/" />
+    <ignored path="$PROJECT_DIR$/code/Java/hc11/target/" />
+    <ignored path="$PROJECT_DIR$/code/Java/hc/hc-gateway/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="helloWorld" />
+  </component>
+  <component name="FileColors">
+    <fileColor scope="All" color="Blue" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-gateway/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="17" column="20" lean-forward="true" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="package-info" />
+        <option value="Enum" />
+        <option value="AnnotationType" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>send</find>
+      <find>getSingleFromReader</find>
+      <find>BaseTranslateService</find>
+      <find>linkService</find>
+      <find>get</find>
+      <find>take(</find>
+      <find>takeLock</find>
+      <find>loadService</find>
+      <find>getFromReader</find>
+      <find>ThreadUtils</find>
+      <find>sendTo</find>
+      <find>queue</find>
+      <find>END_DATA</find>
+      <find>sendToW</find>
+      <find>clone</find>
+      <find>start</find>
+      <find>loadExecutorService</find>
+      <find>getHandler(</find>
+      <find>getHandler</find>
+      <find>patternParser</find>
+      <find>256</find>
+      <find>String</find>
+      <find>proCode</find>
+      <find>等</find>
+      <find>lombo</find>
+      <find>DemoObj</find>
+      <find>act</find>
+      <find>ERR</find>
+      <find>Exce</find>
+      <find>65</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>\</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/resources/application-web.yml" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/App.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/spring/conditional/LinuxCondition.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/spring/conditional/WindowsCondition.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/hutool/SecureUtilTest.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/net/ftp/FTPApplication.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/net/ftp/QuickFTPClient.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/controller/TestController.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/config/RestTemplateConfig.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/net/resttemplate/HttpApp.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/net/resttemplate/RestTemplateConfig.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/hutool/HttpUtilTest.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/net/resttemplate/RestApp.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/config/FilterConfig.java" />
+        <option value="$USER_HOME$/Desktop/Hello.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/thread/queue/disruptor/DisruptorProductor.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/thread/queue/disruptor/MessageEvent.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/thread/queue/disruptor/DisruptorConsumer.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/thread/queue/disruptor/DisruptorCase.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/thread/queue/disruptor/DisruptorProducer.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/resources/logback.xml" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/json/jackson/JacksonTest.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/bean/DemoObj.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/messageconvert/MyMessageConverter.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/bean/ValidateBean.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/bean/User.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/nacos/config/NacosCondition.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/nacos/config/NacosYamlConfig.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/filter/FilterRegistrationFilter.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/filter/SpringDelegatingProxyFilter.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/filter/UpdateResponseWrapperFilter.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/filter/UpdateResponseWrapperSecondFilter.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/advice/UpdateResponseAdvice.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/controller/ValidateController.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/advice/GlobalExceptionHandler.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/nacos/config/NacosJsonConfig.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/nacos/config/NacosRegisterConfig.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/nacos/controller/NacosController.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/validate/CustomValidate.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/validate/CustomValidator.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/resources/application-dao.yml" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/config/HcDataSourceConfig.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/bean/ValidateUser.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/net/netty/echo/EchoServerHandler.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/net/netty/echo/EchoServer.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/net/socket/read0/OneReaderThread.java" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-learning/pom.xml" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-web/pom.xml" />
+        <option value="$PROJECT_DIR$/code/Java/hc/pom.xml" />
+        <option value="$PROJECT_DIR$/code/Java/hc/hc-gateway/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+        <option name="userSettingsFile" value="D:\apache-maven-3.6.3\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="hc-learning" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="hc-learning" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="hc-web" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="hc-web" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="hc_project" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="hc_project" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/code/Vue/hc-vue/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="974" />
+    <option name="height" value="1047" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="CatdeaLogs" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="helloWorld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="helloWorld" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="helloWorld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="helloWorld" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="helloWorld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="helloWorld" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="helloWorld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="helloWorld" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="hc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="helloWorld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="helloWorld" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="hc" type="462c0819:PsiDirectoryNode" />
+              <item name="hc-gateway" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="helloWorld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="helloWorld" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="hc" type="462c0819:PsiDirectoryNode" />
+              <item name="hc-gateway" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="helloWorld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="helloWorld" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="hc" type="462c0819:PsiDirectoryNode" />
+              <item name="hc-gateway" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="helloWorld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="helloWorld" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="hc" type="462c0819:PsiDirectoryNode" />
+              <item name="hc-web" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="helloWorld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="helloWorld" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="hc" type="462c0819:PsiDirectoryNode" />
+              <item name="hc-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="helloWorld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="helloWorld" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="hc" type="462c0819:PsiDirectoryNode" />
+              <item name="hc-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="helloWorld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="helloWorld" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="hc" type="462c0819:PsiDirectoryNode" />
+              <item name="hc-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="helloWorld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="helloWorld" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="hc" type="462c0819:PsiDirectoryNode" />
+              <item name="hc-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="hc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="helloWorld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="helloWorld" type="462c0819:PsiDirectoryNode" />
+              <item name="code" type="462c0819:PsiDirectoryNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="hc" type="462c0819:PsiDirectoryNode" />
+              <item name="hc-web" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="hc" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelOrder2" value="2" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RequestMappingsPanelWidth2" value="75" />
+    <property name="SearchEverywhereHistoryKey" value="Compl&#9;PSI&#9;JAVA://org.hc.learning.thread.pool.CompletionServiceCase&#10;BindExce&#9;PSI&#9;JAVA://org.springframework.validation.BindException&#10;BindE&#9;FILE&#9;jar://D:/Program Files/Java/jdk1.8.0_151/src.zip!/java/net/BindException.java&#10;BindExceptio&#9;PSI&#9;JAVA://java.net.BindException&#10;Abst&#9;FILE&#9;jar://C:/Users/DHAdmin/.m2/repository/org/springframework/spring-webmvc/5.3.20/spring-webmvc-5.3.20-sources.jar!/org/springframework/web/servlet/handler/AbstractHandlerMethodMapping.java&#10;h&#9;FILE&#9;jar://C:/Users/DHAdmin/.m2/repository/org/springframework/spring-webmvc/5.3.20/spring-webmvc-5.3.20-sources.jar!/org/springframework/web/servlet/mvc/method/annotation/RequestMappingHandlerMapping.java&#10;RequestMap&#9;PSI&#9;JAVA://org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping&#10;DispatchServlet&#9;PSI&#9;JAVA://org.springframework.web.servlet.DispatcherServlet&#10;PathPattern&#9;PSI&#9;JAVA://org.springframework.web.util.pattern.PathPattern&#10;BeanUtils&#9;PSI&#9;JAVA://org.hc.learning.beanutils.BeanUtilsTest&#10;Cloneab&#9;PSI&#9;JAVA://java.lang.Cloneable&#10;Object&#9;FILE&#9;jar://D:/Program Files/Java/jdk1.8.0_151/src.zip!/java/lang/Object.java&#10;FileInputS&#9;PSI&#9;JAVA://java.io.FileInputStream&#10;OutputStream&#9;PSI&#9;JAVA://java.io.OutputStream&#10;InputSt&#9;PSI&#9;JAVA://java.io.InputStream&#10;InputStream&#9;null&#9;null&#10;String&#9;FILE&#9;jar://D:/Program Files/Java/jdk1.8.0_151/jre/lib/rt.jar!/java/lang/String.class&#10;String.class&#9;FILE&#9;jar://D:/Program Files/Java/jdk1.8.0_151/jre/lib/rt.jar!/java/lang/String.class&#10;DefaultHttpClientConnectionOperator&#9;FILE&#9;jar://C:/Users/DHAdmin/.m2/repository/org/apache/httpcomponents/httpclient/4.5.2/httpclient-4.5.2-sources.jar!/org/apache/http/impl/conn/DefaultHttpClientConnectionOperator.java&#10;DefaultHttpRequestRetryHandler&#9;PSI&#9;JAVA://org.apache.http.impl.client.DefaultHttpRequestRetryHandler&#10;ArrayList&#9;PSI&#9;JAVA://java.util.ArrayList&#10;List&#9;FILE&#9;jar://D:/Program Files/Java/jdk1.8.0_151/src.zip!/java/util/AbstractList.java&#10;Boolean&#9;PSI&#9;JAVA://java.lang.Boolean&#10;ArithmeticException&#9;PSI&#9;JAVA://java.lang.ArithmeticException&#10;HttpComponentsClientHttpRequestFactory&#9;PSI&#9;JAVA://org.springframework.http.client.HttpComponentsClientHttpRequestFactory&#10;RestTemplate&#9;PSI&#9;JAVA://org.springframework.web.client.RestTemplate&#10;HessianContext&#9;PSI&#9;JAVA://org.hc.learning.net.hessian.server.HessianContext&#10;@Controller&#9;PSI&#9;JAVA://org.springframework.stereotype.Controller&#10;FutureTask&#9;PSI&#9;JAVA://java.util.concurrent.FutureTask&#10;Com&#9;FILE&#9;jar://C:/Users/DHAdmin/.m2/repository/org/springframework/spring-context/4.3.21.RELEASE/spring-context-4.3.21.RELEASE-sources.jar!/org/springframework/context/annotation/CommonAnnotationBeanPostProcessor.java&#10;@Post&#9;PSI&#9;JAVA://javax.annotation.PostConstruct&#10;CommonAnnotationBeanPostProcessor&#9;PSI&#9;JAVA://org.springframework.context.annotation.CommonAnnotationBeanPostProcessor&#10;BeanFac&#9;FILE&#9;jar://C:/Users/DHAdmin/.m2/repository/org/springframework/spring-beans/4.3.21.RELEASE/spring-beans-4.3.21.RELEASE-sources.jar!/org/springframework/beans/factory/BeanFactory.java&#10;BeanP&#9;FILE&#9;jar://C:/Users/DHAdmin/.m2/repository/org/springframework/spring-beans/4.3.21.RELEASE/spring-beans-4.3.21.RELEASE-sources.jar!/org/springframework/beans/factory/config/BeanPostProcessor.java&#10;InitializingBean&#9;PSI&#9;JAVA://org.springframework.beans.factory.InitializingBean&#10;BeanPos&#9;PSI&#9;JAVA://org.springframework.beans.factory.config.BeanPostProcessor&#10;BeanNameAwa&#9;FILE&#9;jar://C:/Users/DHAdmin/.m2/repository/org/springframework/spring-beans/4.3.21.RELEASE/spring-beans-4.3.21.RELEASE-sources.jar!/org/springframework/beans/factory/BeanNameAware.java&#10;BeanPostProcessors&#9;PSI&#9;JAVA://org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration.BeanPostProcessorsRegistrar&#10;ApplicationContextAw&#9;PSI&#9;JAVA://org.springframework.context.ApplicationContextAware&#10;BeanNameAware&#9;PSI&#9;JAVA://org.springframework.beans.factory.BeanNameAware&#10;org.springframework.beans.factory.BeanFactory&#9;PSI&#9;JAVA://org.springframework.beans.factory.BeanFactory&#10;BeanFactory&#9;FILE&#9;jar://C:/Users/DHAdmin/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/8.5.35/tomcat-embed-core-8.5.35.jar!/org/apache/naming/factory/BeanFactory.class&#10;ApplicationEventPublisherAware&#9;PSI&#9;JAVA://org.springframework.context.ApplicationEventPublisherAware&#10;ResourceLoaderAware&#9;PSI&#9;JAVA://org.springframework.context.ResourceLoaderAware&#10;setEmbeddedValueResolver&#9;PSI&#9;JAVA://org.springframework.context.EmbeddedValueResolverAware#setEmbeddedValueResolver&#10;EnvironmentAware&#9;PSI&#9;JAVA://org.springframework.context.EnvironmentAware&#10;setBeanFactory&#9;PSI&#9;JAVA://org.springframework.beans.factory.BeanFactoryAware#setBeanFactory&#10;ApplicationContext&#9;PSI&#9;JAVA://org.apache.catalina.core.ApplicationContext&#10;ConcurrentHash&#9;PSI&#9;JAVA://java.util.concurrent.ConcurrentHashMap&#10;HashMap&#9;null&#9;null" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1676367613963" />
+    <property name="database.console.LAST_STATE" value="true" />
+    <property name="jdk.selected.JAVA_MODULE" value="15" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/code/Java/hc" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\workspace\helloWorld\code\Java\hc\hc-learning\src\main\resources\config\el" />
+      <recent name="D:\workspace\helloWorld\code\Java\hc\hc-learning\src\main\resources\config" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.hc.learning" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.hc.learning.net.webservice.client" />
+      <recent name="org.hc.learning.net.hessian.client.service" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\workspace\helloWorld\code\Java\hc\hc-learning\src\main" />
+      <recent name="D:\workspace\helloWorld\code\Java\hc\hc-learning\target\classes\org\hc\learning\spring\el" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.OneReaderThread">
+    <configuration name="DisruptorCase" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.hc.learning.thread.queue.disruptor.DisruptorCase" />
+      <module name="hc-learning" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.hc.learning.thread.queue.disruptor.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OneReaderThread" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.hc.learning.net.socket.read0.OneReaderThread" />
+      <module name="hc-learning" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.hc.learning.net.socket.read0.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RestApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.hc.learning.net.resttemplate.RestApp" />
+      <module name="hc-learning" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.hc.learning.net.resttemplate.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DisruptorCase.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hc-learning" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.hc.learning.thread.queue.disruptor.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.hc.learning.thread.queue.disruptor" />
+      <option name="MAIN_CLASS_NAME" value="org.hc.learning.thread.queue.disruptor.DisruptorCase" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JacksonTest.mapToJsonNode" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="hc-learning" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.hc.learning.json.jackson.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.hc.learning.json.jackson" />
+      <option name="MAIN_CLASS_NAME" value="org.hc.learning.json.jackson.JacksonTest" />
+      <option name="METHOD_NAME" value="mapToJsonNode" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="hc-web" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="hc.web.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ContainerConfigApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="hc-learning" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.hc.learning.spring.el.ContainerConfigApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="hc-learning" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.hc.learning.spring.el.Main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Spring Boot.Application" />
+      <item itemvalue="Spring Boot.Main" />
+      <item itemvalue="Spring Boot.ContainerConfigApplication" />
+      <item itemvalue="JUnit.JacksonTest.mapToJsonNode" />
+      <item itemvalue="Application.RestApp" />
+      <item itemvalue="JUnit.DisruptorCase.test" />
+      <item itemvalue="Application.DisruptorCase" />
+      <item itemvalue="Application.OneReaderThread" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.OneReaderThread" />
+        <item itemvalue="JUnit.JacksonTest.mapToJsonNode" />
+        <item itemvalue="Application.DisruptorCase" />
+        <item itemvalue="JUnit.DisruptorCase.test" />
+        <item itemvalue="Application.RestApp" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="264d45ab-c799-40e9-bb15-fcfc4e0792a5" name="Default Changelist" comment="" />
+      <created>1595471384656</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1595471384656</updated>
+      <workItem from="1595471385983" duration="7992000" />
+      <workItem from="1595491993584" duration="3530000" />
+      <workItem from="1595906523503" duration="9829000" />
+      <workItem from="1595984683827" duration="123000" />
+      <workItem from="1595984826315" duration="101000" />
+      <workItem from="1595984947317" duration="7520000" />
+      <workItem from="1596002222183" duration="17487000" />
+      <workItem from="1596254035776" duration="2067000" />
+      <workItem from="1596416629010" duration="46363000" />
+      <workItem from="1596695423054" duration="7248000" />
+      <workItem from="1597022493844" duration="18520000" />
+      <workItem from="1597235195130" duration="3052000" />
+      <workItem from="1597979192990" duration="2162000" />
+      <workItem from="1598584858614" duration="17788000" />
+      <workItem from="1599728744994" duration="1382000" />
+      <workItem from="1603330619165" duration="22257000" />
+      <workItem from="1604283563984" duration="28333000" />
+      <workItem from="1604474807546" duration="29454000" />
+      <workItem from="1604901630091" duration="33892000" />
+      <workItem from="1606356634069" duration="11478000" />
+      <workItem from="1606961298649" duration="4733000" />
+      <workItem from="1607047943906" duration="5809000" />
+      <workItem from="1607330739527" duration="42175000" />
+      <workItem from="1608174352905" duration="688000" />
+      <workItem from="1608175078141" duration="174000" />
+      <workItem from="1608175288853" duration="164000" />
+      <workItem from="1608175497957" duration="1227000" />
+      <workItem from="1608181511006" duration="101000" />
+      <workItem from="1608255693624" duration="41888000" />
+      <workItem from="1610503428545" duration="11117000" />
+      <workItem from="1610934872659" duration="13662000" />
+      <workItem from="1611543829818" duration="13739000" />
+      <workItem from="1611647949366" duration="585000" />
+      <workItem from="1611648927544" duration="1945000" />
+      <workItem from="1611740791505" duration="2831000" />
+      <workItem from="1612162084369" duration="624000" />
+      <workItem from="1612162915121" duration="286000" />
+      <workItem from="1612163259716" duration="384000" />
+      <workItem from="1612163650690" duration="130000" />
+      <workItem from="1612166373072" duration="6429000" />
+      <workItem from="1615271539927" duration="1432000" />
+      <workItem from="1616221165838" duration="48000" />
+      <workItem from="1616574266373" duration="26153000" />
+      <workItem from="1617088458061" duration="616000" />
+      <workItem from="1617096002327" duration="13996000" />
+      <workItem from="1618209716801" duration="8315000" />
+      <workItem from="1618543702268" duration="22550000" />
+      <workItem from="1619405331505" duration="3266000" />
+      <workItem from="1620888956659" duration="20000" />
+      <workItem from="1620960989886" duration="994000" />
+      <workItem from="1621318329466" duration="6034000" />
+      <workItem from="1623045051544" duration="9997000" />
+      <workItem from="1623806008055" duration="2869000" />
+      <workItem from="1623901618012" duration="669000" />
+      <workItem from="1623909873329" duration="2224000" />
+      <workItem from="1624516122787" duration="2198000" />
+      <workItem from="1626072073386" duration="4936000" />
+      <workItem from="1626261104339" duration="46724000" />
+      <workItem from="1628680456635" duration="6909000" />
+      <workItem from="1628817906787" duration="22441000" />
+      <workItem from="1630976570591" duration="16089000" />
+      <workItem from="1633770981376" duration="27217000" />
+      <workItem from="1635133205459" duration="36822000" />
+      <workItem from="1635910189808" duration="11294000" />
+      <workItem from="1636083765066" duration="9000" />
+      <workItem from="1636083899547" duration="11928000" />
+      <workItem from="1636698736187" duration="39537000" />
+      <workItem from="1640676813073" duration="4258000" />
+      <workItem from="1640682285858" duration="35251000" />
+      <workItem from="1642474888249" duration="609000" />
+      <workItem from="1642992144165" duration="12637000" />
+      <workItem from="1644377973649" duration="3496000" />
+      <workItem from="1644919839582" duration="4815000" />
+      <workItem from="1645782880620" duration="20982000" />
+      <workItem from="1646891599761" duration="16226000" />
+      <workItem from="1648429918933" duration="24495000" />
+      <workItem from="1648875670890" duration="5551000" />
+      <workItem from="1650873866446" duration="10076000" />
+      <workItem from="1651214220682" duration="8140000" />
+      <workItem from="1651751792456" duration="23107000" />
+      <workItem from="1652178694266" duration="19766000" />
+      <workItem from="1652687343092" duration="33175000" />
+      <workItem from="1653013045995" duration="21137000" />
+      <workItem from="1653440410064" duration="1947000" />
+      <workItem from="1654048460623" duration="4535000" />
+      <workItem from="1655191603833" duration="3217000" />
+      <workItem from="1655436662489" duration="1265000" />
+      <workItem from="1655890955991" duration="875000" />
+      <workItem from="1656405455707" duration="57195000" />
+      <workItem from="1659584411942" duration="6566000" />
+      <workItem from="1660632080431" duration="7641000" />
+      <workItem from="1661910576832" duration="5735000" />
+      <workItem from="1663831847088" duration="39000" />
+      <workItem from="1664185016231" duration="8747000" />
+      <workItem from="1664247931323" duration="5254000" />
+      <workItem from="1664332573766" duration="13706000" />
+      <workItem from="1666319049580" duration="2420000" />
+      <workItem from="1669888539843" duration="14111000" />
+      <workItem from="1676273031048" duration="901000" />
+    </task>
+    <task id="LOCAL-00001" summary="20200723 spring boot 使用@Value对多参setter进行注入">
+      <created>1595494401137</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1595494401137</updated>
+    </task>
+    <task id="LOCAL-00002" summary="20200723 spring-boot将配置文件信息注入hashmap\list">
+      <created>1595993691871</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1595993691871</updated>
+    </task>
+    <task id="LOCAL-00003" summary="20200729 注释调整">
+      <created>1595993834823</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1595993834823</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="AESCoder_listService - 2022.07.01 at 10h 46m 10s.xml">
+      <configuration name="AESCoder.listService" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="AESCoder_test - 2022.07.01 at 10h 46m 30s.xml">
+      <configuration name="AESCoder.test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DESCoder_printBouncy - 2022.07.01 at 10h 47m 53s.xml">
+      <configuration name="DESCoder.printBouncy" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="SecureUtilTest_aes - 2022.07.01 at 10h 51m 38s.xml">
+      <configuration name="SecureUtilTest.aes" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="JacksonTest_mapToJsonNode - 2022.07.20 at 15h 50m 18s.xml">
+      <configuration name="JacksonTest.mapToJsonNode" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DisruptorCase_test - 2022.09.05 at 19h 17m 44s.xml">
+      <configuration name="DisruptorCase.test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="DisruptorCase_test - 2022.09.05 at 19h 18m 34s.xml">
+      <configuration name="DisruptorCase.test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="JacksonTest_mapToJsonNode - 2022.09.13 at 15h 42m 17s.xml">
+      <configuration name="JacksonTest.mapToJsonNode" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="JacksonTest_mapToJsonNode - 2022.09.26 at 19h 05m 01s.xml">
+      <configuration name="JacksonTest.mapToJsonNode" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="JacksonTest_mapToJsonNode - 2022.09.26 at 19h 05m 13s.xml">
+      <configuration name="JacksonTest.mapToJsonNode" configurationId="JUnit" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1122431000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.47939262" visible="true" weight="0.15085287" />
+      <window_info id="Structure" order="1" sideWeight="0.52060735" side_tool="true" weight="0.2217484" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Favorites" order="5" sideWeight="0.5037369" side_tool="true" weight="0.20309168" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32850778" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.37973273" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.8296214" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
+      <window_info anchor="bottom" id="Spring" order="7" weight="0.329718" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.69088936" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50053304" side_tool="true" weight="0.47396964" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.5612472" />
+      <window_info anchor="bottom" id="Java Enterprise" order="11" weight="0.329718" />
+      <window_info anchor="bottom" id="Database Changes" order="12" show_stripe_button="false" weight="0.329718" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.49566162" />
+      <window_info anchor="bottom" id="Database Console" order="14" weight="0.329718" />
+      <window_info anchor="bottom" id="Docker" order="15" show_stripe_button="false" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.3336887" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="5" weight="0.32995737" />
+      <window_info anchor="right" id="Bean Validation" order="6" weight="0.32942432" />
+      <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
+      <window_info anchor="right" x="95" y="95" width="1730" height="850" id="Byte Code Viewer" order="10" weight="0.35980812" />
+      <window_info anchor="right" id="jclasslib" order="11" weight="0.5740938" />
+      <window_info anchor="right" id="SciView" order="12" weight="0.32942432" />
+    </layout>
+    <layout-to-restore>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.47939262" visible="true" weight="0.2489339" />
+      <window_info id="Structure" order="1" sideWeight="0.52060735" side_tool="true" weight="0.2217484" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Favorites" order="5" sideWeight="0.5037369" side_tool="true" weight="0.20309168" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32850778" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.57238305" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.54454345" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
+      <window_info anchor="bottom" id="Spring" order="7" weight="0.329718" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.69088936" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50053304" side_tool="true" weight="0.47396964" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32516703" />
+      <window_info anchor="bottom" id="Java Enterprise" order="11" weight="0.329718" />
+      <window_info anchor="bottom" id="Database Changes" order="12" weight="0.329718" />
+      <window_info anchor="bottom" id="Version Control" order="13" weight="0.49566162" />
+      <window_info anchor="bottom" id="Database Console" order="14" weight="0.329718" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.3336887" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="5" weight="0.32995737" />
+      <window_info anchor="right" id="Bean Validation" order="6" weight="0.32942432" />
+      <window_info anchor="right" id="Database" order="7" weight="0.32995737" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
+      <window_info anchor="right" x="95" y="95" width="1730" height="850" id="Byte Code Viewer" order="10" weight="0.35980812" />
+      <window_info anchor="right" id="jclasslib" order="11" weight="0.5740938" />
+      <window_info anchor="right" id="SciView" order="12" weight="0.32942432" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="20200723 spring boot 使用@Value对多参setter进行注入" />
+    <MESSAGE value="20200723 spring-boot将配置文件信息注入hashmap\list" />
+    <MESSAGE value="20200729 注释调整" />
+    <option name="LAST_COMMIT_MESSAGE" value="20200729 注释调整" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/com/fasterxml/jackson/core/jackson-databind/2.8.11.3/jackson-databind-2.8.11.3-sources.jar!/com/fasterxml/jackson/databind/ser/BeanPropertyWriter.java</url>
+          <line>673</line>
+          <properties />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/org/apache/cxf/cxf-rt-databinding-jaxb/3.3.1/cxf-rt-databinding-jaxb-3.3.1.jar!/org/apache/cxf/jaxb/JAXBEncoderDecoder.class</url>
+          <line>778</line>
+          <properties />
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.5.6/httpclient-4.5.6.jar!/org/apache/http/impl/client/HttpClientBuilder.class</url>
+          <line>477</line>
+          <properties />
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/spring/aop/dynamicproxy/LoggerHandler.java</url>
+          <line>23</line>
+          <properties />
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/spring/aop/dynamicproxy/Main.java</url>
+          <line>16</line>
+          <properties />
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/net/webservice/server/HelloWebServiceImpl.java</url>
+          <line>16</line>
+          <properties />
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/org/springframework/spring-webmvc/5.3.20/spring-webmvc-5.3.20-sources.jar!/org/springframework/web/servlet/mvc/method/RequestMappingInfo.java</url>
+          <line>939</line>
+          <properties />
+          <option name="timeStamp" value="75" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/advice/GlobalExceptionHandler.java</url>
+          <line>18</line>
+          <properties />
+          <option name="timeStamp" value="88" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>resolveEmbeddedValuesInPatterns(requestMapping.path())</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>requestMapping.path()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>this.mappingRegistry.getRegistrations()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>clazz.getClass().getClassLoader()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>instance.toString()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>client.list(file)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>run.getBean(RequestExporter.class)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>run</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>root</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.1.3.RELEASE/spring-context-5.1.3.RELEASE.jar!/org/springframework/validation/Errors.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/nacos/config/NacosCondition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/nacos/config/NacosJsonConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="23" column="13" lean-forward="true" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/nacos/config/NacosYamlConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/nacos/controller/NacosController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="21" column="30" lean-forward="true" selection-start-line="21" selection-start-column="30" selection-end-line="21" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/nacos/config/NacosRegisterConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="29" column="69" selection-start-line="29" selection-start-column="69" selection-end-line="29" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/bean/MessageConvertBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/filter/FilterRegistrationFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="27" lean-forward="true" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/javax/validation/validation-api/2.0.1.Final/validation-api-2.0.1.Final.jar!/javax/validation/Constraint.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="17" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/filter/SpringDelegatingProxyFilter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/javax/validation/validation-api/2.0.1.Final/validation-api-2.0.1.Final.jar!/javax/validation/ConstraintValidator.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/javax/validation/validation-api/2.0.1.Final/validation-api-2.0.1.Final-sources.jar!/javax/validation/ConstraintValidator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-context/5.1.3.RELEASE/spring-context-5.1.3.RELEASE.jar!/org/springframework/validation/beanvalidation/SpringValidatorAdapter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="68" column="65" lean-forward="true" selection-start-line="68" selection-start-column="65" selection-end-line="68" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/advice/UpdateResponseAdvice.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="12" lean-forward="true" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/zaxxer/HikariCP/3.2.0/HikariCP-3.2.0.jar!/com/zaxxer/hikari/HikariConfig.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="533" lean-forward="true" selection-start-line="533" selection-end-line="533" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/controller/ValidateController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="16" column="47" selection-start-line="16" selection-start-column="47" selection-end-line="16" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/config/HcDataSourceConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/advice/GlobalExceptionHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="15" column="43" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/resources/application-nacos.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="18" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/resources/application-web.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/resources/application-dao.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="21" selection-start-line="11" selection-start-column="21" selection-end-line="11" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/resources/application.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/resources/config/el/test.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/resources/config/el/container.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/spring/el/ContainerConfigApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/spring/el/ElConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/spring/el/ElConfigApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/spring/el/DemoService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/spring/el/ContainerConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="23" column="30" lean-forward="true" selection-start-line="23" selection-start-column="30" selection-end-line="23" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/net/netty/NettyServerHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="26" column="7" lean-forward="true" selection-start-line="26" selection-start-column="7" selection-end-line="26" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.28.Final/netty-all-4.1.28.Final.jar!/io/netty/channel/ChannelHandlerAdapter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="14" column="36" selection-start-line="11" selection-start-column="44" selection-end-line="14" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-all/4.1.28.Final/netty-all-4.1.28.Final.jar!/io/netty/channel/ChannelInboundHandlerAdapter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/net/netty/NettyClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/validate/CustomValidate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/validate/CustomValidator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/bean/ValidateUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/net/netty/echo/EchoServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="31" column="58" selection-start-line="31" selection-start-column="58" selection-end-line="31" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/net/netty/echo/EchoServerHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/net/webservice/client/CXFReflectClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/net/webservice/client/CXFClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/net/webservice/client/HelloWebService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="15" column="49" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/net/socket/read0/OneReaderThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="28" column="26" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-learning/src/main/java/org/hc/learning/thread/pool/CompletionServiceCase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="446">
+          <caret line="63" column="49" selection-start-line="63" selection-start-column="49" selection-end-line="63" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/websocket/WebSocketEndpoint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="47" column="9" selection-start-line="47" selection-start-column="9" selection-end-line="47" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/src/main/java/hc/web/websocket/WebSocketController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-gateway/hc-gateway.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-learning/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-web/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="27" column="35" lean-forward="true" selection-start-line="27" selection-start-column="35" selection-end-line="27" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/Java/hc/hc-gateway/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="17" column="20" lean-forward="true" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <last-edited>hc-web:war exploded</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Python 3.7 (Python) interpreter library</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>hc-gateway</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: cglib:cglib:3.2.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
