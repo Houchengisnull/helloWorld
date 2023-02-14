@@ -468,6 +468,15 @@ service iptables start
 service iptables stop
 ```
 
+## tcpdump
+
+- **-i**	指定网卡
+
+``` shell
+# 指定distinction ip
+tcpdump ip dst 192.168.56.1
+```
+
 # net-tools
 
 ## netstat
@@ -517,21 +526,23 @@ ss -p
 ss -s
 ```
 
-# lsof 查看端口
+# lsof 
+
+## 查看端口
 
 - 参考
 - [Linux 命令神器：lsof](https://www.jianshu.com/p/a3aa6b01b2e1)
 
 > 而有一点要切记，在Unix中一切（包括网络套接口）都是文件。
 >
-> 
->
 > 对于我，lsof替代了netstat和ps的全部工作。它可以带来那些工具所能带来的一切，而且要比那些工具多得多。
 
-查看FTP服务端口21
-
 ``` shell
-# lsof -i:21 
+# 查看FTP服务端口21
+lsof -i:21 
+
+# 查看进程信息(例如: 进程地址)
+lsof -p $pid
 ```
 
 # 内存
