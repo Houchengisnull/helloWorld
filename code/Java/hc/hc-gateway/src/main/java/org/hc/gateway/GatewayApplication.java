@@ -1,4 +1,4 @@
-package org.hc;
+package org.hc.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
