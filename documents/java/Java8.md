@@ -178,6 +178,26 @@ stringOptional.ifPresent(e-> System.out.println("我被处理了。。。"+e));
 >
 > 但是问题在于当业务复杂时不够灵活，也不利于扩展。
 
+## removeIf
+
+- **参考**
+- [Java集合中removeIf的使用](https://blog.csdn.net/qq_33829547/article/details/80277956)
+- [lambda 表达式中removeif遇到的问题](https://blog.csdn.net/PANGPANGPANGJIA/article/details/113645383)
+
+在JDK8中，`Collection`以及其子类新加入了`removeIf()`，一行代码快速移除符合条件的元素。
+
+``` java
+List<String> list = new ArrayList<>();
+
+list.add("one");
+list.add("two");
+list.add("three");
+
+list.removeIf(ele -> ele.equals("two"));
+```
+
+但是需要注意的是，我们使用`Arrays.asList(T... a)`方法创建一个`List`对象调用`removeIf`时会抛出`java.lang.UnsupportedOperationException`。这是因为`Arrays.asList`返回的是其内部私有类`ArrayList`，这个类继承自`AbstractList`，而它并不支持`add`与`remove`。
+
 # Lambda
 
 ## 方法引用::
@@ -214,25 +234,21 @@ stringOptional.ifPresent(e-> System.out.println("我被处理了。。。"+e));
 
 > 个人感受仅是用于区分对象与方法，意义不大。
 
-## removeIf
+## Predicate
 
-- **参考**
-- [Java集合中removeIf的使用](https://blog.csdn.net/qq_33829547/article/details/80277956)
-- [lambda 表达式中removeif遇到的问题](https://blog.csdn.net/PANGPANGPANGJIA/article/details/113645383)
+[^Predicate]: 谓语。
 
-在JDK8中，`Collection`以及其子类新加入了`removeIf()`，一行代码快速移除符合条件的元素。
+`Predicate`通常翻译为谓语，但是它也有断言的意思。而断言相较于谓语，更加能体现`Predicate`的作用。
 
 ``` java
-List<String> list = new ArrayList<>();
-
-list.add("one");
-list.add("two");
-list.add("three");
-
-list.removeIf(ele -> ele.equals("two"));
+Predicate<Integer> isPositiveInteger = n -> n>0;
 ```
 
-但是需要注意的是，我们使用`Arrays.asList(T... a)`方法创建一个`List`对象调用`removeIf`时会抛出`java.lang.UnsupportedOperationException`。这是因为`Arrays.asList`返回的是其内部私有类`ArrayList`，这个类继承自`AbstractList`，而它并不支持`add`与`remove`。
+### 与Assert的区别
+
+- 如何理解predicate这个词? - 胡夏的回答 - 知乎 https://www.zhihu.com/question/25404942/answer/53680068
+
+对这篇文章做一个总结就是：predicate是一种返回值为`ture`或者`false`的函数，而assert是编程中的术语，期望`predicate function`返回`true`，否则报错。
 
 # Default关键字
 
