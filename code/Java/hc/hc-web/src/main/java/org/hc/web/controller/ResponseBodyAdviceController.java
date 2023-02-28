@@ -1,6 +1,6 @@
-package hc.web.controller;
+package org.hc.web.controller;
 
-import hc.web.advice.annotation.UpdateResponseBodyAdvice;
+import org.hc.web.advice.annotation.UpdateResponseBodyAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,10 +1,10 @@
 /**
  * Copyright (C), 2015-2019
  */
-package hc.web.util;
+package org.hc.web.util;
 
-import hc.web.wrapper.ModifyRequestBodyWrapper;
-import hc.web.wrapper.ModifyResponseBodyWrapper;
+import org.hc.web.wrapper.ModifyRequestBodyWrapper;
+import org.hc.web.wrapper.ModifyResponseBodyWrapper;
 import jodd.servlet.ServletUtil;
 import lombok.Cleanup;
 import lombok.extern.slf4j.Slf4j;

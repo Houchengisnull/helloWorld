@@ -1,8 +1,8 @@
-package hc.web.config;
+package org.hc.web.config;
 
-import hc.web.filter.FilterRegistrationFilter;
-import hc.web.filter.UpdateResponseWrapperFilter;
-import hc.web.filter.UpdateResponseWrapperSecondFilter;
+import org.hc.web.filter.FilterRegistrationFilter;
+import org.hc.web.filter.UpdateResponseWrapperFilter;
+import org.hc.web.filter.UpdateResponseWrapperSecondFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

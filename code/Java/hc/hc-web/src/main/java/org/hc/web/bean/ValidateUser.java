@@ -1,6 +1,6 @@
-package hc.web.bean;
+package org.hc.web.bean;
 
-import hc.web.validate.CustomValidate;
+import org.hc.web.validate.CustomValidate;
 import lombok.Data;
 import javax.validation.constraints.NotNull;
 

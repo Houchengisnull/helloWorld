@@ -1,7 +1,7 @@
 /**
  * Copyright (C), 2015-2019
  */
-package hc.web.wrapper;
+package org.hc.web.wrapper;
 
 import cn.hutool.core.util.StrUtil;
 import lombok.Getter;

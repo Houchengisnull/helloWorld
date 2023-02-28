@@ -11,9 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import hc.web.Application;
-import hc.web.bean.User;
-import hc.web.mapper.UserMapper;
+import org.hc.web.Application;
+import org.hc.web.bean.User;
+import org.hc.web.mapper.UserMapper;
 
 /**
  * 单元测试

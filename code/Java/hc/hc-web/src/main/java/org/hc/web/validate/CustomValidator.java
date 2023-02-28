@@ -1,6 +1,6 @@
-package hc.web.validate;
+package org.hc.web.validate;
 
-import hc.web.bean.ValidateUser;
+import org.hc.web.bean.ValidateUser;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.validation.ConstraintValidator;
