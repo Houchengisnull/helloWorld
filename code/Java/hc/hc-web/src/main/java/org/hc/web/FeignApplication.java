@@ -1,4 +1,4 @@
-package hc.web;
+package org.hc.web;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 //import org.springframework.cloud.openfeign.EnableFeignClients;

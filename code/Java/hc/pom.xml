@@ -97,5 +97,6 @@
 	<modules>
 		<module>hc-web</module>
     	<module>hc-learning</module>
+		<module>hc-gateway</module>
   </modules>
 </project>

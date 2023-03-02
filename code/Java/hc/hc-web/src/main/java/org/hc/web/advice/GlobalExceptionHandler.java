@@ -1,4 +1,4 @@
-package hc.web.advice;
+package org.hc.web.advice;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;

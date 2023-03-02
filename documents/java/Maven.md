@@ -60,29 +60,27 @@
 
 `dependencyManagement`是`Maven`提供的一种管理依赖版本号的方式。可以看看`spring boot`中的`spring-boot-starter-parent-1.5.18.RELEASE.pom`中的`dependencyManagement`配置。
 
-通过`dependencyManagement`注解，子项目不需要显式配置版本信息，而是沿着父子层级向上寻找指定版本号。
+通过`dependencyManagement`标签，子项目不需要显式配置版本信息，而是沿着父子层级向上寻找指定版本号。
 
 但是`dependencyManagement`只是依赖的声明，不会引入实际的`jar`。
 
 ``` xml
 <dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-core</artifactId>
-				<version>${spring.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>commons-logging</groupId>
-						<artifactId>commons-logging</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
 ```
-
-
 
 # 在IDEA中使用Maven
 

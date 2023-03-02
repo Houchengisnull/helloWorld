@@ -11,10 +11,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.jdbc.DataSourceBuilder; // spring boot <version>2.5.3</version>
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
+@Conditional(value = HcDataSourceCondition.class)
 @Configuration
 @MapperScan(
 		basePackages = "hc.web.mapper", 					// MapperRegister将扫描路径下mapper

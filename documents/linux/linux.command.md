@@ -477,6 +477,17 @@ service iptables stop
 tcpdump ip dst 192.168.56.1
 ```
 
+## curl
+
+``` shell
+# GET请求
+curl -X GET http://127.0.0.1:80/student
+# POST请求
+curl -X POST http:/127.0.0.1:80/student -d '{"name": "Hugo"}'
+# -k 跳过SSL校验
+curl -k -X POST https:/127.0.0.1:443/student -d '{"name": "Hugo"}'
+```
+
 # net-tools
 
 ## netstat
@@ -526,9 +537,7 @@ ss -p
 ss -s
 ```
 
-# lsof 
-
-## 查看端口
+# lsof
 
 - 参考
 - [Linux 命令神器：lsof](https://www.jianshu.com/p/a3aa6b01b2e1)

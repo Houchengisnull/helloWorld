@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+# actuator: true
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: hello
+          uri: http://127.0.0.1:8090/
+          predicates:
+          - Path=/hc-web/**
+      enabled: true

@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import org.hc.web.Application;
+import org.hc.web.WebApplication;
 import org.hc.web.bean.User;
 import org.hc.web.mapper.UserMapper;
 
@@ -22,7 +22,7 @@ import org.hc.web.mapper.UserMapper;
  */
 @SuppressWarnings("deprecation")
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = {Application.class})
+@SpringBootTest(classes = {WebApplication.class})
 /**
  * @SpringApplicationConfiguration在1.4.0版本后不可用
  * 以@RunWith与@SpringBootTest代替
