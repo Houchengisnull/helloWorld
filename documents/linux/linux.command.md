@@ -90,6 +90,9 @@ sudo apt-get isntall gdm
 sudo aot-get install Ubuntu-desktop
 # 使用图形界面
 startx
+
+# 无密码切换root
+sudo sudo su
 ```
 
 # apt-get

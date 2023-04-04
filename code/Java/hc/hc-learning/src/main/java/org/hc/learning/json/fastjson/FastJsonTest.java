@@ -87,4 +87,16 @@ public class FastJsonTest extends TestCase {
         log.debug(jsonObject.toJSONString());
     }
 
+    /**
+     * 打印null WriteMapNullValue
+     * https://www.codenong.com/cs106266288/
+     */
+    @Test
+    public void map(){
+        Group group = new Group();
+        group.setMemberList(new ArrayList<>());
+        String text = JSON.toJSONString(group, SerializerFeature.WriteMapNullValue);
+        log.debug(text);
+    }
+
 }
