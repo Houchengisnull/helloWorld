@@ -10,6 +10,9 @@ public class DisruptorCase extends TestCase {
     public static void main(String[] args) {
         Disruptor<MessageEvent> d = new Disruptor<>(MessageEvent::new, 1024, Executors.defaultThreadFactory());
 
+        /**
+         * 每个消费者收到相同的消息
+         */
         DisruptorConsumer one = new DisruptorConsumer("one");
         DisruptorConsumer two = new DisruptorConsumer("two");
         DisruptorConsumer three = new DisruptorConsumer("three");
