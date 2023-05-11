@@ -791,3 +791,18 @@ export hello=world
 - env查看所有环境变量。例如:env
 - set查看所有本地定义环境变量
 
+# 时间
+
+## 设置时区
+
+经检验，该方法是设置时区最安全的方法。
+
+``` shell
+timedatectl set-timezone Asia/Shanghai
+```
+
+## 设置时间
+
+``` shell
+date -s '2023-05-11 00:00:00'
+```
