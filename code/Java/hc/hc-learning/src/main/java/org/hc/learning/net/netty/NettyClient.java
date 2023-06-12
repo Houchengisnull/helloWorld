@@ -18,23 +18,23 @@ public class NettyClient {
     }
 
     public void start(){
-        /*  线程组 */
-        NioEventLoopGroup group = new NioEventLoopGroup();
-        Bootstrap bootstrap = new Bootstrap();
+                /*  线程组 */
+                NioEventLoopGroup group = new NioEventLoopGroup();
+                Bootstrap bootstrap = new Bootstrap();
 
-        try {
-            bootstrap.group(group)
-                    .channel(NioSocketChannel.class) // 指定使用NIO模型进行网络通信
-                    .remoteAddress(new InetSocketAddress(host, port))
-                    .handler(new NettyClientHandle());
-            ChannelFuture future = bootstrap.connect().sync(); // 阻塞程序，直到连接完成
-            System.out.println("netty client connect finish.");
-            future.channel().closeFuture().sync(); // 阻塞程序 直到通道关闭
-            System.out.println("netty client channel closed.");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-            System.out.println("netty client group closed.");
+                try {
+                    bootstrap.group(group)
+                            .channel(NioSocketChannel.class) // 指定使用NIO模型进行网络通信
+                            .remoteAddress(new InetSocketAddress(host, port))
+                            .handler(new NettyClientHandle());
+                    ChannelFuture future = bootstrap.connect().sync(); // 阻塞程序，直到连接完成
+                    System.out.println("netty client connect finish.");
+                    future.channel().closeFuture().sync(); // 阻塞程序 直到通道关闭
+                    System.out.println("netty client channel closed.");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    System.out.println("netty client group closed.");
             try {
                 group.shutdownGracefully().sync(); // 优雅关闭线程组
             } catch (InterruptedException e) {
