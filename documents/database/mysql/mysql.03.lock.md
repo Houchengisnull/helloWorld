@@ -125,7 +125,7 @@ FROM
 	information_schema.innodb_trx r ON r.trx_id = w.requesting_trx_id;
 # MYSQL5.7
 # 执行该查询的sql_kill_blocking_connection
-SELECT * 	FROM information_schema.INNODB_LOCKS;
+SELECT * FROM information_schema.INNODB_LOCKS;
 SELECT * FROM sys.innodb_lock_waits;
 
 kill thread_id;
@@ -150,7 +150,7 @@ INSERT INTO T1 VALUES (21); -- SUCCESS
 INSERT INTO T1 VALUES (19); -- FAILED
 ```
 
-在可重复读隔离级别中会对主键为13的下个只20，并把这些数据加锁。
+在可重复读隔离级别中，会对主键为13的下一个——20，并把这些数据加锁。
 
 ``` mysql
 CREATE TABLE T2 (A INT PRIMARY KEY, B INT, KEY (B));
