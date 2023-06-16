@@ -329,17 +329,26 @@ b.group(parentGroup, workGroup)
 
 Netty对ByteBuff的包装，内部维护读与写两个索引，移除切换读写模式带来的代码复杂度。
 
-``` java
-// 堆缓冲区
-// 直接缓冲区
-// 复合缓冲区
-```
+### 空间分配 ByteBufAllocator
 
-### ByteBufAllocator
+Netty提供了两种ByteBufAllocator的实现：
+
+- **PooledByteBufAllocator**
+
+  Netty 4缺省使用的缓冲区分配方式。
 
 - **UnpooledByteBufAllocator**
 
   Netty 3缺省使用的缓冲区分配方式。
+
+
+前者池化ByteBuf的实例，以提高性能并最大限度的减少内存碎片；而后者则在每次调用时返回一个新实例。
+
+
+
+- **Unpooled**
+
+  Netty提供的工具类，用于创建未池化的ByteBuf。
 
   ``` java
   // 基于堆
@@ -348,42 +357,53 @@ Netty对ByteBuff的包装，内部维护读与写两个索引，移除切换读�
   Unpooled.directBuffer(1024);
   ```
 
-- **PooledByteBufAllocator**
 
-  Netty 4缺省使用的缓冲区分配方式。
 
-  ``` java
+- **ByteBufUtil**
+
+  Netty提供的工具类，用于操作ByteBuf。
+
   
-  ```
-
-### ByteBufUtil
 
 ### 资源释放
 
-#### 入站请求
+当某个ChannelInboundHandler的实现重写channelRead()方法时，它要负责显式释放与池化ByteBuf实例相关的内存。
 
-``` java
-// 引用计数减1
-ReferenceCountUtil.release();
-```
+为此Netty提供ReferenceCountUtil.release(msg)。
 
-#### 出站请求
+- ReferenceCountUtil.release()
 
-不用显式释放。
+  引用计数-1。
+
+> 使用SimpleChannelInboundHandler、SimpleChannelInboundHandler会自动释放资源。
+
+- **入站请求**
+
+  Netty的EventLoop在处理Channel的读操作时，进行分配ByteBuf。
+
+  对于这类ByteBuf，需要程序员显式释放，有三种方式
+
+  1. 使用SimpleChannelInboundHandler;
+  2. 重新channelRead()使用ReferenceCountUtil.release();
+  3. 使用ctx.fireChannelRead()向后传递。
+
+- **出站请求**
+
+  对于出站请求，不论ByteBuf是否由我们的业务创建，当调用了write()或者writeAndFlush()后，Netty会自动替我们释放。
 
 # Netty内置通信方式
 
-- NI/O
+- N I/O
 
-  使用`java.nio.channels`作为基础，基于选择器的方式。
+  使用java.nio.channels作为基础，基于选择器的方式。
 
 - Epoll
 
   由JNI驱动的`epoll()`和非阻塞I/O，这个传输只有在Linux上可用多种特性，比NI/O传输更快。
 
-- OI/O
+- O I/O
 
-  使用`java.net`作为基础，使用阻塞流。
+  使用java.net作为基础，使用阻塞流。
 
 - Local
 
@@ -395,9 +415,31 @@ ReferenceCountUtil.release();
 
 # 粘包/半包
 
-## TCP粘包/半包原因
+- 现象
 
-## 解决方式
+  假设客户端分别发送了D1、D2两个数据包，由于服务器一次读取到的字节数不确定的，所以可能存在以下4种情况：
+
+  1. 正常：服务器两次读取到两个独立的数据包；
+  2. 粘包：服务器一次接受两个数据包；
+  3. 半包：服务器第一次读取到完整的D1和部分的D2，第二次读取到剩余的D2；
+  4. 半包：服务器第一次读取到部分D1，第二次读取到剩余的D1和完整的D2；
+
+- 粘包原因
+
+  TCP启用Nagle算法时，会将较小的数据包合并，然后再发送。
+
+  那么服务器在接收到消息时无法区分哪些数据包是客户端自己分开发送的，这样就产生了**粘包**。
+
+- 半包原因
+
+  1. IP分片；
+  2. 网络不稳定，导致在传输过程中丢失；
+  3. 接受缓冲区的大小；
+
+- 解决方式
+  1. 包尾增加分隔符；
+  2. 消息定长，如果不够空位补空格；
+  3. 消息分为消息头和消息头，消息头包含消息总长度(HTTP)；
 
 # FAQ
 
