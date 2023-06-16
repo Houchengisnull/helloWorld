@@ -1,6 +1,5 @@
 package org.hc.learning.net.netty.fundamental;
 
-import com.sun.org.apache.xpath.internal.operations.String;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
@@ -11,24 +10,24 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class EchoClientHandler extends ChannelInboundHandlerAdapter {
 
-    private final ByteBuf firstMessage;
-
-    public EchoClientHandler() {
-        firstMessage = Unpooled.buffer(EchoClient.SIZE);
-        for (int i = 0; i < firstMessage.capacity(); i++) {
-            firstMessage.writeByte((byte) i);
-        }
-    }
+    public EchoClientHandler() {}
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        /*log.info("write message:{}", firstMessage);*/
-        ctx.writeAndFlush(firstMessage);
+        log.info("write and flush");
+        ByteBuf firstMessage = Unpooled.buffer(5);
+        firstMessage.writeBytes("Hello world.".getBytes(CharsetUtil.UTF_8));
+        ctx.write(firstMessage);
+
+        ByteBuf secondMessage = Unpooled.buffer(5);
+        secondMessage.writeBytes("Hello Netty.".getBytes(CharsetUtil.UTF_8));
+        ctx.write(secondMessage);
+
+        ctx.flush();
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        // ctx.write(msg);
         log.info("echo :{}", ((ByteBuf) msg).toString(CharsetUtil.UTF_8));
     }
 

@@ -90,31 +90,31 @@
 
 Channel是对Socket的抽象(封装)。
 
-- **Channel的生命周期**
+### Channel的生命周期
 
-  | 生命周期            | 描述                                                         |
-  | ------------------- | ------------------------------------------------------------ |
-  | ChannelUnregistered | Channel已创建，但还未注册到EventLoop                         |
-  | ChannelRegistered   | Channel已注册到EventLoop                                     |
-  | ChannelActive       | Channel处于活动状态，已经连接到remote endpoint，可以接收和发送数据 |
-  | ChannelInactive     | Channel没有连接到remote endpoint                             |
+| 生命周期            | 描述                                                         |
+| ------------------- | ------------------------------------------------------------ |
+| ChannelUnregistered | Channel已创建，但还未注册到EventLoop                         |
+| ChannelRegistered   | Channel已注册到EventLoop                                     |
+| ChannelActive       | Channel处于活动状态，已经连接到remote endpoint，可以接收和发送数据 |
+| ChannelInactive     | Channel没有连接到remote endpoint                             |
 
-  当状态发送改变时，将会生成对应的事件，这些事件将转发给ChannelPipeline的ChannelHandler，随后对它们做出响应。
+当状态发送改变时，将会生成对应的事件，这些事件将转发给ChannelPipeline的ChannelHandler，随后对它们做出响应。
 
-- **Channel API**
+### Channel API
 
-  | method              | description                                            |
-  | ------------------- | ------------------------------------------------------ |
-  | eventLoop           | 返回注册该Channel的EventLoop对象                       |
-  | pipeline[^pipeline] | 返回分配的Pipeline对象                                 |
-  | isActive            | 当前Channel是否活跃的                                  |
-  | localAddress        | 返回本地SocketAddress                                  |
-  | remoteAddress       | 返回远程SocketAddress                                  |
-  | write               | 写入数据，该数据将传递给ChannelPipeline，直到其被flush |
-  | flush               | 刷新至内核                                             |
-  | writeAndFlush       |                                                        |
+| method              | description                                            |
+| ------------------- | ------------------------------------------------------ |
+| eventLoop           | 返回注册该Channel的EventLoop对象                       |
+| pipeline[^pipeline] | 返回分配的Pipeline对象                                 |
+| isActive            | 当前Channel是否活跃的                                  |
+| localAddress        | 返回本地SocketAddress                                  |
+| remoteAddress       | 返回远程SocketAddress                                  |
+| write               | 写入数据，该数据将传递给ChannelPipeline，直到其被flush |
+| flush               | 刷新至内核                                             |
+| writeAndFlush       |                                                        |
 
-  [^pipeline]: 管道
+[^pipeline]:管道
 
 ## EventLoop
 
@@ -175,53 +175,106 @@ EventLoopGroup负责为每个新创建的Channel分配一个EventLoop。一旦Ch
 
 在使用Netty过程中，打交道最多的就是ChannelHandler。见名知意，ChannelHandler负责对通信数据的业务处理。
 
-- **ChannelHandler生命周期**
+### ChannelHandler生命周期
 
-  | 生命周期        | 描述                                  |
-  | --------------- | ------------------------------------- |
-  | handlerAdded    | 当ChannelHandler添加到ChannelPipeline |
-  | handlerRemoved  | 当ChannelHandler移除ChannelPipeline   |
-  | exceptionCaught | 由错误产生时被调用                    |
+| 生命周期        | 描述                                  |
+| --------------- | ------------------------------------- |
+| handlerAdded    | 当ChannelHandler添加到ChannelPipeline |
+| handlerRemoved  | 当ChannelHandler移除ChannelPipeline   |
+| exceptionCaught | 由错误产生时被调用                    |
 
-- **ChannelHandler子接口**
+### ChannelHandler子接口
 
-  | 接口                   | 描述                           |
-  | ---------------------- | ------------------------------ |
-  | ChannelInboundHandler  | 处理入站数据及各种状态变化     |
-  | ChannelOutboundHandler | 处理出站数据并允许拦截所有操作 |
+| 接口                   | 描述                           |
+| ---------------------- | ------------------------------ |
+| ChannelInboundHandler  | 处理入站数据及各种状态变化     |
+| ChannelOutboundHandler | 处理出站数据并允许拦截所有操作 |
 
-### ChannelInboundHandler
+### 入站处理器 
 
-- **ChannelInboundHandler生命周期**
+ChannelInboundHandler
 
-  以下生命周期方法会在数据被接收时或者对应Channel状态发生改变时被调用。
+#### 生命周期
 
-  | 生命周期                  | 描述                                                         |
-  | ------------------------- | ------------------------------------------------------------ |
-  | channelRegistered         | 当Channel注册到EventLoop并且能处理I/O时被调用                |
-  | channelUnregistered       | 当Channel从EventLoop注销并且无法处理I/O时被调用              |
-  | channelInactive           | 当Channel离开Active状态并且不再连接remote endpoint时被调用   |
-  | channelReadComplete       | 当Channel上一个读操作完成时被调用                            |
-  | channelRead               | 当Channel读取数据时被调用                                    |
-  | channelWritabilityChanged | 当Channel可写状态发生改变时被调用                            |
-  | userEventTriggered        | 当ChannelInboundHandler.fireUserEventTriggered()被调用时被调用 |
+以下生命周期方法会在数据被接收时或者对应Channel状态发生改变时被调用。
 
-### ChannelOutboundHandler
+| 生命周期                  | 描述                                                         |
+| ------------------------- | ------------------------------------------------------------ |
+| channelRegistered         | 当Channel注册到EventLoop并且能处理I/O时被调用                |
+| channelUnregistered       | 当Channel从EventLoop注销并且无法处理I/O时被调用              |
+| channelInactive           | 当Channel离开Active状态并且不再连接remote endpoint时被调用   |
+| channelReadComplete       | 当Channel上一个读操作完成时被调用                            |
+| channelRead               | 当Channel读取数据时被调用                                    |
+| channelWritabilityChanged | 当Channel可写状态发生改变时被调用                            |
+| userEventTriggered        | 当ChannelInboundHandler.fireUserEventTriggered()被调用时被调用 |
 
-- **ChannelOutboundHandler API**
+> channelRead()与channelReadComplete()回调事件的区别：
+>
+> - **channelRead()**
+>
+>   从peer[^peer]读取到数据时被调用；
+>
+> - **channelReadComplete()**
+>
+>   从缓冲区中完成读取时被调用;
+>
+> 在netty中，各种内置的Handler(例如:SimpleChannelInboundHandler与ChannelInboundHandlerAdapter)处理数据的行为均不太一致。
 
-  出站操作和数据将由ChannelOutboundHandler处理。它的方法将被Channel、Pipeline、ChannelHandlerContext调用。
+[^peer]: 对端。
 
-  | method     | 描述                                              |
-  | ---------- | ------------------------------------------------- |
-  | bind       | 当请求将Channel绑定到本地地址时被调用             |
-  | connect    | 当请求将Channel连接到远程节点时被调用             |
-  | disconnect | 当请求将Channel从远程节点断开时被调用             |
-  | close      | 当请求关闭Channel时被调用                         |
-  | deregister | 当请求将Channel从EventLoop注销时被调用            |
-  | read       | 当请求从Channel读取更多数据时被调用               |
-  | flush      | 当请求通过Channel将入队数据冲刷到远程节点时被调用 |
-  | write      | 当请求通过Channel将数据写到远程节点时被调用       |
+### 出站处理器
+
+ChannelOutboundHandler
+
+ChannelOutboundHandler API
+
+出站操作和数据将由ChannelOutboundHandler处理。它的方法将被Channel、Pipeline、ChannelHandlerContext调用。
+
+| method     | 描述                                              |
+| ---------- | ------------------------------------------------- |
+| bind       | 当请求将Channel绑定到本地地址时被调用             |
+| connect    | 当请求将Channel连接到远程节点时被调用             |
+| disconnect | 当请求将Channel从远程节点断开时被调用             |
+| close      | 当请求关闭Channel时被调用                         |
+| deregister | 当请求将Channel从EventLoop注销时被调用            |
+| read       | 当请求从Channel读取更多数据时被调用               |
+| flush      | 当请求通过Channel将入队数据冲刷到远程节点时被调用 |
+| write      | 当请求通过Channel将数据写到远程节点时被调用       |
+
+### @Sharable
+
+该注解用于标记ChannelHandler，可以重复将同一个ChannelHandler实例添加到ChannelPipeline上。如果没有使用@Shareable注解标记ChannelHandler，那么在每次建立通道时，需要实例化一个ChannelHandler。
+
+``` java
+ServerBootstrap b = new ServerBootstrap();
+b.group(parentGroup, workGroup)
+    .channel(NioServerSocketChannel.class)
+    .option(ChannelOption.SO_BACKLOG, 100)
+    .childHandler(new ChannelInitializer<SocketChannel>() {
+        @Override
+        protected void initChannel(SocketChannel ch) throws Exception {
+            ChannelPipeline p = ch.pipeline();
+            p.addLast(new EchoSimpleChannelInboundHandler()); // 实例化ChannelHandler
+        }
+    });
+```
+
+使用了@Sharable，那么ChannelHandler则可以被通道复用，减少内存开销。
+
+``` java
+ChannelHandler channelHandler = new EchoSimpleChannelInboundHandler(); // 在匿名内部类外声明ChannelHandler
+ServerBootstrap b = new ServerBootstrap();
+b.group(parentGroup, workGroup)
+    .channel(NioServerSocketChannel.class)
+    .option(ChannelOption.SO_BACKLOG, 100)
+    .childHandler(new ChannelInitializer<SocketChannel>() {
+        @Override
+        protected void initChannel(SocketChannel ch) throws Exception {
+            ChannelPipeline p = ch.pipeline();
+            p.addLast(channelHandler); // 通道创建时，每次在pipeline上添加相同的channelHandler对象
+        }
+    });
+```
 
 ## ChannelPipeline
 
@@ -261,16 +314,16 @@ EventLoopGroup负责为每个新创建的Channel分配一个EventLoop。一旦Ch
 
   | 属性         | 作用                                                         |
   | ------------ | ------------------------------------------------------------ |
-  | SO_BACKLOG   | 设置半连接队列与已连接队列大小，Linux缺省5。                 |
+  | SO_BACKLOG   | 设置半连接队列[^半连接]与已连接队列大小，Linux缺省5。        |
   | SO_REUSEADDR | 是否允许地址复用。主要用于原本监听端口的进程挂了之后，在没有完全释放该端口资源前，内核允许另一个进程使用。 |
   | SO_KEEPALIVE | 保活。                                                       |
   | SO_SNDBUF    | 发送缓冲区大小。                                             |
   | SO_RCVBUF    | 接收缓冲区大小。                                             |
   | TCP_NODELAY  | 关闭Nagle算法。                                              |
+  
+  > SO_*：TCP相关参数，作用范围跨越编程语言。
 
-``` java
-// TODO
-```
+[^半连接]:半连接队列，未完全完成三次握手的连接。
 
 ## ByteBuf
 
