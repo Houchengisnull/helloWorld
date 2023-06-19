@@ -1,4 +1,4 @@
-package org.hc.learning.json.pojo;
+package org.hc.learning.pojo;
 
 import lombok.Data;
 

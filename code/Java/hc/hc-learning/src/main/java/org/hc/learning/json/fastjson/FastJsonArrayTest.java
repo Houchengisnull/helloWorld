@@ -2,7 +2,7 @@ package org.hc.learning.json.fastjson;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
-import org.hc.learning.json.pojo.Member;
+import org.hc.learning.pojo.Member;
 import org.hc.learning.test.TestCase;
 import org.junit.Assert;
 import org.junit.Test;

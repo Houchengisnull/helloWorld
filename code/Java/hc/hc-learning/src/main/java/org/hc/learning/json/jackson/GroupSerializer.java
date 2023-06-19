@@ -3,7 +3,7 @@ package org.hc.learning.json.jackson;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import org.hc.learning.json.pojo.Group;
+import org.hc.learning.pojo.Group;
 
 import java.io.IOException;
 import java.util.Optional;

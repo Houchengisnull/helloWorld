@@ -3,10 +3,10 @@ package org.hc.learning.collection;
 import com.sun.tools.javac.util.Assert;
 import org.hc.learning.test.TestCase;
 import org.junit.Test;
-
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.hc.learning.pojo.Member;
 
 public class StreamTest extends TestCase {
 
@@ -41,6 +41,19 @@ public class StreamTest extends TestCase {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 10);
         int sum = list.stream().mapToInt(Integer::intValue).sum();
         Assert.check(sum == 20);
+    }
+
+    /**
+     * 对象转String
+     */
+    @Test
+    public void obj2String() {
+        List<Object> members = new ArrayList<>();
+        members.add(Member.builder().name("Hugo").build());
+        members.add(Member.builder().name("Hou").build());
+        members.add(Member.builder().name("Cheng").build());
+
+        List<String> collect = members.stream().map(o -> ((Member) o).getName()).collect(Collectors.toList());
     }
 
 }

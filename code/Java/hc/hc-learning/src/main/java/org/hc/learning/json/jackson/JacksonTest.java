@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import lombok.extern.slf4j.Slf4j;
-import org.hc.learning.json.pojo.Group;
+import org.hc.learning.pojo.Group;
 import org.hc.learning.test.TestCase;
 import org.junit.Test;
 import java.util.HashMap;
