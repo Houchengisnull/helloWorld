@@ -8,10 +8,11 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
-
+import lombok.extern.slf4j.Slf4j;
 import javax.net.ssl.SSLException;
 import java.security.cert.CertificateException;
 
+@Slf4j
 public class BootstrapUtil {
     static final int PORT = Integer.parseInt(System.getProperty("port", "8007"));
     public static void bootstrap(NioEventLoopGroup parentGroup, NioEventLoopGroup workGroup, ChannelHandler channelHandler) throws CertificateException, SSLException, InterruptedException {
@@ -37,6 +38,24 @@ public class BootstrapUtil {
 
             ChannelFuture f = b.bind(PORT).sync();
             ((ChannelFuture) f).channel().closeFuture().sync();
+        } finally {
+            parentGroup.shutdownGracefully();
+            workGroup.shutdownGracefully();
+        }
+    }
+
+    public static void bootstrapHttpServer(NioEventLoopGroup parentGroup, NioEventLoopGroup workGroup, ChannelHandler channelHandler) {
+        try {
+            ServerBootstrap b = new ServerBootstrap();
+
+            b.group(parentGroup, workGroup)
+            .channel(NioServerSocketChannel.class)
+            .childHandler(channelHandler);
+
+            ChannelFuture f = b.bind(PORT).sync();
+            f.channel().closeFuture().sync();
+        } catch (InterruptedException e) {
+            log.error(e.getMessage(), e);
         } finally {
             parentGroup.shutdownGracefully();
             workGroup.shutdownGracefully();
