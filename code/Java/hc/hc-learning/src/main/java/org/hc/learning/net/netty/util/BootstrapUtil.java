@@ -18,6 +18,11 @@ import java.security.cert.CertificateException;
 public class BootstrapUtil {
     public static final int PORT = Integer.parseInt(System.getProperty("port", "8007"));
 
+    public static void bind(ChannelInitializer initializer) {
+        NioEventLoopGroup group = new NioEventLoopGroup();
+        bind(group, initializer);
+    }
+
     public static void bind(NioEventLoopGroup parentGroup, NioEventLoopGroup workGroup, ChannelHandler channelHandler) throws CertificateException, SSLException, InterruptedException {
         final SslContext sslCtx = ServerUtil.buildSslContext();
 
@@ -41,7 +46,9 @@ public class BootstrapUtil {
 
             ChannelFuture f = b.bind(PORT).sync();
             ((ChannelFuture) f).channel().closeFuture().sync();
-        } finally {
+        } catch (InterruptedException e) {
+            log.error(e.getMessage(), e);
+        } finally{
             parentGroup.shutdownGracefully();
             workGroup.shutdownGracefully();
         }

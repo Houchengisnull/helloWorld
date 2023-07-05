@@ -1,4 +1,4 @@
-package org.hc.learning.net.netty.粘包半包;
+package org.hc.learning.net.netty.粘包半包.linebased;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
