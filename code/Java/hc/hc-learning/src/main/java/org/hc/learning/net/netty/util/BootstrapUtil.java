@@ -1,25 +1,24 @@
 package org.hc.learning.net.netty.util;
 
+import io.netty.bootstrap.Bootstrap;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
-import io.netty.handler.ssl.SslContextBuilder;
-import io.netty.handler.ssl.util.SelfSignedCertificate;
 import lombok.extern.slf4j.Slf4j;
-import org.hc.learning.net.netty.http.HttpServerHandlerInit;
-
 import javax.net.ssl.SSLException;
 import java.security.cert.CertificateException;
 
 @Slf4j
 public class BootstrapUtil {
-    static final int PORT = Integer.parseInt(System.getProperty("port", "8007"));
-    public static void bootstrap(NioEventLoopGroup parentGroup, NioEventLoopGroup workGroup, ChannelHandler channelHandler) throws CertificateException, SSLException, InterruptedException {
+    public static final int PORT = Integer.parseInt(System.getProperty("port", "8007"));
+
+    public static void bind(NioEventLoopGroup parentGroup, NioEventLoopGroup workGroup, ChannelHandler channelHandler) throws CertificateException, SSLException, InterruptedException {
         final SslContext sslCtx = ServerUtil.buildSslContext();
 
         try {
@@ -48,7 +47,23 @@ public class BootstrapUtil {
         }
     }
 
-    public static void bootstrapHttpServer(NioEventLoopGroup parentGroup, NioEventLoopGroup workGroup, ChannelHandler channelHandler) {
+    public static void bind(NioEventLoopGroup group, ChannelInitializer initializer) {
+        ServerBootstrap bootstrap = new ServerBootstrap();
+        bootstrap.group(group)
+                .channel(NioServerSocketChannel.class)
+                .childHandler(initializer);
+
+        try {
+            ChannelFuture future = bootstrap.bind(PORT).sync();
+            future.channel().closeFuture().sync();
+        } catch (InterruptedException e) {
+            log.error(e.getMessage(), e);
+        } finally {
+            group.shutdownGracefully();
+        }
+    }
+
+    public static void bindHttpServer(NioEventLoopGroup parentGroup, NioEventLoopGroup workGroup, ChannelHandler channelHandler) {
         try {
             ServerBootstrap b = new ServerBootstrap();
 
@@ -63,6 +78,25 @@ public class BootstrapUtil {
         } finally {
             parentGroup.shutdownGracefully();
             workGroup.shutdownGracefully();
+        }
+    }
+
+    public static void connect(String host, ChannelInitializer initializer) {
+        Bootstrap bootstrap = new Bootstrap();
+        EventLoopGroup group = new NioEventLoopGroup();
+        bootstrap.group(group)
+                .channel(NioSocketChannel.class)
+                .remoteAddress(host, PORT)
+                .handler(initializer);
+
+        try {
+            ChannelFuture future = bootstrap.connect().sync();
+            log.info("connect successful. host:{}, port:{}", host, PORT);
+            future.channel().closeFuture().sync();
+        } catch (InterruptedException e) {
+            log.error(e.getMessage(), e);
+        } finally {
+            group.shutdownGracefully();
         }
     }
 

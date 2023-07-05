@@ -15,7 +15,7 @@ public class EchoServer {
         NioEventLoopGroup parentGroup = new NioEventLoopGroup(1);
         NioEventLoopGroup workGroup = new NioEventLoopGroup();
         EchoServerHandler handler = new EchoServerHandler();
-        BootstrapUtil.bootstrap(parentGroup, workGroup, handler);
+        BootstrapUtil.bind(parentGroup, workGroup, handler);
     }
 
 }

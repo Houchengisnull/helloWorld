@@ -9,7 +9,7 @@ public class HttpServer {
         NioEventLoopGroup parentGroup = new NioEventLoopGroup(1);
         NioEventLoopGroup workGroup = new NioEventLoopGroup();
         HttpServerHandlerInit httpServerHandlerInit = new HttpServerHandlerInit();
-        BootstrapUtil.bootstrapHttpServer(parentGroup, workGroup, httpServerHandlerInit);
+        BootstrapUtil.bindHttpServer(parentGroup, workGroup, httpServerHandlerInit);
     }
 
 }

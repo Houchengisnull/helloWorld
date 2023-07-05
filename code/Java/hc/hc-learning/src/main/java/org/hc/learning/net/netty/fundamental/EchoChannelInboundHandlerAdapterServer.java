@@ -15,7 +15,7 @@ public class EchoChannelInboundHandlerAdapterServer {
         NioEventLoopGroup parentGroup = new NioEventLoopGroup(1);
         NioEventLoopGroup workGroup = new NioEventLoopGroup();
         EchoChannelInboundHandlerAdapter adapter = new EchoChannelInboundHandlerAdapter();
-        BootstrapUtil.bootstrap(parentGroup, workGroup, adapter);
+        BootstrapUtil.bind(parentGroup, workGroup, adapter);
 
     }
 }
