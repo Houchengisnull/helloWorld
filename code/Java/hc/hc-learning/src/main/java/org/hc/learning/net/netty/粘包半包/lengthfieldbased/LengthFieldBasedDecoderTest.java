@@ -33,10 +33,10 @@ public class LengthFieldBasedDecoderTest extends TestCase {
 
     private static ByteBuf frame() {
         ByteBuf buffer = ByteBufAllocator.DEFAULT.buffer();
-        buffer.writeShort(11);
-        buffer.writeInt(20);
-        buffer.writeByte(2);
-        buffer.writeBytes("hello world".getBytes(CharsetUtil.UTF_8));
+        buffer.writeShort(11); // 2 bytes
+        buffer.writeInt(20);   // 4
+        buffer.writeByte(2);   // 1
+        buffer.writeBytes("hello world".getBytes(CharsetUtil.UTF_8)); // 11
         return buffer;
     }
 }

@@ -441,6 +441,117 @@ Netty提供了两种ByteBufAllocator的实现：
   2. 消息定长，如果不够空位补空格；
   3. 消息分为消息头和消息头，消息头包含消息总长度(HTTP)；
 
+# 解码器
+
+- 作用
+
+  解码器负责将入站数据从一种格式转换到另一种格式。
+
+- 作用时机
+
+  需要为ChannelPipeline的下一个ChannelInboundHandler转换入站数据时使用。
+
+- 实现
+
+  ByteToMessageDecoder
+
+  MessageToMessageDecoder
+
+## TooLongFrameException
+
+Netty应用在数据解码之前，会将字节数组缓冲在内存中。因此，如果数据量过大会导致内存溢出。为避免这个问题，Netty在帧超出指定大小限制时排除TooLongFrameException。
+
+# 编码器
+
+- 实现
+
+  MessageToByteEncoder
+
+  MessageToMessageEncoder
+
+# Netty内置编解码器和ChannelHandler
+
+## SSL/TLS
+
+JDK通过javax.net.ssl提供Java应用支持SSL/TLS，而Netty内置SslHandler则以该API实现，为我们在开发SSL/TLS网络应用时提供便利。
+
+此外，Netty提供OpenSSL工具包，该工具性能比JDK原生SSL工具性能更好。
+
+如果OpenSSL可以，Netty应用使用OpenSslEngine[^OpenSslEngine]，否则使用JDK提供的SSLEngine。
+
+> OpenSslEngine和SSLEngine分别是OpenSSL和javax.net.ssl的“引擎”。
+
+在大多数情况下，SslHandler是ChannelPipeline的第一个ChannelHandler。
+
+## HTTP
+
+- HttpRequestEncoder
+
+- HttpResponseEncoder
+
+- HttpRequestDecoder
+
+- HttpResponseDecoder
+
+- HttpObjectAggregator
+
+  聚合HTTP消息。
+
+- HttpContentCompressor
+
+  压缩。
+
+# 序列化
+
+## JDK序列化
+
+- **缺点**
+- 无法跨语言
+- 码流太大
+- 性能太低
+
+## 内置
+
+Netty内置JBoss Marshalling和Protocol Buffers。
+
+### Protocol Buffers
+
+谷歌开源项目。
+
+- **使用步骤**
+
+1. 引入依赖
+
+``` xml
+<dependency>
+    <groupId>com.google.protobuf</groupId>
+    <artifactId>protobuf-java</artifactId>
+    <version>2.6.1</version>
+</dependency>
+```
+
+2. 生成protoc文件
+3. 编写代码
+
+<hr>
+
+- 参考
+- [ProtoBuf介绍](https://www.cnblogs.com/rivers-all/p/17376252.html)
+
+## MessagePack
+
+MsgPack是一个简单高效的序列化框架。
+
+- maven
+
+  ``` xml
+  <dependency>
+      <groupId>org.msgpack</groupId>
+      <artifactId>msgpack</artifactId>
+      <version>0.6.12</version>
+  </dependency>
+  ```
+
 # FAQ
 
 - [netty 堆外内存泄露排查盛宴](https://www.jianshu.com/p/4e96beb37935)
