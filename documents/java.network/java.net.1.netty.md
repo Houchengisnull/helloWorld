@@ -457,6 +457,36 @@ Netty提供了两种ByteBufAllocator的实现：
 
   MessageToMessageDecoder
 
+## LengthFieldBasedFrameDecoder
+
+基于Length字段的数据帧解析器。
+
+``` java
+ new LengthFieldBasedFrameDecoder(65535,0,2,0,2);
+```
+
+该构造方法有5个构造参数：
+
+- maxFrameLength
+
+  包的最大长度
+
+- lengthFieldOffset
+
+  Length的偏移量
+
+- lengthFieldLength
+
+  Length占用大小
+
+- lengthAdjustment
+
+  Length字段值调整，总长度-数据实际长度=调整值。
+
+- initialBytesToStrip
+
+  初始数据位置
+
 ## TooLongFrameException
 
 Netty应用在数据解码之前，会将字节数组缓冲在内存中。因此，如果数据量过大会导致内存溢出。为避免这个问题，Netty在帧超出指定大小限制时排除TooLongFrameException。
