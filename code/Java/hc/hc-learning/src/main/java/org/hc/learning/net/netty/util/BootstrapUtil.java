@@ -50,7 +50,7 @@ public class BootstrapUtil {
                     });
 
             ChannelFuture f = b.bind(PORT).sync();
-            ((ChannelFuture) f).channel().closeFuture().sync();
+            f.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             log.error(e.getMessage(), e);
         } finally{
@@ -118,14 +118,14 @@ public class BootstrapUtil {
         bootstrap.group(group)
                 .channel(NioDatagramChannel.class)
                 .handler(channelHandler);
-        Channel channel = null;
+
         try {
             // bind 0 意味着由系统随机分配端口号
-            channel = bootstrap.bind(0).sync().channel();
+            Channel channel = bootstrap.bind(0).sync().channel();
             channel.writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer(message, CharsetUtil.UTF_8), new InetSocketAddress(hostname, port))).sync();
 
             if (!channel.closeFuture().await(timeout)) {
-                log.error("timeout");
+                log.error("UDP data send timeout");
             }
         } catch (InterruptedException e) {
             log.error(e.getMessage(), e);
@@ -140,7 +140,7 @@ public class BootstrapUtil {
         bootstrap.group(group)
                 .channel(NioDatagramChannel.class)
                 .handler(channelHandler);
-        Channel channel = null;
+
         try {
             ChannelFuture future = bootstrap.bind(port).sync();
             log.info("answer with UDP start.");
