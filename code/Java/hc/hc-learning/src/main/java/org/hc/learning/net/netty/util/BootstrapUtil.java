@@ -2,16 +2,21 @@ package org.hc.learning.net.netty.util;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.DatagramPacket;
 import io.netty.channel.socket.SocketChannel;
+import io.netty.channel.socket.nio.NioDatagramChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
+import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
 import javax.net.ssl.SSLException;
+import java.net.InetSocketAddress;
 import java.security.cert.CertificateException;
 
 @Slf4j
@@ -107,4 +112,43 @@ public class BootstrapUtil {
         }
     }
 
+    public static void sendWithUDP(String hostname, int port, ChannelHandler channelHandler, String message, int timeout) {
+        NioEventLoopGroup group = new NioEventLoopGroup();
+        Bootstrap bootstrap = new Bootstrap();
+        bootstrap.group(group)
+                .channel(NioDatagramChannel.class)
+                .handler(channelHandler);
+        Channel channel = null;
+        try {
+            // bind 0 意味着由系统随机分配端口号
+            channel = bootstrap.bind(0).sync().channel();
+            channel.writeAndFlush(new DatagramPacket(Unpooled.copiedBuffer(message, CharsetUtil.UTF_8), new InetSocketAddress(hostname, port))).sync();
+
+            if (!channel.closeFuture().await(timeout)) {
+                log.error("timeout");
+            }
+        } catch (InterruptedException e) {
+            log.error(e.getMessage(), e);
+        } finally {
+            group.shutdownGracefully();
+        }
+    }
+
+    public static void answerWithUDP(int port, ChannelHandler channelHandler) {
+        NioEventLoopGroup group = new NioEventLoopGroup();
+        Bootstrap bootstrap = new Bootstrap();
+        bootstrap.group(group)
+                .channel(NioDatagramChannel.class)
+                .handler(channelHandler);
+        Channel channel = null;
+        try {
+            ChannelFuture future = bootstrap.bind(port).sync();
+            log.info("answer with UDP start.");
+            future.channel().closeFuture().sync();
+        } catch (InterruptedException e) {
+            log.error(e.getMessage(), e);
+        } finally {
+            group.shutdownGracefully();
+        }
+    }
 }
