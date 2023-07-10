@@ -457,6 +457,12 @@ Netty提供了两种ByteBufAllocator的实现：
 
   MessageToMessageDecoder
 
+## ByteToMessageDecoder
+
+- decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out);
+
+  decode()将被重复调用，知道没有新的元素添加到out对象或ByteBuf中没有更多可读取字节时为止。
+
 ## LengthFieldBasedFrameDecoder
 
 基于Length字段的数据帧解析器。
