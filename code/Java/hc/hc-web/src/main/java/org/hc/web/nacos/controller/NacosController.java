@@ -6,7 +6,7 @@ import com.alibaba.nacos.api.config.annotation.NacosValue;
 import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.NamingService;
 import com.alibaba.nacos.api.naming.pojo.Instance;
-import com.google.common.collect.Lists;
+import com.alibaba.nacos.shaded.com.google.common.collect.Lists;
 import org.hc.web.nacos.config.NacosCondition;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

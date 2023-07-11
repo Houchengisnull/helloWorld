@@ -28,6 +28,8 @@ public class PathVariableController {
 
     /**
      * {*spring}
+     * 注意事项:
+     * - Spring Boot 2.6.0以后才支持该格式(https://www.zhangbj.com/p/1261.html)
      */
     @GetMapping("/get/{*path}")
     public String getPathVariable(@PathVariable("path") String path) {
@@ -61,7 +63,9 @@ public class PathVariableController {
 
     /**
      * Not supported by "spring.mvc.pathmatch.matching-strategy=ant-path-matche"
-      */
+     *
+     * 该pattern不允许与 {*spring}或者/** 共同存在
+     */
 //    @GetMapping("get/**/test")
 //    public String getPathVariableAll(){
 //        return "request get/**/test";
