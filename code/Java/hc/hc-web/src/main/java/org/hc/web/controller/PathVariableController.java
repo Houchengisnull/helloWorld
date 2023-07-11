@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-@RequestMapping("/test")
-public class TestController {
+@RequestMapping("/pathVariable")
+public class PathVariableController {
 
     @GetMapping("/")
     public String test(){
@@ -22,7 +22,7 @@ public class TestController {
     @GetMapping("/call")
     public String callTest() {
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> res = restTemplate.getForEntity("http://127.0.0.1:8090/hc-web/test/", String.class);
+        ResponseEntity<String> res = restTemplate.getForEntity("http://127.0.0.1:8090/hc-web/pathVariable/", String.class);
         return res.getBody();
     }
 
@@ -62,8 +62,8 @@ public class TestController {
     /**
      * Not supported by "spring.mvc.pathmatch.matching-strategy=ant-path-matche"
       */
-    @GetMapping("get/**/test")
-    public String getPathVariableAll(){
-        return "request get/**/test";
-    }
+//    @GetMapping("get/**/test")
+//    public String getPathVariableAll(){
+//        return "request get/**/test";
+//    }
 }

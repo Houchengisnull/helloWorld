@@ -85,11 +85,11 @@
     </dependency>-->
 
     <!-- jsp解析器 -->
-    <!--<dependency>
+    <dependency>
       <groupId>org.apache.tomcat.embed</groupId>
       <artifactId>tomcat-embed-jasper</artifactId>
       <scope>provided</scope>
-    </dependency>-->
+    </dependency>
 
     <!-- nacos 配置管理 -->
     <dependency>

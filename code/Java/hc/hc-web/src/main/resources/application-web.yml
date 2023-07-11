@@ -4,7 +4,7 @@
 spring:
   mvc:
     view:
-      prefix: /WEB-INF/views/
+      prefix: /WEB-INF/view/
       suffix: .jsp
     #
     # spring 5 默认路径模式策略, @PathVariable支持{*spring}

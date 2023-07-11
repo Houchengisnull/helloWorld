@@ -351,3 +351,6 @@ public void initBinder() {
 
 或通过转换成json字符串发送到后台，再通过jsonArray反序列化成集合对象以解决类似问题。
 
+## Spring Boot集成jsp出现404
+
+- [springboot整合jsp，页面全报404](https://blog.51cto.com/u_15964717/6057819)
