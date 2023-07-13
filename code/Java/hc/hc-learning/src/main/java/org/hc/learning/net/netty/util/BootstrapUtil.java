@@ -28,6 +28,9 @@ public class BootstrapUtil {
         bind(group, initializer);
     }
 
+    /**
+     * Only one ChannelHandler
+     */
     public static void bind(NioEventLoopGroup parentGroup, NioEventLoopGroup workGroup, ChannelHandler channelHandler) throws CertificateException, SSLException, InterruptedException {
         final SslContext sslCtx = ServerUtil.buildSslContext();
 
@@ -67,6 +70,7 @@ public class BootstrapUtil {
 
         try {
             ChannelFuture future = bootstrap.bind(PORT).sync();
+            log.info("Netty Server Bind {} Successful.", PORT);
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             log.error(e.getMessage(), e);
