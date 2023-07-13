@@ -1,4 +1,4 @@
-package org.hc.learning.net.netty.http.nat;
+package org.hc.learning.net.netty.http.proxy;
 
 import com.alibaba.fastjson.JSONObject;
 import io.netty.bootstrap.Bootstrap;

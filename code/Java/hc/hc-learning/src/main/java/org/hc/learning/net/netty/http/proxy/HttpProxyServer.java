@@ -1,4 +1,4 @@
-package org.hc.learning.net.netty.http.nat;
+package org.hc.learning.net.netty.http.proxy;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
