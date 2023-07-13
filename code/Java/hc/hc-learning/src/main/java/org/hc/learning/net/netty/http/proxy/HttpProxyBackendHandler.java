@@ -19,7 +19,7 @@ public class HttpProxyBackendHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         FullHttpResponse httpResponse = (FullHttpResponse) msg;
-        log.info("\nReceive Http Response: {}", httpResponse.content().toString(CharsetUtil.UTF_8));
+        log.debug("\nReceive Http Response: {}", httpResponse.content().toString(CharsetUtil.UTF_8));
         frontendChannel.writeAndFlush(httpResponse);
     }
 

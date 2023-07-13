@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
-import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.handler.codec.http.*;
 import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +14,7 @@ public class HttpProxyFrontendHandler extends ChannelInboundHandlerAdapter {
     /**
      * Backend Bootstrap
      */
+    private volatile Channel frontendChannel;
     private volatile Channel backendChannel;
     private String remoteIp;
     private int remotePort;
@@ -26,12 +26,28 @@ public class HttpProxyFrontendHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
+    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+        log.info("registered");
+    }
+
+    @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        log.info("complete");
+    }
+
+    @Override
     public void channelActive(ChannelHandlerContext ctx) {
-        Channel channel = ctx.channel();
+        frontendChannel = ctx.channel();
+        String frontendChannelId = frontendChannel.id().asShortText();
+        boolean frontendChannelAutoRead = frontendChannel.config().isAutoRead();
+        log.info("Frontend channel[{}] is auto read:{}", frontendChannelId, frontendChannelAutoRead);
+        if (frontendChannelAutoRead) {
+            frontendChannel.config().setAutoRead(false);
+        }
 
         Bootstrap bootstrap = new Bootstrap();
-        bootstrap.group(new NioEventLoopGroup())
-            .channel(channel.getClass())
+        bootstrap.group(frontendChannel.eventLoop())
+            .channel(frontendChannel.getClass())
             /*.option(ChannelOption.AUTO_READ, false)*/
             .remoteAddress(remoteIp, remotePort)
             .handler(new ChannelInitializer() {
@@ -40,12 +56,20 @@ public class HttpProxyFrontendHandler extends ChannelInboundHandlerAdapter {
                     ch.pipeline().addLast(new HttpClientCodec());
                     ch.pipeline().addLast("aggregator", new HttpObjectAggregator(512 * 1024));
                     ch.pipeline().addLast("decompressor", new HttpContentDecompressor());
-                    ch.pipeline().addLast(new HttpProxyBackendHandler(channel));
+                    ch.pipeline().addLast(new HttpProxyBackendHandler(frontendChannel));
                 }
             });
 
         try {
-            ChannelFuture future = bootstrap.connect().sync();
+            ChannelFuture future = bootstrap.connect();
+            future.addListener((ChannelFutureListener) f->{
+                if (f.isSuccess()) {
+                    // connection is successful. enable read.
+                    frontendChannel.read();
+                } else {
+                    frontendChannel.close();
+                }
+            });
             backendChannel = future.channel();
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -58,7 +82,7 @@ public class HttpProxyFrontendHandler extends ChannelInboundHandlerAdapter {
         FullHttpRequest httpRequest = (FullHttpRequest) msg;
         String uri = httpRequest.uri();
         HttpHeaders headers = httpRequest.headers();
-        log.info("\nReceive Http Request." +
+        log.debug("\nReceive Http Request:" +
                 "\nHttp Request Uri:{}" +
                 "\nHttp Request Headers:{}" +
                 "\nHttp Request Body:{}"
@@ -85,9 +109,22 @@ public class HttpProxyFrontendHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        // close backend channel
+        closeChannel(backendChannel);
+    }
+
+    @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         log.error(cause.getMessage(), cause);
+        // close backend channel
+        closeChannel(backendChannel);
         ctx.close();
     }
 
+    private void closeChannel(Channel channel) {
+        if (channel != null && channel.isActive()) {
+            channel.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);
+        }
+    }
 }
