@@ -105,5 +105,6 @@
 		<module>hc-web</module>
     	<module>hc-learning</module>
 		<module>hc-gateway</module>
+		<module>hc-oauth2</module>
   </modules>
 </project>

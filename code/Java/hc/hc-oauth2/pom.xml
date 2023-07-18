@@ -10,7 +10,7 @@
 
     <parent>
         <groupId>org.hc</groupId>
-        <artifactId>hc</artifactId>
+        <artifactId>hc-project</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
