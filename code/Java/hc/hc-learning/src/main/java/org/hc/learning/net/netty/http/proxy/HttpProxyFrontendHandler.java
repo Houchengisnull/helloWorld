@@ -26,16 +26,6 @@ public class HttpProxyFrontendHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
-        log.info("registered");
-    }
-
-    @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        log.info("complete");
-    }
-
-    @Override
     public void channelActive(ChannelHandlerContext ctx) {
         frontendChannel = ctx.channel();
         String frontendChannelId = frontendChannel.id().asShortText();
@@ -111,6 +101,7 @@ public class HttpProxyFrontendHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         // close backend channel
+        log.info("Frontend channel[{}] is inactive", ctx.channel().id().asShortText());
         closeChannel(backendChannel);
     }
 
@@ -119,7 +110,6 @@ public class HttpProxyFrontendHandler extends ChannelInboundHandlerAdapter {
         log.error(cause.getMessage(), cause);
         // close backend channel
         closeChannel(backendChannel);
-        ctx.close();
     }
 
     private void closeChannel(Channel channel) {

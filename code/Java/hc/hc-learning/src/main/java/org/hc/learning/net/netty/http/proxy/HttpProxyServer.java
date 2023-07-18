@@ -18,8 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 public class HttpProxyServer {
 
     private static final String remoteIp = "127.0.0.1";
-    private static final int remotePort = 8090;
-    private static final int localPort = 8007;
+    private static final int remotePort = 8007;
+    private static final int localPort = 8006;
 
     public static void main(String[] args) {
         NioEventLoopGroup eventExecutors = new NioEventLoopGroup();
