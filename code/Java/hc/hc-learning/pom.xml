@@ -174,11 +174,11 @@
 		  <version>4.1.28.Final</version>
 	  </dependency>
 
-	  <dependency>
+	  <!--<dependency>
 		  <groupId>io.projectreactor.ipc</groupId>
 		  <artifactId>reactor-netty</artifactId>
 		  <version>0.7.3.RELEASE</version>
-	  </dependency>
+	  </dependency>-->
 
 	  <!-- Disruptor -->
 	  <dependency>
