@@ -17,6 +17,7 @@ public class WebMvcConfig implements WebMvcConfigurer, ErrorPageRegistrar {
         registry.addViewController("/view/server_push").setViewName("server_push");
         registry.addViewController("/view/server_push/interval").setViewName("server_push/interval");
         registry.addViewController("/view/server_push/sse").setViewName("server_push/sse");
+        registry.addViewController("/view/server_push/servlet_async").setViewName("server_push/servlet_async");
 
     }
 
