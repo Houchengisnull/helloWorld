@@ -22,8 +22,8 @@ public class BusinessHandler extends ChannelInboundHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        String result = StrUtil.EMPTY;
+    public void channelRead(ChannelHandlerContext ctx, Object msg) {
+        String result;
         FullHttpRequest httpRequest = (FullHttpRequest) msg;
         log.info("http headers:{}", httpRequest.headers());
         try {
