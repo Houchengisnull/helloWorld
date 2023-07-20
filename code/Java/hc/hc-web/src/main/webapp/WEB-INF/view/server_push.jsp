@@ -10,8 +10,8 @@
 <h1>服务器推送技术演示</h1>
 
 <ul>
-    <li><h2><a href="time">查看服务器时间</a></h2></li>
-    <li><h2><a href="pushnews">Servlet异步-推送实时新闻</a></h2></li>
+    <li><h2><a href="${pageContext.request.contextPath}/view/server_push/interval">Interval</a></h2></li>
+    <li><h2><a href="${pageContext.request.contextPath}/view/server_push/sse">SSE(server-sent-event)</a></h2></li>
     <li><h2><a href="nobleMetal">SSE-贵金属期货价格实时查询</a></h2></li>
     <li><h2><a href="weChatPay">在线支付</a></h2></li>
 </ul>

@@ -7,6 +7,6 @@
 <title>Hou Cheng Web</title>
 </head>
 <body>
-	<a href="${pageContext.request.contextPath}/view/server_push">服务器推送技术</a>
+	404 Not Found
 </body>
 </html>
