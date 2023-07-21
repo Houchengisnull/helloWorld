@@ -65,7 +65,7 @@ public class ServerPushController {
      * 不建议使用这种方式:
      * 1. 依赖Servlet 3.0
      * 2. 内置Tomcat无法配置<asyncSupported>true</asyncSupported>, 等价于与Spring Boot不匹配
-     *
+     * 3. WebInitializer仅限外置Tomcat
      */
     /*@RequestMapping("getServerTimeByAsync")
     @ResponseBody
