@@ -16,30 +16,14 @@
 
 	<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript">
-        var source = new EventSource("${pageContext.request.contextPath}/serverPush/getServerTimeBySSE");
+        serverTimeLoop();
 
-        if (!!window.EventSource) {
-            source.onmessage = function (e) {
-                var now = e.data;
-                console.log(now);
-                $('#serverTime').html(now);
-            };
-
-            source.onopen = function (e) {
-                console.log("Connecting server!");
-            };
-
-            source.onerror = function (e) {
-                console.error(e);
-                source.close();
-            };
-
-            /*
-            	可以通过添加事件监听器，监听除'message'以外的自定义事件
-             */
-            // source.addEventListener()
-		} else {
-            $("#hint").html("您的浏览器不支持SSE！");
+		function serverTimeLoop() {
+			$.get("${pageContext.request.contextPath}/serverPush/getServerTimeByAsync", function(data){
+			    console.info(data);
+				$('#serverTime').html(data);
+			   serverTimeLoop();
+			}, false);
 		}
 	</script>
 </body>
