@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>chat.html</title>
+
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html" charset="UTF-8">
+    <style type="text/css">
+        .chatWindow{
+
+            width: 100%;
+            height: 500px;
+            border: 1px solid blue;
+        }
+        .chatRecord{
+            width: 100%;
+            height: 400px;
+            border-bottom: 1px solid blue;
+            line-height:20px;
+            overflow:auto;
+            overflow-x:hidden;
+        }
+        .sendWindow{
+            width: 100%;
+            height: 200px;
+        }
+        .sendChatValue{
+
+            width: 90%;
+            height: 40px;
+
+        }
+    </style>
+</head>
+
+<body>
+<div>
+    <div style="float:left;width:45%">
+        <p>请选择你是谁：</p>
+        <select id="selectName" onchange="stompQueue();">
+            <option value="1">请选择</option>
+            <option value="Mark">Mark</option>
+            <option value="James">James</option>
+            <option value="Lison">Lison</option>
+            <option value="Peter">Peter</option>
+            <option value="King">King</option>
+        </select>
+        <div class="chatWindow">
+            <p style="color:darkgrey">群聊：</p>
+            <section id="chatRecord" class="chatRecord">
+                <p id="titleval" style="color:#CD2626;"></p>
+            </section>
+            <section class="sendWindow">
+                <textarea name="sendChatValue" id="sendChatValue" class="sendChatValue"></textarea>
+                <input type="button" name="sendMessage" id="sendMassMessage" class="sendMessage" onclick="sendMassMessage()" value="发送">
+            </section>
+        </div>
+    </div>
+
+
+    <div style="float:left; width:45%">
+        <p>请选择你要发给谁：</p>
+        <select id="selectName2">
+            <option value="1">请选择</option>
+            <option value="Mark">Mark</option>
+            <option value="James">James</option>
+            <option value="Lison">Lison</option>
+            <option value="Peter">Peter</option>
+            <option value="King">King</option>
+        </select>
+        <div class="chatWindow">
+            <p style="color:darkgrey">单独聊：</p>
+            <section id="chatRecord2" class="chatRecord">
+                <p id="titleval" style="color:#CD2626;"></p>
+            </section>
+            <section class="sendWindow">
+                <textarea name="sendChatValue2" id="sendChatValue2" class="sendChatValue"></textarea>
+                <input type="button" name="sendMessage" id="sendAloneMessage" class="sendMessage" onclick="sendAloneMessage()" value="发送">
+            </section>
+        </div>
+    </div>
+</div>
+<!-- 独立JS -->
+<script th:src="@{sockjs.min.js}"></script>
+<script th:src="@{stomp.min.js}"></script>
+<script th:src="@{jquery.js}"></script>
+<script th:src="@{chatroom.js}"></script>
+</body>
+</html>
