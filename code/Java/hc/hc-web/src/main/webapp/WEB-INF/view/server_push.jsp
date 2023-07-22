@@ -7,13 +7,11 @@
     <title>服务器推送技术</title>
 </head>
 <body>
-<h1>服务器推送技术演示</h1>
 
 <ul>
-    <li><h2><a href="${pageContext.request.contextPath}/view/server_push/interval">Interval</a></h2></li>
-    <li><h2><a href="${pageContext.request.contextPath}/view/server_push/sse">SSE(server-sent-event)</a></h2></li>
-    <li><h2><a href="${pageContext.request.contextPath}/view/server_push/servlet_async">Servlet Asynchronous</a></h2></li>
-    <li><h2><a href="weChatPay">在线支付</a></h2></li>
+    <li><a href="${pageContext.request.contextPath}/view/server_push/interval">Interval</a></li>
+    <li><a href="${pageContext.request.contextPath}/view/server_push/sse">SSE(server-sent-event)</a></li>
+    <li><a href="${pageContext.request.contextPath}/view/server_push/servlet_async">Servlet Asynchronous</a></li>
 </ul>
 </body>
 </html>
