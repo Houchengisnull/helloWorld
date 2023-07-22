@@ -306,6 +306,10 @@ b.group(parentGroup, workGroup)
 
 ## ChannelInitializer
 
+ChannelInitializer是ChannelInboundHandler的子类，用于在通道建立后，将一个或者多个ChannelHandler添加到ChannelPipeline上。
+
+在initChannel()调用结束后，ChannelInitializer会将自己移出ChannelPipeline。
+
 ## ChannelOption
 
 配置网络连接属性。
