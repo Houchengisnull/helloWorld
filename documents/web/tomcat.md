@@ -138,7 +138,27 @@ Engine -->> Connector: HttpServletResponse
 Connector -->> User: http response
 ```
 
+# 责任链模式
 
+Tomcat使用了责任链模式。责任链模式带来了更好的拓展性，，例如添加一个额外的逻辑处理，我们可以增加一个阀门：
+
+``` java
+public class PrintIPValve extends ValveBase{
+    @Override
+    public void invoke(Request request, Response response)throws IOException{
+        System.out.println(requset.getRemoteAddr());
+        getNext().invoke(request,response); //传递给下一个阀门
+    }
+}
+```
+
+然后在Tomcat的server.xml上将阀门注册到对应Engine容器上。
+
+``` xml
+<Valve className="org.apache.catalina.valves.PrintIPValve"/>
+```
+
+最后将这个阀门类放在Tomcat的lib目录下。
 
 # server.xml
 
