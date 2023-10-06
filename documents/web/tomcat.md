@@ -74,6 +74,72 @@ Tomcat类库，所有的项目都可以共享。
 
 Tomcat的临时目录。
 
+# 组件
+
+## Server
+
+- 提供监听器机制，代表了Tomcat的运行实例。
+- 提供Tomcat容器全局的命名资源实现，JNDI。
+- 监听某个端口以接受SHUTDOWN命令，用于关闭Tomcat。
+
+## Service
+
+一个Service维护多个Connector和一个Container。
+
+## Connector组件
+
+链接器，监听转换Socket请求，请求交给Container处理，支持不同协议以及不同的I/O方式。
+
+## Container
+
+表示能够执行客户端请求并返回响应的一类对象，其中有不同级别的容器：Engine、Host、Context、Wrapper。
+
+## Engine
+
+整个Servlet引擎，最高级的容器对象。
+
+## Host
+
+Servlet引擎中的虚拟机，主要与域名有关，一个服务器有多个域名是可以使用多个Host。
+
+> Tomcat诞生时，服务器资源是昂贵的，所以当时一台服务器可以又多个域名映射。
+
+## Context
+
+用于表示ServletContext，一个ServletContext表示一个独立的Web应用。
+
+## Wrapper
+
+用于表示Web应用中定义的Servlet。
+
+## Executor
+
+Tomcat组件间可以共享的线程池。
+
+# 生命周期管理
+
+Tomcat的架构采用了一种树结构，每个节点包含多个子节点，而每个节点又继承了Tomcat的生命周期统一接口——Lifecycle。通过Lifecycle接口完成对Tomcat中所有组件生命周期的管理(启动、停止、关闭)。
+
+# 请求过程
+
+``` mermaid
+sequenceDiagram
+
+User ->> Connector:http request
+Connector ->> Service:http request
+Service ->> Engine:http request(url:localhost/index.jsp)
+Engine ->> Host:根据ip:port找到名为localhost的虚拟主机
+Host ->> Context:根据url找到/index.jsp对于的Context
+Context ->> Servlet:根据映射表找到对应的Servlet
+Servlet -->> Context: HttpServletResponse
+Context -->> Host: HttpServletResponse
+Host -->> Engine: HttpServletResponse
+Engine -->> Connector: HttpServletResponse
+Connector -->> User: http response
+```
+
+
+
 # server.xml
 
 ## 解压war unpackWARs
