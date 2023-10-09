@@ -366,7 +366,7 @@ value.set(text, value.get("Hello world"));
 
 - `bootstrap classloader`
 
-  引导类加载器，负责加载`JDK`核心类
+  引导类加载器(启动类加载器)，负责加载`JDK`核心类，由C++实现。
 
 - `extension classloader`
 
@@ -407,6 +407,12 @@ value.set(text, value.get("Hello world"));
 ## 类加载顺序
 
 `parent first`，双亲委派机制。核心的类不可被仿照。
+
+## 双亲委派模型
+
+如果一个类加载器收到了类加载请求，它首先委派给父加载器去完成，只有当父加载器无法完成时，子加载器采取自己加载。
+
+- 打破双亲委派模型需要重新ClassLoader的loadClass()方法
 
 # 引用 Reference
 

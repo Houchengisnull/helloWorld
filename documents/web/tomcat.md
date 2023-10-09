@@ -160,6 +160,46 @@ public class PrintIPValve extends ValveBase{
 
 最后将这个阀门类放在Tomcat的lib目录下。
 
+# Tomcat的类加载过程
+
+Tomcat中类加载考虑因素：
+
+- 隔离性
+
+  同一个Tomcat下不同应用，对于不同版本的依赖互补影响。
+
+- 灵活性
+
+  一个Web应用重新加载类时，不影响其他的应用。
+
+- 性能
+
+  由于每个Web应用都有一个类加载器，所以Web应用加载类时，不会搜索其他的应用的依赖，性能优于只有一个类加载器的情况。
+
+## 基础类加载器
+
+Tomcat提供了三个基础类加载器:
+
+- Commons
+
+  实现类Jar在应用服务器与Web应用之间的共享。
+
+- Catalina
+
+  加载服务器依赖的类
+
+- Shared
+
+  实现Jar在Web应用之间的共享
+
+以及Web应用类加载器。
+
+在Tomcat中，三个基础类加载器的加载路径在catalina.properties配置，默认情况下，三个基础类加载器的实例都是一个。
+
+- **Tomcat的类加载器结构**
+
+​	![](../images/tomcat/tomcat-classloader.png)
+
 # server.xml
 
 ## 解压war unpackWARs
