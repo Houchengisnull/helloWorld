@@ -1,6 +1,6 @@
 package org.hc.learning.thread.forkjoin.learning;
 
-import org.hc.tool.print.Colorful;
+import org.hc.tool.print.Colorfuls;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -77,8 +77,8 @@ public class FindWords extends RecursiveAction {
             int index = 1;
             while ((line = reader.readLine()) != null){
                 if (line.contains(keyWords)) {
-                    desc = Colorful.toBlue(path.getAbsolutePath() + ":" + index + "\t");
-                    line = Colorful.toRed(line, keyWords);
+                    desc = Colorfuls.toBlue(path.getAbsolutePath() + ":" + index + "\t");
+                    line = Colorfuls.toRed(line, keyWords);
                     System.out.println(desc + line);
                 }
                 index++;

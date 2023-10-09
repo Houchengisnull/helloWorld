@@ -5,7 +5,7 @@ package org.hc.tool.print;
  * 僅能在控制臺顯示
  * 于CMD窗口暫無效
  */
-public final class Colorful {
+public final class Colorfuls {
 
     public enum Color {
         BLACK,

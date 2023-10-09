@@ -1,7 +1,7 @@
 package org.hc.learning.algorithm.sort;
 
 import org.hc.learning.thread.forkjoin.learning.sum.MakeArray;
-import org.hc.tool.print.Colorful;
+import org.hc.tool.print.Colorfuls;
 
 import java.util.Optional;
 import java.util.concurrent.ForkJoinPool;
@@ -47,7 +47,7 @@ public class MergeSortError extends RecursiveAction {
      * @param args
      */
     public static void main(String[] args) {
-        System.out.println(Colorful.toRed("归并排序"));
+        System.out.println(Colorfuls.toRed("归并排序"));
         long l = System.currentTimeMillis();
         Integer[] array = MakeArray.makeArray();
         // output(array);
