@@ -94,6 +94,13 @@ Tomcat的临时目录。
 
 表示能够执行客户端请求并返回响应的一类对象，其中有不同级别的容器：Engine、Host、Context、Wrapper。
 
+> Tomcat的核心组件时Connector和Container：
+>
+> - Connector分装了地产的网络请求Socket,提供了统一的接口
+> - Container专注处理Servlet
+>
+> Tomcat的本质是Servlet容器。
+
 ## Engine
 
 整个Servlet引擎，最高级的容器对象。
@@ -199,6 +206,14 @@ Tomcat提供了三个基础类加载器:
 - **Tomcat的类加载器结构**
 
 ​	![](../images/tomcat/tomcat-classloader.png)
+
+## 类加载工厂
+
+类加载需要完成很多重复的事情，例如：读取字节数组、验证、解析、初始化等。
+
+而Java提供的URLClassLoader类能够方便的将Jar、Class或者网络资源加载到内存。
+
+而Tomcat则使用工厂类——ClassLoaderFactory把创建类的细节进行封装，通过它创建自定义加载类。
 
 # server.xml
 
