@@ -1,5 +1,51 @@
 [toc]
 
+# 作用
+
+Nginx在架构体系中的位置与作用
+
+- 网关
+
+  面向客户的总入口
+
+- 虚拟主机
+
+  为不同域名/ip/端口提供服务
+
+- 路由
+
+  使用反向代理
+
+- 静态服务器
+
+  在`MVVM`模式中，用来发布html/css/js/img
+
+- 负载集群
+
+  使用upstream，负载多个web服务器(tomcat)
+
+# Nginx模型
+
+Nginx采用多进程模型
+
+- master进程
+
+  接收来自外界的信号，向各个worker进程发生信号，监控各个worker进程的运行状态，当worker进程异常退出将重新拉起。
+
+## IO模型
+
+采用`epoll`模型。
+
+> select与epoll：
+>
+> select采用忙轮询，收集所有的TCP连接，把套接字交给操作系统梳理数据；
+>
+> epoll则是内核将时间写入Map，发生IO事件时，内核到Map中查找**my_event**；
+>
+> epoll = event + polls
+
+
+
 # 安装
 
 - **windows**	[nginx:download](http://nginx.org/en/download.html)
@@ -11,15 +57,93 @@
 - **参考**
 - [linux安装nginx 步骤](https://blog.csdn.net/qq_14926283/article/details/109838952)
 
+## 源码安装
 
+- C/C++编译环境
 
-# 启动
+  ``` shell
+  # 安装make
+  yum -y install autoconf automake make
+  # 安装g++
+  yum -y install gcc gcc-c++
+  yum -y install pcre pcre-devel
+  yum -y install zlib zlib-devel
+  yum -y install openssl openssl-devel
+  ```
+
+- 源码安装
+
+  ``` shell
+  # 源码安装
+  wget http://nginx.org/download/nginx-1.15.8.tar.gz
+  tar -zxcvf
+  cd nginx-1.9.0
+  # 启用命令 --with: 针对Nignx内部的模块化设计，部分模块默认不启动
+  ./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module 
+  make && make install
+  export PATH=$PATH:/usr/local/nginx/sbin
+  
+  # yum安装
+  yum install yum-utils
+  yum-config-manager --add-repo https://openresty.org/package/centos/openresty.repo
+  yum install openresty
+  ```
+
+# 目录结构
+
+- conf	配置文件
+- html	静态文件
+- logs	日志
+- sbin	二进制程序
+
+# 配置
+
+nginx.conf是nginx的配置文件，其结构如下：
+
+- main	全局配置
+- events	设置nginx的工作模式及连接数上限
+- http		服务器相关属性
+- server	虚拟主机设置
+- upstream	上游服务器设置，主要为反向代理、负载均衡相关配置
+- location	URL匹配特定位置后的设置
+
+# 启动与停止
 
 执行`nginx.exe`即可。启动成功如下图：
 
 ![image-20211103105728525](../images/web/nginx.start.png)
 
 > `nginx`启动成功后没有任何提示，可能这就是俄罗斯工程师的浪漫。
+
+``` shell
+# 安全退出
+kill -quit $pid
+# 立即退出
+kill -term $pid 
+```
+
+# 日志分割脚本
+
+- 分割脚本
+
+  ``` shell
+  #!/bin/bash
+  #设置日志文件存放目录
+  LOG_HOME="/usr/local/nginx/logs/"
+  #备分文件名称
+  LOG_PATH_BAK="$(date -d yesterday +%Y%m%d%H%M)"
+  #重命名日志文件
+  mv ${LOG_HOME}/access.log ${LOG_HOME}/access.${LOG_PATH_BAK}.log
+  mv ${LOG_HOME}/error.log ${LOG_HOME}/error.${LOG_PATH_BAK}.log
+  #向 nginx 主进程发信号重新打开日志
+  kill -USR1 `cat ${LOG_HOME}/nginx.pid
+  ```
+
+- 定时脚本
+
+  ``` shell
+  */1 * * * * /usr/local/nginx/sbin/logcut.sh
+  ```
 
 # upstream
 
