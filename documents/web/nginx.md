@@ -107,6 +107,96 @@ nginx.conf是nginx的配置文件，其结构如下：
 - upstream	上游服务器设置，主要为反向代理、负载均衡相关配置
 - location	URL匹配特定位置后的设置
 
+## 常用语法
+
+### Location
+
+路由。
+
+匹配优先级：
+
+- 精准匹配	location= /
+- 普通匹配	location ^~ /static/
+- 正则匹配	location~*.(gif|png|css|js)$
+
+`~`符号代表了正则表达式。
+
+- Location与Path
+
+  当Path匹配了Location后，Path会丢弃Location的命中的部分，将未命中的部分重新嫁接到proxy_pass部分。
+
+### Rewrite
+
+- 语法
+
+  rewrite regex replacement [flag]
+
+当正则表达式regex匹配path成功后，把路径替换成replacement字符串。
+
+flag指重定向的方式：
+
+- 内部重定向
+
+  - break	path值被更新，rewrite命令中断，原控制流程逻辑不变往下走
+  - last	path值被跟新，rewrite命令中断，控制流程刷新整个location层的逻辑流程
+
+- 外部重定向
+
+  发生页面重定向，nginx流程结束，返回http响应，页面url刷新
+
+  - redirect	返回301永久重定向
+  - permanent	返回302临时重定向
+
+- 空
+
+  发生内部重定向，path值更新，rewrite层面的命令继续，最后一个rewrite刷新控制流程，重新进行location匹配。
+
+# Nginx处理请求的过程
+
+- **post-read**
+
+  接收到完整的 http 头部后处理的阶段，在 uri 重写之前。
+
+- **server-rewrite**
+
+  location 匹配前，修改 uri 的阶段，用于重定向，location 块外的重写指令（**多次执行**）
+
+- **find-config**
+
+  uri 寻找匹配的 location 块配置项（**多次执行**）
+
+- **rewrite** 
+
+  找到 location 块后再修改 uri，location 级别的 uri 重写阶段（**多次执行**）
+
+- **post-rewrite**
+
+  防死循环，跳转到对应阶段
+
+- **preaccess** 
+
+  权限预处理
+
+- **access**
+
+  判断是否允许这个请求进入
+
+- **post-access**
+
+  向用户发送拒绝服务的错误码，用来响应上一阶段的拒绝
+
+- **try-files**
+
+  访问静态文件资源
+
+- **content**
+
+  内容生成阶段，该阶段产生响应，并发送到客户端
+
+- **log** 
+
+  记录访问日志
+
 # 启动与停止
 
 执行`nginx.exe`即可。启动成功如下图：
@@ -145,9 +235,17 @@ kill -term $pid
   */1 * * * * /usr/local/nginx/sbin/logcut.sh
   ```
 
-# upstream
+# Module
+
+## http
+
+## upstream
 
 ngx_http_upstream_module属于http模块，用于定义一组服务器。
+
+# Plugins
+
+## echo-nginx-module
 
 # FAQ
 
