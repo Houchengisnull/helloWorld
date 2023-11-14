@@ -1,5 +1,13 @@
 [toc]
 
+# 简介
+
+Nginx是俄罗斯工程师实现的轻量级HTTP服务器，它的发音是"engine X"。
+
+- 支持五万并发连接
+- 内存消耗少
+- 成本低
+
 # 作用
 
 Nginx在架构体系中的位置与作用
@@ -24,27 +32,45 @@ Nginx在架构体系中的位置与作用
 
   使用upstream，负载多个web服务器(tomcat)
 
-# Nginx模型
+# Nginx架构设计
+
+## 模块化设计
+
+高度模块化的设计是Nginx的架构基础，Nginx服务器被分为多个模块，每个模块是一个功能模块，只负责自身的功能，严格遵循高内聚，低耦合的原则。
+
+- core
+
+- standard http
+
+- optional http
+
+- email
+
+- third
+
+  第三方模块是为了扩展Nginx服务器应用的。
+
+## 多进程模型
 
 Nginx采用多进程模型
 
 - master进程
 
   接收来自外界的信号，向各个worker进程发生信号，监控各个worker进程的运行状态，当worker进程异常退出将重新拉起。
+  
+- work进程
 
-## IO模型
+  子进程，负责与客户端建立连接进行交互。
 
-采用`epoll`模型。
+## Epoll模式
 
-> select与epoll：
->
-> select采用忙轮询，收集所有的TCP连接，把套接字交给操作系统梳理数据；
->
-> epoll则是内核将时间写入Map，发生IO事件时，内核到Map中查找**my_event**；
->
-> epoll = event + polls
+采用epoll[^epoll]模型。
 
+- **select与epoll的区别**
 
+  select采用忙轮询，收集所有的TCP连接，把套接字交给操作系统梳理数据；epoll则是内核将时间写入Map，发生IO事件时，内核到Map中查找**my_event**；
+
+[^epoll]:event + polls
 
 # 安装
 
@@ -144,58 +170,62 @@ flag指重定向的方式：
 
   发生页面重定向，nginx流程结束，返回http响应，页面url刷新
 
-  - redirect	返回301永久重定向
-  - permanent	返回302临时重定向
+  - permanent 返回301永久重定向
+  - redirect	返回302临时重定向
 
 - 空
 
   发生内部重定向，path值更新，rewrite层面的命令继续，最后一个rewrite刷新控制流程，重新进行location匹配。
 
+> CDN:
+>
+> Content Delivery Network, 内容分发网络。
+
 # Nginx处理请求的过程
 
-- **post-read**
+1. **post-read**
 
-  接收到完整的 http 头部后处理的阶段，在 uri 重写之前。
+   接收到完整的 http 头部后处理的阶段，在 uri 重写之前。
 
-- **server-rewrite**
+2. **server-rewrite**
 
-  location 匹配前，修改 uri 的阶段，用于重定向，location 块外的重写指令（**多次执行**）
+   location 匹配前，修改 uri 的阶段，用于重定向，location 块外的重写指令（**多次执行**）
 
-- **find-config**
+3. **find-config**
 
-  uri 寻找匹配的 location 块配置项（**多次执行**）
+   uri 寻找匹配的 location 块配置项（**多次执行**）
 
-- **rewrite** 
+4. **rewrite** 
 
-  找到 location 块后再修改 uri，location 级别的 uri 重写阶段（**多次执行**）
+   找到 location 块后再修改 uri，location 级别的 uri 重写阶段（**多次执行**）
 
-- **post-rewrite**
+5. **post-rewrite**
 
-  防死循环，跳转到对应阶段
+   防死循环，跳转到对应阶段
 
-- **preaccess** 
+6. **preaccess** 
 
-  权限预处理
+   权限预处理
 
-- **access**
+7. **access**
 
-  判断是否允许这个请求进入
+   判断是否允许这个请求进入
 
-- **post-access**
+8. **post-access**
 
-  向用户发送拒绝服务的错误码，用来响应上一阶段的拒绝
+   向用户发送拒绝服务的错误码，用来响应上一阶段的拒绝
 
-- **try-files**
+9. **try-files**
 
-  访问静态文件资源
+   访问静态文件资源
 
-- **content**
+10. **content**
 
-  内容生成阶段，该阶段产生响应，并发送到客户端
+    内容生成阶段，该阶段产生响应，并发送到客户端
 
-- **log** 
+11. **log** 
 
-  记录访问日志
+    记录访问日志
 
 # 启动与停止
 
@@ -235,13 +265,13 @@ kill -term $pid
   */1 * * * * /usr/local/nginx/sbin/logcut.sh
   ```
 
-# Module
+# 负载均衡
 
-## http
+常规使用：
 
-## upstream
-
-ngx_http_upstream_module属于http模块，用于定义一组服务器。
+- 轮询
+- 权重
+- ip_hash
 
 # Plugins
 
