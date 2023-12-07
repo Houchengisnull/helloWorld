@@ -18,23 +18,35 @@ def connect():
 # 上滑
 def move_up():
     # 向adb发送命令:向上滑动屏幕
-    cmd="adb -s " + addr + " shell input swipe 310 650 310 200"
+    FirstDotX = str(random.randint(250, 350))
+    FirstDotY = str(random.randint(600, 700))
+    SecondDotX = str(random.randint(250, 350))
+    SecondDotY = str(random.randint(150, 250))
+    # cmd="adb -s " + addr + " shell input swipe 310 650 310 200"
+    cmd="adb -s " + addr + " shell input swipe "+FirstDotX+" " + FirstDotY + " " + SecondDotX + " " + SecondDotY
     res=subprocess.run(cmd,shell=True)
     print(res)
     
 # 点赞
 def like ():
-    cmd="adb shell input tap 664 878"
+    dotX = str(random.randint(505, 515))
+    dotY = str(random.randint(645, 655)) 
+    cmd="adb -s " + addr + " shell input tap " + dotX + " " + dotY
     res=subprocess.run(cmd,shell=True)
 
 if __name__=="__main__":
+    connect()
     
-    for i in range(100):
+    for i in range(50):
         move_up()
-        like()
+        isLike = random.randint(1, 200)
+        if isLike == 100:
+            like()
+            print("click like")
         print("第" + str(i+1) + "个视频")
         print("----------- ----------")
-        time.sleep(20)
+        
+        time.sleep(random.randint(20, 25))
    
  
     # ui = subprocess.Popen("adb -s " + addr +" shell uiautomator dump /data/local/tmp/uidump.xml", shell=True, stdout=subprocess.PIPE)
