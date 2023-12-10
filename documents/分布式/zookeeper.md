@@ -185,9 +185,19 @@ Zookeeper集群实际上是一种读写分离的架构，Leader负责写入数�
 - 分布式队列
 - 分布式锁
 
-# Zookeeper
+# ZooKeeper
 
 ZooKeeper致力于提供一个高性能、高可用，且具备严格的顺序访问控制能力的分布式协调服务。由雅虎公司创建，是 Google 的 Chubby 一个开源的实现，也是 Hadoop 和 Hbase 的重要组件。
+
+- **历史**
+
+  > ​	ZooKeeper 最早起源于雅虎研究院的一个研究小组。在当时，研究人员发现，在雅虎内部很多大型系统基本都需要依赖一个类似的系统来进行分布式协同，但是这些系统往往都存在分布式单点问题。
+  >
+  > ​	所以，雅虎的开发人员就开发了一个通用的无单点问题的分布式协调框架，这就是 ZooKeeper。
+
+- **场景**
+  1. 服务注册；
+  2. 分布式锁；
 
 其设计目标为：
 
@@ -347,3 +357,6 @@ org.apache.zookeeper.server.LogFormatter log.1
 
 - EventThread
 
+# 分布式锁
+
+ZooKeeper实现分布式锁利用了**临时有序节点**与Watch机制。
