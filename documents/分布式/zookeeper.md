@@ -360,3 +360,5 @@ org.apache.zookeeper.server.LogFormatter log.1
 # 分布式锁
 
 ZooKeeper实现分布式锁利用了**临时有序节点**与Watch机制。
+
+> 如果使用临时无序节点，在某客户端释放锁的时候，可能出发羊群效应。
