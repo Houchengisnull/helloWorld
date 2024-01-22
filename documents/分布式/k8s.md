@@ -226,7 +226,10 @@
 
 - **加入集群**
 
-  ·
+  ``` shell
+  kubeadm join 192.168.192.15:6443 --token aqf3ii.kn1luk9odk5ix0dq \
+      --discovery-token-ca-cert-hash sha256:e98fd2e33da8cb07ded532e1d0fd453c8f5e1c2e823962307f4f0589b14b6135
+  ```
 
 # 架构
 
