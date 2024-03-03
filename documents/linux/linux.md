@@ -364,8 +364,6 @@ yum clean oldheaders
 yum clean | yum clean all
 ```
 
-
-
 #### 源
 
 在/etc/yum/repos.d/下进行如下操作(注意备份)：

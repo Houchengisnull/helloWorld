@@ -95,7 +95,9 @@ startx
 sudo sudo su
 ```
 
-# apt-get
+# 安装工具
+
+## apt-get
 
 全名`Advanced Package Tool`，类似`python`中的`pip`工具。
 
@@ -109,9 +111,9 @@ sudo sudo su
 
   再执行`sudo apt-get update`更新
 
-## FAQ
+**FAQ**
 
-### Unable to locate XXX
+Unable to locate XXX
 
 [关于Ubuntu的Unable to locate package无法更新源问题解决方案](https://blog.csdn.net/qq_38880380/article/details/83008426)
 
@@ -139,6 +141,15 @@ deb-src http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe
 ```
 
 
+
+## yum
+
+``` shell
+# 常用软件
+yum install wget
+yum install lrzsz
+yum install net-tools
+```
 
 # 编码 
 
@@ -342,6 +353,15 @@ sz $directory /*
 # 上传
 rz $filename
 ```
+## scp
+
+``` shell
+$scp local_file remote_username@remote_ip:remote_folder
+$scp local_file remote_username@remote_ip:remote_file
+$scp local_file remote_ip:remote_folder
+$scp local_file remote_ip:remote_file
+```
+
 # vi/vim
 
 ## 查找
@@ -444,13 +464,13 @@ $ ethtool eth0
 ``` shell
 # 查看防火墙状态
 # 出现Active属性显示running则表示防火墙开启
-$ systemctl status firewalld.service
+systemctl status firewalld.service
 
 # 开启防火墙
-$ systemctl start firewalld.service
+systemctl start firewalld.service
 
 # 关闭防火墙
-$ systemctl stop firewalld.service
+systemctl stop firewalld.service
 ```
 
 - 开放端口
