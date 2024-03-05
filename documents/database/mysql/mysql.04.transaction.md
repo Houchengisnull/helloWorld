@@ -41,12 +41,12 @@ SHOW CREATE TABLE '表名';
 
 ## 隔离级别
 
-| 隔离级别        | 脏读 | 不可重复度 | 幻读 |
-| --------------- | ---- | ---------- | ---- |
-| READ UNCOMMITED | NO   | NO         | NO   |
-| READ COMMITED   | YES  | NO         | NO   |
-| REPEATABLE READ | YES  | YES        | NO   |
-| SERIALIZABLE    | YES  | YES        | YES  |
+| 隔离级别        | Dirty Read | Non-Repeatable Read | Phantom Read |
+| --------------- | ---------- | ------------------- | ------------ |
+| READ UNCOMMITED | ×          | ×                   | ×            |
+| READ COMMITED   | √          | ×                   | ×            |
+| REPEATABLE READ | √          | √                   | ×            |
+| SERIALIZABLE    | √          | √                   | √            |
 
 ## 语法
 
