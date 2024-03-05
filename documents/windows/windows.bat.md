@@ -243,6 +243,21 @@ C:\Users\admin\AppData\Local\Programs\Python\Python38\python.exe
 
 # 文件
 
+## 创建空文件
+
+- 参考
+- [通过 Windows 命令行（CMD）创建文件](https://www.markjour.com/article/20131224-cmd-create-file.html)
+
+``` bat
+cd . > a.txt
+
+copy nul a.txt
+
+type nul > a.txt
+
+fsutil file createnew d:\a.txt 0
+```
+
 ## 查看当前目录
 
 ``` bat
