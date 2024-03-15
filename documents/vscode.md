@@ -105,3 +105,11 @@
 # tasks.json
 
 用于构建的配置文件。
+
+# 快捷键
+
+## 修改快捷键
+
+1. `Ctrl + Shift + P`
+2. 输入`Keyboard Shortcuts`
+3. 修改对应的键位
