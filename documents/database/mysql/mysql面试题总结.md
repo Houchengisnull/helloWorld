@@ -79,6 +79,28 @@
 
 ## MVVC实现原理
 
+MVVC由`undo log`与`read view`共同实现。
+
+`undo_log`中有一个`trx_id`字段，记录修改该记录的事务id;
+
+`read_view`中则有：
+
+- **m_ids**	当前活跃事务id
+- **min_id**	m_ids中的最小事务id
+- **max_id**	m_ids的下一事务id
+- **creator_id**	当前事务id
+
+| 场景                                        | 可用 | 备注 |
+| ------------------------------------------- | ---- | ---- |
+| trx_id ∈ (-∞，min_id)                       | √    |      |
+| trx_id = min_id                             | ×    |      |
+| trx_id ∈ {m_ids} ∩ [min_id, max_id]         | ×    |      |
+| trx_id ∈ [min_id, max_id]且trx_id ∉ {m_ids} | √    |      |
+| trx_id ∈[max_id, +∞)                        | ×    |      |
+| trx_id = creator_id                         | √    | 优先 |
+
+
+
 # 锁
 
 ## InnoDB由哪些锁
