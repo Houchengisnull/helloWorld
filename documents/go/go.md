@@ -13,16 +13,34 @@ go env -w GOPROXY=https://goproxy.cn,direct
 
 ``` bat
 go mod edit -replace example.com/greetings=../greetings
-go mod tidy
+go mod tidy	
 ```
-
-
 
 # Project
 
 ## go.sum
 
 记录项目依赖的版本和hash，以保证项目在构建与部署过程中的一致性。
+
+## go.work
+
+创建一个`workspace`，快速搭建模块。
+
+``` shell
+go work init ./hello
+```
+
+执行该命令后，会出现一个`go.work`的文件。
+
+再执行：
+
+``` shell
+go work use hello
+```
+
+说明在该`workspace`将使用`hello`模块。
+
+> 但是看其他项目并没有该文件...其他人是在Go中是如何使用multipart module的呢？很疑惑。
 
 # 语法
 
