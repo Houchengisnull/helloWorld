@@ -1,10 +1,21 @@
 [toc]
 
-# 安装依赖
+# 依赖
+
+## 下载依赖
+
+- **设置代理**
 
 ``` shell
 go env -w GOSUMDB=off
 go env -w GOPROXY=https://goproxy.cn,direct
+```
+
+## 导入
+
+``` go
+// 仅使用包中的init函数
+import _ "golang.org/x/image/bmp"
 ```
 
 # Command
