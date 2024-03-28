@@ -3,10 +3,13 @@ package org.hc.learning.jvm.classloader;
 import org.hc.tool.print.Prints;
 import sun.misc.Launcher;
 
+import java.lang.management.ClassLoadingMXBean;
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
 import java.net.URL;
 import java.net.URLClassLoader;
 
-public class ClassLoaderApp {
+public class GetAllClassUrlUtil {
 
     public static void main(String[] args) {
         // 启动类加载器
@@ -27,6 +30,7 @@ public class ClassLoaderApp {
         // 应用类加载器
         System.out.println("系统加载器:");
         URLClassLoader system = (URLClassLoader) ClassLoader.getSystemClassLoader();
+        // 打印加载路径
         for (URL url : system.getURLs()){
             System.out.println(url);
         }
