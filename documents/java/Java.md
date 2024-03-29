@@ -350,33 +350,47 @@ value.set(text, value.get("Hello world"));
   1. 通过`ObjectInputStream`，`ObjectOutputStream`实现对象的深克隆；
   2. 借助`Spring`、`Hutool`的`BeanUtils`；
 
-# 类加载
+# Class Loader
 
-## 类动态加载
+## 加载方式
 
-动态主要体现为三种方式：
+| 加载方式              | 加载类型 |
+| --------------------- | -------- |
+| new关键字             | 隐式加载 |
+| Class.forName()       | 显式加载 |
+| 自定义classloader加载 | 显式加载 |
 
-| 加载方式 | 加载类型 |
-| -------- | -------- |
-| new关键字         | 隐式加载         |
-| Class.forName()         | 显式加载         |
-| 自定义classloader加载         | 显式加载         |
+## 类加载器
 
-当`JVM`启动时，会形成三个类加载器组成的初始类加载器层次结构
-
-- `bootstrap classloader`
+- **bootstrap classloader**
 
   引导类加载器(启动类加载器)，负责加载`JDK`核心类，由C++实现。
 
-- `extension classloader`
+- **extension classloader**
 
   扩展类加载器，负责加载`JRE`扩展目录——`$JAVA_HOME/jre/lib/ext`
 
-- `system classloader`
+- **system classloader**
 
   应用类加载器，负责加载`java -classpath`中指定的类路径或`jar`
 
 ## 类加载过程
+
+- 加载
+
+  加载过程：通过全类名读取.class文件的二进制字节流，将字节流（代表的静态存储结构）转换为方法区的运行时数据结构，在内存中生成代表该类的对象。
+
+- 链接
+
+  - 验证
+  - 准备
+  - 初始化
+
+- 初始化
+
+### 动态加载
+
+动态加载指的是在类被具体使用的时候，才去加载。
 
 在默认的`JVM`设计中，`classloader`加载`Class`的过程大致如下：
 

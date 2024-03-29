@@ -2,13 +2,9 @@ package org.hc.learning.jvm.classloader;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.net.URLClassLoader;
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -59,22 +55,6 @@ public class MyJarClassLoader extends ClassLoader {
             }
         }
         return clazz;
-    }
-
-    private List<String> getRelatedClasses(String filename) {
-        List<String> classes = new ArrayList<>();
-        Enumeration<JarEntry> entries = jarFile.entries();
-        while (entries.hasMoreElements()) {
-            String name = entries.nextElement().getName();
-            if (name.startsWith(filename)) {
-                classes.add(name);
-            }
-        }
-        return classes;
-    }
-
-    public JarFile getJarFile() {
-        return this.jarFile;
     }
 
     public static void printAllClass(JarFile jarFile) {
