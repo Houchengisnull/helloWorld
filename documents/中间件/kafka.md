@@ -6,15 +6,15 @@ Apache Kafka 是一个分布式流处理平台和消息队列系统，最初由 
 
 ## 特点
 
-- 持久化
-- 高伸缩性
-- 高性能
+- **持久化：** Kafka 可以持久化大量数据，并确保数据不会丢失。
+  
+- **高伸缩性：** Kafka 集群可以轻松地水平扩展，以适应不断增长的数据量和流量。
+  
+- **高性能：** Kafka 具有优秀的性能表现，可以处理大规模的消息传输和处理任务。
 
 ## 性能影响的因素
 
-- 磁盘吞吐量
-- 内存
-- 网络
+Kafka 的性能受多种因素影响，包括磁盘吞吐量、内存和网络等。合理配置和优化这些因素可以提升 Kafka 的性能表现。
 
 # 消费者
 
@@ -28,29 +28,20 @@ Apache Kafka 是一个分布式流处理平台和消息队列系统，最初由 
 
 ## 偏移量
 
-消费者根据**偏移量**来决定从什么位置开始消费。偏移量的值保存在一个`_consumer_offset`的特殊主题中。
+消费者根据偏移量来决定从什么位置开始消费消息。偏移量的值保存在一个特殊的主题 `_consumer_offset` 中。消费者可以选择自动提交或手动提交偏移量。
 
 ### 提交
 
-- **自动提交**
+- **自动提交：** 在分区再分配之后可能导致数据重复消费。
+  
+- **手动提交：** 可以使用同步或异步方式手动提交偏移量，以确保偏移量的准确性。
 
-  在分区再分配之后，可能导致数据重复消费。
+## 再平衡监听器
 
-- **手动提交**
+为了更好地处理再分配现象，Kafka 提供了 ConsumerRebalanceListener 接口，可以在再分配前后执行一些逻辑操作，如提交偏移量等。
 
-  使用`commitSync()`提交最新poll的偏移量。
-
-- **手动提交(Async)**
-
-  使用`commitAsync()`异步提交最新poll的偏移量。
-
-<hr>
-
-以上情况或多或少都有一些缺陷，无法保证发生再平衡时数据不会重新消费，所以Kafka提供ConsumerRebalancelistener[^1]。
-
-[1]: 再平衡监听器
-
-``` java 
+```java
+// 示例代码
 import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
 import org.apache.kafka.common.TopicPartition;
 import java.util.Collection;
@@ -59,47 +50,14 @@ public class MyConsumerRebalanceListener implements ConsumerRebalanceListener {
 
     @Override
     public void onPartitionsRevoked(Collection<TopicPartition> partitions) {
-        // 在重新分配分区之前，消费者将要丧失这些分区的所有权
-        System.out.println("Lost partitions in rebalance. Committing current offsets: " + partitions);
-        // 在这里添加提交当前偏移量的逻辑
+        // 在重新分配分区之前执行的逻辑操作
     }
 
     @Override
     public void onPartitionsAssigned(Collection<TopicPartition> partitions) {
-        // 消费者重新分配到了这些分区的所有权
-        System.out.println("Assigned partitions in rebalance: " + partitions);
-        // 在这里添加消费者重新分配到分区后的处理逻辑
+        // 在重新分配分区之后执行的逻辑操作
     }
 }
-
-// 在消费者代码中使用 ConsumerRebalanceListener
-import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.clients.consumer.KafkaConsumer;
-import java.util.Collections;
-import java.util.Properties;
-
-public class MyConsumer {
-
-    public static void main(String[] args) {
-        Properties props = new Properties();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "my-group");
-        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-
-        KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props);
-        consumer.subscribe(Collections.singletonList("my-topic"), new MyConsumerRebalanceListener());
-
-        try {
-            while (true) {
-                // 消费消息的逻辑
-            }
-        } finally {
-            consumer.close();
-        }
-    }
-}
-
 ```
 
 # Kafka集群
@@ -139,4 +97,3 @@ Kafka组件订阅Zookeeper的/brokers/ids路径，当有broker加入或退出集
 - **优先副本**
 
   除了首领副本外，每个分区都有一个优先副本。创建主题时，选定的首领分区就是分区的优先副本。
-
