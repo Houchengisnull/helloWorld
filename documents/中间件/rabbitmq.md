@@ -1,64 +1,18 @@
 [toc]
 
-# 基本
+# 简介
 
-- **参考**
-- [RabbitMQ博客列表](https://www.jianshu.com/p/cd81afa8ade1)
-- [RabbitMQ笔记一：消息队列和RabbitMQ及AMQP协议介绍](https://www.jianshu.com/p/6e6821604efc)
-- **实现语言**	`Erlang`
+RabbitMQ是一个流行的开源消息代理和队列服务器，用于在分布式系统中协调和管理消息传递。它实现了高级消息队列协议（AMQP），并且支持多种消息协议和插件扩展，如MQTT, STOMP等。RabbitMQ是用Erlang语言编写的，因此继承了Erlang的高并发、高可用性和容错特性。
 
-![img](../images/messagequeue/rabbitmq.arch.jpg)
+# Channel
 
-## 用途
+Channel是生产者/消费者与RabbitMQ通信的渠道。
 
-- 异步处理
-- 系统解耦
-- 流量削峰
-- 广播
-- 最终一致性
+信道是建立在TCP连接上虚拟连接，即RabbitMQ可以在一条TCP连接上建立多个Channel交给多线程来处理。
 
-## 常用信息 
-
-- **默认端口**	5672
-- **管理端端口**	15672
-- **管理端默认用户** guest
-- **管理端默认密码** guest
-
-# AMQP
-
-应用层标准高级消息队列协议，`Advanced Message Queuing Protocol`。
-
-## 背景
-
-各个厂家使用的`MQ`使用不同的`api`、协议，如果应用需要使用不同的厂家的队列，那么将增加系统复杂性。为了解决这个问题，Java曾经试图使用`JMS(Java Message Service)`来屏蔽这些问题，类似`JDBC`。
-
-但是消息中间件接口的复杂程度不得不引入新的消息通信标准化方案——`AMQP`。
-
-## 基本概念
-
-| 概念          | 意义                                                         |
-| ------------- | ------------------------------------------------------------ |
-| Server/Broker | 实现`AMQP`的服务器实体                                       |
-| Connection    | 应用程序与Broker的网络连接                                   |
-| Channel       | 信道，进行消息读写的通道，客户端可以建立多个Channel，每个Channel代表一个会话任务 |
-| Message       | 消息                                                         |
-| Exchange      | 交换机，用于接收消息。                                       |
-| Binding       | Exchange与Queue之间的虚拟连接                                |
-| Routing key   | 一个虚拟地址，个人理解为转发时所使用的映射关系中的key        |
-| Queue         | 消息队列，用于缓存消息并转发给消费者                         |
-| Virtual Host  | 类似权限控制组，一个Virtual Host中里面可以有若干个Exchange和Queue |
-
-![img](../images/messagequeue/amqp)
-
-> - 如何理解“路由”？
-> - 2021-7-14 暂时理解为转发就好了。
+> 从技术上将，这被称为·**多路复用**，有效减少操作系统的性能开销。
 
 # Exchange
-
-- **参考**
-- [RabbitMQ笔记三：四种类型Exchange](https://www.jianshu.com/p/04f443dcd8bd)
-
-## 作用
 
 服务器不会把消息直接塞进队列(`Queue`)，而是发送给交换机(`Exchange`)。再根据消息附带的规则，`Exchange`将会决定消息投递到哪个队列中。
 
@@ -70,7 +24,7 @@
 
   队列和交换机之间的绑定。
 
-## `Exchange`类型有四种：
+## Type
 
 - **Direct Exchange**
 
@@ -88,60 +42,56 @@
 
   将消息中的`headers`与该`Exchange`相关联的所有`Binding`中的**参数**进行匹配，如果**匹配**则发送到绑定的队列中。
 
-## Routing Key匹配规则
+## Binding Key
 
-- **参考**
-
-  [通配符模式](https://www.cnblogs.com/laosunlaiye/p/11671519.html)
+### Match Rule
 
 - **\***	匹配一个单词
 - **#**	匹配任意字符
 - **\*,#**	只能写在`.`左右，且不能挨着字符
 
-尽管没有阅读过官网文档，但是直觉告诉我以下描述为`Binding Key`更为准确。
+# Virtual Host
 
-首先因为消费者消费消息只需要指定队列即可，其次`Binding Key`用于指明消息从`Exchanger`到`Queue`之间的链路，所以在很多文章中都会说明——通配符只针对消费者。反正队列里的数据都是消费者消费的，那么笼统地将队列看成整个消费者也没什么关系。
+虚拟主机(virtual host)是一个逻辑分组，t同一台RabbitMQ服务器上可以有不同的vhost。
 
-> 需要注意的是: 通配符只针对~~消费者~~**Binding Key**。
+而各个vhost下的user、exchange、topic、queue互不干扰。
 
-# Publisher Confirms 消息确认
+vhost之间的**资源隔离**可以满足以下场景：
 
-- **参考**
-- [RabbitMQ笔记十五：消息确认之一（Publisher Confirms）](https://www.jianshu.com/p/0db95a3e972c)
+- 权限管理
+- 环境分离[^1]
+- 多租户环境
 
-在使用消息中间件时，存在丢失消息的情况，发送者不能确保是否发送成功，接收者接收失败也无法反馈。
+[^1]: 可以使用虚拟主机区分不同的环境：开发环境、测试环境、生产环境。
 
-``` mermaid
-graph LR
-	p(生产者)  -- publish --> broker(broker)
-	broker -- consume --> c(消费者)
+# Publish
 
-```
+## Transaction
 
-为了保证消息中间件的可靠性：
+在发生消息时，需要设置channel支持事务。
 
-1. 事务
+- channel.txSelect()		开启事务
+- channel.txCommit()	提交事务
+- channel.txRollback()	回滚事务
 
-   利用`AMQP`的一部分，发送消息前将`channel`设置为`tx`模式，与数据库事务类似。但同样非常耗费消息中间件的性能。
+在开启事务的channel与RabbitMQ交互时，任意环节发生问题则会抛出IOException，这样用户可以捕获异常进行事务回滚。
 
-2. 消息确认，`Publish confirms`
+# Consume
 
-   ``` mermaid
-   graph LR
-   	p(生产者)  -- publish --> broker(broker)
-   	broker -- consume --> c(消费者)
-   	broker -- confirm --> p
-   	c -- confirm --> broker
-   	broker -- 数据落地 --> broker
-   ```
+## ack
 
-   发送消息前将`channel`设置为`confirmSelect`模式。
+在RabbitMQ中，每条消息需要消费者确认。
+
+消费者声明队列时，设置autoAck参数：
+
+当autoAck=false，需要消费者显式确认，RabbitMQ在收到消费者返回的basicAck后，才会移除消息。
+
+否则，该消息在消费者断开连接后，重新返回队列。
 
 - **Java**
 
   ``` java
   import com.rabbitmq.client.*;
-  
   import java.io.IOException;
   import java.util.TreeSet;
   import java.util.concurrent.TimeUnit;
@@ -168,12 +118,56 @@ graph LR
   		
   }
   ```
-
   
 
-- **参考**
+## reject
 
-- [RabbitMQ笔记十五：消息确认之一（Publisher Confirms）](https://www.jianshu.com/p/0db95a3e972c)
+消费者在应答时，可以将消息设置为reject，表明拒绝该消息。可能时非法的消息，或者是该消息自己暂时无法处理，于是reject。
+
+在reject的同时，结合requeue参数，确定这条消息是否需要重回队列，否则丢弃。
+
+- nack
+
+  nack与reject类似，但是它可以一次性拒绝多条消息。
+
+## Qos预取模式
+
+Qos预取模式是消费者先拉取一定数量的消息，然后批量确认。
+
+Qos模式需要autoAck=false，然后设置baseQos的值。
+
+# Queue
+
+## 死信队列
+
+RabbitMQ提出了**死信队列**的概念。
+
+死信队列主要保存三种消息：
+
+- reject & requeue=false的消息
+- 过期消息[^2]
+- 队列达到最大长度
+
+[^2]: 默认情况下消息不会过期，但是可以给队列设置过期时间和消息的过期时间
+
+死信队列的exchange同样是个普通的exchange，在创建队列的时候，声明该队列是死信队列即可。
+
+### 和备用exchange的区别
+
+- 备用exchange是在原exchange不可用时作用
+- 备用exchange是在原exchange创建时声明，死信exchange是在创建队列时声明
+
+## 临时队列
+
+临时队列即没有持久化的队列，在RabbitMQ重启后，队列不存在。
+
+## 自动删除队列
+
+在声明队列时，设置auto-delete=true，那么在最后一个消费者断开连接后，该队列自动删除。
+
+## exclusive
+
+在声明队列时，设置exclusive=true，那么只有一个消费者可以消费该队列的消息。
 
 # Java集成
 

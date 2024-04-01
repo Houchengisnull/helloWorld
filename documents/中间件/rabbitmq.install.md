@@ -76,5 +76,9 @@ rabbitmq-plugins enable rabbitmq_management
 rabbitmqctl status
 ```
 
+## 常用信息 
 
-
+- **默认端口**	5672
+- **管理端端口**	15672
+- **管理端默认用户** guest
+- **管理端默认密码** guest
