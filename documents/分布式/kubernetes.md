@@ -2,107 +2,13 @@
 
 - [官网](https://kubernetes.io/zh-cn/docs)
 
+# Overview
 
+Kubernetes（简称k8s）是一款容器编排系统。
 
-# 目的
+# Setting up a cluster
 
-kubernets支持在分布式环境下管理容器(Docker)。
-
-> Docker公司的同款产品时swarm，但在功能上不如kubernets。
-
-# 概念
-
-## Namespace
-
-将一个物理Cluster在逻辑上划分成多个虚拟的Cluster，每个Cluster就是一个Namespace。
-
-不同的Namespace里的资源是完全隔离的。
-
-## Master Node
-
-负责管理和控制。
-
-## Worker Node
-
-运行容器应用，Worker由Master管理，负责监控并汇报容器的状态，同时根据Master的要求管理容器的生命周期。
-
-## Pod
-
-Pod是Kubernets的最小工作单元。
-
-每个Pod包含一个或多个容器。Pod中的容器会被作为一个整体被Master调度到一个Node上运行。
-
-- **状态**
-
-  ![img](../images/k8s_pod_status.png)
-
-  | status                     | means                                                        |
-  | -------------------------- | ------------------------------------------------------------ |
-  | Pending                    | 该阶段表示已经被 Kubernetes 所接受，但是容器还没有被创建，正在被 kube 进行资源调度。 |
-  | 1                          | 图中数字 1 是表示在被 kube 资源调度成功后，开始进行容器的创建，但是在这个阶段是会出现容器创建失败的现象 |
-  | Waiting或ContainerCreating | 这两个原因就在于容器创建过程中**镜像拉取失败**，或者**网络错误**容器的状态就会发生转变。 |
-  | Running                    | 该阶段表示容器已经正常运行。                                 |
-  | Failed                     | Pod 中的容器是以非 0 状态（非正常）状态退出的。              |
-  | 2                          | 阶段 2 可能出现的状态为`CrashLoopBackOff`，表示容器正常启动但是存在异常退出。 |
-  | Succeeded                  | Pod 容器成功终止，并且不会再在重启。                         |
-
-## Controller
-
-管理Pod的工具。
-
-Deployment是最常用的Controller。
-
-## Service
-
-定义外界访问一组特定Pod的方式。
-
-Service拥有自己的IP和端口，并把该IP与后端的Pod运行的服务关联起来。
-
-Service为Pod提供了负载均衡。
-
-# 架构
-
-![Kubernetes 架构](../images/kubernetes-cluster-architecture.svg)
-
-## kube-apiserver
-
-Kubernetes Cluster的前端接口。
-
-其他客户端工具以及K8S的其他组件可以通过它管理Cluster资源。
-
-## kube-scheduler
-
-调度器，负责决定将Pod放在哪个Node上运行。
-
-## Controller-Manager
-
-监控每个Controller的健康状态，并确保控制器是健康的，而控制器是确保Pod健康的组件。
-
-## etcd
-
-保存K8S Cluster的配置信息和各种资源的状态信息。
-
-## Pod网络
-
-Pod能通信，K8S Cluster必须部署网络。（Flannel是其中一个方案）
-
-## kubelet
-
-是Node的Agent。
-
-当Scheduler却在某个Node上运行Pod后，会将Pod的具体配置信息（image、volume）发送给该节点的kubelet，kubelet根据这些信息创建和运行容器，并向Master报告运行状态。
-
-## kube-proxy
-
-service在逻辑上代表了后端的多个Pod，外部通过service访问Pod。
-
-而kube-proxy负责将service接收到的请求转发到Pod。
-
-> 每个Node都运行kube-proxy。
-
-# 集群搭建
-
-## 安装flannel网络插件
+## install flannel
 
 - [network plugin is not ready & cni config uninitialized](https://github.com/kubernetes/kubernetes/issues/103324)
 
@@ -113,7 +19,7 @@ service在逻辑上代表了后端的多个Pod，外部通过service访问Pod。
 
 发现一直在报错`failed to find plugin "flannel" in path [/opt/cni/bin]`。
 
-## 安装
+## Install
 
 - **关闭selinux**
 
@@ -251,7 +157,7 @@ service在逻辑上代表了后端的多个Pod，外部通过service访问Pod。
   ```
 
 
-## Master节点配置
+## Master Node
 
 - 参考
 
@@ -259,13 +165,15 @@ service在逻辑上代表了后端的多个Pod，外部通过service访问Pod。
 
   [如何解决kubeadm init初始化时dial tcp 127.0.0.1:10248: connect: connection refused](https://www.myfreax.com/how-to-solve-dial-tcp-127-0-0-1-10248-connect-connection-refused-during-kubeadm-init-initialization/)
 
-### 初始化
+### Init
 
 初始化`kubernet`的`control-pane`。
 
 在执行这一步时总是报错，通过`journalctl -xeu kubelet`发现：存在大量的拒绝连接错误。
 
-搜索一番后，了解到这是因为cgroup驱动问题造成的。kubernet的驱动是systemd，而docker的驱动则是cgroupfs。根据官方建议，使用systemd更加稳定，因此将docker的配置修改为cgroupfs。
+搜索一番后，了解到这是因为cgroup驱动问题造成的。kubernet的驱动是systemd，而docker的驱动则是cgroupfs。
+
+根据官方建议，使用systemd更加稳定，因此将docker的配置修改为cgroupfs。
 
 重启docker和kubernet生效。
 
@@ -285,7 +193,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 ![image-kubernet-master-node-install](../images/kubernet-master-node-install-success.png)
 
-### 添加flannel网络
+### Add flannel
 
 配置pod network
 
@@ -294,7 +202,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml
 ```
 
-### 生成token
+### Generate token
 
 ``` shell
 # 查询token list
@@ -304,7 +212,7 @@ kubeadm token list
 kubeadm token create --print-join-command
 ```
 
-## Work节点配置
+## Work Node
 
 - **设置机器名**
 
@@ -327,23 +235,24 @@ kubeadm token create --print-join-command
       --discovery-token-ca-cert-hash sha256:ae4b04bbe7aee468b410e5f20cbbbd02b80d9761dd915ecf17f88f42fa57debb 
   ```
 
-## 查看集群
+# Usag
+
+## Namespace
 
 ``` shell
-kubectl get nodes
+kubectl get namespaces 
+
+kubectl delete namespaces <namespaces>
 ```
 
-这一步报错TLS握手异常，问题出现在kubenet的api-sever服务，看了日志之后也确实如此。尽管如此，还是按照网上的说法重新设置了一下虚拟机的内存大小，从1g设置为3g。
+## Service
 
-重启虚拟机后，问题解决。
+``` shell
+# 查看service
+kubeclt get svc
+```
 
-> 20240123
->
-> 这让我的学习体验十分不好，因为从握手异常真的很难联想到内存不足。
->
-> 只能说Google开源的产品是具有其独特文化和环境的，国内这种伸手即来、开箱即用的风气真的是不太好。甚至国内各行各业的IT公司将其作为招聘的硬性条件，变相要求所有从业者去学习kubernet，进而导致国内唯一的解决方案就是k8s，实在是一种缺乏创新精神的表现。
-
-# Pod
+## Pod
 
 Pod是Kubernet的最小工作单元，包含一个或者多个容器。
 
@@ -363,15 +272,9 @@ kubectl get pods -o wide
 kubectl describe pod nginx-dep-5779c9d6c9-jw5gc
 ```
 
-- 默认情况下，**Master Node不允许创建Pod**
+# Sample
 
-  否则将出错：`(k8s) 1 node(s) had taints that the pod didn't tolerate`。
-
-  在默认情况下，Master Node不参与工作负载，出于安全方面的考虑。
-
-# Kubernet的使用
-
-## kubectl run
+## Run
 
 ``` shell
 # 创建一个应用程序
@@ -383,11 +286,15 @@ kubectl describe pod nginx-dep-5779c9d6c9-745b2
 
 # 进入容器查看
 kubectl exec -it nginx-dep-5779c9d6c9-745b2 -c nginx-dep /bin/bash
+
 # 退出容器
 exit
+
+# 查看日志
+kubectl logs kafka-6b969957f8-878gm -n kafka
 ```
 
-## 暴露服务到外网
+## Expose service
 
 ``` shell
 # 删除pod(模拟pod出现故障)
@@ -409,13 +316,13 @@ kubectl edit svc nginx-service
 kubectl get svc
 ```
 
-## 服务伸缩
+## Scale
 
 ``` shell 
 kubectl scale --replicas=4 deployment nginx-dep
 ```
 
-## 在线升级与回滚
+## Update and rollback
 
 ``` shell 
 # update
