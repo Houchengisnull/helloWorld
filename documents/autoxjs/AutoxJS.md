@@ -63,3 +63,25 @@ adb shell getprop ro.product.cpu.abi
 - 打包
   1. `Ctrl Shift P`
   2. `autoxjs: save`
+
+# Start
+
+## 投屏
+
+1. 通过cmd执行`adb start-server`
+
+   > 确保adb-server驱动正确安装
+
+   ![image-20240402190834279](../images/image-adb-start-server.png)
+
+2. 启动scrypt即可投屏成功
+
+   ![image-20240402191119397](../images/image-scrypt.png)
+
+## 连接电脑
+
+# 开启指针位置
+
+打开手机的开发者选项，找到“指针位置”并开启。
+
+这个方法主要用于通过指针快速查看组件的坐标；
