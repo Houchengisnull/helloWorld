@@ -13,8 +13,6 @@ quick_home();
 quick_money();
 swipe(device.width / 2, 500, device.width / 2, device.width / 2, device.height)
 
-console.
-
 
 // 
 // click("去点赞", 0)
