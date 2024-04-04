@@ -292,6 +292,16 @@ $ find path -option [-print] [-exec -ok command] {} \;
 cat hello.txt
 ```
 
+cat也可以快速写入文件：
+
+``` shell
+cat << EOF > hello.txt
+```
+
+在这种语法中，`<<` 表示输入重定向操作符，`EOF` 是一个特殊的标记，用于指示输入的结束。
+
+这行命令的作用是将后续的输入（直到遇到另一个 `EOF` 标记为止）写入到一个名为 `hello.txt` 的文件中。
+
 ### grep
 
 `grep`命令用于查找文件里符合条件的字符串。在`windows`中与`findstr`功能相似。
