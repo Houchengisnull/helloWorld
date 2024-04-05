@@ -4,7 +4,7 @@
 
 Apache Kafka 是一个分布式流处理平台和消息队列系统，最初由 LinkedIn 公司开发，并于2011年开源。Kafka 旨在处理实时数据流，具有高吞吐量、低延迟、可扩展性和容错性等特点，已被广泛应用于各种场景，如日志收集、实时数据分析、事件驱动架构等。
 
-## 特点
+## Feature
 
 - **持久化：** Kafka 可以持久化大量数据，并确保数据不会丢失。
   
@@ -12,9 +12,16 @@ Apache Kafka 是一个分布式流处理平台和消息队列系统，最初由 
   
 - **高性能：** Kafka 具有优秀的性能表现，可以处理大规模的消息传输和处理任务。
 
-## 性能影响的因素
+## Factors Affecting Performance
 
 Kafka 的性能受多种因素影响，包括磁盘吞吐量、内存和网络等。合理配置和优化这些因素可以提升 Kafka 的性能表现。
+
+# Command
+
+``` shell
+# 创建主题
+kafka-topics.bat --zookeeper localhost:2181/kafka --create --topic hi-kafka --replication-factor 1 --partitions 4
+```
 
 # 消费者
 
