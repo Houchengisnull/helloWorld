@@ -465,42 +465,6 @@ $ iptraf-ng eth0
 $ ethtool eth0
 ```
 
-## 防火墙
-
-### firewalld
-
-- 查看状态
-
-``` shell
-# 查看防火墙状态
-# 出现Active属性显示running则表示防火墙开启
-systemctl status firewalld.service
-
-# 开启防火墙
-systemctl start firewalld.service
-
-# 关闭防火墙
-systemctl stop firewalld.service
-```
-
-- 开放端口
-
-``` shell
-# 查看开放端口
-firewall-cmd --list-ports
-# 开放防火墙3306端口TCP连接
-firewall-cmd --zone=public --add-port=3306/tcp --permanent
-# 重启防火墙
-firewall-cmd --reload
-```
-
-### iptables
-
-``` shell
-service iptables start
-service iptables stop
-```
-
 ## tcpdump
 
 - **-i**	指定网卡
