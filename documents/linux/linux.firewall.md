@@ -40,6 +40,9 @@ firewall-cmd --list-ports
 firewall-cmd --zone=public --add-port=<port>/tcp --permanent
 # 重载防火墙
 firewall-cmd --reload
+
+# 设置开机不启动
+systemctl disable firewalld
 ```
 
 ## iptables

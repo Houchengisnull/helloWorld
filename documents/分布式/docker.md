@@ -1,6 +1,6 @@
 [toc]
 
-# Why
+# Overview
 
 - 取代虚拟机
 
@@ -12,6 +12,8 @@
 
 ``` shell
 yum install -y yum-utils
+
+# 设置Docker镜像仓库
 yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 yum install docker-ce
 
@@ -40,7 +42,7 @@ yum list installed | grep docker
 docker images
 
 # 移除
-docker rmi [id|name]
+docker rm [id|name]
 
 # 构建
 docker build -t [name:version] [path]

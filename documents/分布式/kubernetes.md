@@ -120,6 +120,10 @@ zookeeper-69c999f9d-2f9lv   1/1     Running   3          2d5h
 [root@master ~]# kubectl describe pods kafka-6dd8d74db-6nxrj  -n kafka
 ```
 
+### Deployment
+
+
+
 ### Service
 
 Service在Kubernetes中承担了服务发现的重任。
@@ -216,10 +220,6 @@ kubectl describe pod nginx-dep-5779c9d6c9-jw5gc
 # 删除pod(模拟pod出现故障)
 kubeclt delete nginx-dep-5779c9d6c9-745b2
 ```
-
-## Kubernetes YAML
-
-
 
 # Sample
 
