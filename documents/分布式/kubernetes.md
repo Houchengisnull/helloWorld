@@ -4,236 +4,176 @@
 
 # Overview
 
-Kubernetes（简称k8s）是一款容器编排系统。
+Kubernetes（简称k8s）是一款容器编排[^容器编排]系统。
 
-# Setting up a cluster
+可以帮助我们：
 
-## install flannel
+- 自动化部署
+- 自动化扩展
+- 服务发现和负载均衡
+- 存储管理
+- 自动故障恢复
+- 自动化配置管理
 
-- [network plugin is not ready & cni config uninitialized](https://github.com/kubernetes/kubernetes/issues/103324)
+[^容器编排]: 容器编排是指对容器化应用程序的部署、管理和调度。
 
-- [failed to find plugin “flannel” in path [/opt/cni/bin]](https://blog.csdn.net/qq_29385297/article/details/127682552)
-- [解决k8s安装flannel无法拉取镜像(ImagePullBackOff)](https://blog.csdn.net/sinat_23225111/article/details/125111063)
+# Concept
 
-通过`journalctl -u kubelet -f`查看kubelet的日志。
+- **心得**
 
-发现一直在报错`failed to find plugin "flannel" in path [/opt/cni/bin]`。
+  我在学习kubernetes的过程中，最痛苦的莫过于遇到问题无从下手。特别是看网上各种教程的时候：同样的步骤带来不一样的结果，作为初学者是非常懵逼，非常不友好的。
 
-## Install
+  复盘一下，归根到底是：
 
-- **关闭selinux**
+  - 对k8s的组件、基本概念和原理不熟悉；
 
-  Linux安全相关。
+  - k8s是一个繁杂的工具，体现在：安装与使用过程中会遇到很多**网络通信**的问题，而不是k8s本身需要怎么运用；
 
-    ``` shell
-    # 查看
-    getenforce 
-    # 临时关闭
-    setenforce 0
-    # 永久关闭
-    vi /etc/sysconfig/selinux
-
-    SELINUX=disabled
-    ```
-
-- **关闭swap**
-
-    ``` shell
-    # 临时
-    swapoff -a
-    # 永久
-    sed -i.bak '/swap/s/^/#/' /etc/fstab
-    ```
-
-- **允许ip_forward**
-
-    ``` shell
-    # 0 表示禁止
-    echo "1" > /proc/sys/net/ipv4/ip_forward
-    ```
-
-- **配置centos7、docker源**
-
-    ``` shell
-    cd /etc/yum.repos.d/
-    rm -rf *
-    
-    # 下载centos7源和docker源
-    wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-    wget -P /etc/yum.repos.d/ http://mirrors.aliyun.com/repo/epel-7.repo
-    wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-    
-    yum clean all && yum makecache fast
-    ```
-
-- **配置k8s源**
-
-    ``` shell
-    cat <<EOF > /etc/yum.repos.d/kubernetes.repo
-    [kubernetes]
-    name=Kubernetes
-    baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
-    enabled=1
-    gpgcheck=0
-    EOF
-    ```
-
-- **安装docker**
-
-    ``` shell
-    yum install docker-ce-18.09.9 docker-ce-cli-18.09.9 containerd.io -y
-    ```
-
-- **配置docker的`--cgroup-driver=systemd`**
-
-    ``` shell
-    tee /etc/docker/daemon.json <<EOF
-    {
-        "registry-mirrors":["https://v16stybc.mirror.aliyuncs.com"]
-        , "exec-opts":["native.cgroupdriver=systemd"]
-    }
-    EOF
-    cat /etc/docker/daemon.json
-    
-    
-    vi /etc/docker/daemon.json
-    
-    {
-        "registry-mirrors":["https://v16stybc.mirror.aliyuncs.com"]
-        , "exec-opts":["native.cgroupdriver=systemd"]
-    }
-    
-    ## 执行完这一步之后需要重启docker与kubenet令配置生效
-    systemctl daemon-reload
-    systemctl restart docker
-    systemctl restart kubelet
-    ```
-
-    [^cgroup driver]:control group driver是Linux系统内核提供的特性，主要用于限制和隔离一组进程对系统资源的使用。
-
-- **启动docker并配置开机启动**
-
-    ``` shell
-    systemctl enable docker && systemctl start docker
-    ```
-
-- **安装k8s**
-
-    ``` shell
-    yum install -y kubelet-1.16.4 kubeadm-1.16.4 kubectl-1.16.4
-    # 卸载
-    # yum remove -y kubelet-1.16.4 kubeadm-1.16.4 kubectl-1.16.4
-    ```
-
-- **设置开机启动**
-
-    ``` shell
-    systemctl enable kubelet && systemctl start kubelet
-    ```
-
-- **配置kubectl上下文到环境中**
-
-    ``` shell 
-    echo "source <(kubectl completion bash)" >> ~/.bash_profile
-    cd ~
-    source .bash_profile
-    ```
-
-- **内核参数修改**
-
-  k8s网络一般使用flannel，该网络需要设置内核参数bridge-nf-call-iptables=1
-
-    ``` shell
-    vi /etc/sysctl.d/k8s.conf
-    net.bridge.bridge-nf-call-ip6tables = 1
-    net.bridge.bridge-nf-call-iptables = 1
-    ```
-  执行`sysctl -p /etc/sysctl.d/k8s.conf`
-
-  ``` shell
-  sysctl -p /etc/sysctl.d/k8s.conf
-  net.bridge.bridge-nf-call-ip6tables = 1
-  net.bridge.bridge-nf-call-iptables = 1
-  ```
+  - 官网非常全面，但是我并不想成为kubernetes专家；
+  - 博客通常是一片文字+图片，至少对我来说很难建立概念之间的联系；
 
 
-## Master Node
+## Object
 
-- 参考
+在使用kubernetes时，我们就是在与其中各个Object打交道。
 
-  [使用 Kubeadm 部署](http://icyfenix.cn/appendix/deployment-env-setup/setup-kubernetes/setup-kubeadm.html)
+- **什么是Object**
 
-  [如何解决kubeadm init初始化时dial tcp 127.0.0.1:10248: connect: connection refused](https://www.myfreax.com/how-to-solve-dial-tcp-127-0-0-1-10248-connect-connection-refused-during-kubeadm-init-initialization/)
+  如果类比Rabbit MQ，那对象是用户、交换机、队列、路由；
 
-### Init
+  如果类比MySQL，那对象就是表空间、表、行、值、索引；
 
-初始化`kubernet`的`control-pane`。
+  对象也就是我们编排容器的各个数据结构。
 
-在执行这一步时总是报错，通过`journalctl -xeu kubelet`发现：存在大量的拒绝连接错误。
+> 在kubernetes中，每个Object都有Spec和Status两个属性。
 
-搜索一番后，了解到这是因为cgroup驱动问题造成的。kubernet的驱动是systemd，而docker的驱动则是cgroupfs。
+### Node
 
-根据官方建议，使用systemd更加稳定，因此将docker的配置修改为cgroupfs。
-
-重启docker和kubernet生效。
+Node代表k8s集群中的每一台服务器。
 
 ``` shell
-# sudo kubeadm reset
-# sudo kubeadm init
-# 这一步非常耗时, 需要拉去镜像
-sudo kubeadm init --image-repository registry.aliyuncs.com/google_containers --kubernetes-version v1.16.4 --pod-network-cidr=10.244.0.0/16
-
-# 在执行完成后, 根据master的提示执行
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
+[root@master /]# kubectl get nodes
+NAME     STATUS   ROLES    AGE   VERSION
+master   Ready    master   71d   v1.16.4
+work1    Ready    <none>   71d   v1.16.4
 ```
 
-执行结果如下:
+注意这里的角色：
 
-![image-kubernet-master-node-install](../images/kubernet-master-node-install-success.png)
+- **master**
+- **<none>**
 
-### Add flannel
+这里的<none>就意味着这是一个worker。
 
-配置pod network
+`kubectl get nodes`的结果表明：当前集群中有一个master和worker
+
+### Namespace
+
+命名空间是类似Rabbit MQ的虚拟主机[^vhost]。
+
+> 在 Kubernetes 中，**名字空间（Namespace）** 提供一种机制，将同一集群中的资源划分为相互隔离的组。 
+>
+> ~~同一名字空间内的资源名称要唯一，但跨名字空间时没有这个要求。 名字空间作用域仅针对带有名字空间的[对象](https://kubernetes.io/zh-cn/docs/concepts/overview/working-with-objects/#kubernetes-objects)， （例如 Deployment、Service 等），这种作用域对集群范围的对象 （例如 StorageClass、Node、PersistentVolume 等）不适用。~~
+
+以上是来自官网的描述，但我们初学者只想关注Namespace是什么，对其他的说明、StorageClass、PersistentVolume只是感觉到头疼。
+
+可以说Namespace是kubernetes对象的共同的家，常见的Pod、Service、Deployment都住在这里。
 
 ``` shell
-# 执行成功后，会出现/etc/cni/net.d/
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml
+[root@master /]# kubectl get namespace
+NAME                   STATUS   AGE
+default                Active   71d
+kafka                  Active   2d4h
+kube-node-lease        Active   71d
+kube-public            Active   71d
+kube-system            Active   71d
+kubernetes-dashboard   Active   24h
 ```
 
-### Generate token
+[^vhost]: 在不同vhost中，各个vhost下的用户、交换机、队列无法互相通信，相当于一种隔离。
+
+#### Namespace下的Object
+
+> 初学者可以先跳过
+
+并不是所有的Object都属于Namespace，我们可以通过下方command查看哪些Object在Namespace下。
 
 ``` shell
-# 查询token list
-kubeadm token list
-
-# 生成join command
-kubeadm token create --print-join-command
+kubectl api-resources --namespaced=true
+kubectl api-resources --namespaced=false
 ```
 
-## Work Node
+### Pod
 
-- **设置机器名**
+在Kubernetes中，Pod是容器们居住的场所。
 
-  ``` shell 
-  hostnamectl set-hostname work1
-  ```
+如果把容器比作犯人，那么Pod就是牢房。
 
-- **配置ip**
+``` shell
+# 在kafka命名空间下里有两个pod:kafka-6dd8d74db-6nxrj和zookeeper-69c999f9d-2f9lv
+[root@master ~]# kubectl get pods -n kafka
+NAME                        READY   STATUS    RESTARTS   AGE
+kafka-6dd8d74db-6nxrj       1/1     Running   8          149m
+zookeeper-69c999f9d-2f9lv   1/1     Running   3          2d5h
 
-  ``` shell
-  vi /etc/hosts
-  
-  192.168.192.11 work1
-  ```
+# 通过describe命令可以查看pod的详情
+[root@master ~]# kubectl describe pods kafka-6dd8d74db-6nxrj  -n kafka
+```
 
-- **加入集群**
+### Service
 
-  ``` shell
-  kubeadm join 192.168.192.10:6443 --token znygl1.rdkprye9ibg5l27y \
-      --discovery-token-ca-cert-hash sha256:ae4b04bbe7aee468b410e5f20cbbbd02b80d9761dd915ecf17f88f42fa57debb 
-  ```
+Service在Kubernetes中承担了服务发现的重任。
+
+Service有四种类型：
+
+- ClusterIP
+- NodePort
+- LoadBalancer
+- ExternalName
+
+其中ClusterType和NodeType是最基础的。
+
+ClusterType是Service的默认值，仅用于集群的内部访问。
+
+NodeType则通过一个静态端口，在每个节点上暴露该服务。
+
+``` shell
+[root@master ~]# kubectl get services -n kafka
+NAME        TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                      AGE
+kafka       NodePort    10.100.178.196   <none>        9092:31694/TCP               25h
+zookeeper   ClusterIP   10.103.118.140   <none>        2181/TCP,2888/TCP,3888/TCP   2d1h
+
+```
+
+在上述例子中，我通过NodePort建立了9092到31694之间的映射，另外我有`192.168.192.11`与`192.168.192.12`两台Node，那么我可以通过任意Node的31694端口访问到`10.100.178.196:9092`。
+
+``` shell
+[root@master ~]# kubectl describe svc kafka -n kafka 
+Name:                     kafka
+Namespace:                kafka
+Labels:                   <none>
+Annotations:              kubectl.kubernetes.io/last-applied-configuration:
+                            {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"kafka","namespace":"kafka"},"spec":{"ports":[{"port":9092,"target...
+Selector:                 app=kafka
+Type:                     NodePort
+IP:                       10.100.178.196
+Port:                     <unset>  9092/TCP
+TargetPort:               9092/TCP
+NodePort:                 <unset>  31694/TCP
+Endpoints:                10.244.1.31:9092
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+
+```
+
+## Deployment
+
+## Component
+
+## Kubernetes 网络
+
+## Kubernetes DNS 解析
 
 # Usag
 
@@ -251,6 +191,8 @@ kubectl delete namespaces <namespaces>
 # 查看service
 kubeclt get svc
 ```
+
+### Kubernetes 对外暴露服务
 
 ## Pod
 
@@ -270,11 +212,18 @@ kubectl get pods -o wide
 
 # 查看服务详情
 kubectl describe pod nginx-dep-5779c9d6c9-jw5gc
+
+# 删除pod(模拟pod出现故障)
+kubeclt delete nginx-dep-5779c9d6c9-745b2
 ```
+
+## Kubernetes YAML
+
+
 
 # Sample
 
-## Run
+## kubectl run
 
 ``` shell
 # 创建一个应用程序
@@ -294,17 +243,49 @@ exit
 kubectl logs kafka-6b969957f8-878gm -n kafka
 ```
 
-## Expose service
+
+## Firewall
+
+kubernetes集群访问需要放行相关端口：
 
 ``` shell
-# 删除pod(模拟pod出现故障)
-kubeclt delete nginx-dep-5779c9d6c9-745b2
+# 允许API服务器端口
+firewall-cmd --zone=public --add-port=6443/tcp --permanent
 
+# 允许Flannel VXLAN端口（如果您的网络使用了VXLAN）
+firewall-cmd --zone=public --add-port=4789/udp --permanent
+
+# 允许kubelet端口
+firewall-cmd --zone=public --add-port=10250/tcp --permanent
+firewall-cmd --zone=public --add-port=10255/tcp --permanent
+
+# 允许kube-proxy端口
+# 这里假设kube-proxy使用了动态分配的端口范围，您可能需要根据实际情况调整
+firewall-cmd --zone=public --add-port=30000-32767/tcp --permanent
+
+# 允许Pod网络范围（PodCIDR）中的通信端口
+# 这里假设PodCIDR范围是10.244.0.0/16，您可能需要根据实际情况调整
+firewall-cmd --zone=public --add-source=10.244.0.0/16 --permanent
+
+# 重新加载防火墙规则
+firewall-cmd --reload
+```
+
+注意，需要放行CIDR，CIDR的查询方式如下：
+
+``` shell
+kubectl describe node master | grep -i podcidr
+kubectl describe node work1 | grep -i podcidr
+```
+
+## 暴露服务
+
+``` shell
 # 创建service
 kubectl expose deployment nginx-dep --name=nginx-service --port=8080 --target-port=80
 
 # 查看service
-kubeclt get svc
+kubectl get svc
 # 查看service的label配置
 kubectl describe svc nginx-service
 
