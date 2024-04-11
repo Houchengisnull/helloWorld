@@ -36,8 +36,8 @@ func NewAlien(cfg *Config) *Alien {
 
 func (alien *Alien) Draw(screen *ebiten.Image) {
 	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(alien.x, alien.y)
-	screen.DrawImage(alien.image, op)
+	op.GeoM.Translate(alien.x, alien.y) // 外星人坐标
+	screen.DrawImage(alien.image, op)   // 绘制外星人
 }
 
 func (alien *Alien) outOfScreen(cfg *Config) bool {
