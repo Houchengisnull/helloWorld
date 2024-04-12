@@ -313,66 +313,6 @@ ln -li
 ln -s hello.sh hello
 ```
 
-## 安装方式
-
-### rpm
-
-``` shell
-# 查询jdk
-rpm -qa|grep jdk
-
-# 卸载jdk
-rpm -e jdk*
-```
-
-### yum
-
-yum(Yellow dog Updater,Modified)是Fedora和RedHat以及SUSE中的Shell前端软件包管理，基于RPM包管理，能够从指定服务器自动下载RPM包并安装，可以自动处理依赖关系，无须一次次下载、安装。
-
-``` shell
-# 查询rz命令安装地址
-yum search rz
-
-# 下载及安装rz
-yum install -y rz*
-
-# 列出已安装程序
-yun list installed
-
-# 移除
-yum remove <package_name>
-
-# 可更新程序
-yum check-update
-# 更新所有软件
-yum update
-
-# 仅安装指定包
-yum install <package_name>
-
-# 仅更新指定包
-yum update <package_name>
-
-# 清除缓存
-## 清除缓存目录下的包
-yum clean pacakges
-## 清除缓存目录下的headers
-yum clean headers
-## 清除缓存目录下的旧headers
-yum clean oldheaders
-## 清除所有
-yum clean | yum clean all
-```
-
-#### 源
-
-在/etc/yum/repos.d/下进行如下操作(注意备份)：
-
-``` shell
-wget http://mirrors.163.com/.help/CentOS7-Base-163.repo
-mv CenOS7-Base-163.repo CentOS-Base.repo
-```
-
 # 环境变量
 
 在/etc/profile文件下，可以通过vi profile编辑该文件。

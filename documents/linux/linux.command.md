@@ -46,8 +46,6 @@ cat /proc/version
 $ getconf LONG_BIT
 ```
 
-
-
 # 磁盘
 
 ## 查看磁盘IO信息
@@ -93,62 +91,6 @@ startx
 
 # 无密码切换root
 sudo sudo su
-```
-
-# 安装工具
-
-## apt-get
-
-全名`Advanced Package Tool`，类似`python`中的`pip`工具。
-
-用于自动从互联网搜索、安装、升级或卸载软件。
-
-另外，`apt-get`通常需要`root`权限，所以一般在`sudo`命令后。
-
-- 在`Ubuntu`中使用`apt-get`
-
-  它通常会从`/etc/apt/source.list`文件中设置网址下载文件，所以我们需要对其备份后，修改所使用的更新源。
-
-  再执行`sudo apt-get update`更新
-
-**FAQ**
-
-Unable to locate XXX
-
-[关于Ubuntu的Unable to locate package无法更新源问题解决方案](https://blog.csdn.net/qq_38880380/article/details/83008426)
-
-[ubuntu apt-get使用国内源](https://blog.csdn.net/ziyetian666/article/details/80491875)
-
-[阿里云服务器Ubuntu上使用apt-get install出现404 Not Found](https://www.linuxdiyf.com/linux/24591.html)
-
-主要是因为官方软件源在国内下载速度太慢。我们需要重新设置更新源。
-
-一直使用阿里云的`APT源`一直在报404的错误。换了网易之后终于成功。小声吐槽！
-
-- **网易APT源**
-
-``` txt
-deb http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse
-deb http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse
-deb-src http://mirrors.163.com/ubuntu/ trusty main restricted universe multiverse
-deb-src http://mirrors.163.com/ubuntu/ trusty-security main restricted universe multiverse
-deb-src http://mirrors.163.com/ubuntu/ trusty-updates main restricted universe multiverse
-deb-src http://mirrors.163.com/ubuntu/ trusty-proposed main restricted universe multiverse
-deb-src http://mirrors.163.com/ubuntu/ trusty-backports main restricted universe multiverse
-```
-
-
-
-## yum
-
-``` shell
-# 常用软件
-yum install wget
-yum install lrzsz
-yum install net-tools
 ```
 
 # 编码 
@@ -702,10 +644,6 @@ https://blog.csdn.net/baozijiaruqing/article/details/80645082
 ``` shell
 ssh -v -p 3306 127.0.0.1
 ```
-
-# Yum
-
-`Yellow dog Updater , Modified`，为一款Shell前端软件包管理器。
 
 # head 和 tail
 
