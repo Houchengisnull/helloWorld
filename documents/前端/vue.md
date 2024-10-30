@@ -43,29 +43,36 @@ TypeError: Cannot read property '__vccOpts' of undefined
 
 查询了很多资料，并没有提到组件的导出必须使用`export default`，但所有的vue开发者似乎都默认了这件事。
 
+## Router
+
+### Install
+
+``` shell
+npm install vue-router --save
+```
+
+### Usage
+
+- **RouterLink**
+
+  与<a></a>不同的是：<RouterLink>能够在不触发加载页面的情况下更新URL。
+
+- **RouterView**
+
+- **$route**
+
+  可以在组件模板中使用 `$route` 来访问当前的路由对象。
+
+### Method
+
+- **createRouter()**
 
 
-# 常用命令
+
+# Command
 
 - **npm run dev**	本地运行
 - **npm run build**	构建
-
-# 名词
-
-- **vetur** `visual code`下的`vue`插件
-- **npm**	`nodejs`的包管理工具，类似`pip`(`python`的包管理工具)
-
-# 点击事件
-
-``` vue
-<div id='element-girl' @click='say('hello')'>
-    我是一个嫡女div
-</div>
-/* 或者 */
-<div id='element-boy' v-on:click='say('hello')'>
-    我是一个嫡子
-</div>
-```
 
 # FAQ
 
