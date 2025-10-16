@@ -82,74 +82,6 @@ python -m pip install --upgrade pip
 
 个人尝试安装`MinGW`并不能解决pip require 2014（Win10）的问题。
 
-## 参考
-
-https://blog.csdn.net/zhou120189162/article/details/82711600	
-
-https://blog.csdn.net/qq_14998713/article/details/78277052
-
-# 设置Python脚本编码
-
-`SyntaxError: Non-UTF-8 code starting with '\xc4' `
-
-- 2019\06\29
-
-  今天在遇到如上错误，出现在声明字符串处
-
-  百度后发现在文件头设置编码即可
-
-  ``` python
-  # coding = gbk
-  ```
-
-- 参考
-
-  https://blog.csdn.net/mgsg_asp/article/details/80668621
-
-# Python编码规范
-
-## def 方法声明
-
-<span style="color:red">PEP:8 expected 2 blank lines ，found 1</span>
-
-在Python中声明方法时，需要距上空两行
-
-# import
-
-## 导入同路径下Package/Module
-
-.
-
-└──src
-
-​		└──spider
-
-​				├── SpiderUtils
-
-​				│ 		└──\__init__.py
-
-​				└── books
-
-​							└──1q84.py
-
-如上场景，`1q84.py`需要调用SpiderUtils下\____init____.py中方法时
-
-``` python
-from src.spider.spidersuit import SpiderMan
-```
-
-https://blog.csdn.net/Tyro_java/article/details/80739247
-
-https://www.cnblogs.com/7tiny/p/7209608.html
-
-# 声明变量
-
-## GLOBAL
-
-当我们需要在函数中使用全局变量时，应该对该变量使用`global`声明。
-
-否则`解释器`将认为你在函数中定义了一个局部变量。
-
 # 循环
 
 ## for-index
@@ -235,28 +167,6 @@ print len(str)
   stringType = str(intType)
   ```
 
-
-## 正则表达式
-
-``` python
-import re
-
-# 正则匹配过滤掉emoji表情，例如emoji1f3c3等
-rep = re.compile("1f\d.+")
-signature = rep.sub("", signature)
-```
-
-# 集合
-
-- **排序**
-
-  ``` python
-  arr = [3, 2, 5, 7]
-  arr.sort()
-  for i in arr:
-      print i
-  ```
-
 # 异次元口袋——python类库
 
 - bs4 (BeautifulSoup)
@@ -302,6 +212,9 @@ pip install jieba
 
 # 查看已安装类库
 pip list
+
+# 指定版本
+pip install numpy==1.19.5 opencv-python==4.5.1.48
 
 # 指定下载镜像
 # 使用清华大学镜像下载pillow
