@@ -64,7 +64,7 @@ adb shell getprop ro.product.cpu.abi
   1. `Ctrl Shift P`
   2. `autoxjs: save`
 
-# Start
+# scrcpy
 
 ## 投屏
 
@@ -74,7 +74,7 @@ adb shell getprop ro.product.cpu.abi
 
    ![image-20240402190834279](../images/image-adb-start-server.png)
 
-2. 启动scrypt即可投屏成功
+2. 启动scrcpy即可投屏成功
 
    ![image-20240402191119397](../images/image-scrypt.png)
 
