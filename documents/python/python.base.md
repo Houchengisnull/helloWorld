@@ -82,6 +82,12 @@ python -m pip install --upgrade pip
 
 个人尝试安装`MinGW`并不能解决pip require 2014（Win10）的问题。
 
+# Import
+
+- 主模块必须使用绝对导入
+
+  由于相对导入是基于名称的（`__name__`），但是主模块的名称是`__main__`，因此主模块必须使用绝对导入。
+
 # 循环
 
 ## for-index
