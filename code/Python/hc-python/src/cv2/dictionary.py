@@ -1,0 +1,1 @@
+img = './src/cv2/girl.jpg'
