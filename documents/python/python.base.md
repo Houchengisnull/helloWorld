@@ -88,6 +88,10 @@ python -m pip install --upgrade pip
 
   由于相对导入是基于名称的（`__name__`），但是主模块的名称是`__main__`，因此主模块必须使用绝对导入。
 
+- **参考**
+
+- [python模块导入规则（相对导入和绝对导入）](https://www.cnblogs.com/qizhou/p/17784429.html)
+
 # 循环
 
 ## for-index
