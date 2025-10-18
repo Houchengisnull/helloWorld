@@ -35,3 +35,33 @@ ADB运行需要安装ADB驱动。
 - 官网地址
 
   https://adb.clockworkmod.com/
+
+# ADB Shell
+
+## Usage
+
+### 点击
+
+``` shell
+input tap x y
+```
+
+# Mumu模拟器
+
+## MumuManager
+
+### Usage
+
+- **获取模拟器信息**
+
+  ``` shell
+  # 获取0号模拟器信息
+  MuMuManager info -v 0
+  # 获取所有模拟器信息
+  MuMuManager info -v all
+  ```
+
+  
+
+
+
