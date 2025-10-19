@@ -82,15 +82,62 @@ python -m pip install --upgrade pip
 
 个人尝试安装`MinGW`并不能解决pip require 2014（Win10）的问题。
 
+# 命名规范
+
+- **Package**
+
+  简短全小写，不建议下划线。
+
+- **Module**
+
+  简短全小写，可以使用下划线。
+
+- **Class**
+
+  首字母大写。
+
+- 全局变量
+
+  仅在模块内使用，命名前加下划线。
+
+- **Function**
+
+  函数名应该小写，如果想提高可读性可以用下划线分隔。
+
+- **Method & Instance Variables**
+
+  使用下划线分隔小写单词以提高可读性。
+
+  在非共有方法和实例变量前使用单下划线。
+
+- **Constants**
+
+  通过下划线分隔的全大写字母命名。
+
 # Import
 
-- 主模块必须使用绝对导入
+解释器在导入时，依次从内置模块、`sys.path`中查找Package。
 
-  由于相对导入是基于名称的（`__name__`），但是主模块的名称是`__main__`，因此主模块必须使用绝对导入。
+而`sys.path`中仅包含了主函数的当前路径和其他lib。
 
-- **参考**
+所以，常规情况下，解释器无法找到同级文件夹中的Package、Module。
 
-- [python模块导入规则（相对导入和绝对导入）](https://www.cnblogs.com/qizhou/p/17784429.html)
+## Concept
+
+- **Package**
+
+  包含`__init__.py`的文件夹。
+
+- **Module**
+
+  `*.py`文件。
+
+- **The Module Search Path**
+
+  1. 内置模块；
+  2. `sys.path`上定义的文件夹列表；
+
+  若未找到模块，将抛出异常。
 
 # 循环
 
