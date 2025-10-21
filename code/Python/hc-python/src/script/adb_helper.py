@@ -1,7 +1,14 @@
-import os, time
+import os, time, re,logging
+
+# 返回第一个设备
+def device():
+    device = devices()[0]
+    logging.info('设备:{0}'.format(device))
+    return device 
+
 
 # 获取设备列表
-def get_devices():
+def devices():
     content = os.popen('adb devices').read()
     if "daemon not running" in content:
         content = os.popen('adb devices').read()
@@ -13,14 +20,24 @@ def get_devices():
     return res
 
 
+# Override size
+def screen_size(device):
+    content = os.popen('adb -s {0} '.format(device) + "shell wm size").read()
+    physical_match = re.search(r'Override size:\s*(\d+)x(\d+)', content)
+    if physical_match:
+        w = int(physical_match.group(1))
+        h = int(physical_match.group(2))
+        return (w, h)
+
+
 # 设备屏幕截图
 def scree_capture(device, path):
     screenCap = 'adb -s {0} shell screencap -p sdcard/temp.png'.format(device)
-    pull = "adb pull sdcard/temp.png {0}".format(path)
+    pull = "adb -s {0} pull sdcard/temp.png {1}".format(device, path)
    
     for row in [screenCap, pull]:
         time.sleep(0.1)
-        print(row)
+        logging.debug(row)
         os.system(row)
 
     if os.path.exists(path) == True:
@@ -34,3 +51,14 @@ def touch(device, pos):
     x, y = pos
     command = "adb -s {0} shell input touchscreen tap {1} {2}".format(device, x, y)
     os.system(command)
+
+# 滑动
+def swipe(device, pos, pos1, time = 1000):
+    x, y = pos
+    x1, y1 = pos1
+    command = "adb -s {0} shell input swipe {1} {2} {3} {4} {5}".format(device, x, y, x1, y1, time)
+    os.system(command)
+
+
+if __name__ == "__main__":
+    pass
