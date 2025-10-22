@@ -3,7 +3,8 @@ import cv2_helper as ch
 import location_helper as lh
 import logging
 
-device = adb.device()
+device = 'adb-f8251985-IMF5Fr._adb-tls-connect._tcp'
+# device = 'adb-8a466557-HBXAaz._adb-tls-connect._tcp'
 w, h = adb.screen_size(device)
 
 def width():
@@ -16,6 +17,11 @@ def height():
 # 截屏
 def screen_capture(path):
     adb.scree_capture(device, path)
+
+# 切割图片 在source中将template切割出来
+# match_result :(template, location)
+def image_capture(source, template, copy, position):
+    ch.image_capture(source, template, copy, position)
 
 # 点击模板位置
 def touch_template(source, template):
@@ -31,24 +37,26 @@ def touch_template(source, template):
     return False
 
 # 匹配正确模板并点击模板位置
-def touch_templates(source, templates):
+def touch_templates(source, templates, accuracy=0.90):
     adb.scree_capture(device, source)
-    pos = match_templates(source, templates)
-    if pos is not None:
-        touch_location(pos)
+    result = match_templates(source, templates, accuracy)
+    
+    if result is not None:
+        template, pos = result
+        touch_location(lh.center(template, pos))
         return True
     return False
 
-# 匹配模板 成功返回对应模板得中心点位
+# 匹配模板 成功返回(template, location)
 def match_templates(source, templates, accuracy=0.90):
     for template in templates:
-        logging.debug(">>>>>>>>>> 匹配{0}中".format(template))
+        logging.info("匹配[{0}]中".format(template))
         match_result = ch.matchTemplate(source, template)
         location = ch.maxLoc(match_result, accuracy)
         is_match = location is not None
-        logging.debug("<<<<<<<<<< 匹配{0}结果:{1}".format(template, is_match))
+        logging.info("匹配[{0}]结果:{1}".format(template, is_match))
         if is_match:
-            return lh.center(template, location)
+            return (template, location)
     return None
 
 

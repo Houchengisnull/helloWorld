@@ -4,7 +4,7 @@ import script_helper as sh
 
 # 修改以下参数来运行
 # 原图缩放比例，用于展示在窗口里
-scale = 0.5
+scale = 0.3
 
 # 截图保存路径，以/结束
 save_file_path = "./dy_img/"
@@ -22,30 +22,6 @@ sh.screen_capture(img_file)
 
 # ===================================================
 # 以下部分可以不改动
-
-# def isVarExist(varName):
-#     if os.path.exists(pos_img_dict):
-#         with open(pos_img_dict, 'r', encoding='utf-8') as f:
-#             str = f.read()
-#             if varName in str:
-#                 return True
-#             else:
-#                 return False
-#     else:
-#         return False
-
-
-# type=动作类型 1=截图  2=标点  3=标线（取起终点组成向量） 4=标记区域
-# def createVar(varName, value, type):
-#     with open(pos_img_dict, 'a+', encoding='utf-8') as f:
-#         if type == 1:
-#             f.write(varName + " = \"" + value + "\"\n")
-#         elif type == 2:
-#             f.write(varName + " = " + str(value) + "\n")
-#         elif type == 3:
-#             f.write(varName + " = " + str(value) + "\n")
-#         elif type == 4:
-#             f.write(varName + " = " + str(value) + "\n")
 
 def draw_Rect(event, x, y, flags, param):
     global drawing, startPos, stopPos
@@ -68,13 +44,6 @@ def draw_Rect(event, x, y, flags, param):
         cropped = img_source[y0:y1, x0:x1]  # 裁剪坐标为[y0:y1, x0:x1]
         res = tkinter.simpledialog.askstring(title="输入", prompt="请输入图片变量名：（存储路径为" + save_file_path + "）",
                                              initialvalue="")
-        # if res is not None:
-        #     if isVarExist(res):
-        #         tkinter.simpledialog.messagebox.showerror("错误", "该变量名已存在，请更换一个或手动去文件中删除！")
-        #     else:
-        #         cv2.imwrite(save_file_path + res + ".png", cropped)
-        #         createVar(res, save_file_path + res + ".png", 1)
-        #         tkinter.simpledialog.messagebox.showinfo("提示", "创建完成！")
         cv2.imwrite(save_file_path + res + ".png", cropped)
         tkinter.simpledialog.messagebox.showinfo("提示", "创建完成！")
     elif event == cv2.EVENT_MBUTTONUP:
@@ -100,13 +69,6 @@ def draw_Point(event, x, y, flags, param):
     elif event == cv2.EVENT_RBUTTONUP:
         if startPos == (0, 0):
             return
-        # res = tkinter.simpledialog.askstring(title="输入", prompt="请输入坐标 " + str(startPos) + " 变量名：", initialvalue="")
-        # if res is not None:
-        #     if isVarExist(res):
-        #         tkinter.simpledialog.messagebox.showerror("错误", "该变量名已存在，请更换一个或手动去文件中删除！")
-        #     else:
-        #         createVar(res, startPos, 2)
-        #         tkinter.simpledialog.messagebox.showinfo("提示", "创建完成！")
         tkinter.simpledialog.messagebox.showinfo("提示", "创建完成！")
 
 

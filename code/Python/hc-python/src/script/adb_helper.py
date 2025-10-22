@@ -23,7 +23,14 @@ def devices():
 # Override size
 def screen_size(device):
     content = os.popen('adb -s {0} '.format(device) + "shell wm size").read()
-    physical_match = re.search(r'Override size:\s*(\d+)x(\d+)', content)
+    logging.debug(content)
+    override_match = re.search(r'Override size:\s*(\d+)x(\d+)', content)
+    if override_match:
+        w = int(override_match.group(1))
+        h = int(override_match.group(2))
+        return (w, h)
+
+    physical_match = re.search(r'Physical size:\s*(\d+)x(\d+)', content)
     if physical_match:
         w = int(physical_match.group(1))
         h = int(physical_match.group(2))
