@@ -7,21 +7,39 @@ import script_helper as sh
 scale = 0.3
 
 # 截图保存路径，以/结束
-save_file_path = "./dy_img/"
+# save_file_path = "./dy_img/"
+save_file_path = "./qk_img/"
 
 # py变量字典文件
-pos_img_dict = "./testDict.py"
+pos_img_dict = "./src/script/quick_dictionary.py"
 
 # 动作类型 1=截图  2=标点  3=标线（取起终点组成向量） 4=标记区域
 action = 1
 
 # 图片来源替换输入你的did
-img_file = './dy_img/cap.png'
-sh.screen_capture(img_file)
+# img_file = './dy_img/cap.png'
+img_file = './qk_img/source.png'
+# sh.set_device("192.168.8.240:40849")
+# sh.set_device('192.168.8.167:38607')
+# sh.screen_capture(img_file)
 
 
 # ===================================================
 # 以下部分可以不改动
+
+
+# type=动作类型 1=截图  2=标点  3=标线（取起终点组成向量） 4=标记区域
+def createVar(varName, value, type):
+    with open(pos_img_dict, 'a+', encoding='utf-8') as f:
+        if type == 1:
+            f.write(varName.upper() + " = " + value + "\n")
+        elif type == 2:
+            f.write('\n' + varName + " = " + str(value) + "\n")
+        elif type == 3:
+            f.write('\n' + varName + " = " + str(value) + "\n")
+        elif type == 4:
+            f.write('\n' + varName + " = " + str(value) + "\n")
+
 
 def draw_Rect(event, x, y, flags, param):
     global drawing, startPos, stopPos
@@ -44,8 +62,11 @@ def draw_Rect(event, x, y, flags, param):
         cropped = img_source[y0:y1, x0:x1]  # 裁剪坐标为[y0:y1, x0:x1]
         res = tkinter.simpledialog.askstring(title="输入", prompt="请输入图片变量名：（存储路径为" + save_file_path + "）",
                                              initialvalue="")
-        cv2.imwrite(save_file_path + res + ".png", cropped)
-        tkinter.simpledialog.messagebox.showinfo("提示", "创建完成！")
+        if res is not None:
+            cv2.imwrite(save_file_path + res + ".png", cropped)
+            dict_value = "prefix + '{0}' + suffix".format(res)
+            createVar(res, dict_value, 1)
+            tkinter.simpledialog.messagebox.showinfo("提示", "创建完成！")
     elif event == cv2.EVENT_MBUTTONUP:
         if startPos == (0, 0) and stopPos == (0, 0):
             return

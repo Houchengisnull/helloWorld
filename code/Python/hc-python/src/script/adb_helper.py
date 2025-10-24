@@ -66,6 +66,10 @@ def swipe(device, pos, pos1, time = 1000):
     command = "adb -s {0} shell input swipe {1} {2} {3} {4} {5}".format(device, x, y, x1, y1, time)
     os.system(command)
 
+def back(device):
+    command= 'adb -s {0} shell input keyevent KEYCODE_BACK'.format(device)
+    os.system(command)
+
 
 if __name__ == "__main__":
     pass

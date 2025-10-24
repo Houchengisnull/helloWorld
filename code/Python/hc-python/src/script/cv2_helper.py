@@ -16,6 +16,10 @@ def maxLoc(match_result, accuracy = 0.90):
         return max_loc
     
 # 切割图片
+## source_path      原图片
+## template_path    模板图片
+## save_path        保存路径
+## position         模板图片初始位置
 def image_capture(source_path, template_path, save_path, position):
     x, y = position
     source = cv2.imread(source_path)
@@ -25,3 +29,10 @@ def image_capture(source_path, template_path, save_path, position):
     copy = copy[y:y+h, x:x+w]
     cv2.imwrite(save_path, copy)
 
+def image_capture_between(source_path, save_path, start_pos, end_pos):
+    x, y = start_pos
+    x1, y1 = end_pos
+    source = cv2.imread(source_path)
+    copy = source.copy()
+    copy = copy[y:y1, x:x1]
+    cv2.imwrite(save_path, copy)

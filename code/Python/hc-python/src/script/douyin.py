@@ -6,6 +6,7 @@ import douyin_logging_config
 import script_helper as helper
 import douyin_dictionary as dict
 
+device = '192.168.8.240:40849'
 
 # 记录下滑次数
 stack_lower = 0
@@ -22,10 +23,12 @@ def swipe_lower():
     h = helper.height()
     helper.swipe_vertical(h/4)
 
+def screen_capture():
+    helper.screen_capture(dict.SOURCE)
 
 # 看广告赚金币
 def advertising():
-    helper.screen_capture(dict.SOURCE)
+    screen_capture()
     # 是否满足领取条件
     match_result = helper.match_templates(dict.SOURCE, [dict.ADVER, dict.ADVER_20000])
     if match_result is None:
@@ -37,6 +40,7 @@ def advertising():
         log.warning("[看广告赚金币]未找到")
         return False
     
+    screen_capture()
     helper.touch_templates(dict.SOURCE, [dict.ADVER, dict.ADVER_20000])
     log.info("[看广告赚金币]...")
 
@@ -48,6 +52,7 @@ def advertising():
 # 领取宝箱
 def treasure():
     # 点击宝箱
+    screen_capture()
     if not helper.touch_templates(dict.SOURCE, [dict.TREA]):
         log.warning("[开宝箱得金币]未找到")
         return False
@@ -57,10 +62,13 @@ def treasure():
     # 网路延迟
     time.sleep(3)
 
-
     # 点击'看广告再赚'进入广告流程
+    screen_capture()
     if not helper.touch_templates(dict.SOURCE, [dict.TREA_ADEV]):
         log.warning("[看广告再赚]未找到")
+        # 开心收下
+        if helper.touch_template(dict.SOURCE, dict.TREA_ACCEPT):
+            log.info("[开心收下]")
         return False
     
     log.info("[看广告再赚]")
@@ -94,7 +102,7 @@ def advertising_process():
     
     while (True):
         time.sleep(1)
-        helper.screen_capture(dict.SOURCE)
+        screen_capture()
 
         # 是否观看下一广告： 根据'领取奖励'判断
         if helper.touch_templates(dict.SOURCE, [dict.REWARD]):
@@ -102,6 +110,7 @@ def advertising_process():
             return True
 
         # 评价或关闭
+        screen_capture()
         if helper.touch_templates(dict.SOURCE, [dict.EVAL]):
             log.info('[评价]')
             return False
@@ -157,6 +166,10 @@ def shopping():
         swipe_lower()
 
 def main():
+    helper.set_device(device)
+
+    treasure_count = 0
+    advertising_count = 0
     while (True) :
         if treasure():
             treasure_count += 1

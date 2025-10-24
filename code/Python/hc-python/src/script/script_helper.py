@@ -3,15 +3,22 @@ import cv2_helper as ch
 import location_helper as lh
 import logging
 
-device = 'adb-f8251985-IMF5Fr._adb-tls-connect._tcp'
+# device = 'adb-f8251985-IMF5Fr._adb-tls-connect._tcp'
 # device = 'adb-8a466557-HBXAaz._adb-tls-connect._tcp'
-w, h = adb.screen_size(device)
+
+device = None
+
+def set_device(id):
+    global device 
+    device = id
 
 def width():
+    w, h = adb.screen_size()
     return w
 
 
 def height():
+    w, h = adb.screen_size()
     return h
 
 # 截屏
@@ -23,22 +30,23 @@ def screen_capture(path):
 def image_capture(source, template, copy, position):
     ch.image_capture(source, template, copy, position)
 
-# 点击模板位置
-def touch_template(source, template):
+def image_capture_between(source, template, start, end):
+    ch.image_capture_between(source, template, start, end)
+
+#
+def screencap_and_touch(source, template_obj, accuracy = 0.9):
     adb.scree_capture(device, source)
-    match_result = ch.matchTemplate(source, template)
-    location = ch.maxLoc(match_result)
-    
-    if location is not None:
-        location = lh.center(template, location)
-        location_rand = lh.location_random(location)
-        adb.touch(device, location_rand)
-        return True
-    return False
+    if isinstance(template_obj, list):
+        return touch_templates(source, template_obj, accuracy)
+    else:
+        return touch_template(source, template_obj, accuracy)
+
+# 点击模板位置
+def touch_template(source, template, accuracy = 0.90):
+    return touch_templates(source, [template], accuracy)
 
 # 匹配正确模板并点击模板位置
 def touch_templates(source, templates, accuracy=0.90):
-    adb.scree_capture(device, source)
     result = match_templates(source, templates, accuracy)
     
     if result is not None:
@@ -47,14 +55,17 @@ def touch_templates(source, templates, accuracy=0.90):
         return True
     return False
 
+def match_template(source, template, accuracy=0.90):
+    return match_templates(source, [template], accuracy)
+
 # 匹配模板 成功返回(template, location)
 def match_templates(source, templates, accuracy=0.90):
     for template in templates:
-        logging.info("匹配[{0}]中".format(template))
+        logging.debug("匹配[{0}]中".format(template))
         match_result = ch.matchTemplate(source, template)
         location = ch.maxLoc(match_result, accuracy)
         is_match = location is not None
-        logging.info("匹配[{0}]结果:{1}".format(template, is_match))
+        logging.debug("匹配[{0}]结果:{1}".format(template, is_match))
         if is_match:
             return (template, location)
     return None
@@ -80,6 +91,10 @@ def swipe_vertical(value, upper=False):
     pos1 = (x1, y1)
 
     adb.swipe(device, pos, pos1)
+
+
+def back():
+    adb.back(device)
 
 
 if __name__ == "__main__":

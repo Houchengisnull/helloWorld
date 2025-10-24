@@ -35,9 +35,10 @@ ADVER_NONE = prefix + 'advertising_none' + suffix
 
 # 开宝箱得金币
 TREA = prefix + 'treasure' + suffix
+TREA_ONEKEY = prefix + 'treasure_oneKey' + suffix
 TREA_ICON = prefix + 'treasure_icon' + suffix
 TREA_ADEV = prefix + 'treasure_adver' + suffix
 TREA_NEXT = prefix + 'treasure_next' + suffix
-
+TREA_ACCEPT = prefix + 'treasure_accept' + suffix
 # 逛街赚钱
 SHOPPING = prefix + 'shopping' + suffix
