@@ -24,3 +24,4 @@ REWARD_OTHER_BACK = prefix + 'reward_other_back' + suffix
 ADVERTISING = prefix + 'advertising' + suffix
 BOTTOM_BAR = prefix + 'bottom_bar' + suffix
 UPDATE_REJECT = prefix + 'update_reject' + suffix
+WATCH_ADVERTISING = prefix + 'watch_advertising' + suffix
