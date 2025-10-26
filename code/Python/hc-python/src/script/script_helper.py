@@ -7,18 +7,22 @@ import logging
 # device = 'adb-8a466557-HBXAaz._adb-tls-connect._tcp'
 
 device = None
+w = 0
+h = 0
 
 def set_device(id):
     global device 
     device = id
 
 def width():
-    w, h = adb.screen_size()
+    global w, h
+    w, h= adb.screen_size(device)
     return w
 
 
 def height():
-    w, h = adb.screen_size()
+    global w, h
+    w, h= adb.screen_size(device)
     return h
 
 # 截屏

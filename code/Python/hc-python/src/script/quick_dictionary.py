@@ -10,7 +10,7 @@ SUCCESS2 = prefix + 'success2' + suffix
 
 # 宝箱
 TREASURE = prefix + 'treasure' + suffix
-TREASURE_ADVERTISING = prefix + 'treasure_advertising.png' + suffix
+TREASURE_ADVERTISING = prefix + 'treasure_advertising' + suffix
 # 人物中心
 TASK_CENTER = prefix + 'task_center' + suffix
 #
@@ -25,3 +25,15 @@ ADVERTISING = prefix + 'advertising' + suffix
 BOTTOM_BAR = prefix + 'bottom_bar' + suffix
 UPDATE_REJECT = prefix + 'update_reject' + suffix
 WATCH_ADVERTISING = prefix + 'watch_advertising' + suffix
+
+# 看指定视频
+VIDEO = prefix + 'video' + suffix
+BOTTOM_BAR_BLACK = prefix + 'bottom_bar_black' + suffix
+HOMEPAGE = prefix + 'homepage' + suffix
+ADVERTISING_1 = prefix + 'advertising_1' + suffix
+WATCHING_ADVERTISING = prefix + 'watching_advertising' + suffix
+REWARD2 = prefix + 'reward2' + suffix
+FOLLOW = prefix + 'follow' + suffix
+
+
+PLAYLET = prefix + 'playlet' + suffix
