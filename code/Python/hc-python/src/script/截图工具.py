@@ -20,8 +20,8 @@ action = 1
 # img_file = './dy_img/cap.png'
 img_file = './qk_img/source.png'
 # sh.set_device("192.168.8.240:40849")
-# sh.set_device('192.168.8.167:38607')
-# sh.screen_capture(img_file)
+sh.set_device('192.168.8.167:38607')
+sh.screen_capture(img_file)
 
 
 # ===================================================

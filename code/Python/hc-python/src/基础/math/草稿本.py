@@ -2,7 +2,7 @@ import math
 
 # 330
 # 收益
-income = 15
+income = 538
 # 耗时
 time = 30
 efficiency = income/time

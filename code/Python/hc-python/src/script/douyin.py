@@ -6,7 +6,7 @@ import douyin_logging_config
 import script_helper as helper
 import douyin_dictionary as dict
 
-device = '192.168.8.240:40849'
+device = '192.168.8.240:38293'
 
 # 记录下滑次数
 stack_lower = 0
@@ -152,6 +152,8 @@ def watching_advertising(duration = 30):
 逛街赚钱
 '''
 def shopping():
+    screen_capture()
+
     if helper.touch_templates(dict.SOURCE, [dict.SHOPPING]):
         log.info('[逛街赚钱]')
     else:
@@ -159,17 +161,44 @@ def shopping():
     
     duration = 90
     while (duration >= 0):
-        time.sleep(1)
-        duration -= 1
-        log.debug("[逛街中]\t剩余时间:" + str(duration))
+        time.sleep(3)
+        duration -= 3
+        log.info("[逛街中]\t剩余时间:" + str(duration))
         # 下滑
         swipe_lower()
+
+    screen_capture()
+    touch_(dict.EVAL, 0.7)
+    log.info("[逛街赚钱] 评价")
+    time.sleep(3)
+    helper.back()
+    log.info("[逛街赚钱] back")
+
+def match_(template, accuracy=0.90):
+    return helper.match_template(dict.SOURCE, template, accuracy)
+
+def match_array_(templates, accuracy=0.90):
+    return helper.match_templates(dict.SOURCE, templates, accuracy)
+
+def touch_(template, accuracy=0.90):
+    return helper.touch_template(dict.SOURCE, template, accuracy)
+
+def touch_array_(templates, accuracy=0.90):
+    return helper.touch_templates(dict.SOURCE, templates, accuracy)
+
+def screen_capture():
+    helper.screen_capture(dict.SOURCE)
+    sleep()
+
+def sleep():
+    time.sleep(round(random.uniform(0.0, 1.0), 1))
 
 def main():
     helper.set_device(device)
 
     treasure_count = 0
     advertising_count = 0
+
     while (True) :
         if treasure():
             treasure_count += 1
@@ -178,8 +207,21 @@ def main():
         if advertising():
             advertising_count += 1
             log.info("[看广告赚金币]执行:{0}".format(advertising_count))
+
         time.sleep(60)
 
+def shopping_task():
+    helper.set_device(device)
+
+    count = 0
+    while count <= 15:
+        shopping()
+        count += 1
+        for i in range(10):
+            time.sleep(60)
+            log.info("[逛街赚钱] 下次执行时间:{0}分钟后".format(10 - i))
+    
+
 if __name__ == "__main__":
-    main()
-    # shopping()
+    # main()
+    shopping_task()

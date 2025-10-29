@@ -1,10 +1,10 @@
 import logging
 
-logging.basicConfig(level=logging.DEBUG
+logging.basicConfig(level=logging.INFO
                     , format='%(asctime)s - %(levelname)-8s - %(filename)-10s:%(lineno)d - %(message)s'
                     # , datefmt='%m-%d %H:%M'
                     , filename='./logs/quick.log'
-                    , filemode='w'
+                    , filemode='a'
                     , encoding='UTF-8')
 
 console = logging.StreamHandler()

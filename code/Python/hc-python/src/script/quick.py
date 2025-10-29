@@ -3,14 +3,14 @@ import random
 import datetime
 import logging as log
 import quick_logging_config
-
 import script_helper as helper
 import quick_dictionary as dict
 
-device = '192.168.8.167:38607'
+device = '192.168.8.167:41221'
 helper.set_device(device)
 
 def main():
+    # is_video = True
     is_video = False
     while (True):
         screen_capture()
@@ -72,7 +72,6 @@ def video_process():
 # 领取奖励 > 领取额外金币
 # 领取额外金币 > back * 2 > 成功领取
 def advertising_process():
-    log.info(">>>>> >>>>> >>>>>")
     # 增加延迟
     sleep()
     screen_capture()
@@ -105,7 +104,6 @@ def advertising_process():
         if is_in_watching_advertising():
             log.info("[观看广告中]")
             watching_advertising()
-    log.info("<<<<< <<<<< <<<<<")
 
 # 观看广告中
 def watching_advertising():
@@ -172,7 +170,7 @@ def screen_capture():
     sleep()
 
 def sleep_rand_seconds():
-    time.sleep(random.uniform(5, 15))
+    time.sleep(random.uniform(2, 5))
 
 def sleep():
     time.sleep(round(random.uniform(0.0, 1.0), 1))
@@ -181,5 +179,15 @@ def swipe_lower():
     h = helper.height()
     helper.swipe_vertical(h/4)
 
+
+def live_task():
+    count = 1
+    while (count < 50):
+        time.sleep(30)
+        swipe_lower()
+        count += 1
+        log.info("[看直播] 次数:" + str(count))
+
 if __name__ == '__main__':
-    main()
+    # main()
+    live_task()
