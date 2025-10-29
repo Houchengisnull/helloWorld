@@ -100,6 +100,12 @@ def swipe_vertical(value, upper=False):
 def back():
     adb.back(device)
 
+def send(str):
+    adb.send(device, str)
+
+def copy():
+    adb.copy(device)
+    
 
 if __name__ == "__main__":
     pass

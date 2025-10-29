@@ -67,9 +67,20 @@ def swipe(device, pos, pos1, time = 1000):
     os.system(command)
 
 def back(device):
-    command= 'adb -s {0} shell input keyevent KEYCODE_BACK'.format(device)
+    command = 'adb -s {0} shell input keyevent KEYCODE_BACK'.format(device)
     os.system(command)
 
+
+def send(device, text):
+    # unicode_text = ''.join(f'\\u{ord(c):04x}' for c in text)
+    # command = f'adb shell input text "{unicode_text}"'
+    # command = 'adb -s {0} shell input text {1}'.format(device, text)
+    command = "adb -s {0} shell am broadcast -a ADB_INPUT_TEXT --es msg '{1}'".format(device, text)
+    os.system(command)
+
+def copy(device):
+    command = 'adb -s {0} shell input keyevent 279'.format(device)
+    os.system(command)
 
 if __name__ == "__main__":
     pass
