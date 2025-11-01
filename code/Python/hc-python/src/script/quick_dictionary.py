@@ -37,3 +37,6 @@ FOLLOW = prefix + 'follow' + suffix
 
 
 PLAYLET = prefix + 'playlet' + suffix
+COMMENTS = prefix + 'comments' + suffix
+COMMENTS = prefix + 'comments' + suffix
+COMMENTS = prefix + 'comments' + suffix

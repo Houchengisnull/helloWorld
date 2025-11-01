@@ -1,3 +1,4 @@
+import os
 import time
 import random
 import datetime
@@ -6,7 +7,8 @@ import douyin_logging_config
 import script_helper as helper
 import douyin_dictionary as dict
 
-device = '192.168.8.240:38293'
+# device = '192.168.8.240:38293'
+device = 'adb-f8251985-IMF5Fr._adb-tls-connect._tcp'
 
 # 记录下滑次数
 stack_lower = 0
@@ -21,7 +23,7 @@ def swipe_lower():
     global stack_lower
     stack_lower += 1
     h = helper.height()
-    helper.swipe_vertical(h/4)
+    helper.swipe_vertical(h/2)
 
 def screen_capture():
     helper.screen_capture(dict.SOURCE)
@@ -186,6 +188,9 @@ def touch_(template, accuracy=0.90):
 def touch_array_(templates, accuracy=0.90):
     return helper.touch_templates(dict.SOURCE, templates, accuracy)
 
+def sleep_rand_seconds():
+    time.sleep(random.uniform(2, 5))
+
 def screen_capture():
     helper.screen_capture(dict.SOURCE)
     sleep()
@@ -200,6 +205,12 @@ def main():
     advertising_count = 0
 
     while (True) :
+        # 刷视频
+        browse_videos_task()
+
+        screen_capture()
+        touch_(dict.TASK_CENTER)
+
         if treasure():
             treasure_count += 1
             log.info("[开宝箱得金币]执行:{0}".format(treasure_count))
@@ -208,7 +219,9 @@ def main():
             advertising_count += 1
             log.info("[看广告赚金币]执行:{0}".format(advertising_count))
 
+        touch_(dict.BACK)
         time.sleep(60)
+
 
 def shopping_task():
     helper.set_device(device)
@@ -221,7 +234,57 @@ def shopping_task():
             time.sleep(60)
             log.info("[逛街赚钱] 下次执行时间:{0}分钟后".format(10 - i))
     
+def comment():
+    screen_capture()
+    touch_(dict.COMMENTS, 0.7)
+    sleep_rand_seconds()
+    # helper.touch_location([1000, 1600])
+    screen_capture()
+    touch_(dict.TEXT_VIEW)
+    helper.copy()
+
+    sleep_rand_seconds()
+    touch_(dict.PICTURE)
+
+    sleep_rand_seconds()
+    helper.touch_location([190, 900])
+    screen_capture()
+    touch_(dict.SEND)
+
+def browse_videos_task():
+    total_time = 300
+    browsed_time = 300
+    while browsed_time > 0:
+        swipe_lower()
+        screen_capture()
+        sleep_time = 0
+
+        is_live = helper.match_templates(dict.SOURCE, [dict.FOLLOW]) is not None
+        if is_live:
+            time.sleep(sleep_time)
+            helper.touch_location([950, 1550])
+            sleep_rand_seconds()
+            screen_capture()
+            touch_(dict.OPEN_LIVE_TREASURE)
+            sleep_time = 180
+
+            helper.back()
+            helper.back()
+            log.info("当前在直播间内，即将退出")
+            helper.touch_location((1020,160))
+            continue
+        elif random.randint(0, 20) > 18:
+            # 评论
+            comment()
+            helper.back()
+            
+        sleep_time = random.randint(3, 40)
+        time.sleep(sleep_time)
+        browsed_time -= sleep_time
+        log.info("[刷视频] 已经观看{0}秒".format(total_time - browsed_time))
 
 if __name__ == "__main__":
-    # main()
-    shopping_task()
+    os.system("cls")
+    # helper.set_device(device)
+    # comment()
+    main()

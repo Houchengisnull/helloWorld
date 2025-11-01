@@ -42,3 +42,13 @@ TREA_NEXT = prefix + 'treasure_next' + suffix
 TREA_ACCEPT = prefix + 'treasure_accept' + suffix
 # 逛街赚钱
 SHOPPING = prefix + 'shopping' + suffix
+COMMENTS = prefix + 'comments' + suffix
+
+TEXT_VIEW = prefix + 'text_view' + suffix
+PICTURE = prefix + 'picture' + suffix
+COMMENTS2 = prefix + 'comments2' + suffix
+SEND = prefix + 'send' + suffix
+TASK_CENTER = prefix + 'task_center' + suffix
+BACK = prefix + 'back' + suffix
+COMMENTS = prefix + 'comments' + suffix
+OPEN_LIVE_TREASURE = prefix + 'open_live_treasure' + suffix

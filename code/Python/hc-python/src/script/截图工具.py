@@ -7,20 +7,20 @@ import script_helper as sh
 scale = 0.3
 
 # 截图保存路径，以/结束
-# save_file_path = "./dy_img/"
-save_file_path = "./qk_img/"
+save_file_path = "./dy_img/"
+# save_file_path = "./qk_img/"
 
 # py变量字典文件
-pos_img_dict = "./src/script/quick_dictionary.py"
+pos_img_dict = "./src/script/douyin_dictionary.py"
 
 # 动作类型 1=截图  2=标点  3=标线（取起终点组成向量） 4=标记区域
 action = 1
 
 # 图片来源替换输入你的did
-# img_file = './dy_img/cap.png'
-img_file = './qk_img/source.png'
+img_file = './dy_img/cap.png'
+# img_file = './qk_img/source.png'
 # sh.set_device("192.168.8.240:40849")
-sh.set_device('192.168.8.167:38607')
+sh.set_device('adb-f8251985-IMF5Fr._adb-tls-connect._tcp')
 sh.screen_capture(img_file)
 
 

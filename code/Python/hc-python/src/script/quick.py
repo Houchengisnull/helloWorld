@@ -10,8 +10,8 @@ device = '192.168.8.167:41221'
 helper.set_device(device)
 
 def main():
-    # is_video = True
-    is_video = False
+    is_video = True
+    # is_video = False
     while (True):
         screen_capture()
         # 在任务中心
@@ -189,5 +189,5 @@ def live_task():
         log.info("[看直播] 次数:" + str(count))
 
 if __name__ == '__main__':
-    # main()
-    live_task()
+    main()
+    # live_task()
