@@ -22,7 +22,7 @@ print("启动时间\t" + start_time.strftime("%Y-%m-%d %H:%M:%S"))
 print("----------- -----------")
 
 count = 0
-while diff.seconds < 60 * 60:
+while diff.seconds < 150 * 60:
     x = lh.randint_between(w/4, 3/4*w)
     y = lh.randint_between(h/2, 3/4*h)
     x1 = x
@@ -34,7 +34,7 @@ while diff.seconds < 60 * 60:
     y1 = lh.position_random(y1)
 
     device.swipe(x, y, x1, y1)
-    sleep_time = random.uniform(5, 15)
+    sleep_time = random.uniform(5, 30)
     time.sleep(sleep_time)
 
     end_time = datetime.datetime.now()
